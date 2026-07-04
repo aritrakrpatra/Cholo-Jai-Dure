@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1782214167874",
+    "name": "Sayan Maity",
+    "gender": "male",
+    "phoneNumber": "1234567890",
+    "email": null,
+    "password": "123456",
+    "createdAt": "2026-06-23T11:29:27.874Z"
+  },
+  {
+    "id": "1782219273750",
+    "name": "ARITRA SHOW",
+    "gender": "male",
+    "phoneNumber": "6295942471",
+    "email": null,
+    "password": "123456",
+    "createdAt": "2026-06-23T12:54:33.751Z"
+  },
+  {
+    "id": "1782220000898",
+    "name": "SAmaresh MAITY",
+    "gender": "male",
+    "phoneNumber": "1234567891",
+    "email": null,
+    "password": "123456",
+    "createdAt": "2026-06-23T13:06:40.898Z"
+  },
+  {
+    "id": "1782809898355",
+    "name": "Akash Das",
+    "gender": "male",
+    "phoneNumber": "9999999990",
+    "email": null,
+    "password": "khanki",
+    "createdAt": "2026-06-30T08:58:18.355Z"
+  }
+]
