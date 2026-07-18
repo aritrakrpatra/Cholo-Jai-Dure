@@ -2,20 +2,24 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Plane, User, LogOut } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronDown, LogOut, MonitorSmartphone, MoonStar, Plane, SunMedium, User } from "lucide-react";
 import { useAuth } from "@/app/context/AuthContext";
+import { useTheme } from "@/app/context/ThemeContext";
 
 const navItems = [
   { label: "Home", href: "/#home" }, 
-  { label: "About Us", href: "/#about-us" },
   { label: "Tours", href: "/tours" },
-  { label: "Bike Ride", href: "/#bike-ride" },
-  { label: "Trekking", href: "/#trekking" },
-  { label: "Merchandise", href: "/#merchandise" },
-  { label: "Customer Gallery", href: "/gallery" },
-  { label: "Rules & Regulations", href: "/#rules" },
+  { label: "Bike Ride", href: "/bike-ride" },
+  { label: "Trekking", href: "/trekking" },
   { label: "Contact Us", href: "/contact" },
+];
+
+const moreNavItems = [
+  { label: "About Us", href: "/about-us" },
+  { label: "Merchandise", href: "/merchandise" },
+  { label: "Customer Gallery", href: "/gallery" },
+  { label: "Rules & Regulations", href: "/rules-regulations" },
 ];
 
 
@@ -33,6 +37,26 @@ function getActiveItem(href, pathname, hash) {
     return pathname === "/contact";
   }
 
+  if (href === "/merchandise") {
+    return pathname === "/merchandise";
+  }
+
+  if (href === "/about-us") {
+    return pathname === "/about-us";
+  }
+
+  if (href === "/bike-ride") {
+    return pathname === "/bike-ride";
+  }
+
+  if (href === "/trekking") {
+    return pathname === "/trekking";
+  }
+
+  if (href === "/rules-regulations") {
+    return pathname === "/rules-regulations";
+  }
+
   if (href === "/#home") {
     return pathname === "/" && (!hash || hash === "#home");
   }
@@ -44,24 +68,207 @@ function getActiveItem(href, pathname, hash) {
   return false;
 }
 
+const themeOptions = [
+  { value: "light", label: "Light", icon: SunMedium },
+  { value: "dark", label: "Dark", icon: MoonStar },
+  { value: "system", label: "System", icon: MonitorSmartphone },
+];
+
+function ThemeMenuButton({ pathname, mobile = false }) {
+  const { theme, setTheme } = useTheme();
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
+  const activeOption = themeOptions.find((option) => option.value === theme) ?? themeOptions[2];
+  const ActiveIcon = activeOption.icon;
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handlePointerDown = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [open]);
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => setOpen(false), 0);
+    return () => window.clearTimeout(timeoutId);
+  }, [pathname]);
+
+  const buttonClasses = mobile
+    ? "flex w-full items-center justify-between rounded-3xl border border-white/10 bg-white/10 px-5 py-4 text-sm font-semibold text-white transition hover:bg-white/20"
+    : "inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm font-semibold text-white/85 transition hover:bg-white/10 hover:text-white";
+
+  const menuClasses = mobile
+    ? "absolute left-0 right-0 top-full mt-3 grid gap-2 rounded-3xl border border-white/10 bg-slate-950/95 p-2 shadow-2xl backdrop-blur-xl z-50"
+    : "absolute right-0 top-full mt-2 grid w-56 gap-2 rounded-3xl border border-white/10 bg-slate-950/95 p-2 shadow-2xl backdrop-blur-xl";
+
+  return (
+    <div ref={menuRef} className={`relative ${mobile ? "w-full" : "shrink-0"}`}>
+      <button type="button" onClick={() => setOpen((value) => !value)} className={buttonClasses}>
+        <span className="flex items-center gap-2">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-400/15 text-amber-300">
+            <ActiveIcon className="h-4 w-4" />
+          </span>
+          <span>{activeOption.label} theme</span>
+        </span>
+        <ChevronDown className={`h-4 w-4 transition ${open ? "rotate-180" : ""}`} />
+      </button>
+
+      {open && (
+        <div className={menuClasses}>
+          {themeOptions.map((option) => {
+            const OptionIcon = option.icon;
+            const selected = option.value === theme;
+
+            return (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => {
+                  setTheme(option.value);
+                  setOpen(false);
+                }}
+                className={`flex items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm transition ${
+                  selected
+                    ? "border-amber-300/40 bg-amber-300/15 text-amber-100"
+                    : "border-white/10 bg-white/5 text-white/80 hover:bg-white/10 hover:text-white"
+                }`}
+              >
+                <span className="flex items-center gap-3">
+                  <OptionIcon className="h-4 w-4" />
+                  {option.label}
+                </span>
+                {selected ? <span className="text-[10px] uppercase tracking-[0.28em] text-amber-200">Active</span> : null}
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function MoreMenuButton({ pathname, currentHash, isLightTheme, mobile = false }) {
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
+  const active = moreNavItems.some((item) => getActiveItem(item.href, pathname, currentHash));
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handlePointerDown = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [open]);
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => setOpen(false), 0);
+    return () => window.clearTimeout(timeoutId);
+  }, [pathname]);
+
+  const buttonClasses = mobile
+    ? "flex w-full items-center justify-between rounded-3xl border border-white/10 bg-white/10 px-5 py-4 text-sm font-semibold text-white transition hover:bg-white/20"
+    : `inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-semibold transition ${
+        active
+          ? isLightTheme
+            ? "border-slate-300 bg-slate-100 text-slate-950"
+            : "border-white/20 bg-white/10 text-white"
+          : isLightTheme
+            ? "border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-950"
+            : "border-white/10 bg-white/5 text-white/85 hover:bg-white/10 hover:text-white"
+      }`;
+
+  const menuClasses = mobile
+    ? "absolute left-0 right-0 top-full mt-3 grid gap-2 rounded-3xl border border-white/10 bg-slate-950/95 p-2 shadow-2xl backdrop-blur-xl z-50"
+    : `absolute right-0 top-full mt-2 grid w-60 gap-2 rounded-3xl border p-2 shadow-2xl backdrop-blur-xl ${
+        isLightTheme ? "border-(--border) bg-(--surface-strong)" : "border-white/10 bg-slate-950/95"
+      }`;
+
+  return (
+    <div ref={menuRef} className={`relative ${mobile ? "w-full" : "shrink-0"}`}>
+      <button type="button" onClick={() => setOpen((value) => !value)} className={buttonClasses}>
+        <span>More</span>
+      </button>
+
+      {open && (
+        <div className={menuClasses}>
+          {moreNavItems.map((item) => {
+            const itemActive = getActiveItem(item.href, pathname, currentHash);
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className={`rounded-2xl border px-4 py-3 text-sm transition ${
+                  itemActive
+                    ? isLightTheme
+                      ? "border-slate-300 bg-slate-100 text-slate-950"
+                      : "border-amber-300/40 bg-amber-300/15 text-amber-100"
+                    : isLightTheme
+                      ? "border-(--border) bg-transparent text-slate-700 hover:bg-black/5 hover:text-slate-950"
+                      : "border-white/10 bg-white/5 text-white/80 hover:bg-white/10 hover:text-white"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Navbar() {
   const pathname = usePathname();
   const { user, logout, loading } = useAuth();
+  const { resolvedTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentHash, setCurrentHash] = useState("");
-  const [mounted, setMounted] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const isLightTheme = resolvedTheme === "light";
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    setCurrentHash(window.location.hash);
-    setIsScrolled(window.scrollY > 20);
+    const frameId = window.requestAnimationFrame(() => {
+      setCurrentHash(window.location.hash);
+      setIsScrolled(window.scrollY > 20);
+    });
 
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     const handleHashChange = () => setCurrentHash(window.location.hash);
@@ -70,6 +277,7 @@ export default function Navbar() {
     window.addEventListener("hashchange", handleHashChange);
 
     return () => {
+      window.cancelAnimationFrame(frameId);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("hashchange", handleHashChange);
     };
@@ -99,9 +307,12 @@ export default function Navbar() {
   }, [menuOpen]);
 
   useEffect(() => {
-    // Close open menus on route change.
-    setMenuOpen(false);
-    setProfileMenuOpen(false);
+    const timeoutId = window.setTimeout(() => {
+      setMenuOpen(false);
+      setProfileMenuOpen(false);
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
   }, [pathname]);
 
   const handleLogout = () => {
@@ -115,22 +326,22 @@ export default function Navbar() {
       <div
         // Valid z-index utilities keep navbar above mobile page layers.
         className={`fixed left-0 right-0 top-0 z-50 mx-auto w-full px-4 transition-all duration-300 ease-out sm:px-6 md:sticky ${
-          isScrolled ? "backdrop-blur-2xl bg-slate-950/80 py-3 shadow-xl border-b border-white/10" : "backdrop-blur-xl bg-slate-950/40 py-4 sm:py-5"
+          isScrolled ? "theme-surface py-3" : "theme-surface py-4 sm:py-5"
         }`}
         style={{ zIndex: 1000 }}
       >
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 sm:gap-4">
-          <Link href="/" className="flex min-w-0 flex-1 items-center gap-3 text-white">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-3xl bg-amber-400/15 text-amber-300 ring-1 ring-amber-300/20 shadow-lg shadow-amber-500/10 sm:h-12 sm:w-12">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4">
+          <Link href="/" className={`flex min-w-0 shrink-0 items-center gap-3 ${isLightTheme ? "text-slate-900" : "text-white"}`}>
+            <span className="theme-glow flex h-11 w-11 shrink-0 items-center justify-center rounded-3xl bg-amber-400/15 text-amber-300 ring-1 ring-amber-300/20 shadow-lg shadow-amber-500/10 sm:h-12 sm:w-12">
               <Plane className="h-5 w-5 sm:h-6 sm:w-6" />
             </span>
             <div className="min-w-0">
               <p className="truncate text-sm font-semibold sm:text-base">Cholo Jai Dure</p>
-              <p className="truncate text-[11px] text-white/70 sm:text-xs">Explore Beyond Boundaries</p>
+              <p className={`truncate text-[11px] sm:text-xs ${isLightTheme ? "text-slate-600" : "text-white/70"}`}>Explore Beyond Boundaries</p>
             </div>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
+          <nav className={`hidden min-w-0 items-center justify-center gap-6 overflow-x-auto whitespace-nowrap text-sm font-medium lg:flex ${isLightTheme ? "text-slate-700" : "text-white/80"}`}>
             {navItems.map((item) => {
               const active = getActiveItem(item.href, pathname, currentHash);
               return (
@@ -138,7 +349,7 @@ export default function Navbar() {
                   key={item.href}
                   href={item.href}
                   className={`relative transition duration-300 ${
-                    active ? "text-white" : "hover:text-white"
+                    active ? (isLightTheme ? "text-slate-950" : "text-white") : isLightTheme ? "hover:text-slate-950" : "hover:text-white"
                   }`}
                   onClick={() => setMenuOpen(false)}
                 >
@@ -153,12 +364,20 @@ export default function Navbar() {
             })}
           </nav>
 
-          <div className="hidden items-center gap-3 md:flex">
-            {mounted && !loading && user ? (
+          <div className="hidden items-center gap-3 lg:flex">
+            <MoreMenuButton pathname={pathname} currentHash={currentHash} isLightTheme={isLightTheme} />
+            <div className="relative z-50">
+              <ThemeMenuButton pathname={pathname} />
+            </div>
+            {!loading && user ? (
               <div className="relative">
                 <button
                   onClick={() => setProfileMenuOpen(!profileMenuOpen)}
-                  className="flex items-center gap-2 rounded-full bg-amber-400/20 border border-amber-400/30 px-4 py-2 text-sm font-semibold text-amber-300 transition hover:bg-amber-400/30"
+                  className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${
+                    isLightTheme
+                      ? "border-amber-300/40 bg-amber-300/15 text-slate-900 hover:bg-amber-300/25"
+                      : "border-amber-400/30 bg-amber-400/20 text-amber-300 hover:bg-amber-400/30"
+                  }`}
                 >
                   <User className="h-4 w-4" />
                   {user.name}
@@ -166,10 +385,10 @@ export default function Navbar() {
                 
                 {/* Profile dropdown */}
                 {profileMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 rounded-lg bg-slate-950 border border-white/10 shadow-xl overflow-hidden">
+                  <div className={`absolute right-0 mt-2 w-48 overflow-hidden rounded-lg border shadow-xl ${isLightTheme ? "border-(--border) bg-(--surface-strong)" : "border-white/10 bg-slate-950"}`}>
                     <Link
                       href="/account"
-                      className="block w-full text-left px-4 py-3 text-sm text-white hover:bg-white/10 transition border-b border-white/5"
+                      className={`block w-full border-b px-4 py-3 text-left text-sm transition ${isLightTheme ? "border-(--border) text-slate-900 hover:bg-black/5" : "border-white/5 text-white hover:bg-white/10"}`}
                       onClick={() => setProfileMenuOpen(false)}
                     >
                       <User className="h-4 w-4 inline mr-2" />
@@ -177,7 +396,7 @@ export default function Navbar() {
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="w-full text-left px-4 py-3 text-sm text-red-300 hover:bg-red-500/10 transition"
+                      className="w-full px-4 py-3 text-left text-sm text-red-300 transition hover:bg-red-500/10"
                     >
                       <LogOut className="h-4 w-4 inline mr-2" />
                       Logout
@@ -214,86 +433,102 @@ export default function Navbar() {
               event.stopPropagation();
               setMenuOpen((open) => !open);
             }}
-            className="relative z-50 flex h-11 w-11 shrink-0 items-center justify-center rounded-3xl border border-white/10 bg-slate-950/70 text-white transition hover:bg-slate-900/90 md:hidden"
+            className={`relative z-50 flex h-11 w-11 shrink-0 items-center justify-center rounded-3xl border transition lg:hidden ${isLightTheme ? "border-(--border) bg-(--surface-strong) text-slate-900 hover:bg-black/5" : "border-white/10 bg-black/30 text-white hover:bg-black/40"}`}
             style={{ zIndex: 1010 }}
           >
             <span className="relative h-5 w-5">
-              <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-2 bg-white transition-all duration-300 ${menuOpen ? "translate-y-0 rotate-45" : ""}`} />
-              <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-1/2 bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : "opacity-100"}`} />
-              <span className={`absolute left-0 top-1/2 block h-0.5 w-5 translate-y-1 bg-white transition-all duration-300 ${menuOpen ? "translate-y-0 -rotate-45" : ""}`} />
+              <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-2 transition-all duration-300 ${isLightTheme ? "bg-slate-900" : "bg-white"} ${menuOpen ? "translate-y-0 rotate-45" : ""}`} />
+              <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-1/2 transition-all duration-300 ${isLightTheme ? "bg-slate-900" : "bg-white"} ${menuOpen ? "opacity-0" : "opacity-100"}`} />
+              <span className={`absolute left-0 top-1/2 block h-0.5 w-5 translate-y-1 transition-all duration-300 ${isLightTheme ? "bg-slate-900" : "bg-white"} ${menuOpen ? "translate-y-0 -rotate-45" : ""}`} />
             </span>
           </button>
         </div>
       </div>
 
-      <div className="h-20 md:hidden" aria-hidden="true" />
+      <div className="h-20 lg:hidden" aria-hidden="true" />
 
       <div
         id="mobile-navigation"
         role="dialog"
         aria-modal="true"
-        className={`fixed inset-0 z-50 overflow-y-auto bg-slate-950/95 backdrop-blur-xl transition-all duration-300 md:hidden ${
+        className={`fixed inset-0 z-50 overflow-y-auto backdrop-blur-xl transition-all duration-300 lg:hidden ${
           menuOpen
             ? "visible translate-x-0 opacity-100 pointer-events-auto"
             : "invisible translate-x-full opacity-0 pointer-events-none"
         }`}
-        style={{ zIndex: 1020 }}
+        style={{ backgroundColor: isLightTheme ? "rgba(246, 240, 232, 0.96)" : "rgba(2, 6, 23, 0.92)", zIndex: 1020 }}
       >
         <div className="mx-auto flex h-full max-w-7xl flex-col justify-between px-6 py-8">
           <div>
             <div className="mb-12 flex items-center justify-between">
-              <Link href="/" className="flex items-center gap-3 text-white">
+              <Link href="/" className={`flex items-center gap-3 ${isLightTheme ? "text-slate-900" : "text-white"}`}>
                 <span className="flex h-12 w-12 items-center justify-center rounded-3xl bg-amber-400/15 text-amber-300 ring-1 ring-amber-300/20">
                   <Plane className="h-6 w-6" />
                 </span>
                 <div>
                   <p className="text-base font-semibold">Cholo Jai Dure</p>
-                  <p className="text-xs text-white/70">Explore Beyond Boundaries</p>
+                  <p className={`text-xs ${isLightTheme ? "text-slate-600" : "text-white/70"}`}>Explore Beyond Boundaries</p>
                 </div>
               </Link>
               <button
                 type="button"
                 aria-label="Close navigation menu"
                 onClick={() => setMenuOpen(false)}
-                className="text-white"
+                className={isLightTheme ? "text-slate-900" : "text-white"}
               >
                 ✕
               </button>
             </div>
 
-            <div className="space-y-4 text-lg font-semibold text-white">
+            <div className={`space-y-4 text-lg font-semibold ${isLightTheme ? "text-slate-900" : "text-white"}`}>
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="block rounded-3xl border border-white/10 bg-white/10 px-5 py-4 transition hover:bg-white/20"
+                  className={`block rounded-3xl border px-5 py-4 transition ${isLightTheme ? "border-(--border) bg-(--surface-strong) hover:bg-black/5" : "border-white/10 bg-white/10 hover:bg-white/20"}`}
                   onClick={() => setMenuOpen(false)}
                 >
                   {item.label}
                 </Link>
               ))}
+              <div className="pt-2">
+                {moreNavItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`block rounded-3xl border px-5 py-4 transition ${isLightTheme ? "border-(--border) bg-(--surface-strong) hover:bg-black/5" : "border-white/10 bg-white/10 hover:bg-white/20"}`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
 
           <div className="space-y-4">
-            {mounted && !loading && user ? (
+            <div className="relative mb-8">
+              <ThemeMenuButton pathname={pathname} mobile />
+            </div>
+
+            {!loading && user ? (
               <>
-                <div className="rounded-3xl bg-amber-400/10 border border-amber-400/20 px-5 py-4 text-center">
-                  <p className="text-sm font-semibold text-amber-300">
+                <div className={`rounded-3xl border px-5 py-4 text-center ${isLightTheme ? "border-amber-300/30 bg-amber-300/15" : "border-amber-400/20 bg-amber-400/10"}`}>
+                  <p className={`text-sm font-semibold ${isLightTheme ? "text-slate-900" : "text-amber-300"}`}>
                     <User className="h-4 w-4 inline mr-2" />
                     {user.name}
                   </p>
                 </div>
                 <Link
                   href="/account"
-                  className="block rounded-3xl border border-white/10 bg-white/10 px-5 py-4 text-center text-sm font-semibold text-white transition hover:bg-white/20"
+                  className={`block rounded-3xl border px-5 py-4 text-center text-sm font-semibold transition ${isLightTheme ? "border-(--border) bg-(--surface-strong) text-slate-900 hover:bg-black/5" : "border-white/10 bg-white/10 text-white hover:bg-white/20"}`}
                   onClick={() => setMenuOpen(false)}
                 >
                   View Profile
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="w-full rounded-3xl bg-red-500/20 border border-red-500/30 px-5 py-4 text-center text-sm font-semibold text-red-300 transition hover:bg-red-500/30"
+                  className="w-full rounded-3xl border border-red-500/30 bg-red-500/20 px-5 py-4 text-center text-sm font-semibold text-red-300 transition hover:bg-red-500/30"
                 >
                   <LogOut className="h-4 w-4 inline mr-2" />
                   Logout
@@ -302,6 +537,7 @@ export default function Navbar() {
             ) : (
               <>
                 {/* Temporarily hidden login and call buttons */}
+
                 {/* <Link
                   href="/auth/login"
                   className="block rounded-3xl bg-amber-400 px-5 py-4 text-center text-sm font-semibold text-slate-950 transition hover:bg-amber-300"

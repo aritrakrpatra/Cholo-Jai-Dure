@@ -57,7 +57,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="theme-bg min-h-screen text-foreground">
       <Navbar />
 
       <section className="py-16 pt-24 sm:py-24 sm:pt-28">
@@ -65,15 +65,15 @@ export default function ContactPage() {
           <div className="mb-10 text-center sm:mb-12">
             <p className="text-sm uppercase tracking-[0.3em] text-amber-300">Contact</p>
             <h1 className="mt-4 text-3xl font-bold sm:text-5xl">Ready to start your journey?</h1>
-            <p className="mx-auto mt-6 max-w-2xl text-white/70">
+            <p className="mx-auto mt-6 max-w-2xl text-(--muted)">
               Reach out for personalized trip planning, group bookings, and premium travel support.
             </p>
           </div>
 
           <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
-            <div className="rounded-4xl border border-white/10 bg-slate-900/70 p-6 sm:p-10">
+            <div className="theme-surface-strong rounded-4xl p-6 sm:p-10">
               <h2 className="text-2xl font-bold">Get in Touch</h2>
-              <div className="mt-8 space-y-4 text-white/80">
+              <div className="mt-8 space-y-4 text-(--muted)">
                 <p className="flex items-center gap-3">
                   <MapPin className="h-5 w-5" />
                   Zilla Parishad Market Complex, Midnapur
@@ -89,20 +89,20 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4 rounded-4xl border border-white/10 bg-slate-900/80 p-6 sm:p-10">
+            <form onSubmit={handleSubmit} className="theme-surface-strong space-y-4 rounded-4xl p-6 sm:p-10">
               <input
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Your Name"
-                className="w-full rounded-3xl border border-white/10 bg-slate-950/90 px-5 py-4 text-white outline-none"
+                className="w-full rounded-3xl border border-(--border) bg-(--surface) px-5 py-4 text-foreground outline-none"
               />
               <input
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="Phone Number"
-                className="w-full rounded-3xl border border-white/10 bg-slate-950/90 px-5 py-4 text-white outline-none"
+                className="w-full rounded-3xl border border-(--border) bg-(--surface) px-5 py-4 text-foreground outline-none"
               />
               <input
                 name="email"
@@ -110,7 +110,7 @@ export default function ContactPage() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Email Address"
-                className="w-full rounded-3xl border border-white/10 bg-slate-950/90 px-5 py-4 text-white outline-none"
+                className="w-full rounded-3xl border border-(--border) bg-(--surface) px-5 py-4 text-foreground outline-none"
               />
               <textarea
                 name="message"
@@ -118,7 +118,7 @@ export default function ContactPage() {
                 onChange={handleChange}
                 rows={5}
                 placeholder="Your Message"
-                className="w-full rounded-3xl border border-white/10 bg-slate-950/90 px-5 py-4 text-white outline-none"
+                className="w-full rounded-3xl border border-(--border) bg-(--surface) px-5 py-4 text-foreground outline-none"
               />
               {submitStatus.message && (
                 <p

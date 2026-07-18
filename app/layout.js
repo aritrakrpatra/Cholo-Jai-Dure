@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./context/AuthContext";
+import { ThemeProvider } from "./context/ThemeContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,12 +28,32 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                try {
+                  var preference = localStorage.getItem('cholo-jai-dure-theme');
+                  var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  var theme = preference === 'light' || preference === 'dark' ? preference : (systemDark ? 'dark' : 'light');
+                  var root = document.documentElement;
+                  root.dataset.theme = theme;
+                  root.dataset.themePreference = preference || 'system';
+                  root.style.colorScheme = theme;
+                } catch (error) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+        <ThemeProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

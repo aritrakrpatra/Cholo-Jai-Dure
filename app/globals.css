@@ -1,8 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f6f0e8;
+  --foreground: #14213d;
+  --muted: #5e6472;
+  --surface: rgba(255, 255, 255, 0.74);
+  --surface-strong: rgba(255, 255, 255, 0.92);
+  --border: rgba(20, 33, 61, 0.12);
+  --accent: #c58c2b;
+  --accent-strong: #8f5d11;
+  --hero-overlay: linear-gradient(145deg, rgba(255, 247, 237, 0.9), rgba(247, 231, 203, 0.72));
+  --shadow-elevated: 0 30px 80px rgba(20, 33, 61, 0.14);
+}
+
+[data-theme="dark"] {
+  --background: #08111f;
+  --foreground: #f5f7fb;
+  --muted: #9aa4b2;
+  --surface: rgba(15, 23, 42, 0.68);
+  --surface-strong: rgba(10, 16, 28, 0.9);
+  --border: rgba(255, 255, 255, 0.1);
+  --accent: #f5b94e;
+  --accent-strong: #ffd889;
+  --hero-overlay: linear-gradient(145deg, rgba(4, 10, 20, 0.65), rgba(15, 23, 42, 0.28));
+  --shadow-elevated: 0 30px 80px rgba(0, 0, 0, 0.35);
 }
 
 @theme inline {
@@ -12,23 +33,40 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   scroll-behavior: smooth;
+  transition: background-color 250ms ease, color 250ms ease;
+  background-image:
+    radial-gradient(circle at top left, rgba(197, 140, 43, 0.12), transparent 30%),
+    radial-gradient(circle at top right, rgba(120, 119, 198, 0.08), transparent 26%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 18%);
+  opacity: 0.6;
+  z-index: -1;
 }
 
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -10px, 0); }
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.04); }
 }
 
 html {
@@ -38,4 +76,103 @@ html {
 
 body {
   overflow-x: hidden;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+[data-theme="light"] .bg-slate-950,
+[data-theme="light"] .bg-slate-900,
+[data-theme="light"] .bg-slate-800,
+[data-theme="light"] .bg-slate-700,
+[data-theme="light"] .bg-black {
+  background-color: var(--surface-strong) !important;
+  color: var(--foreground) !important;
+  border-color: var(--border) !important;
+}
+
+[data-theme="light"] .bg-white,
+[data-theme="light"] .bg-white\/5,
+[data-theme="light"] .bg-white\/10,
+[data-theme="light"] .bg-white\/20 {
+  background-color: var(--surface-strong) !important;
+  color: var(--foreground) !important;
+  border-color: var(--border) !important;
+}
+
+[data-theme="light"] .text-white {
+  color: var(--foreground) !important;
+}
+
+[data-theme="light"] .text-white\/70,
+[data-theme="light"] .text-white\/80 {
+  color: var(--muted) !important;
+}
+
+[data-theme="light"] .border-white\/5,
+[data-theme="light"] .border-white\/10,
+[data-theme="light"] .border-white\/20 {
+  border-color: var(--border) !important;
+}
+
+[data-theme="light"] .bg-slate-950\/95,
+[data-theme="light"] .bg-slate-950\/90,
+[data-theme="light"] .bg-slate-950\/80,
+[data-theme="light"] .bg-slate-950\/70,
+[data-theme="light"] .bg-slate-900\/95,
+[data-theme="light"] .bg-slate-900\/90,
+[data-theme="light"] .bg-slate-900\/80,
+[data-theme="light"] .bg-slate-900\/70 {
+  background-color: var(--surface-strong) !important;
+}
+
+[data-theme="light"] .text-slate-950,
+[data-theme="light"] .text-slate-900,
+[data-theme="light"] .text-slate-800 {
+  color: var(--foreground) !important;
+}
+
+[data-theme="light"] .text-slate-700,
+[data-theme="light"] .text-slate-600,
+[data-theme="light"] .text-slate-500 {
+  color: var(--muted) !important;
+}
+
+.theme-surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-elevated);
+  backdrop-filter: blur(20px);
+}
+
+.theme-surface-strong {
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-elevated);
+  backdrop-filter: blur(20px);
+}
+
+.theme-text-muted {
+  color: var(--muted);
+}
+
+.theme-accent {
+  color: var(--accent);
+}
+
+.theme-border {
+  border-color: var(--border);
+}
+
+.theme-bg {
+  background: var(--background);
+}
+
+.theme-hero-overlay {
+  background: var(--hero-overlay);
+}
+
+.theme-glow {
+  animation: glow 6s ease-in-out infinite;
 }
