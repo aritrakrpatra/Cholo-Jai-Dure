@@ -367,7 +367,11 @@ export default function Navbar() {
         style={{ zIndex: 1000 }}
       >
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 lg:grid lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-4">
-          <Link href="/" className={`flex min-w-0 flex-1 shrink items-center gap-3 ${isLightTheme ? "text-slate-900" : "text-white"}`}>
+          <Link
+            href="/"
+            className="flex min-w-0 flex-1 shrink items-center gap-3"
+            style={{ color: "var(--foreground)" }}
+          >
             <span className="theme-glow flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-3xl bg-white ring-1 ring-amber-300/20 shadow-lg shadow-amber-500/10 sm:h-12 sm:w-12">
               <Image
                 src="/cjd%20logo.jpg"
@@ -379,8 +383,18 @@ export default function Navbar() {
               />
             </span>
             <div className="min-w-0">
-              <p className="truncate text-sm font-semibold sm:text-base">Cholo Jai Dure</p>
-              <p className={`hidden truncate text-[11px] sm:text-xs md:block ${isLightTheme ? "text-slate-600" : "text-white/70"}`}>Explore Beyond Boundaries</p>
+              <p
+                className="truncate text-sm font-semibold sm:text-base"
+                style={{ color: "var(--foreground)", textShadow: isLightTheme ? "none" : "0 1px 2px rgba(0, 0, 0, 0.35)" }}
+              >
+                Cholo Jai Dure
+              </p>
+              <p
+                className="hidden truncate text-[11px] sm:text-xs md:block"
+                style={{ color: "var(--muted)", textShadow: isLightTheme ? "none" : "0 1px 2px rgba(0, 0, 0, 0.35)" }}
+              >
+                Explore Beyond Boundaries
+              </p>
             </div>
           </Link>
 
@@ -520,7 +534,7 @@ export default function Navbar() {
         }`}>
           <div>
             <div className="mb-8 flex items-center justify-between">
-              <Link href="/" className={`flex items-center gap-3 ${isLightTheme ? "text-slate-900" : "text-white"}`}>
+              <Link href="/" className="flex items-center gap-3" style={{ color: "var(--foreground)" }}>
                 <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-3xl bg-white ring-1 ring-amber-300/20">
                   <Image
                     src="/cjd%20logo.jpg"
@@ -532,8 +546,12 @@ export default function Navbar() {
                   />
                 </span>
                 <div>
-                  <p className="text-base font-semibold">Cholo Jai Dure</p>
-                  <p className={`text-xs ${isLightTheme ? "text-slate-600" : "text-white/70"}`}>Explore Beyond Boundaries</p>
+                  <p style={{ color: "var(--foreground)", textShadow: isLightTheme ? "none" : "0 1px 2px rgba(0, 0, 0, 0.35)" }}>
+                    Cholo Jai Dure
+                  </p>
+                  <p style={{ color: "var(--muted)", textShadow: isLightTheme ? "none" : "0 1px 2px rgba(0, 0, 0, 0.35)" }}>
+                    Explore Beyond Boundaries
+                  </p>
                 </div>
               </Link>
               <button
