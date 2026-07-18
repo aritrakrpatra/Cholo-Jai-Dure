@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, LogOut, MonitorSmartphone, MoonStar, Plane, SunMedium, User } from "lucide-react";
+import { LogOut, MonitorSmartphone, MoonStar, Plane, SunMedium, User } from "lucide-react";
 import { useAuth } from "@/app/context/AuthContext";
 import { useTheme } from "@/app/context/ThemeContext";
 
@@ -127,7 +127,6 @@ function ThemeMenuButton({ pathname, mobile = false }) {
           </span>
           <span>{activeOption.label} theme</span>
         </span>
-        <ChevronDown className={`h-4 w-4 transition ${open ? "rotate-180" : ""}`} />
       </button>
 
       {open && (
