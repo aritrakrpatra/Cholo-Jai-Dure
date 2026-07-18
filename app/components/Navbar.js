@@ -478,13 +478,13 @@ export default function Navbar() {
                 event.stopPropagation();
                 setMenuOpen((open) => !open);
               }}
-              className={`relative z-50 flex h-11 w-11 shrink-0 items-center justify-center rounded-3xl border transition ${isLightTheme ? "border-slate-300 bg-white text-slate-950 shadow-md shadow-slate-900/5 hover:bg-slate-50" : "border-white/10 bg-black/30 text-white hover:bg-black/40"}`}
+              className={`relative z-50 flex h-11 w-11 shrink-0 items-center justify-center rounded-3xl border transition ${isLightTheme ? "border-slate-300 bg-white text-black shadow-md shadow-slate-900/5 hover:bg-slate-50" : "border-white/10 bg-black/30 text-white hover:bg-black/40"}`}
               style={{ zIndex: 1010 }}
             >
               <span className="relative h-5 w-5">
-                <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-2 transition-all duration-300 ${isLightTheme ? "bg-slate-950" : "bg-white"} ${menuOpen ? "translate-y-0 rotate-45" : ""}`} />
-                <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-1/2 transition-all duration-300 ${isLightTheme ? "bg-slate-950" : "bg-white"} ${menuOpen ? "opacity-0" : "opacity-100"}`} />
-                <span className={`absolute left-0 top-1/2 block h-0.5 w-5 translate-y-1 transition-all duration-300 ${isLightTheme ? "bg-slate-950" : "bg-white"} ${menuOpen ? "translate-y-0 -rotate-45" : ""}`} />
+                <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-2 transition-all duration-300 ${isLightTheme ? "bg-black" : "bg-white"} ${menuOpen ? "translate-y-0 rotate-45" : ""}`} />
+                <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-1/2 transition-all duration-300 ${isLightTheme ? "bg-black" : "bg-white"} ${menuOpen ? "opacity-0" : "opacity-100"}`} />
+                <span className={`absolute left-0 top-1/2 block h-0.5 w-5 translate-y-1 transition-all duration-300 ${isLightTheme ? "bg-black" : "bg-white"} ${menuOpen ? "translate-y-0 -rotate-45" : ""}`} />
               </span>
             </button>
           </div>
