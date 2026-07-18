@@ -57,83 +57,130 @@ export default function CholoJaiDureTours() {
     <div className="bg-slate-950 text-white">
       <Navbar />
 
-      <section
-        id="home"
-        className="relative isolate min-h-[calc(100svh-5rem)] md:min-h-screen"
-        style={{ backgroundImage: "url('/group1.jpeg')", backgroundSize: "cover", backgroundPosition: "center" }}
-      >
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/group1.jpeg"
-          preload="auto"
-          className="absolute inset-0 h-full w-full object-cover object-center"
-        >
-          <source src="/cjd video.mp4" type="video/mp4" />
-        </video>
-
-        <div className="absolute inset-0 bg-linear-to-b from-slate-950/75 via-slate-950/30 to-slate-950/90" />
-
-        <div className="relative z-10 flex min-h-[calc(100svh-5rem)] md:min-h-screen flex-col items-center justify-start px-4 pb-10 pt-8 text-center sm:justify-center sm:px-6 sm:pb-8 sm:pt-10 md:pt-16">
-          <div className="mx-auto max-w-4xl">
-
-            {/* Flash News Ticker */}
-            <div className="mb-4 hidden justify-center min-[421px]:flex sm:mb-6">
-              <div className="flex w-full max-w-2xl overflow-hidden rounded-2xl border border-amber-400/40 bg-black/40 shadow-lg shadow-amber-400/10 backdrop-blur-md sm:rounded-full">
-                <span className="shrink-0 rounded-l-2xl bg-amber-400 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-950 max-[380px]:hidden sm:rounded-l-full sm:px-4 sm:text-xs sm:tracking-widest">
-                  FLASH NEWS
-                </span>
-                <div className="overflow-hidden flex-1">
-                  <div
-                    className="flex whitespace-nowrap py-2 text-xs text-amber-200 max-[380px]:text-[11px] sm:text-sm"
-                    style={{ animation: "marquee 30s linear infinite" }}
-                  >
-                    <span className="mx-6">✈️ <strong>Chardham Yatra 2026</strong> — Book now at ₹30,000 | 11N/12D</span>
-                    <span className="mx-6">🏔️ <strong>Kashmir Special</strong> — Limited seats available!</span>
-                    <span className="mx-6">🕌 <strong>Do Dham Yatra</strong> — ₹23,000 | 7N/8D</span>
-                    <span className="mx-6">🌴 <strong>Tamil Nadu &amp; Kerala</strong> — ₹26,000 | 9N/10D</span>
-                    <span className="mx-6">🏖️ <strong>Vizag Tour</strong> — Coastal getaway deal!</span>
-                    <span className="mx-6">🌿 <strong>Sikkim</strong> — Northeast retreat at ₹12,000</span>
-                    <span className="mx-6">🌄 <strong>Arunachal Pradesh</strong> — ₹24,000 | 7N/8D</span>
-                    <span className="mx-6">📞 <strong>Cholo Jai Dure Tour &amp; Travels</strong> — Call us now!</span>
-                    {/* duplicate for seamless loop */}
-                    <span className="mx-6">✈️ <strong>Chardham Yatra 2026</strong> — Book now at ₹30,000 | 11N/12D</span>
-                    <span className="mx-6">🏔️ <strong>Kashmir Special</strong> — Limited seats available!</span>
-                    <span className="mx-6">🕌 <strong>Do Dham Yatra</strong> — ₹23,000 | 7N/8D</span>
-                    <span className="mx-6">🌴 <strong>Tamil Nadu &amp; Kerala</strong> — ₹26,000 | 9N/10D</span>
-                  </div>
-                </div>
-              </div>
+      <section id="home" className="relative isolate bg-slate-950">
+        <div className="sm:hidden">
+          <div className="relative z-10 flex flex-col items-center px-4 pb-8 pt-6 text-center">
+            <div className="mx-auto max-w-md">
+              <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] text-white/80">
+                <Plane className="h-3.5 w-3.5 text-amber-300" />
+                Luxury Travel
+              </p>
+              <h1 className="text-[clamp(1.8rem,8vw,2.8rem)] font-bold leading-tight text-white">
+                CHOLO JAI DURE
+              </h1>
+              <h2 className="mt-2 text-[clamp(1rem,5vw,1.45rem)] font-semibold text-white/80">
+                Tour &amp; Travels
+              </h2>
+              <p className="mx-auto mt-3 max-w-sm text-sm text-white/70">
+                Elegant journeys curated for modern explorers — from sacred pilgrimages to scenic retreats.
+              </p>
             </div>
+          </div>
 
-            <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] text-white/80 sm:mb-4 sm:px-4 sm:py-2 sm:text-sm sm:tracking-[0.3em]">
-              <Plane className="h-3.5 w-3.5 text-amber-300 sm:h-4 sm:w-4" />
-              Luxury Travel
-            </p>
-            <h1 className="text-[clamp(1.5rem,7vw,2.7rem)] font-bold leading-tight text-white sm:text-5xl md:text-7xl">
-              CHOLO JAI DURE
-            </h1>
-            <h2 className="mt-2 text-[clamp(1rem,5vw,1.75rem)] font-semibold text-white/80 sm:mt-3 sm:text-3xl md:text-5xl">
-              Tour &amp; Travels
-            </h2>
-            <p className="mx-auto mt-3 max-w-3xl text-xs text-white/70 sm:mt-5 sm:text-base md:text-xl">
-              Elegant journeys curated for modern explorers — from sacred pilgrimages to scenic retreats.
-            </p>
-            <div className="mt-5 flex flex-col items-center gap-3 sm:mt-8 sm:flex-row sm:justify-center sm:gap-4">
+          <div className="relative aspect-video w-full overflow-hidden bg-slate-950">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster="/group1.jpeg"
+              preload="auto"
+              className="h-full w-full object-cover object-center"
+            >
+              <source src="/cjd video.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-linear-to-b from-slate-950/20 via-transparent to-slate-950/60" />
+          </div>
+
+          <div className="relative z-10 flex flex-col items-center px-4 pb-8 pt-5 text-center">
+            <div className="mx-auto flex w-full max-w-md flex-col items-center gap-3">
               <a
                 href="#tours"
-                className="flex w-full max-w-xs items-center justify-center rounded-full bg-amber-400 px-8 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-300 sm:w-auto sm:py-3.5"
+                className="flex w-full max-w-xs items-center justify-center rounded-full bg-amber-400 px-8 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-300"
               >
                 View Packages
               </a>
-              <a
-                href="#contact"
-                className="flex w-full max-w-xs items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-3 text-sm text-white transition hover:bg-white/20 sm:w-auto sm:py-3.5"
+              <Link
+                href="/contact"
+                className="flex w-full max-w-xs items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-3 text-sm text-white transition hover:bg-white/20"
               >
                 Contact Us
-              </a>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative hidden min-h-[calc(100svh-5rem)] sm:block md:min-h-screen">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/group1.jpeg"
+            preload="auto"
+            className="absolute inset-0 h-full w-full object-cover object-center"
+          >
+            <source src="/cjd video.mp4" type="video/mp4" />
+          </video>
+
+          <div className="absolute inset-0 bg-linear-to-b from-slate-950/75 via-slate-950/30 to-slate-950/90" />
+
+          <div className="relative z-10 flex min-h-[calc(100svh-5rem)] flex-col items-center justify-center px-6 pb-8 pt-10 text-center md:min-h-screen md:pt-16">
+            <div className="mx-auto max-w-4xl">
+              <div className="mb-6 hidden justify-center min-[421px]:flex">
+                <div className="flex w-full max-w-2xl overflow-hidden rounded-full border border-amber-400/40 bg-black/40 shadow-lg shadow-amber-400/10 backdrop-blur-md">
+                  <span className="shrink-0 rounded-l-full bg-amber-400 px-4 py-2 text-xs font-bold uppercase tracking-widest text-slate-950">
+                    FLASH NEWS
+                  </span>
+                  <div className="overflow-hidden flex-1">
+                    <div
+                      className="flex whitespace-nowrap py-2 text-sm text-amber-200"
+                      style={{ animation: "marquee 30s linear infinite" }}
+                    >
+                      <span className="mx-6">✈️ <strong>Chardham Yatra 2026</strong> — Book now at ₹30,000 | 11N/12D</span>
+                      <span className="mx-6">🏔️ <strong>Kashmir Special</strong> — Limited seats available!</span>
+                      <span className="mx-6">🕌 <strong>Do Dham Yatra</strong> — ₹23,000 | 7N/8D</span>
+                      <span className="mx-6">🌴 <strong>Tamil Nadu &amp; Kerala</strong> — ₹26,000 | 9N/10D</span>
+                      <span className="mx-6">🏖️ <strong>Vizag Tour</strong> — Coastal getaway deal!</span>
+                      <span className="mx-6">🌿 <strong>Sikkim</strong> — Northeast retreat at ₹12,000</span>
+                      <span className="mx-6">🌄 <strong>Arunachal Pradesh</strong> — ₹24,000 | 7N/8D</span>
+                      <span className="mx-6">📞 <strong>Cholo Jai Dure Tour &amp; Travels</strong> — Call us now!</span>
+                      <span className="mx-6">✈️ <strong>Chardham Yatra 2026</strong> — Book now at ₹30,000 | 11N/12D</span>
+                      <span className="mx-6">🏔️ <strong>Kashmir Special</strong> — Limited seats available!</span>
+                      <span className="mx-6">🕌 <strong>Do Dham Yatra</strong> — ₹23,000 | 7N/8D</span>
+                      <span className="mx-6">🌴 <strong>Tamil Nadu &amp; Kerala</strong> — ₹26,000 | 9N/10D</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm uppercase tracking-[0.3em] text-white/80">
+                <Plane className="h-4 w-4 text-amber-300" />
+                Luxury Travel
+              </p>
+              <h1 className="text-[clamp(1.5rem,7vw,2.7rem)] font-bold leading-tight text-white sm:text-5xl md:text-7xl">
+                CHOLO JAI DURE
+              </h1>
+              <h2 className="mt-3 text-[clamp(1rem,5vw,1.75rem)] font-semibold text-white/80 sm:text-3xl md:text-5xl">
+                Tour &amp; Travels
+              </h2>
+              <p className="mx-auto mt-5 max-w-3xl text-base text-white/70 md:text-xl">
+                Elegant journeys curated for modern explorers — from sacred pilgrimages to scenic retreats.
+              </p>
+              <div className="mt-8 flex flex-row justify-center gap-4">
+                <a
+                  href="#tours"
+                  className="flex items-center justify-center rounded-full bg-amber-400 px-8 py-3.5 text-sm font-semibold text-slate-950 transition hover:bg-amber-300"
+                >
+                  View Packages
+                </a>
+                <Link
+                  href="/contact"
+                  className="flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-3.5 text-sm text-white transition hover:bg-white/20"
+                >
+                  Contact Us
+                </Link>
+              </div>
             </div>
           </div>
         </div>

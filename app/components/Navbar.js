@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { LogOut, MonitorSmartphone, MoonStar, Plane, SunMedium, User } from "lucide-react";
+import { LogOut, MonitorSmartphone, MoonStar, SunMedium, User } from "lucide-react";
 import { useAuth } from "@/app/context/AuthContext";
 import { useTheme } from "@/app/context/ThemeContext";
 
@@ -74,12 +75,13 @@ const themeOptions = [
   { value: "system", label: "System", icon: MonitorSmartphone },
 ];
 
-function ThemeMenuButton({ pathname, mobile = false }) {
-  const { theme, setTheme } = useTheme();
+function ThemeMenuButton({ pathname, mobile = false, iconOnly = false, alignRight = false }) {
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
   const activeOption = themeOptions.find((option) => option.value === theme) ?? themeOptions[2];
   const ActiveIcon = activeOption.icon;
+  const isLightTheme = resolvedTheme === "light";
 
   useEffect(() => {
     if (!open) return;
@@ -110,23 +112,54 @@ function ThemeMenuButton({ pathname, mobile = false }) {
     return () => window.clearTimeout(timeoutId);
   }, [pathname]);
 
-  const buttonClasses = mobile
-    ? "flex w-full items-center justify-between rounded-3xl border border-white/10 bg-white/10 px-5 py-4 text-sm font-semibold text-white transition hover:bg-white/20"
-    : "inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm font-semibold text-white/85 transition hover:bg-white/10 hover:text-white";
+  const buttonClasses = iconOnly
+    ? `inline-flex h-11 w-11 items-center justify-center rounded-3xl border transition ${
+        mobile
+          ? "border-white/10 bg-white/10 text-white hover:bg-white/20"
+          : isLightTheme
+            ? "border-(--border) bg-(--surface-strong) text-slate-900 hover:bg-black/5"
+            : "border-white/10 bg-white/5 text-white/85 hover:bg-white/10 hover:text-white"
+      }`
+    : mobile
+    ? `flex w-full items-center justify-between rounded-3xl border px-5 py-4 text-sm font-semibold transition ${
+        isLightTheme
+          ? "border-(--border) bg-(--surface-strong) text-slate-900 hover:bg-black/5"
+          : "border-white/10 bg-white/10 text-white hover:bg-white/20"
+      }`
+    : `inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-semibold transition ${
+        isLightTheme
+          ? "border-(--border) bg-(--surface-strong) text-slate-900 hover:bg-black/5"
+          : "border-white/10 bg-white/5 text-white/85 hover:bg-white/10 hover:text-white"
+      }`;
 
   const menuClasses = mobile
-    ? "absolute left-0 right-0 top-full mt-3 grid gap-2 rounded-3xl border border-white/10 bg-slate-950/95 p-2 shadow-2xl backdrop-blur-xl z-50"
-    : "absolute right-0 top-full mt-2 grid w-56 gap-2 rounded-3xl border border-white/10 bg-slate-950/95 p-2 shadow-2xl backdrop-blur-xl";
+    ? `absolute left-0 right-0 top-full mt-3 grid gap-2 rounded-3xl border p-2 shadow-2xl backdrop-blur-xl z-50 ${
+        isLightTheme ? "border-(--border) bg-(--surface-strong)" : "border-white/10 bg-slate-950/95"
+      }`
+    : `absolute top-full mt-2 grid w-56 gap-2 rounded-3xl border p-2 shadow-2xl backdrop-blur-xl ${alignRight ? "right-0" : "left-0"} ${
+        isLightTheme ? "border-(--border) bg-(--surface-strong)" : "border-white/10 bg-slate-950/95"
+      }`;
 
   return (
     <div ref={menuRef} className={`relative ${mobile ? "w-full" : "shrink-0"}`}>
-      <button type="button" onClick={() => setOpen((value) => !value)} className={buttonClasses}>
-        <span className="flex items-center gap-2">
+      <button
+        type="button"
+        aria-label={`Change theme, current theme ${activeOption.label.toLowerCase()}`}
+        onClick={() => setOpen((value) => !value)}
+        className={buttonClasses}
+      >
+        {iconOnly ? (
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-400/15 text-amber-300">
             <ActiveIcon className="h-4 w-4" />
           </span>
-          <span>{activeOption.label} theme</span>
-        </span>
+        ) : (
+          <span className="flex items-center gap-2">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-400/15 text-amber-300">
+              <ActiveIcon className="h-4 w-4" />
+            </span>
+            <span>{activeOption.label} theme</span>
+          </span>
+        )}
       </button>
 
       {open && (
@@ -145,15 +178,19 @@ function ThemeMenuButton({ pathname, mobile = false }) {
                 }}
                 className={`flex items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm transition ${
                   selected
-                    ? "border-amber-300/40 bg-amber-300/15 text-amber-100"
-                    : "border-white/10 bg-white/5 text-white/80 hover:bg-white/10 hover:text-white"
+                    ? isLightTheme
+                      ? "border-amber-300/40 bg-amber-300/15 text-slate-900"
+                      : "border-amber-300/40 bg-amber-300/15 text-amber-100"
+                    : isLightTheme
+                      ? "border-(--border) bg-transparent text-slate-700 hover:bg-black/5 hover:text-slate-950"
+                      : "border-white/10 bg-white/5 text-white/80 hover:bg-white/10 hover:text-white"
                 }`}
               >
                 <span className="flex items-center gap-3">
                   <OptionIcon className="h-4 w-4" />
                   {option.label}
                 </span>
-                {selected ? <span className="text-[10px] uppercase tracking-[0.28em] text-amber-200">Active</span> : null}
+                {selected ? <span className={`text-[10px] uppercase tracking-[0.28em] ${isLightTheme ? "text-amber-700" : "text-amber-200"}`}>Active</span> : null}
               </button>
             );
           })}
@@ -329,14 +366,21 @@ export default function Navbar() {
         }`}
         style={{ zIndex: 1000 }}
       >
-        <div className="mx-auto grid w-full max-w-7xl grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4">
-          <Link href="/" className={`flex min-w-0 shrink-0 items-center gap-3 ${isLightTheme ? "text-slate-900" : "text-white"}`}>
-            <span className="theme-glow flex h-11 w-11 shrink-0 items-center justify-center rounded-3xl bg-amber-400/15 text-amber-300 ring-1 ring-amber-300/20 shadow-lg shadow-amber-500/10 sm:h-12 sm:w-12">
-              <Plane className="h-5 w-5 sm:h-6 sm:w-6" />
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 lg:grid lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-4">
+          <Link href="/" className={`flex min-w-0 flex-1 shrink items-center gap-3 ${isLightTheme ? "text-slate-900" : "text-white"}`}>
+            <span className="theme-glow flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-3xl bg-white ring-1 ring-amber-300/20 shadow-lg shadow-amber-500/10 sm:h-12 sm:w-12">
+              <Image
+                src="/cjd%20logo.jpg"
+                alt="Cholo Jai Dure logo"
+                width={48}
+                height={48}
+                className="h-full w-full object-cover"
+                priority
+              />
             </span>
             <div className="min-w-0">
               <p className="truncate text-sm font-semibold sm:text-base">Cholo Jai Dure</p>
-              <p className={`truncate text-[11px] sm:text-xs ${isLightTheme ? "text-slate-600" : "text-white/70"}`}>Explore Beyond Boundaries</p>
+              <p className={`hidden truncate text-[11px] sm:text-xs md:block ${isLightTheme ? "text-slate-600" : "text-white/70"}`}>Explore Beyond Boundaries</p>
             </div>
           </Link>
 
@@ -423,24 +467,27 @@ export default function Navbar() {
             )}
           </div>
 
-          <button
-            type="button"
-            aria-label="Toggle navigation menu"
-            aria-expanded={menuOpen}
-            aria-controls="mobile-navigation"
-            onClick={(event) => {
-              event.stopPropagation();
-              setMenuOpen((open) => !open);
-            }}
-            className={`relative z-50 flex h-11 w-11 shrink-0 items-center justify-center rounded-3xl border transition lg:hidden ${isLightTheme ? "border-(--border) bg-(--surface-strong) text-slate-900 hover:bg-black/5" : "border-white/10 bg-black/30 text-white hover:bg-black/40"}`}
-            style={{ zIndex: 1010 }}
-          >
-            <span className="relative h-5 w-5">
-              <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-2 transition-all duration-300 ${isLightTheme ? "bg-slate-900" : "bg-white"} ${menuOpen ? "translate-y-0 rotate-45" : ""}`} />
-              <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-1/2 transition-all duration-300 ${isLightTheme ? "bg-slate-900" : "bg-white"} ${menuOpen ? "opacity-0" : "opacity-100"}`} />
-              <span className={`absolute left-0 top-1/2 block h-0.5 w-5 translate-y-1 transition-all duration-300 ${isLightTheme ? "bg-slate-900" : "bg-white"} ${menuOpen ? "translate-y-0 -rotate-45" : ""}`} />
-            </span>
-          </button>
+          <div className="ml-auto flex shrink-0 items-center gap-2 lg:hidden">
+            <ThemeMenuButton pathname={pathname} iconOnly alignRight />
+            <button
+              type="button"
+              aria-label="Toggle navigation menu"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-navigation"
+              onClick={(event) => {
+                event.stopPropagation();
+                setMenuOpen((open) => !open);
+              }}
+              className={`relative z-50 flex h-11 w-11 shrink-0 items-center justify-center rounded-3xl border transition ${isLightTheme ? "border-(--border) bg-(--surface-strong) text-slate-900 hover:bg-black/5" : "border-white/10 bg-black/30 text-white hover:bg-black/40"}`}
+              style={{ zIndex: 1010 }}
+            >
+              <span className="relative h-5 w-5">
+                <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-2 transition-all duration-300 ${isLightTheme ? "bg-slate-900" : "bg-white"} ${menuOpen ? "translate-y-0 rotate-45" : ""}`} />
+                <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-1/2 transition-all duration-300 ${isLightTheme ? "bg-slate-900" : "bg-white"} ${menuOpen ? "opacity-0" : "opacity-100"}`} />
+                <span className={`absolute left-0 top-1/2 block h-0.5 w-5 translate-y-1 transition-all duration-300 ${isLightTheme ? "bg-slate-900" : "bg-white"} ${menuOpen ? "translate-y-0 -rotate-45" : ""}`} />
+              </span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -461,8 +508,15 @@ export default function Navbar() {
           <div>
             <div className="mb-12 flex items-center justify-between">
               <Link href="/" className={`flex items-center gap-3 ${isLightTheme ? "text-slate-900" : "text-white"}`}>
-                <span className="flex h-12 w-12 items-center justify-center rounded-3xl bg-amber-400/15 text-amber-300 ring-1 ring-amber-300/20">
-                  <Plane className="h-6 w-6" />
+                <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-3xl bg-white ring-1 ring-amber-300/20">
+                  <Image
+                    src="/cjd%20logo.jpg"
+                    alt="Cholo Jai Dure logo"
+                    width={48}
+                    height={48}
+                    className="h-full w-full object-cover"
+                    priority
+                  />
                 </span>
                 <div>
                   <p className="text-base font-semibold">Cholo Jai Dure</p>
