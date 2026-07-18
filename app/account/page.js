@@ -50,7 +50,7 @@ export default function AccountPage() {
             </span>
             <div>
               <p className="text-sm font-semibold">Cholo Jai Dure</p>
-              <p className="text-xs text-white/70">Explore Beyond Boundaries</p>
+              <p className="text-xs text-white/70">Your Journey, Our Priority</p>
             </div>
           </Link>
           <button

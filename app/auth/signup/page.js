@@ -99,7 +99,7 @@ export default function SignupPage() {
   const displayError = localError || error;
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen flex flex-col bg-linear-to-br from-slate-950 via-slate-900 to-slate-950">
       {/* Navigation */}
       <div className="sticky top-0 z-50 px-4 py-5 backdrop-blur-xl bg-slate-950/40">
         <div className="mx-auto max-w-7xl flex items-center justify-between">
@@ -109,7 +109,7 @@ export default function SignupPage() {
             </span>
             <div>
               <p className="text-sm font-semibold">Cholo Jai Dure</p>
-              <p className="text-xs text-white/70">Explore Beyond Boundaries</p>
+              <p className="text-xs text-white/70">Your Journey, Our Priority</p>
             </div>
           </Link>
           <Link href="/" className="text-white/70 hover:text-white transition">

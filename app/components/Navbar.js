@@ -390,10 +390,10 @@ export default function Navbar() {
                 Cholo Jai Dure
               </p>
               <p
-                className="hidden truncate text-[11px] sm:text-xs md:block"
+                className="truncate text-[11px] sm:text-xs"
                 style={{ color: "var(--muted)", textShadow: isLightTheme ? "none" : "0 1px 2px rgba(0, 0, 0, 0.35)" }}
               >
-                Explore Beyond Boundaries
+                Your Journey, Our Priority
               </p>
             </div>
           </Link>
@@ -550,7 +550,7 @@ export default function Navbar() {
                     Cholo Jai Dure
                   </p>
                   <p style={{ color: "var(--muted)", textShadow: isLightTheme ? "none" : "0 1px 2px rgba(0, 0, 0, 0.35)" }}>
-                    Explore Beyond Boundaries
+                    Your Journey, Our Priority
                   </p>
                 </div>
               </Link>

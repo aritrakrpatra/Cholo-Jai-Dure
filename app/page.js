@@ -68,7 +68,7 @@ export default function CholoJaiDureTours() {
                   height={14}
                   className="h-3.5 w-3.5 rounded-full object-cover"
                 />
-                Luxury Travel
+                ESTD. 2024
               </p>
               <h1 className="text-[clamp(1.8rem,8vw,2.8rem)] font-bold leading-tight text-white">
                 CHOLO JAI DURE

@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Cholo Jai Dure",
-  description: "Explore Beyond Boundaries",
+  description: "Your Journey, Our Priority",
 };
 
 export const viewport = {
