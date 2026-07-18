@@ -223,7 +223,7 @@ export default function CholoJaiDureTours() {
                   <h3 className="mt-2 text-xl font-bold sm:mt-3 sm:text-2xl">{tour.title}</h3>
                   <div className="mt-4 flex items-center justify-between gap-3">
                     <p className="text-sm text-white/70 sm:text-base">{tour.price}</p>
-                    <Link href={tour.packagePath} className="inline-flex rounded-full bg-white px-5 py-2.5 text-xs font-semibold text-slate-950 transition hover:bg-amber-300 sm:px-6 sm:py-3 sm:text-sm">
+                    <Link href={tour.packagePath} className="explore-more-btn inline-flex rounded-full bg-white px-5 py-2.5 text-xs font-semibold text-slate-950 transition hover:bg-amber-300 sm:px-6 sm:py-3 sm:text-sm">
                       Explore More
                     </Link>
                   </div>

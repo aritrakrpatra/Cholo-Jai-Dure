@@ -139,6 +139,18 @@ body {
   color: var(--muted) !important;
 }
 
+[data-theme="light"] .bg-white.explore-more-btn {
+  background-color: var(--accent) !important;
+  color: #14213d !important;
+  border: 1px solid rgba(143, 93, 17, 0.35) !important;
+  box-shadow: 0 10px 25px rgba(197, 140, 43, 0.28);
+}
+
+[data-theme="light"] .bg-white.explore-more-btn:hover {
+  background-color: var(--accent-strong) !important;
+  color: #ffffff !important;
+}
+
 .theme-surface {
   background: var(--surface);
   border: 1px solid var(--border);
