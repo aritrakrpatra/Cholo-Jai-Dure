@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { Plane } from "lucide-react";
 import Navbar from "./components/Navbar";
 import { allPackages as tours } from "./data/packages";
 
@@ -62,7 +61,13 @@ export default function CholoJaiDureTours() {
           <div className="relative z-10 flex flex-col items-center px-4 pb-8 pt-6 text-center">
             <div className="mx-auto max-w-md">
               <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] text-white/80">
-                <Plane className="h-3.5 w-3.5 text-amber-300" />
+                <Image
+                  src="/cjd%20logo.jpg"
+                  alt="Cholo Jai Dure logo"
+                  width={14}
+                  height={14}
+                  className="h-3.5 w-3.5 rounded-full object-cover"
+                />
                 Luxury Travel
               </p>
               <h1 className="text-[clamp(1.8rem,8vw,2.8rem)] font-bold leading-tight text-white">
@@ -155,7 +160,13 @@ export default function CholoJaiDureTours() {
               </div>
 
               <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm uppercase tracking-[0.3em] text-white/80">
-                <Plane className="h-4 w-4 text-amber-300" />
+                <Image
+                  src="/cjd%20logo.jpg"
+                  alt="Cholo Jai Dure logo"
+                  width={16}
+                  height={16}
+                  className="h-4 w-4 rounded-full object-cover"
+                />
                 Luxury Travel
               </p>
               <h1 className="text-[clamp(1.5rem,7vw,2.7rem)] font-bold leading-tight text-white sm:text-5xl md:text-7xl">
