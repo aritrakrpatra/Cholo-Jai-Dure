@@ -3,24 +3,34 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Compass, MapPin, Phone, Plane, User, LogOut } from "lucide-react";
+import { Plane, User, LogOut } from "lucide-react";
 import { useAuth } from "@/app/context/AuthContext";
 
 const navItems = [
-  { label: "Home", href: "/#home" },
+  { label: "Home", href: "/#home" }, 
   { label: "About Us", href: "/#about-us" },
-  { label: "Tours", href: "/#tours" },
+  { label: "Tours", href: "/tours" },
   { label: "Bike Ride", href: "/#bike-ride" },
+  { label: "Trekking", href: "/#trekking" },
+  { label: "Merchandise", href: "/#merchandise" },
   { label: "Customer Gallery", href: "/gallery" },
   { label: "Rules & Regulations", href: "/#rules" },
-  { label: "Contact Us", href: "/#contact" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 
 
 function getActiveItem(href, pathname, hash) {
+  if (href === "/tours") {
+    return pathname === "/tours" || pathname.startsWith("/tours/");
+  }
+
   if (href === "/gallery") {
     return pathname === "/gallery";
+  }
+
+  if (href === "/contact") {
+    return pathname === "/contact";
   }
 
   if (href === "/#home") {
@@ -65,6 +75,35 @@ export default function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    // Prevent background scroll when mobile drawer is open.
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    // Close open menus on route change.
+    setMenuOpen(false);
+    setProfileMenuOpen(false);
+  }, [pathname]);
+
   const handleLogout = () => {
     logout();
     setMenuOpen(false);
@@ -72,11 +111,13 @@ export default function Navbar() {
   };
 
   return (
-    <div className="relative z-60">
+    <div className="relative z-50" style={{ zIndex: 1000 }}>
       <div
-        className={`sticky top-0 z-60 mx-auto w-full px-4 transition-all duration-300 ease-out sm:px-6 ${
+        // Valid z-index utilities keep navbar above mobile page layers.
+        className={`fixed left-0 right-0 top-0 z-50 mx-auto w-full px-4 transition-all duration-300 ease-out sm:px-6 md:sticky ${
           isScrolled ? "backdrop-blur-2xl bg-slate-950/80 py-3 shadow-xl border-b border-white/10" : "backdrop-blur-xl bg-slate-950/40 py-4 sm:py-5"
         }`}
+        style={{ zIndex: 1000 }}
       >
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 sm:gap-4">
           <Link href="/" className="flex min-w-0 flex-1 items-center gap-3 text-white">
@@ -146,7 +187,8 @@ export default function Navbar() {
               </div>
             ) : (
               <>
-                <Link
+                {/* Temporarily hidden login and call buttons */}
+                {/* <Link
                   href="/auth/login"
                   className="rounded-full bg-amber-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-300"
                 >
@@ -158,7 +200,7 @@ export default function Navbar() {
                 >
                   <Phone className="h-4 w-4" />
                   Call Us
-                </a>
+                </a> */}
               </>
             )}
           </div>
@@ -166,20 +208,36 @@ export default function Navbar() {
           <button
             type="button"
             aria-label="Toggle navigation menu"
-            onClick={() => setMenuOpen((open) => !open)}
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-3xl border border-white/10 bg-slate-950/70 text-white transition hover:bg-slate-900/90 md:hidden"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
+            onClick={(event) => {
+              event.stopPropagation();
+              setMenuOpen((open) => !open);
+            }}
+            className="relative z-50 flex h-11 w-11 shrink-0 items-center justify-center rounded-3xl border border-white/10 bg-slate-950/70 text-white transition hover:bg-slate-900/90 md:hidden"
+            style={{ zIndex: 1010 }}
           >
-            <span className="block h-0.5 w-5 bg-white" />
-            <span className="mt-1.5 block h-0.5 w-5 bg-white" />
-            <span className="mt-1.5 block h-0.5 w-5 bg-white" />
+            <span className="relative h-5 w-5">
+              <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-2 bg-white transition-all duration-300 ${menuOpen ? "translate-y-0 rotate-45" : ""}`} />
+              <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-1/2 bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : "opacity-100"}`} />
+              <span className={`absolute left-0 top-1/2 block h-0.5 w-5 translate-y-1 bg-white transition-all duration-300 ${menuOpen ? "translate-y-0 -rotate-45" : ""}`} />
+            </span>
           </button>
         </div>
       </div>
 
+      <div className="h-20 md:hidden" aria-hidden="true" />
+
       <div
-        className={`fixed inset-0 z-55 transform overflow-y-auto bg-slate-950/95 backdrop-blur-xl transition duration-500 ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        } md:hidden`}
+        id="mobile-navigation"
+        role="dialog"
+        aria-modal="true"
+        className={`fixed inset-0 z-50 overflow-y-auto bg-slate-950/95 backdrop-blur-xl transition-all duration-300 md:hidden ${
+          menuOpen
+            ? "visible translate-x-0 opacity-100 pointer-events-auto"
+            : "invisible translate-x-full opacity-0 pointer-events-none"
+        }`}
+        style={{ zIndex: 1020 }}
       >
         <div className="mx-auto flex h-full max-w-7xl flex-col justify-between px-6 py-8">
           <div>
@@ -243,7 +301,8 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link
+                {/* Temporarily hidden login and call buttons */}
+                {/* <Link
                   href="/auth/login"
                   className="block rounded-3xl bg-amber-400 px-5 py-4 text-center text-sm font-semibold text-slate-950 transition hover:bg-amber-300"
                   onClick={() => setMenuOpen(false)}
@@ -256,7 +315,7 @@ export default function Navbar() {
                   onClick={() => setMenuOpen(false)}
                 >
                   Call Us
-                </a>
+                </a> */}
               </>
             )}
           </div>

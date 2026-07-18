@@ -16,22 +16,22 @@ export default function CustomerGallery() {
     <div className="min-h-screen bg-black text-white">
       <Navbar />
 
-      <main className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <h1 className="text-5xl font-bold text-center mb-8">
+      <main className="py-16 sm:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <h1 className="text-2xl font-bold text-center mb-4 sm:text-4xl md:text-5xl sm:mb-8">
             Customer Gallery
           </h1>
-          <p className="max-w-3xl mx-auto text-center text-lg text-white/70 mb-12">
+          <p className="max-w-3xl mx-auto text-center text-sm text-white/70 mb-10 sm:text-lg sm:mb-12">
             Explore moments from our tours placed by happy customers and travel groups.
           </p>
 
-          <div className="grid gap-4 md:grid-cols-4">
+          <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {images.map((img, index) => (
               <img
                 key={index}
                 src={img}
                 alt={`Customer gallery ${index + 1}`}
-                className="h-72 w-full rounded-3xl object-cover shadow-2xl transition-transform duration-500 hover:scale-105"
+                className="h-40 w-full rounded-2xl object-cover shadow-2xl transition-transform duration-500 hover:scale-105 sm:h-56 md:h-64 lg:h-72 sm:rounded-3xl"
               />
             ))}
           </div>

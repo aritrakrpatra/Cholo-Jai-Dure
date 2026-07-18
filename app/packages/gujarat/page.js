@@ -64,6 +64,7 @@ const itinerary = [
     image:
       "https://images.unsplash.com/photo-1511525547934-2f20d2d8b156?auto=format&fit=crop&w=1200&q=80",
     points: ["Statue of Unity", "Aatapi Wonderland", "Ajwa Lake"],
+    hotel: "Lemon Tree Hotel, Vadodara",
   },
   {
     day: "Day 2",
@@ -71,6 +72,7 @@ const itinerary = [
     image:
       "https://images.unsplash.com/photo-1494377121331-9229999cef4b?auto=format&fit=crop&w=1200&q=80",
     points: ["Sabarmati Ashram", "Adalaj Stepwell", "Akshardham Temple"],
+    hotel: "Fortune Landmark, Ahmedabad",
   },
   {
     day: "Day 3",
@@ -84,6 +86,7 @@ const itinerary = [
       "Law Garden",
       "Swaminarayan Temple",
     ],
+    hotel: "Regenta Central Antarim, Ahmedabad",
   },
   {
     day: "Day 4",
@@ -91,6 +94,7 @@ const itinerary = [
     image:
       "https://images.unsplash.com/photo-1546286517-3d076293f5f5?auto=format&fit=crop&w=1200&q=80",
     points: ["Takhteshwar Temple", "Victoria Park", "Gaurishankar Lake"],
+    hotel: "Efcee Sarovar Portico, Bhavnagar",
   },
   {
     day: "Day 5",
@@ -98,6 +102,7 @@ const itinerary = [
     image:
       "https://images.unsplash.com/photo-1595247850422-45c7c3cf523f?auto=format&fit=crop&w=1200&q=80",
     points: ["Gir Jungle Safari", "Devalia Park"],
+    hotel: "Fern Gir Forest Resort, Sasan Gir",
   },
   {
     day: "Day 6",
@@ -112,6 +117,7 @@ const itinerary = [
       "Bhalka Tirth",
       "Triveni Sangam",
     ],
+    hotel: "The Fern Residency, Somnath",
   },
   {
     day: "Day 7",
@@ -119,6 +125,7 @@ const itinerary = [
     image:
       "https://images.unsplash.com/photo-1513708925320-6d01899e8a3f?auto=format&fit=crop&w=1200&q=80",
     points: ["Dwarkadhish Temple", "Gomti Ghat"],
+    hotel: "Hawthorn Suites by Wyndham, Dwarka",
   },
   {
     day: "Day 8",
@@ -126,6 +133,7 @@ const itinerary = [
     image:
       "https://images.unsplash.com/photo-1549909561-1c4db6e8f5c5?auto=format&fit=crop&w=1200&q=80",
     points: ["Bet Dwarka", "Nageshwar Jyotirlinga", "Rukmini Mata Temple"],
+    hotel: "The Dwarika Hotel, Dwarka",
   },
   {
     day: "Day 9",
@@ -133,6 +141,7 @@ const itinerary = [
     image:
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
     points: ["Kaba Gandhi No Delo", "Watson Museum", "Race Course"],
+    hotel: "Regency Lagoon Resort, Rajkot",
   },
   {
     day: "Day 10",
@@ -140,20 +149,8 @@ const itinerary = [
     image:
       "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
     points: ["Rajkot to Kharagpur", "End of Tour"],
+    hotel: "Train journey / Checkout",
   },
-];
-
-const highlights = [
-  { title: "Statue of Unity", icon: Landmark },
-  { title: "Gir National Park Safari", icon: TreeDeciduous },
-  { title: "Somnath Jyotirlinga", icon: Sparkles },
-  { title: "Dwarkadhish Temple", icon: MapPin },
-  { title: "Diu Beaches", icon: Waves },
-  { title: "Bengali Meals", icon: Heart },
-  { title: "Comfortable Hotels", icon: Hotel },
-  { title: "Professional Tour Guide", icon: User },
-  { title: "Tempo Traveller", icon: Truck },
-  { title: "Daily Water Bottle", icon: Droplet },
 ];
 
 const includedItems = [
@@ -254,16 +251,6 @@ const reviews = [
   },
 ];
 
-const infoCards = [
-  "Last Booking Date: 30 June 2026",
-  "Booking Amount: ₹5,000 per person",
-  "Seat Selection Available During Booking",
-  "Carry Original ID Proof",
-  "Wear Comfortable Clothing",
-  "Follow Guide Instructions",
-  "Tour Operates in All Weather Conditions",
-];
-
 function formatDisplayDate(date) {
   return new Intl.DateTimeFormat("en-US", {
     timeZone: "UTC",
@@ -321,26 +308,26 @@ export default function GujratExplorePage() {
           />
         ))}
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-24 sm:py-32">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-24 lg:py-32">
           <div className="grid gap-10 lg:grid-cols-[1.65fr_0.95fr] lg:items-end">
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="space-y-6">
               <span className="inline-flex rounded-full border border-amber-300/30 bg-amber-300/10 px-4 py-2 text-sm uppercase tracking-[0.35em] text-amber-200">GUJRAT 9 NIGHTS & 10 DAYS</span>
-              <h1 className="text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">Explore Gujrat&apos;s Royal Temples, Wildlife & Coastal Wonders</h1>
-              <p className="max-w-3xl text-lg leading-8 text-white/80 sm:text-xl">A premium journey through Gujrat&apos;s most iconic heritage, wildlife, and beach destinations with luxury comforts and immersive local experiences.</p>
-              <div className="flex flex-wrap items-center gap-4">
-                <span className="rounded-full bg-amber-400/10 px-5 py-3 text-lg font-semibold text-amber-200 ring-1 ring-amber-300/20">₹32,000 per person</span>
-                <span className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm text-white/80">9 Nights · 10 Days · Premium Inclusions</span>
+              <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-5xl lg:text-7xl">Explore Gujrat&apos;s Royal Temples, Wildlife &amp; Coastal Wonders</h1>
+              <p className="max-w-3xl text-base leading-7 text-white/80 sm:text-lg sm:leading-8 md:text-xl">A premium journey through Gujrat&apos;s most iconic heritage, wildlife, and beach destinations with luxury comforts and immersive local experiences.</p>
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="rounded-full bg-amber-400/10 px-4 py-2 text-base font-semibold text-amber-200 ring-1 ring-amber-300/20 sm:px-5 sm:py-3 sm:text-lg">₹32,000 per person</span>
+                <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/80 sm:px-5 sm:py-3 sm:text-sm">9 Nights · 10 Days · Premium Inclusions</span>
               </div>
-              <div className="flex flex-wrap gap-4">
-                <a href="#booking" className="inline-flex items-center justify-center rounded-full bg-amber-400 px-7 py-4 text-sm font-semibold text-slate-950 transition hover:bg-amber-300">Book Now</a>
-                <a href="https://wa.me/917501307766" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-400/10 px-7 py-4 text-sm font-semibold text-emerald-200 transition hover:bg-emerald-400/20">WhatsApp Inquiry</a>
-                <a href="tel:7501307766" className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-7 py-4 text-sm font-semibold text-white transition hover:bg-white/10">Call Now</a>
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+                <a href="#booking" className="flex items-center justify-center rounded-full bg-amber-400 px-6 py-3.5 text-sm font-semibold text-slate-950 transition hover:bg-amber-300 sm:px-7 sm:py-4">Book Now</a>
+                <a href="https://wa.me/917501307766" target="_blank" rel="noreferrer" className="flex items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-400/10 px-6 py-3.5 text-sm font-semibold text-emerald-200 transition hover:bg-emerald-400/20 sm:px-7 sm:py-4">WhatsApp Inquiry</a>
+                <a href="tel:7501307766" className="flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10 sm:px-7 sm:py-4">Call Now</a>
               </div>
             </motion.div>
 
-            <motion.aside initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} className="rounded-[2rem] border border-white/10 bg-slate-900/85 p-8 shadow-2xl backdrop-blur-xl">
+            <motion.aside initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} className="rounded-4xl border border-white/10 bg-slate-900/85 p-4 shadow-2xl backdrop-blur-xl sm:p-8">
               <div className="space-y-6">
-                <div className="rounded-[2rem] border border-amber-300/10 bg-slate-950/90 p-6">
+                <div className="rounded-4xl border border-amber-300/10 bg-slate-950/90 p-6">
                   <p className="text-sm uppercase tracking-[0.35em] text-amber-300">Journey Date Selection</p>
                   <div className="mt-5 space-y-3">
                     {journeyDates.map((option) => (
@@ -350,7 +337,7 @@ export default function GujratExplorePage() {
                     ))}
                   </div>
                 </div>
-                <div className="rounded-[2rem] border border-white/10 bg-slate-950/90 p-6">
+                <div className="rounded-4xl border border-white/10 bg-slate-950/90 p-6">
                   <p className="text-sm uppercase tracking-[0.35em] text-amber-300">Premium Inclusions</p>
                   <div className="mt-4 space-y-3 text-white/80">
                     <p className="flex items-center gap-3 text-sm"><CheckCircle2 className="h-4 w-4 text-amber-300" /> Bengali meals every day</p>
@@ -358,7 +345,7 @@ export default function GujratExplorePage() {
                     <p className="flex items-center gap-3 text-sm"><Truck className="h-4 w-4 text-amber-300" /> Tempo Traveller transport</p>
                   </div>
                 </div>
-                <div className="rounded-[2rem] border border-white/10 bg-slate-950/90 p-6">
+                <div className="rounded-4xl border border-white/10 bg-slate-950/90 p-6">
                   <p className="text-sm uppercase tracking-[0.35em] text-amber-300">Travel Concierge</p>
                   <p className="mt-4 text-2xl font-semibold text-white">Premium support from booking to return.</p>
                 </div>
@@ -368,12 +355,12 @@ export default function GujratExplorePage() {
         </div>
       </section>
 
-      <main className="mx-auto max-w-7xl px-6 pb-24 pt-16">
+      <main className="mx-auto max-w-7xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-16">
         <section className="mb-24">
           <div className="grid gap-12 lg:grid-cols-[1.3fr_0.95fr] lg:items-center">
             <div>
               <p className="text-sm uppercase tracking-[0.35em] text-amber-300">Tour Overview</p>
-              <h2 className="mt-4 text-4xl font-bold text-white">A rich Gujrat journey crafted for discerning travelers</h2>
+              <h2 className="mt-4 text-2xl font-bold text-white sm:text-4xl">A rich Gujrat journey crafted for discerning travelers</h2>
               <p className="mt-6 max-w-3xl text-lg leading-9 text-white/70">Explore the rich culture, spirituality, wildlife, beaches, and heritage of Gujrat on this carefully designed 9 Nights & 10 Days tour. Visit the world&apos;s tallest statue, sacred Jyotirlingas, magnificent temples, historic cities, Gir National Park, and the beautiful beaches of Diu while enjoying comfortable accommodation, Bengali meals, and guided sightseeing.</p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -390,61 +377,35 @@ export default function GujratExplorePage() {
         <section className="mb-24">
           <div className="mb-12 text-center">
             <p className="text-sm uppercase tracking-[0.4em] text-amber-300">Itinerary Timeline</p>
-            <h2 className="mt-4 text-4xl font-bold text-white">Your journey day by day</h2>
+            <h2 className="mt-4 text-2xl font-bold text-white sm:text-4xl">Your journey day by day</h2>
           </div>
           <div className="space-y-10">
             {dynamicItinerary.map((item, index) => (
-              <motion.div key={item.day} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.6, delay: index * 0.05 }} className="grid gap-6 rounded-[2rem] border border-white/10 bg-slate-900/90 p-8 lg:grid-cols-[220px_1fr] lg:items-start">
-                <div className="space-y-4">
-                  <div className="inline-flex rounded-[2rem] bg-amber-300/10 px-4 py-3 text-sm uppercase tracking-[0.35em] text-amber-200">{item.day}</div>
-                  <p className="text-sm uppercase tracking-[0.25em] text-white/60">{item.date}</p>
-                  <h3 className="text-2xl font-semibold text-white">{item.title}</h3>
-                  <div className="mt-4 flex flex-wrap gap-3">
-                    {item.points.slice(0, 3).map((point) => (
-                      <span key={point} className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80">{point}</span>
+              <motion.div key={item.day} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.6, delay: index * 0.05 }} className="grid gap-6 rounded-4xl border border-white/10 bg-slate-900/90 p-8 lg:grid-cols-[140px_1fr_200px] lg:items-start">
+                <div className="rounded-3xl bg-slate-950/80 p-4 text-center">
+                  <p className="text-xs uppercase tracking-[0.35em] text-amber-300">{item.day}</p>
+                  <p className="mt-2 text-lg font-semibold text-white">{item.date}</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                  <ul className="mt-3 space-y-2 text-white/70">
+                    {item.points.map((point) => (
+                      <li key={point} className="flex gap-2 text-sm">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-300 shrink-0" />
+                        <span>{point}</span>
+                      </li>
                     ))}
+                  </ul>
+                </div>
+                {item.hotel && (
+                  <div className="flex h-fit flex-col items-center rounded-3xl bg-slate-950/80 p-4 text-center">
+                    <Hotel className="mb-2 h-6 w-6 text-amber-300" />
+                    <p className="mb-1 text-xs uppercase tracking-[0.35em] text-amber-300">Hotel</p>
+                    <p className="text-sm font-semibold text-white">{item.hotel}</p>
                   </div>
-                </div>
-                <div className="overflow-hidden rounded-[1.75rem] bg-slate-950/60">
-                  <img src={item.image} alt={item.title} className="h-72 w-full object-cover transition duration-500 hover:scale-105" loading="lazy" />
-                </div>
+                )}
               </motion.div>
             ))}
-          </div>
-        </section>
-
-        <section className="mb-24">
-          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-            <div>
-              <p className="text-sm uppercase tracking-[0.4em] text-amber-300">Package Highlights</p>
-              <h2 className="mt-4 text-4xl font-bold text-white">Luxury experiences woven through every destination</h2>
-              <p className="mt-6 text-white/70">Enjoy a premium travel rhythm from the landmark moments at Statue of Unity to the peaceful beaches of Diu and sacred temples of Dwarka.</p>
-              <div className="mt-10 grid gap-4 sm:grid-cols-2">
-                {highlights.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={item.title} className="rounded-[2rem] border border-white/10 bg-slate-950/85 p-6 transition hover:-translate-y-1 hover:border-amber-300/40">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-3xl bg-amber-300/10 text-amber-200">
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <p className="mt-5 text-lg font-semibold text-white">{item.title}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-            <div className="rounded-[2rem] border border-amber-300/10 bg-slate-950/90 p-8 shadow-2xl">
-              <div className="space-y-6">
-                <div>
-                  <p className="text-sm uppercase tracking-[0.35em] text-amber-300">Premium Comfort</p>
-                  <h3 className="mt-3 text-3xl font-bold text-white">Stay, travel and dine in luxury.</h3>
-                </div>
-                <div className="grid gap-4">
-                  <div className="rounded-[1.75rem] border border-white/10 bg-slate-950/85 p-5"><p className="text-sm uppercase tracking-[0.3em] text-white/60">Bengali Meals</p><p className="mt-3 text-white/80">Daily curated flavors with comfort for every traveler.</p></div>
-                  <div className="rounded-[1.75rem] border border-white/10 bg-slate-950/85 p-5"><p className="text-sm uppercase tracking-[0.3em] text-white/60">Travel & Support</p><p className="mt-3 text-white/80">Guided sightseeing with professional support and smooth transfers.</p></div>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -452,7 +413,7 @@ export default function GujratExplorePage() {
           <div>
             <div className="mb-10">
               <p className="text-sm uppercase tracking-[0.4em] text-amber-300">What&apos;s Included</p>
-              <h2 className="mt-4 text-4xl font-bold text-white">Every detail covered</h2>
+              <h2 className="mt-4 text-2xl font-bold text-white sm:text-4xl">Every detail covered</h2>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               {includedItems.map((item) => (
@@ -466,7 +427,7 @@ export default function GujratExplorePage() {
           <div className="mt-12 lg:mt-0">
             <div className="mb-10">
               <p className="text-sm uppercase tracking-[0.4em] text-amber-300">Not Included</p>
-              <h2 className="mt-4 text-4xl font-bold text-white">Plan ahead for optional extras</h2>
+              <h2 className="mt-4 text-2xl font-bold text-white sm:text-4xl">Plan ahead for optional extras</h2>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               {excludedItems.map((item) => (
@@ -482,13 +443,13 @@ export default function GujratExplorePage() {
         <section className="mb-24">
           <div className="mb-10 text-center">
             <p className="text-sm uppercase tracking-[0.4em] text-amber-300">Destination Gallery</p>
-            <h2 className="mt-4 text-4xl font-bold text-white">Gujrat sights in every frame</h2>
+            <h2 className="mt-4 text-2xl font-bold text-white sm:text-4xl">Gujrat sights in every frame</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {galleryItems.map((item) => (
-              <button key={item.label} type="button" onClick={() => setLightbox(item)} className="group overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/80 transition hover:-translate-y-1">
-                <img src={item.src} alt={item.label} className="h-64 w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
-                <div className="relative bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent px-4 pb-4 pt-6 text-left">
+              <button key={item.label} type="button" onClick={() => setLightbox(item)} className="group overflow-hidden rounded-4xl border border-white/10 bg-slate-950/80 transition hover:-translate-y-1">
+                <img src={item.src} alt={item.label} className="h-40 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-52 lg:h-64" loading="lazy" />
+                <div className="relative bg-linear-to-t from-slate-950/90 via-slate-950/50 to-transparent px-4 pb-4 pt-6 text-left">
                   <p className="text-lg font-semibold text-white">{item.label}</p>
                 </div>
               </button>
@@ -497,7 +458,7 @@ export default function GujratExplorePage() {
           {lightbox && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/95 p-6 backdrop-blur-lg">
               <button type="button" onClick={() => setLightbox(null)} className="absolute right-6 top-6 rounded-full border border-white/20 bg-slate-950/80 px-4 py-2 text-sm text-white transition hover:bg-slate-900">Close</button>
-              <div className="max-h-full w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/95 shadow-2xl">
+              <div className="max-h-full w-full max-w-5xl overflow-hidden rounded-4xl border border-white/10 bg-slate-950/95 shadow-2xl">
                 <img src={lightbox.src} alt={lightbox.label} className="h-[75vh] w-full object-cover" />
                 <div className="border-t border-white/10 p-6 text-white">
                   <h3 className="text-2xl font-semibold">{lightbox.label}</h3>
@@ -507,36 +468,15 @@ export default function GujratExplorePage() {
           )}
         </section>
 
-        <section className="mb-24 rounded-[2rem] border border-white/10 bg-slate-900/90 p-8 shadow-2xl">
-          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-            <div>
-              <p className="text-sm uppercase tracking-[0.4em] text-amber-300">Map Route</p>
-              <h2 className="mt-4 text-4xl font-bold text-white">Visualize the Gujrat route</h2>
-              <p className="mt-4 max-w-3xl text-white/70">Follow the elegant travel path from Vadodara to Rajkot, visiting Ahmedabad, Bhavnagar, Gir, Diu, Somnath, and Dwarka along the way.</p>
-              <div className="mt-8 overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950">
-                <iframe title="Gujrat travel route" src="https://www.google.com/maps?q=Vadodara+Ahmedabad+Bhavnagar+Gir+Diu+Somnath+Dwarka+Rajkot&output=embed" className="h-96 w-full border-0" loading="lazy" />
-              </div>
-            </div>
-            <div className="grid gap-4">
-              {infoCards.map((info) => (
-                <div key={info} className="rounded-[1.75rem] border border-white/10 bg-slate-950/85 p-6">
-                  <p className="text-sm uppercase tracking-[0.3em] text-amber-300">Important</p>
-                  <p className="mt-3 text-white/80">{info}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section className="mb-24 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
           <div>
             <div className="mb-10">
               <p className="text-sm uppercase tracking-[0.4em] text-amber-300">FAQs</p>
-              <h2 className="mt-4 text-4xl font-bold text-white">Questions travelers ask most</h2>
+              <h2 className="mt-4 text-2xl font-bold text-white sm:text-4xl">Questions travelers ask most</h2>
             </div>
             <div className="space-y-4">
               {faqItems.map((item, index) => (
-                <div key={item.question} className="overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/90">
+                <div key={item.question} className="overflow-hidden rounded-4xl border border-white/10 bg-slate-950/90">
                   <button type="button" onClick={() => setActiveFaq(activeFaq === index ? null : index)} className="flex w-full items-center justify-between gap-4 p-6 text-left text-white">
                     <span className="text-lg font-semibold">{item.question}</span>
                     <span className="text-2xl text-amber-300">{activeFaq === index ? "−" : "+"}</span>
@@ -547,9 +487,9 @@ export default function GujratExplorePage() {
             </div>
           </div>
 
-          <aside className="rounded-[2rem] border border-amber-300/10 bg-slate-950/90 p-8">
+          <aside className="rounded-4xl border border-amber-300/10 bg-slate-950/90 p-8">
             <p className="text-sm uppercase tracking-[0.35em] text-amber-300">Customer Stories</p>
-            <h3 className="mt-4 text-3xl font-bold text-white">What premium travelers say</h3>
+            <h3 className="mt-4 text-2xl font-bold text-white sm:text-3xl">What premium travelers say</h3>
             <div className="mt-8 space-y-6">
               {reviews.map((review) => (
                 <div key={review.name} className="rounded-[1.75rem] border border-white/10 bg-slate-950/80 p-6">
@@ -564,15 +504,15 @@ export default function GujratExplorePage() {
           </aside>
         </section>
 
-        <section id="booking" className="mb-24 rounded-[2rem] border border-white/10 bg-slate-900/90 p-8 shadow-2xl">
+        <section id="booking" className="mb-16 rounded-4xl border border-white/10 bg-slate-900/90 p-5 shadow-2xl sm:mb-24 sm:p-8">
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <p className="text-sm uppercase tracking-[0.35em] text-amber-300">Booking & Pricing</p>
-              <h2 className="mt-3 text-4xl font-bold text-white">Reserve your Gujrat luxury trip</h2>
+              <h2 className="mt-3 text-2xl font-bold text-white sm:text-4xl">Reserve your Gujrat luxury trip</h2>
               <p className="mt-4 max-w-3xl text-white/70">Secure your seat with just ₹5,000 and pay the balance later. Our team will confirm departures, seats, and room preferences with you.</p>
             </div>
-            <div className="space-y-4 rounded-[2rem] bg-slate-950/90 p-8 shadow-xl">
-              <div className="rounded-[1.75rem] bg-gradient-to-r from-amber-400/15 to-amber-300/10 p-6">
+            <div className="space-y-4 rounded-4xl bg-slate-950/90 p-4 shadow-xl sm:p-8">
+              <div className="rounded-[1.75rem] bg-linear-to-r from-amber-400/15 to-amber-300/10 p-6">
                 <p className="text-sm uppercase tracking-[0.35em] text-amber-200">Tour Price</p>
                 <p className="mt-3 text-4xl font-semibold text-white">₹32,000 per person</p>
                 <p className="mt-2 text-sm text-white/70">Booking Amount ₹5,000</p>
@@ -585,15 +525,8 @@ export default function GujratExplorePage() {
         </section>
       </main>
 
-      <footer className="border-t border-white/10 bg-slate-950/95 py-12 text-white">
-        <div className="mx-auto max-w-7xl px-6 text-center sm:text-left">
-          <p className="text-xl font-semibold">Cholo Jai Dure Tour & Travels</p>
-          <p className="mt-4 text-white/70">Zilla Parishad Market Complex, Midnapur, Paschim Medinipur</p>
-          <div className="mt-4 flex flex-col items-center justify-center gap-2 text-sm text-white/80 sm:flex-row sm:justify-center">
-            <a href="tel:7501307766" className="hover:text-white">📞 7501307766</a>
-            <a href="tel:7478167607" className="hover:text-white">📞 7478167607</a>
-          </div>
-        </div>
+      <footer className="border-t border-white/10 bg-slate-950/90 py-10 text-center text-sm text-white/70">
+        <p>© 2026 Cholo Jai Dure. All Rights Reserved.</p>
       </footer>
     </div>
     </>
