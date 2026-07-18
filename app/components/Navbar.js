@@ -482,9 +482,18 @@ export default function Navbar() {
               style={{ zIndex: 1010 }}
             >
               <span className="relative h-5 w-5">
-                <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-2 transition-all duration-300 ${isLightTheme ? "bg-black" : "bg-white"} ${menuOpen ? "translate-y-0 rotate-45" : ""}`} />
-                <span className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-1/2 transition-all duration-300 ${isLightTheme ? "bg-black" : "bg-white"} ${menuOpen ? "opacity-0" : "opacity-100"}`} />
-                <span className={`absolute left-0 top-1/2 block h-0.5 w-5 translate-y-1 transition-all duration-300 ${isLightTheme ? "bg-black" : "bg-white"} ${menuOpen ? "translate-y-0 -rotate-45" : ""}`} />
+                <span
+                  className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-2 transition-all duration-300 ${menuOpen ? "translate-y-0 rotate-45" : ""}`}
+                  style={{ backgroundColor: isLightTheme ? "#000000" : "#ffffff" }}
+                />
+                <span
+                  className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-1/2 transition-all duration-300 ${menuOpen ? "opacity-0" : "opacity-100"}`}
+                  style={{ backgroundColor: isLightTheme ? "#000000" : "#ffffff" }}
+                />
+                <span
+                  className={`absolute left-0 top-1/2 block h-0.5 w-5 translate-y-1 transition-all duration-300 ${menuOpen ? "translate-y-0 -rotate-45" : ""}`}
+                  style={{ backgroundColor: isLightTheme ? "#000000" : "#ffffff" }}
+                />
               </span>
             </button>
           </div>
