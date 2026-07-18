@@ -497,16 +497,20 @@ export default function Navbar() {
         id="mobile-navigation"
         role="dialog"
         aria-modal="true"
-        className={`fixed inset-0 z-50 overflow-y-auto backdrop-blur-xl transition-all duration-300 lg:hidden ${
+        className={`fixed inset-0 z-50 overflow-y-auto transition-all duration-300 lg:hidden ${
           menuOpen
             ? "visible translate-x-0 opacity-100 pointer-events-auto"
             : "invisible translate-x-full opacity-0 pointer-events-none"
         }`}
-        style={{ backgroundColor: isLightTheme ? "rgba(246, 240, 232, 0.96)" : "rgba(2, 6, 23, 0.92)", zIndex: 1020 }}
+        style={{ backgroundColor: isLightTheme ? "rgba(246, 240, 232, 0.38)" : "rgba(2, 6, 23, 0.42)", zIndex: 1020, backdropFilter: "blur(12px)" }}
       >
-        <div className="mx-auto flex h-full max-w-7xl flex-col justify-between px-6 py-8">
+        <div className={`ml-auto flex min-h-full w-full max-w-88 flex-col gap-6 border-l px-4 py-5 shadow-[0_24px_80px_rgba(0,0,0,0.45)] ${
+          isLightTheme
+            ? "border-(--border) bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,240,232,0.95))]"
+            : "border-white/10 bg-[linear-gradient(180deg,rgba(12,18,31,0.98),rgba(7,12,24,0.96))]"
+        }`}>
           <div>
-            <div className="mb-12 flex items-center justify-between">
+            <div className="mb-8 flex items-center justify-between">
               <Link href="/" className={`flex items-center gap-3 ${isLightTheme ? "text-slate-900" : "text-white"}`}>
                 <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-3xl bg-white ring-1 ring-amber-300/20">
                   <Image
@@ -527,29 +531,37 @@ export default function Navbar() {
                 type="button"
                 aria-label="Close navigation menu"
                 onClick={() => setMenuOpen(false)}
-                className={isLightTheme ? "text-slate-900" : "text-white"}
+                className={`flex h-10 w-10 items-center justify-center rounded-2xl border transition ${
+                  isLightTheme
+                    ? "border-(--border) bg-white/80 text-slate-900 hover:bg-black/5"
+                    : "border-white/10 bg-white/5 text-white hover:bg-white/10"
+                }`}
               >
                 ✕
               </button>
             </div>
 
-            <div className={`space-y-4 text-lg font-semibold ${isLightTheme ? "text-slate-900" : "text-white"}`}>
+            <p className={`mb-3 px-1 text-[10px] font-semibold uppercase tracking-[0.28em] ${isLightTheme ? "text-slate-500" : "text-white/45"}`}>
+              Navigate
+            </p>
+
+            <div className={`space-y-2.5 text-base font-semibold ${isLightTheme ? "text-slate-900" : "text-white"}`}>
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`block rounded-3xl border px-5 py-4 transition ${isLightTheme ? "border-(--border) bg-(--surface-strong) hover:bg-black/5" : "border-white/10 bg-white/10 hover:bg-white/20"}`}
+                  className={`block rounded-2xl border px-4 py-3 transition ${isLightTheme ? "border-(--border) bg-white/85 hover:bg-black/5" : "border-white/10 bg-white/6 hover:bg-white/10"}`}
                   onClick={() => setMenuOpen(false)}
                 >
                   {item.label}
                 </Link>
               ))}
-              <div className="pt-2">
+              <div className="space-y-2.5">
                 {moreNavItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`block rounded-3xl border px-5 py-4 transition ${isLightTheme ? "border-(--border) bg-(--surface-strong) hover:bg-black/5" : "border-white/10 bg-white/10 hover:bg-white/20"}`}
+                    className={`block rounded-2xl border px-4 py-3 transition ${isLightTheme ? "border-(--border) bg-white/85 hover:bg-black/5" : "border-white/10 bg-white/6 hover:bg-white/10"}`}
                     onClick={() => setMenuOpen(false)}
                   >
                     {item.label}
@@ -559,14 +571,18 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className="space-y-4">
-            <div className="relative mb-8">
+          <div className={`space-y-3 border-t pt-4 pb-2 ${isLightTheme ? "border-(--border)" : "border-white/10"}`}>
+            <p className={`px-1 text-[10px] font-semibold uppercase tracking-[0.28em] ${isLightTheme ? "text-slate-500" : "text-white/45"}`}>
+              Preferences
+            </p>
+
+            <div className="relative">
               <ThemeMenuButton pathname={pathname} mobile />
             </div>
 
             {!loading && user ? (
               <>
-                <div className={`rounded-3xl border px-5 py-4 text-center ${isLightTheme ? "border-amber-300/30 bg-amber-300/15" : "border-amber-400/20 bg-amber-400/10"}`}>
+                <div className={`rounded-2xl border px-4 py-3 text-center ${isLightTheme ? "border-amber-300/30 bg-amber-300/15" : "border-amber-400/20 bg-amber-400/10"}`}>
                   <p className={`text-sm font-semibold ${isLightTheme ? "text-slate-900" : "text-amber-300"}`}>
                     <User className="h-4 w-4 inline mr-2" />
                     {user.name}
@@ -574,14 +590,14 @@ export default function Navbar() {
                 </div>
                 <Link
                   href="/account"
-                  className={`block rounded-3xl border px-5 py-4 text-center text-sm font-semibold transition ${isLightTheme ? "border-(--border) bg-(--surface-strong) text-slate-900 hover:bg-black/5" : "border-white/10 bg-white/10 text-white hover:bg-white/20"}`}
+                  className={`block rounded-2xl border px-4 py-3 text-center text-sm font-semibold transition ${isLightTheme ? "border-(--border) bg-white/85 text-slate-900 hover:bg-black/5" : "border-white/10 bg-white/6 text-white hover:bg-white/10"}`}
                   onClick={() => setMenuOpen(false)}
                 >
                   View Profile
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="w-full rounded-3xl border border-red-500/30 bg-red-500/20 px-5 py-4 text-center text-sm font-semibold text-red-300 transition hover:bg-red-500/30"
+                  className="w-full rounded-2xl border border-red-500/30 bg-red-500/20 px-4 py-3 text-center text-sm font-semibold text-red-300 transition hover:bg-red-500/30"
                 >
                   <LogOut className="h-4 w-4 inline mr-2" />
                   Logout
