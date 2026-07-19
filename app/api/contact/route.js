@@ -7,6 +7,16 @@ export const dynamic = "force-dynamic";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_REGEX = /^[0-9+\-()\s]{7,20}$/;
 
+function firstDefinedValue(values) {
+  for (const value of values) {
+    const normalized = String(value || "").trim();
+    if (normalized) {
+      return normalized;
+    }
+  }
+  return "";
+}
+
 function escapeHtml(value) {
   return value
     .replace(/&/g, "&amp;")
@@ -46,21 +56,47 @@ export async function POST(request) {
       );
     }
 
-    const smtpHost = (process.env.SMTP_HOST || "").trim();
+    const smtpHost = firstDefinedValue([
+      process.env.SMTP_HOST,
+      process.env.EMAIL_HOST,
+      process.env.MAIL_HOST,
+    ]);
     const smtpPort = Number(process.env.SMTP_PORT || 0) || undefined;
     const smtpSecure =
       String(process.env.SMTP_SECURE || "").toLowerCase() === "true" ||
       smtpPort === 465;
-    const smtpUser = (process.env.SMTP_USER || process.env.GMAIL_USER || "").trim();
-    const smtpPass = (process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD || "")
+    const smtpUser = firstDefinedValue([
+      process.env.SMTP_USER,
+      process.env.SMTP_USERNAME,
+      process.env.GMAIL_USER,
+      process.env.EMAIL_USER,
+      process.env.MAIL_USER,
+    ]);
+    const smtpPass = firstDefinedValue([
+      process.env.SMTP_PASS,
+      process.env.SMTP_PASSWORD,
+      process.env.GMAIL_APP_PASSWORD,
+      process.env.EMAIL_PASS,
+      process.env.MAIL_PASS,
+    ])
       .trim()
       .replace(/\s+/g, "");
     const smtpTo = process.env.CONTACT_RECEIVER_EMAIL || "cholojaiduretourandtravels@gmail.com";
     const smtpFrom = (process.env.SMTP_FROM || smtpUser).trim();
 
     if (!smtpUser || !smtpPass) {
+      const missing = [];
+      if (!smtpUser) {
+        missing.push("SMTP_USER");
+      }
+      if (!smtpPass) {
+        missing.push("SMTP_PASS");
+      }
+
       return NextResponse.json(
-        { message: "Server email is not configured. Please contact support." },
+        {
+          message: `Server email is not configured. Missing: ${missing.join(", ")}. Add values in Vercel Project Settings -> Environment Variables and redeploy.`,
+        },
         { status: 500 }
       );
     }
