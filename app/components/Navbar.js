@@ -13,15 +13,14 @@ const navItems = [
   { label: "Tours", href: "/tours" },
   { label: "Bike Ride", href: "/bike-ride" },
   { label: "Trekking", href: "/trekking" },
-  { label: "Contact Us", href: "/contact" },
-];
-
-const moreNavItems = [
   { label: "About Us", href: "/about-us" },
   { label: "Merchandise", href: "/merchandise" },
   { label: "Customer Gallery", href: "/gallery" },
   { label: "Rules & Regulations", href: "/rules-regulations" },
+  { label: "Contact Us", href: "/contact" },
 ];
+
+const moreNavItems = [];
 
 
 
@@ -398,7 +397,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          <nav className={`hidden min-w-0 items-center justify-center gap-6 overflow-x-auto whitespace-nowrap text-sm font-medium lg:flex ${isLightTheme ? "text-slate-700" : "text-white/80"}`}>
+          <nav className={`hidden min-w-0 items-center justify-center gap-4 overflow-x-auto whitespace-nowrap text-sm font-medium lg:flex ${isLightTheme ? "text-slate-700" : "text-white/80"}`}>
             {navItems.map((item) => {
               const active = getActiveItem(item.href, pathname, currentHash);
               return (
@@ -412,7 +411,7 @@ export default function Navbar() {
                 >
                   {item.label}
                   <span
-                    className={`absolute left-0 -bottom-1 h-0.5 w-full bg-white transition-all duration-300 ${
+                    className={`absolute left-0 -bottom-1 h-0.5 w-full transition-all duration-300 ${isLightTheme ? "bg-slate-900" : "bg-white"} ${
                       active ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"
                     }`}
                   />
@@ -422,7 +421,6 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden items-center gap-3 lg:flex">
-            <MoreMenuButton pathname={pathname} currentHash={currentHash} isLightTheme={isLightTheme} />
             <div className="relative z-50">
               <ThemeMenuButton pathname={pathname} />
             </div>
@@ -583,18 +581,7 @@ export default function Navbar() {
                   {item.label}
                 </Link>
               ))}
-              <div className="space-y-2.5">
-                {moreNavItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`block rounded-2xl border px-4 py-3 transition ${isLightTheme ? "border-(--border) bg-white/85 hover:bg-black/5" : "border-white/10 bg-white/6 hover:bg-white/10"}`}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
+
             </div>
           </div>
 

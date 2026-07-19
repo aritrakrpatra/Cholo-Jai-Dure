@@ -20,6 +20,27 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Contact Enquiry Form Setup (Vercel)
+
+The enquiry form posts to `/api/contact` and sends email using SMTP via `nodemailer`.
+
+Add these environment variables in Vercel Project Settings -> Environment Variables:
+
+- `SMTP_HOST` (example: `smtp.gmail.com`)
+- `SMTP_PORT` (example: `587`)
+- `SMTP_SECURE` (`true` for port `465`, otherwise `false`)
+- `SMTP_USER` (sender email)
+- `SMTP_PASS` (SMTP password or Gmail app password)
+- `SMTP_FROM` (optional, defaults to `SMTP_USER`)
+- `CONTACT_RECEIVER_EMAIL` (where enquiry emails are received)
+- `CONTACT_BUSINESS_PHONE` (optional, used in customer auto-reply)
+
+You can copy defaults from `.env.example`.
+
+Important for Gmail:
+- Use a Google App Password (not your normal Gmail password).
+- Keep 2-step verification enabled on that Google account.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

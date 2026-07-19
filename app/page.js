@@ -70,7 +70,7 @@ export default function CholoJaiDureTours() {
                 />
                 ESTD. 2024
               </p>
-              <h1 className="text-[clamp(1.8rem,8vw,2.8rem)] font-bold leading-tight text-white">
+              <h1 className="text-[clamp(1.8rem,8vw,2.8rem)] font-bold leading-tight" style={{ color: "white" }}>
                 CHOLO JAI DURE
               </h1>
               <h2 className="mt-2 text-[clamp(1rem,5vw,1.45rem)] font-semibold text-white/80">
@@ -115,7 +115,7 @@ export default function CholoJaiDureTours() {
           </div>
         </div>
 
-        <div className="relative hidden min-h-[calc(100svh-5rem)] sm:block md:min-h-screen">
+        <div className="hero-video relative hidden min-h-[calc(100svh-5rem)] sm:block md:min-h-screen">
           <video
             autoPlay
             muted
@@ -167,9 +167,9 @@ export default function CholoJaiDureTours() {
                   height={16}
                   className="h-4 w-4 rounded-full object-cover"
                 />
-                Luxury Travel
+                ESTD. 2024
               </p>
-              <h1 className="text-[clamp(1.5rem,7vw,2.7rem)] font-bold leading-tight text-white sm:text-5xl md:text-7xl">
+              <h1 className="text-[clamp(1.5rem,7vw,2.7rem)] font-bold leading-tight sm:text-5xl md:text-7xl" style={{ color: "white", textShadow: "0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.7)" }}>
                 CHOLO JAI DURE
               </h1>
               <h2 className="mt-3 text-[clamp(1rem,5vw,1.75rem)] font-semibold text-white/80 sm:text-3xl md:text-5xl">

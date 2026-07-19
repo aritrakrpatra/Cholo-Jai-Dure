@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_REGEX = /^[0-9+\-()\s]{7,20}$/;
 
@@ -43,11 +46,17 @@ export async function POST(request) {
       );
     }
 
+    const smtpHost = (process.env.SMTP_HOST || "").trim();
+    const smtpPort = Number(process.env.SMTP_PORT || 0) || undefined;
+    const smtpSecure =
+      String(process.env.SMTP_SECURE || "").toLowerCase() === "true" ||
+      smtpPort === 465;
     const smtpUser = (process.env.SMTP_USER || process.env.GMAIL_USER || "").trim();
     const smtpPass = (process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD || "")
       .trim()
       .replace(/\s+/g, "");
     const smtpTo = process.env.CONTACT_RECEIVER_EMAIL || "cholojaiduretourandtravels@gmail.com";
+    const smtpFrom = (process.env.SMTP_FROM || smtpUser).trim();
 
     if (!smtpUser || !smtpPass) {
       return NextResponse.json(
@@ -56,20 +65,32 @@ export async function POST(request) {
       );
     }
 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: smtpUser,
-        pass: smtpPass,
-      },
-    });
+    const transporter = nodemailer.createTransport(
+      smtpHost
+        ? {
+            host: smtpHost,
+            port: smtpPort || 587,
+            secure: smtpSecure,
+            auth: {
+              user: smtpUser,
+              pass: smtpPass,
+            },
+          }
+        : {
+            service: "gmail",
+            auth: {
+              user: smtpUser,
+              pass: smtpPass,
+            },
+          }
+    );
 
     const submittedAt = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
     const businessPhone = process.env.CONTACT_BUSINESS_PHONE || "7501307766 / 7478167607";
 
     await Promise.all([
       transporter.sendMail({
-        from: `Cholo Jai Dure Website <${smtpUser}>`,
+        from: `Cholo Jai Dure Website <${smtpFrom}>`,
         to: smtpTo,
         replyTo: email,
         subject: `New Travel Inquiry from ${name}`,
@@ -94,7 +115,7 @@ export async function POST(request) {
         `,
       }),
       transporter.sendMail({
-        from: `Cholo Jai Dure Tour & Travels <${smtpUser}>`,
+        from: `Cholo Jai Dure Tour & Travels <${smtpFrom}>`,
         to: email,
         subject: "We received your inquiry | Cholo Jai Dure",
         text: [
@@ -139,7 +160,8 @@ export async function POST(request) {
       { message: "Inquiry sent successfully. A confirmation email has been sent to you." },
       { status: 200 }
     );
-  } catch {
+  } catch (error) {
+    console.error("[contact-api] Failed to send inquiry", error);
     return NextResponse.json(
       { message: "Unable to send inquiry right now. Please try again later." },
       { status: 500 }
