@@ -23,16 +23,37 @@ function StatusBadge({ status }: { status: BookingStatus }) {
   );
 }
 
-function fmtDate(d) {
+function fmtDate(d: string | Date | null | undefined) {
   if (!d) return "—";
-  try { return new Date(d + "T00:00:00").toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }); }
-  catch { return d; }
+
+  try {
+    const parsed = d instanceof Date ? d : new Date(`${d}T00:00:00`);
+    return parsed.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  } catch {
+    return String(d);
+  }
 }
 
-function fmtDateTime(iso) {
+function fmtDateTime(iso: string | Date | null | undefined) {
   if (!iso) return "—";
-  try { return new Date(iso).toLocaleString("en-IN", { timeZone: "Asia/Kolkata", day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }); }
-  catch { return iso; }
+
+  try {
+    const parsed = iso instanceof Date ? iso : new Date(iso);
+    return parsed.toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  } catch {
+    return String(iso);
+  }
 }
 
 const STATUSES: BookingFilterStatus[] = [
