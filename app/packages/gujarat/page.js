@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
@@ -448,7 +449,14 @@ export default function GujratExplorePage() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {galleryItems.map((item) => (
               <button key={item.label} type="button" onClick={() => setLightbox(item)} className="group overflow-hidden rounded-4xl border border-white/10 bg-slate-950/80 transition hover:-translate-y-1">
-                <img src={item.src} alt={item.label} className="h-40 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-52 lg:h-64" loading="lazy" />
+                <Image
+                  src={item.src}
+                  alt={item.label}
+                  width={960}
+                  height={720}
+                  className="h-40 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-52 lg:h-64"
+                  loading="lazy"
+                />
                 <div className="relative bg-linear-to-t from-slate-950/90 via-slate-950/50 to-transparent px-4 pb-4 pt-6 text-left">
                   <p className="text-lg font-semibold text-white">{item.label}</p>
                 </div>
@@ -459,7 +467,13 @@ export default function GujratExplorePage() {
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/95 p-6 backdrop-blur-lg">
               <button type="button" onClick={() => setLightbox(null)} className="absolute right-6 top-6 rounded-full border border-white/20 bg-slate-950/80 px-4 py-2 text-sm text-white transition hover:bg-slate-900">Close</button>
               <div className="max-h-full w-full max-w-5xl overflow-hidden rounded-4xl border border-white/10 bg-slate-950/95 shadow-2xl">
-                <img src={lightbox.src} alt={lightbox.label} className="h-[75vh] w-full object-cover" />
+                <Image
+                  src={lightbox.src}
+                  alt={lightbox.label}
+                  width={1920}
+                  height={1200}
+                  className="h-[75vh] w-full object-cover"
+                />
                 <div className="border-t border-white/10 p-6 text-white">
                   <h3 className="text-2xl font-semibold">{lightbox.label}</h3>
                 </div>

@@ -1,0 +1,166 @@
+[
+  {
+    "id": "bk_1784534743404_h7ajz19",
+    "bookingId": "CJD-20260720-001",
+    "packageId": "gujarat",
+    "packageName": "Gujarat",
+    "customerName": "Sayan Maity",
+    "email": "sayan.cjd@gmail.com",
+    "phone": "747792872",
+    "whatsapp": "",
+    "city": "Midnapore",
+    "travelDate": "2026-07-25",
+    "adults": 1,
+    "children": 0,
+    "totalTravelers": 1,
+    "pickupLocation": "",
+    "specialRequests": "",
+    "bookingStatus": "paid",
+    "adminNotes": "",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "changedAt": "2026-07-20T08:05:43.412Z"
+      },
+      {
+        "status": "paid",
+        "changedAt": "2026-07-20T08:22:25.883Z"
+      }
+    ],
+    "createdAt": "2026-07-20T08:05:43.412Z",
+    "updatedAt": "2026-07-20T08:22:25.883Z"
+  },
+  {
+    "id": "bk_1784534891073_j0dhgdi",
+    "bookingId": "CJD-20260720-002",
+    "packageId": "do-dham-yatra",
+    "packageName": "Do Dham",
+    "customerName": "Aritra Patra",
+    "email": "aritrakumarpatra2003@gmail.com",
+    "phone": "8250134887",
+    "whatsapp": "",
+    "city": "kolkata",
+    "travelDate": "2026-07-23",
+    "adults": 1,
+    "children": 0,
+    "totalTravelers": 1,
+    "pickupLocation": "",
+    "specialRequests": "",
+    "bookingStatus": "confirmed",
+    "adminNotes": "debo na sala toke",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "changedAt": "2026-07-20T08:08:11.088Z"
+      },
+      {
+        "status": "confirmed",
+        "changedAt": "2026-07-20T08:16:14.297Z"
+      }
+    ],
+    "createdAt": "2026-07-20T08:08:11.088Z",
+    "updatedAt": "2026-07-20T08:16:14.297Z"
+  },
+  {
+    "id": "bk_1784535698608_jgrp5vb",
+    "bookingId": "CJD-20260720-003",
+    "packageId": "do-dham-yatra",
+    "packageName": "Do Dham",
+    "customerName": "Aritra Patra",
+    "email": "aritrakumarpatra2003@gmail.com",
+    "phone": "7047792872",
+    "whatsapp": "",
+    "city": "midnapore",
+    "travelDate": "2026-07-23",
+    "adults": 1,
+    "children": 0,
+    "totalTravelers": 1,
+    "pickupLocation": "",
+    "specialRequests": "i want to go",
+    "bookingStatus": "confirmed",
+    "adminNotes": "",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "changedAt": "2026-07-20T08:21:38.629Z"
+      },
+      {
+        "status": "confirmed",
+        "changedAt": "2026-07-20T08:22:08.950Z"
+      }
+    ],
+    "createdAt": "2026-07-20T08:21:38.629Z",
+    "updatedAt": "2026-07-20T08:22:08.950Z"
+  },
+  {
+    "id": "bk_1784537221401_sbi7wdr",
+    "bookingId": "CJD-20260720-004",
+    "packageId": "gujarat",
+    "packageName": "Gujarat",
+    "customerName": "Aritra Patra",
+    "email": "aritrakumarpatra2003@gmail.com",
+    "phone": "7047792872",
+    "whatsapp": "",
+    "city": "",
+    "travelDate": "2026-07-24",
+    "adults": 1,
+    "children": 0,
+    "totalTravelers": 1,
+    "pickupLocation": "",
+    "specialRequests": "",
+    "bookingStatus": "paid",
+    "adminNotes": "",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "changedAt": "2026-07-20T08:47:01.406Z"
+      },
+      {
+        "status": "confirmed",
+        "changedAt": "2026-07-20T08:59:30.890Z"
+      },
+      {
+        "status": "paid",
+        "changedAt": "2026-07-20T08:59:51.199Z"
+      }
+    ],
+    "createdAt": "2026-07-20T08:47:01.406Z",
+    "updatedAt": "2026-07-20T08:59:51.199Z"
+  },
+  {
+    "id": "bk_1784563114679_03g2pml",
+    "bookingId": "CJD-20260720-005",
+    "packageId": "do-dham-yatra",
+    "packageName": "Do Dham",
+    "customerName": "Aritra Patra",
+    "email": "aritrakumarpatra2003@gmail.com",
+    "phone": "7047792872",
+    "whatsapp": "",
+    "city": "midnapore",
+    "travelDate": "2026-07-23",
+    "adults": 2,
+    "children": 1,
+    "totalTravelers": 3,
+    "pickupLocation": "",
+    "specialRequests": "i want to go",
+    "bookingStatus": "cancelled",
+    "adminNotes": "",
+    "createdByUserId": "user_3GjqkyA0XqHvGZjvyofgNNh6KD1",
+    "statusHistory": [
+      {
+        "status": "pending",
+        "changedAt": "2026-07-20T15:58:34.683Z"
+      },
+      {
+        "status": "confirmed",
+        "changedAt": "2026-07-20T16:02:21.272Z"
+      },
+      {
+        "status": "cancelled",
+        "changedAt": "2026-07-20T16:03:46.069Z"
+      }
+    ],
+    "createdAt": "2026-07-20T15:58:34.683Z",
+    "updatedAt": "2026-07-20T16:03:46.069Z"
+  }
+]

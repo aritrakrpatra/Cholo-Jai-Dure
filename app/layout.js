@@ -1,7 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import DOBModal from "./components/DOBModal";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
@@ -53,11 +55,14 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="min-h-full flex flex-col">
-        <ThemeProvider>
-          <AuthProvider>
-            {children}
-          </AuthProvider>
-        </ThemeProvider>
+        <ClerkProvider>
+          <ThemeProvider>
+            <AuthProvider>
+              <DOBModal />
+              {children}
+            </AuthProvider>
+          </ThemeProvider>
+        </ClerkProvider>
         <Analytics />
         <SpeedInsights />
       </body>

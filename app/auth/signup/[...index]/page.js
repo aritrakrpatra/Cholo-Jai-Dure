@@ -4,10 +4,9 @@ import Link from "next/link";
 import { SignUp } from "@clerk/nextjs";
 import { Plane } from "lucide-react";
 
-export default function SignupPage() {
+export default function SignupSubPage() {
   return (
     <div className="min-h-screen flex flex-col bg-linear-to-br from-slate-950 via-slate-900 to-slate-950">
-      {/* Navigation */}
       <div className="sticky top-0 z-50 px-4 py-5 backdrop-blur-xl bg-slate-950/40">
         <div className="mx-auto max-w-7xl flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 text-white">
@@ -25,7 +24,6 @@ export default function SignupPage() {
         </div>
       </div>
 
-      {/* Main content */}
       <div className="flex-1 flex items-center justify-center px-4 py-8">
         <div className="w-full max-w-md">
           <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 shadow-2xl sm:p-6">

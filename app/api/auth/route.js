@@ -1,25 +1,7 @@
-import fs from "fs";
-import path from "path";
-
-const usersFile = path.join(process.cwd(), "data", "users.json");
-
-function readUsers() {
-  try {
-    const file = fs.readFileSync(usersFile, "utf8");
-    return JSON.parse(file || "[]");
-  } catch (err) {
-    if (err.code === "ENOENT") {
-      fs.mkdirSync(path.dirname(usersFile), { recursive: true });
-      fs.writeFileSync(usersFile, "[]");
-      return [];
-    }
-    throw err;
-  }
-}
-
-function writeUsers(users) {
-  fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
-}
+import {
+  createLegacyUser,
+  findLegacyUserByCredentials,
+} from "@/app/lib/users";
 
 export async function POST(request) {
   const url = new URL(request.url);
@@ -29,8 +11,6 @@ export async function POST(request) {
   if (!action) {
     return new Response(JSON.stringify({ error: "Action is required" }), { status: 400 });
   }
-
-  const users = readUsers();
 
   if (action === "signup") {
     const { name, gender, phoneNumber, email, password } = body;
@@ -48,29 +28,22 @@ export async function POST(request) {
       return new Response(JSON.stringify({ error: "Invalid email" }), { status: 400 });
     }
 
-    if (users.some((user) => user.phoneNumber === normalizedPhone)) {
-      return new Response(JSON.stringify({ error: "Phone number already registered" }), { status: 409 });
+    try {
+      const user = await createLegacyUser({
+        name,
+        gender,
+        phoneNumber: normalizedPhone,
+        email: email || null,
+        password,
+      });
+
+      return new Response(JSON.stringify({ user }), { status: 201 });
+    } catch (error) {
+      if (error?.code === 11000) {
+        return new Response(JSON.stringify({ error: "Phone number or email already registered" }), { status: 409 });
+      }
+      throw error;
     }
-
-    if (email && users.some((user) => user.email === email)) {
-      return new Response(JSON.stringify({ error: "Email already registered" }), { status: 409 });
-    }
-
-    const newUser = {
-      id: Date.now().toString(),
-      name,
-      gender,
-      phoneNumber: normalizedPhone,
-      email: email || null,
-      password,
-      createdAt: new Date().toISOString(),
-    };
-
-    users.push(newUser);
-    writeUsers(users);
-
-    const { password: _, ...userWithoutPassword } = newUser;
-    return new Response(JSON.stringify({ user: userWithoutPassword }), { status: 201 });
   }
 
   if (action === "login") {
@@ -79,18 +52,16 @@ export async function POST(request) {
       return new Response(JSON.stringify({ error: "Missing email/phone or password" }), { status: 400 });
     }
 
-    const foundUser = users.find(
-      (user) =>
-        (user.email === emailOrPhone || user.phoneNumber === emailOrPhone) &&
-        user.password === password
-    );
+    const foundUser = await findLegacyUserByCredentials({
+      emailOrPhone,
+      password,
+    });
 
     if (!foundUser) {
       return new Response(JSON.stringify({ error: "Invalid email/phone or password" }), { status: 401 });
     }
 
-    const { password: _, ...userWithoutPassword } = foundUser;
-    return new Response(JSON.stringify({ user: userWithoutPassword }), { status: 200 });
+    return new Response(JSON.stringify({ user: foundUser }), { status: 200 });
   }
 
   return new Response(JSON.stringify({ error: "Unknown action" }), { status: 400 });

@@ -20,6 +20,49 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Clerk Authentication Setup
+
+This project uses Clerk for sign up, sign in, session management, and protecting the `/account` page.
+
+Add these environment variables locally (`.env.local`) and in your deployment provider:
+
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
+- `CLERK_SECRET_KEY`
+- `NEXT_PUBLIC_CLERK_SIGN_IN_URL=/auth/login` (optional)
+- `NEXT_PUBLIC_CLERK_SIGN_UP_URL=/auth/signup` (optional)
+
+Then in Clerk Dashboard:
+
+- Add your development URL (for example `http://localhost:3000`) to allowed origins/redirects.
+- Add your production domain before deploying.
+
+## MongoDB Setup (Users + Bookings)
+
+This project now stores user profile data and booking records in MongoDB.
+
+Add these environment variables to your local `.env.local` and deployment platform:
+
+- `MONGODB_URI` (MongoDB connection string)
+- `MONGODB_DB` (optional, defaults to `cholo_jai_dure`)
+
+Example:
+
+```env
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
+MONGODB_DB=cholo_jai_dure
+```
+
+Recommended collections used by the app:
+
+- `users`
+- `bookings`
+
+Notes:
+
+- Booking APIs (`/api/bookings/*`) read/write MongoDB.
+- User profile API (`/api/users/me`) syncs authenticated Clerk users into MongoDB.
+- Legacy `/api/auth` route also writes/reads users from MongoDB (for backward compatibility).
+
 ## Contact Enquiry Form Setup (Vercel)
 
 The enquiry form posts to `/api/contact` and sends email using SMTP via `nodemailer`.

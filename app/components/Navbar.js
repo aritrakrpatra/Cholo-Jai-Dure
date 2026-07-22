@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { LogOut, MonitorSmartphone, MoonStar, SunMedium, User } from "lucide-react";
+import { LayoutDashboard, LogOut, MonitorSmartphone, MoonStar, SunMedium, User } from "lucide-react";
 import { useAuth } from "@/app/context/AuthContext";
 import { useTheme } from "@/app/context/ThemeContext";
 
@@ -289,12 +289,13 @@ function MoreMenuButton({ pathname, currentHash, isLightTheme, mobile = false })
 
 export default function Navbar() {
   const pathname = usePathname();
-  const { user, logout, loading } = useAuth();
+  const { user, isAdmin, logout, loading } = useAuth();
   const { resolvedTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentHash, setCurrentHash] = useState("");
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const isLightTheme = resolvedTheme === "light";
 
   useEffect(() => {
@@ -350,10 +351,15 @@ export default function Navbar() {
     return () => window.clearTimeout(timeoutId);
   }, [pathname]);
 
-  const handleLogout = () => {
-    logout();
-    setMenuOpen(false);
-    setProfileMenuOpen(false);
+  const handleLogout = async () => {
+    try {
+      setIsLoggingOut(true);
+      await logout();
+      setMenuOpen(false);
+      setProfileMenuOpen(false);
+    } finally {
+      setIsLoggingOut(false);
+    }
   };
 
   return (
@@ -435,12 +441,12 @@ export default function Navbar() {
                   }`}
                 >
                   <User className="h-4 w-4" />
-                  {user.name}
+                  {user.name || "Account"}
                 </button>
                 
                 {/* Profile dropdown */}
                 {profileMenuOpen && (
-                  <div className={`absolute right-0 mt-2 w-48 overflow-hidden rounded-lg border shadow-xl ${isLightTheme ? "border-(--border) bg-(--surface-strong)" : "border-white/10 bg-slate-950"}`}>
+                  <div className={`absolute right-0 mt-2 w-52 overflow-hidden rounded-lg border shadow-xl ${isLightTheme ? "border-(--border) bg-(--surface-strong)" : "border-white/10 bg-slate-950"}`}>
                     <Link
                       href="/account"
                       className={`block w-full border-b px-4 py-3 text-left text-sm transition ${isLightTheme ? "border-(--border) text-slate-900 hover:bg-black/5" : "border-white/5 text-white hover:bg-white/10"}`}
@@ -449,32 +455,35 @@ export default function Navbar() {
                       <User className="h-4 w-4 inline mr-2" />
                       View Profile
                     </Link>
+                    {isAdmin && (
+                      <Link
+                        href="/admin/bookings"
+                        className={`block w-full border-b px-4 py-3 text-left text-sm font-semibold transition ${isLightTheme ? "border-(--border) text-amber-700 hover:bg-amber-50" : "border-white/5 text-amber-300 hover:bg-amber-400/10"}`}
+                        onClick={() => setProfileMenuOpen(false)}
+                      >
+                        <LayoutDashboard className="h-4 w-4 inline mr-2" />
+                        Admin Dashboard
+                      </Link>
+                    )}
                     <button
                       onClick={handleLogout}
+                      disabled={isLoggingOut}
                       className="w-full px-4 py-3 text-left text-sm text-red-300 transition hover:bg-red-500/10"
                     >
                       <LogOut className="h-4 w-4 inline mr-2" />
-                      Logout
+                      {isLoggingOut ? "Logging out..." : "Logout"}
                     </button>
                   </div>
                 )}
               </div>
             ) : (
               <>
-                {/* Temporarily hidden login and call buttons */}
-                {/* <Link
+                <Link
                   href="/auth/login"
                   className="rounded-full bg-amber-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-300"
                 >
                   Login
                 </Link>
-                <a
-                  href="tel:7501307766"
-                  className="hidden rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm text-white transition hover:bg-white/20 md:inline-flex items-center gap-2"
-                >
-                  <Phone className="h-4 w-4" />
-                  Call Us
-                </a> */}
               </>
             )}
           </div>
@@ -609,32 +618,34 @@ export default function Navbar() {
                 >
                   View Profile
                 </Link>
+                {isAdmin && (
+                  <Link
+                    href="/admin/bookings"
+                    className={`flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-semibold transition ${isLightTheme ? "border-amber-300/40 bg-amber-300/15 text-amber-800 hover:bg-amber-300/25" : "border-amber-400/30 bg-amber-400/15 text-amber-300 hover:bg-amber-400/25"}`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <LayoutDashboard className="h-4 w-4" />
+                    Admin Dashboard
+                  </Link>
+                )}
                 <button
                   onClick={handleLogout}
+                  disabled={isLoggingOut}
                   className="w-full rounded-2xl border border-red-500/30 bg-red-500/20 px-4 py-3 text-center text-sm font-semibold text-red-300 transition hover:bg-red-500/30"
                 >
                   <LogOut className="h-4 w-4 inline mr-2" />
-                  Logout
+                  {isLoggingOut ? "Logging out..." : "Logout"}
                 </button>
               </>
             ) : (
               <>
-                {/* Temporarily hidden login and call buttons */}
-
-                {/* <Link
+                <Link
                   href="/auth/login"
                   className="block rounded-3xl bg-amber-400 px-5 py-4 text-center text-sm font-semibold text-slate-950 transition hover:bg-amber-300"
                   onClick={() => setMenuOpen(false)}
                 >
                   Login
                 </Link>
-                <a
-                  href="tel:7501307766"
-                  className="block rounded-3xl border border-white/10 bg-white/10 px-5 py-4 text-center text-sm font-semibold text-white transition hover:bg-white/20"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Call Us
-                </a> */}
               </>
             )}
           </div>

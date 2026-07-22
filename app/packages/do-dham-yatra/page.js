@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Phone, ArrowRight, MapPin, Plane, Heart, Sparkles, Hotel } from "lucide-react";
@@ -311,7 +312,13 @@ export default function DoDhamYatraPage() {
             <div className="mt-6 grid gap-3 grid-cols-2 sm:mt-8 sm:gap-4 lg:grid-cols-4">
               {destinations.slice(0, 4).map((destination, index) => (
                 <div key={destination.image} className="overflow-hidden rounded-[1.25rem] bg-white/5 sm:rounded-[1.75rem]">
-                  <img src={destination.image} alt={`Do Dham gallery ${index + 1}`} className="h-36 w-full object-cover transition duration-500 hover:scale-105 sm:h-52 lg:h-64" />
+                  <Image
+                    src={destination.image}
+                    alt={`Do Dham gallery ${index + 1}`}
+                    width={800}
+                    height={1000}
+                    className="h-36 w-full object-cover transition duration-500 hover:scale-105 sm:h-52 lg:h-64"
+                  />
                 </div>
               ))}
             </div>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Navbar from "../components/Navbar";
 
 export default function CustomerGallery() {
@@ -27,10 +28,12 @@ export default function CustomerGallery() {
 
           <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {images.map((img, index) => (
-              <img
+              <Image
                 key={index}
                 src={img}
                 alt={`Customer gallery ${index + 1}`}
+                width={720}
+                height={960}
                 className="h-40 w-full rounded-2xl object-cover shadow-2xl transition-transform duration-500 hover:scale-105 sm:h-56 md:h-64 lg:h-72 sm:rounded-3xl"
               />
             ))}

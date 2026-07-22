@@ -70,7 +70,10 @@ export default function CholoJaiDureTours() {
                 />
                 ESTD. 2024
               </p>
-              <h1 className="text-[clamp(1.8rem,8vw,2.8rem)] font-bold leading-tight" style={{ color: "white" }}>
+              <h1
+                className="text-[clamp(1.8rem,8vw,2.8rem)] font-bold leading-tight"
+                style={{ color: "var(--foreground)" }}
+              >
                 CHOLO JAI DURE
               </h1>
               <h2 className="mt-2 text-[clamp(1rem,5vw,1.45rem)] font-semibold text-white/80">
@@ -288,7 +291,7 @@ export default function CholoJaiDureTours() {
           <div className="grid gap-8 md:grid-cols-3">
             {testimonials.map((review) => (
               <div key={review.name} className="rounded-4xl border border-slate-200 bg-white p-8 shadow-xl">
-                <p className="mb-6 text-slate-700">"{review.comment}"</p>
+                <p className="mb-6 text-slate-700">&ldquo;{review.comment}&rdquo;</p>
                 <div className="flex items-center gap-3">
                   <Image
                     src={review.image}

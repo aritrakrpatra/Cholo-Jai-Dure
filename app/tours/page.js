@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import Navbar from "@/app/components/Navbar";
+import BookNowButton from "@/app/components/BookNowButton";
 import { allPackages as tours } from "@/app/data/packages";
 
 const monthOrder = [
@@ -190,22 +192,37 @@ export default function ToursPage() {
 
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {filteredTours.map((tour) => (
-                  <Link
+                  <div
                     key={tour.slug}
-                    href={tour.packagePath}
-                    className="group block overflow-hidden rounded-3xl border border-(--border) bg-(--surface-strong) transition hover:border-amber-300/40"
+                    className="group flex flex-col overflow-hidden rounded-3xl border border-(--border) bg-(--surface-strong) transition hover:border-amber-300/40"
                   >
-                    <img src={tour.image} alt={tour.title} className="h-36 w-full object-cover sm:h-28" />
-                    <div className="p-4">
-                      <p className="text-[11px] uppercase tracking-[0.25em] text-amber-300">{tour.subtitle}</p>
-                      <h2 className="mt-1 text-lg font-semibold text-foreground">{tour.title}</h2>
-                      <p className="mt-1 text-sm text-(--muted)">{tour.price}</p>
-                      <p className="mt-2 text-xs text-(--muted)">
-                        Best months: {getTourMonths(tour).slice(0, 3).join(", ")}
-                        {getTourMonths(tour).length > 3 ? "..." : ""}
-                      </p>
+                    <Link href={tour.packagePath} className="block flex-1">
+                      <Image
+                        src={tour.image}
+                        alt={tour.title}
+                        width={640}
+                        height={360}
+                        className="h-36 w-full object-cover sm:h-28"
+                      />
+                      <div className="p-4">
+                        <p className="text-[11px] uppercase tracking-[0.25em] text-amber-300">{tour.subtitle}</p>
+                        <h2 className="mt-1 text-lg font-semibold text-foreground">{tour.title}</h2>
+                        <p className="mt-1 text-sm text-(--muted)">{tour.price}</p>
+                        <p className="mt-2 text-xs text-(--muted)">
+                          Best months: {getTourMonths(tour).slice(0, 3).join(", ")}
+                          {getTourMonths(tour).length > 3 ? "..." : ""}
+                        </p>
+                      </div>
+                    </Link>
+                    <div className="px-4 pb-4">
+                      <BookNowButton
+                        packageName={tour.title}
+                        packageId={tour.slug}
+                        variant="outline"
+                        className="w-full text-xs py-2"
+                      />
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </div>
 
