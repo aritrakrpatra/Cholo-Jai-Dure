@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { LayoutDashboard, LogOut, MonitorSmartphone, MoonStar, SunMedium, User } from "lucide-react";
 import { useAuth } from "@/app/context/AuthContext";
@@ -291,8 +291,7 @@ function MoreMenuButton({ pathname, currentHash, isLightTheme, mobile = false, c
 
 export default function Navbar() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const category = searchParams.get("category");
+  const [category, setCategory] = useState("");
   const { user, isAdmin, logout, loading } = useAuth();
   const { resolvedTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -301,6 +300,17 @@ export default function Navbar() {
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const isLightTheme = resolvedTheme === "light";
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const syncCategory = () => {
+      const params = new URLSearchParams(window.location.search);
+      setCategory(params.get("category") || "");
+    };
+
+    syncCategory();
+  }, [pathname]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;

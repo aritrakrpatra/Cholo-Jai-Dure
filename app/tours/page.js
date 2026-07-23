@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Navbar from "@/app/components/Navbar";
 import BookNowButton from "@/app/components/BookNowButton";
 import { allPackages as tours } from "@/app/data/packages";
@@ -80,12 +79,19 @@ function isInternationalTour(tour) {
 }
 
 export default function ToursPage() {
-  const searchParams = useSearchParams();
-  const tourCategory = searchParams.get("category") === "international" ? "international" : "domestic";
+  const [tourCategory, setTourCategory] = useState("domestic");
   const [query, setQuery] = useState("");
   const [tourType, setTourType] = useState("group");
   const [selectedMonth, setSelectedMonth] = useState("all");
   const [budgetValue, setBudgetValue] = useState(MAX_BUDGET_LIMIT);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const params = new URLSearchParams(window.location.search);
+    const categoryParam = params.get("category");
+    setTourCategory(categoryParam === "international" ? "international" : "domestic");
+  }, []);
 
   const filteredTours = useMemo(() => {
     const normalized = query.trim().toLowerCase();
