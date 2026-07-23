@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CalendarCheck } from "lucide-react";
 import BookingModal from "./BookingModal";
 import { useAuth } from "@/app/context/AuthContext";
+import { getPackageBySlug } from "@/app/data/packages";
 
 /**
  * Drop-in "Book Now" button for any package card or details page.
@@ -17,6 +18,9 @@ import { useAuth } from "@/app/context/AuthContext";
 export default function BookNowButton({ packageName, packageId, className = "", variant = "primary" }) {
   const [open, setOpen] = useState(false);
   const { user, loading, login } = useAuth();
+  const packageMeta = getPackageBySlug(packageId) || {};
+  const bookingMode = packageMeta.bookingMode || "group";
+  const travelDateOptions = Array.isArray(packageMeta.travelDateOptions) ? packageMeta.travelDateOptions : [];
 
   const base =
     "inline-flex items-center justify-center gap-2 rounded-xl font-bold text-sm transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400";
@@ -50,6 +54,8 @@ export default function BookNowButton({ packageName, packageId, className = "", 
       <BookingModal
         packageName={packageName}
         packageId={packageId}
+        bookingMode={bookingMode}
+        travelDateOptions={travelDateOptions}
         isOpen={open}
         onClose={() => setOpen(false)}
       />

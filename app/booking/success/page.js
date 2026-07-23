@@ -10,6 +10,7 @@ function SuccessContent() {
   const bookingId = params.get("bookingId") || "";
   const packageName = params.get("packageName") || "";
   const travelDate = params.get("travelDate") || "";
+  const batch = params.get("batch") || "";
   const travelers = params.get("travelers") || "";
   const customerName = params.get("customerName") || "";
   const phone = params.get("phone") || "";
@@ -78,7 +79,7 @@ function SuccessContent() {
         <div className="rounded-2xl border border-white/10 bg-white/5 p-5 space-y-3">
           {[
             { Icon: Package, label: "Package", value: packageName },
-            { Icon: Calendar, label: "Travel Date", value: fmtDate(travelDate) },
+            { Icon: Calendar, label: travelDate ? "Travel Date" : "Batch", value: travelDate ? fmtDate(travelDate) : batch || "—" },
             { Icon: Users, label: "Travelers", value: travelers ? `${travelers} person${travelers > 1 ? "s" : ""}` : "—" },
             { Icon: User, label: "Name", value: customerName },
           ].map(({ Icon, label, value }) => (

@@ -24,6 +24,33 @@
   --accent-strong: #ffd889;
   --hero-overlay: linear-gradient(145deg, rgba(4, 10, 20, 0.65), rgba(15, 23, 42, 0.28));
   --shadow-elevated: 0 30px 80px rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
+}
+
+[data-theme="dark"] select,
+[data-theme="dark"] input[type="date"] {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  color-scheme: dark;
+}
+
+[data-theme="dark"] select option {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] select option:checked,
+[data-theme="dark"] select option:hover {
+  background-color: #1e293b;
+  color: #ffffff;
+}
+
+[data-theme="dark"] select:focus,
+[data-theme="dark"] input[type="date"]:focus {
+  border-color: rgba(245, 185, 78, 0.95) !important;
+  box-shadow: 0 0 0 3px rgba(245, 185, 78, 0.18);
+  outline: none;
 }
 
 @theme inline {

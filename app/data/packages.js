@@ -246,6 +246,8 @@ export const allPackages = [
     description: "A complete Gujarat discovery covering heritage, wildlife, temples, and coast.",
     packagePath: "/packages/gujarat",
     featured: false,
+    bookingMode: "group",
+    travelDateOptions: ["2026-10-26", "2026-11-16", "2026-12-14"],
   },
   {
     slug: "do-dham-yatra",
@@ -265,6 +267,8 @@ export const allPackages = [
     description: "A sacred Uttarakhand yatra covering two major dhams with guided support.",
     packagePath: "/packages/do-dham-yatra",
     featured: false,
+    bookingMode: "group",
+    travelDateOptions: ["2027-10-08", "2027-11-08", "2027-12-08"],
   },
   {
     slug: "kanha-bandhavgarh",
@@ -433,6 +437,8 @@ export const allPackages = [
     packagePath: "/packages/thailand",
     featured: false,
     category: "international",
+    bookingMode: "customize",
+    travelDateOptions: ["2026-10-12", "2026-11-18", "2026-12-08"],
   },
   {
     slug: "vietnam",
@@ -447,6 +453,8 @@ export const allPackages = [
     packagePath: "/packages/vietnam",
     featured: false,
     category: "international",
+    bookingMode: "customize",
+    travelDateOptions: ["2026-10-20", "2026-11-24", "2026-12-18"],
   },
   {
     slug: "amarnath-yatra",

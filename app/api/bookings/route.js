@@ -82,9 +82,11 @@ export async function POST(request) {
     const phone = (body.phone || "").trim();
     const packageId = (body.packageId || "").trim();
     const packageName = (body.packageName || "").trim();
+    const bookingMode = ((body.bookingMode || "group").toString().trim().toLowerCase() || "group");
     const travelDate = (body.travelDate || "").trim();
     const adults = parseInt(body.adults || "0", 10);
     const children = Math.max(0, parseInt(body.children || "0", 10));
+    const isGroupBooking = bookingMode === "group";
 
     if (!customerName) return NextResponse.json({ message: "Full name is required." }, { status: 400 });
     if (!phone || !PHONE_REGEX.test(phone)) return NextResponse.json({ message: "A valid phone number is required." }, { status: 400 });
@@ -92,7 +94,6 @@ export async function POST(request) {
     if (!travelDate) return NextResponse.json({ message: "Travel date is required." }, { status: 400 });
     if (!adults || adults < 1) return NextResponse.json({ message: "At least 1 adult traveler is required." }, { status: 400 });
 
-    // Ensure travel date is in the future
     const travel = new Date(travelDate);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
