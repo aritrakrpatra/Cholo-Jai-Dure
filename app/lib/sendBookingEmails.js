@@ -1,5 +1,8 @@
 import nodemailer from "nodemailer";
 
+const LOGO_CID = "cjdLogo";
+const LOGO_FILE_PATH = `${process.cwd()}/public/cjd logo.jpg`;
+
 function esc(v) {
   return String(v || "")
     .replace(/&/g, "&amp;")
@@ -47,6 +50,10 @@ function createTransporter() {
   );
 }
 
+function logoAttachment() {
+  return [{ filename: "cjd logo.jpg", path: LOGO_FILE_PATH, cid: LOGO_CID }];
+}
+
 // ─── HTML template helpers ───────────────────────────────────────────────────
 
 function emailWrapper(content) {
@@ -65,8 +72,8 @@ function emailWrapper(content) {
         <tr>
           <td align="center" style="background:#1e293b;border-radius:16px 16px 0 0;padding:28px 32px;border-bottom:2px solid #f59e0b;">
             <div style="display:inline-flex;align-items:center;gap:12px;">
-              <div style="width:44px;height:44px;border-radius:50%;background:rgba(245,158,11,0.15);display:inline-flex;align-items:center;justify-content:center;">
-                <span style="font-size:22px;">✈️</span>
+              <div style="height:44px;display:inline-flex;align-items:center;justify-content:center;">
+                <img src="cid:${LOGO_CID}" alt="Cholo Jai Dure logo" style="height:44px;width:auto;display:block;border-radius:8px;" />
               </div>
               <div>
                 <div style="color:#f59e0b;font-size:18px;font-weight:700;letter-spacing:0.5px;">Cholo Jai Dure</div>
@@ -311,6 +318,7 @@ export async function sendCustomerBookingEmail(booking) {
     to: booking.email,
     subject: `Booking Request Received — ${booking.bookingId} | Cholo Jai Dure`,
     html: buildCustomerEmailHtml(booking),
+    attachments: logoAttachment(),
     text: [
       `Hello ${booking.customerName},`,
       "",
@@ -344,6 +352,7 @@ export async function sendAdminBookingEmail(booking) {
     replyTo: booking.email,
     subject: `New Booking: ${booking.bookingId} — ${booking.packageName} | ${booking.customerName}`,
     html: buildAdminEmailHtml(booking),
+    attachments: logoAttachment(),
     text: [
       `New Booking Received`,
       `Booking ID: ${booking.bookingId}`,
@@ -368,6 +377,7 @@ export async function sendCustomerStatusUpdateEmail(booking, previousStatus) {
     to: booking.email,
     subject: `Booking ${booking.bookingId} Status: ${statusLabel(booking.bookingStatus)} | Cholo Jai Dure`,
     html: buildCustomerStatusUpdateEmailHtml(booking, previousStatus),
+    attachments: logoAttachment(),
     text: [
       `Hello ${booking.customerName},`,
       "",
@@ -396,6 +406,7 @@ export async function sendAdminStatusUpdateEmail(booking, previousStatus) {
     replyTo: booking.email,
     subject: `Booking Status Updated: ${booking.bookingId} -> ${statusLabel(booking.bookingStatus)}`,
     html: buildAdminStatusUpdateEmailHtml(booking, previousStatus),
+    attachments: logoAttachment(),
     text: [
       "Booking Status Changed",
       `Booking ID: ${booking.bookingId}`,

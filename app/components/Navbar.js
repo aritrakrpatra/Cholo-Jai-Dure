@@ -13,14 +13,20 @@ const navItems = [
   { label: "Tours", href: "/tours" },
   { label: "Bike Ride", href: "/bike-ride" },
   { label: "Trekking", href: "/trekking" },
-  { label: "About Us", href: "/about-us" },
   { label: "Merchandise", href: "/merchandise" },
+  { label: "Contact Us", href: "/contact" },
   { label: "Customer Gallery", href: "/gallery" },
   { label: "Rules & Regulations", href: "/rules-regulations" },
-  { label: "Contact Us", href: "/contact" },
-];
+  { label: "About Us", href: "/about-us" },
+  ];
 
-const moreNavItems = [];
+const desktopPrimaryHrefs = new Set(["/#home", "/tours", "/bike-ride", "/trekking", "/about-us", "/merchandise"]);
+const desktopPrimaryNavItems = navItems.filter((item) => desktopPrimaryHrefs.has(item.href));
+const moreNavItems = navItems.filter((item) => !desktopPrimaryHrefs.has(item.href));
+const tourOptions = [
+  { label: "Domestic Tour", href: "/tours?category=domestic" },
+  { label: "International Tour", href: "/tours?category=international" },
+];
 
 
 
@@ -287,6 +293,97 @@ function MoreMenuButton({ pathname, currentHash, isLightTheme, mobile = false })
   );
 }
 
+function ToursMenuButton({ pathname, currentHash, isLightTheme, mobile = false }) {
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
+  const active = pathname === "/tours" || pathname.startsWith("/tours/");
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handlePointerDown = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [open]);
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => setOpen(false), 0);
+    return () => window.clearTimeout(timeoutId);
+  }, [pathname]);
+
+  const buttonClasses = mobile
+    ? `flex w-full items-center justify-between rounded-3xl border px-5 py-4 text-sm font-semibold transition ${
+        active
+          ? isLightTheme
+            ? "border-amber-300/40 bg-amber-300/15 text-slate-900"
+            : "border-amber-400/30 bg-amber-400/15 text-amber-100"
+          : isLightTheme
+            ? "border-(--border) bg-(--surface-strong) text-slate-900 hover:bg-black/5"
+            : "border-white/10 bg-white/10 text-white hover:bg-white/20"
+      }`
+    : `inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-semibold transition ${
+        active
+          ? isLightTheme
+            ? "border-slate-300 bg-slate-100 text-slate-950"
+            : "border-white/20 bg-white/10 text-white"
+          : isLightTheme
+            ? "border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-950"
+            : "border-white/10 bg-white/5 text-white/85 hover:bg-white/10 hover:text-white"
+      }`;
+
+  const menuClasses = mobile
+    ? `absolute left-0 right-0 top-full mt-3 grid gap-2 rounded-3xl border p-2 shadow-2xl backdrop-blur-xl z-50 ${
+        isLightTheme ? "border-(--border) bg-(--surface-strong)" : "border-white/10 bg-slate-950/95"
+      }`
+    : `absolute top-full mt-2 grid w-64 gap-2 rounded-3xl border p-2 shadow-2xl backdrop-blur-xl ${
+        isLightTheme ? "border-(--border) bg-(--surface-strong)" : "border-white/10 bg-slate-950/95"
+      }`;
+
+  return (
+    <div ref={menuRef} className={`relative ${mobile ? "w-full" : "shrink-0"}`}>
+      <button type="button" onClick={() => setOpen((value) => !value)} className={buttonClasses} aria-expanded={open}>
+        <span>Tours</span>
+        <span className="text-[10px] uppercase tracking-[0.24em] opacity-70">{mobile ? "Select" : "Menu"}</span>
+      </button>
+
+      {open && (
+        <div className={menuClasses}>
+          {tourOptions.map((option) => (
+            <Link
+              key={option.href}
+              href={option.href}
+              onClick={() => setOpen(false)}
+              className={`rounded-2xl border px-4 py-3 text-sm transition ${
+                isLightTheme
+                  ? "border-(--border) bg-transparent text-slate-700 hover:bg-black/5 hover:text-slate-950"
+                  : "border-white/10 bg-white/5 text-white/80 hover:bg-white/10 hover:text-white"
+              }`}
+            >
+              {option.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Navbar() {
   const pathname = usePathname();
   const { user, isAdmin, logout, loading } = useAuth();
@@ -403,9 +500,13 @@ export default function Navbar() {
             </div>
           </Link>
 
-          <nav className={`hidden min-w-0 items-center justify-center gap-4 overflow-x-auto whitespace-nowrap text-sm font-medium lg:flex ${isLightTheme ? "text-slate-700" : "text-white/80"}`}>
-            {navItems.map((item) => {
+          <nav className={`hidden min-w-0 items-center justify-center gap-4 overflow-visible whitespace-nowrap text-sm font-medium lg:flex ${isLightTheme ? "text-slate-700" : "text-white/80"}`}>
+            {desktopPrimaryNavItems.map((item) => {
               const active = getActiveItem(item.href, pathname, currentHash);
+              if (item.href === "/tours") {
+                return <ToursMenuButton key={item.href} pathname={pathname} currentHash={currentHash} isLightTheme={isLightTheme} />;
+              }
+
               return (
                 <Link
                   key={item.href}
@@ -424,6 +525,13 @@ export default function Navbar() {
                 </Link>
               );
             })}
+            {moreNavItems.length > 0 ? (
+              <MoreMenuButton
+                pathname={pathname}
+                currentHash={currentHash}
+                isLightTheme={isLightTheme}
+              />
+            ) : null}
           </nav>
 
           <div className="hidden items-center gap-3 lg:flex">
@@ -579,17 +687,41 @@ export default function Navbar() {
               Navigate
             </p>
 
+            {!loading && !user && (
+              <Link
+                href="/auth/login"
+                className="mb-2.5 block rounded-3xl bg-amber-400 px-5 py-4 text-center text-sm font-semibold text-slate-950 transition hover:bg-amber-300"
+                onClick={() => setMenuOpen(false)}
+              >
+                Login
+              </Link>
+            )}
+
             <div className={`space-y-2.5 text-base font-semibold ${isLightTheme ? "text-slate-900" : "text-white"}`}>
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`block rounded-2xl border px-4 py-3 transition ${isLightTheme ? "border-(--border) bg-white/85 hover:bg-black/5" : "border-white/10 bg-white/6 hover:bg-white/10"}`}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                if (item.href === "/tours") {
+                  return (
+                    <ToursMenuButton
+                      key={item.href}
+                      pathname={pathname}
+                      currentHash={currentHash}
+                      isLightTheme={isLightTheme}
+                      mobile
+                    />
+                  );
+                }
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`block rounded-2xl border px-4 py-3 transition ${isLightTheme ? "border-(--border) bg-white/85 hover:bg-black/5" : "border-white/10 bg-white/6 hover:bg-white/10"}`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
 
             </div>
           </div>
@@ -637,17 +769,7 @@ export default function Navbar() {
                   {isLoggingOut ? "Logging out..." : "Logout"}
                 </button>
               </>
-            ) : (
-              <>
-                <Link
-                  href="/auth/login"
-                  className="block rounded-3xl bg-amber-400 px-5 py-4 text-center text-sm font-semibold text-slate-950 transition hover:bg-amber-300"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Login
-                </Link>
-              </>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
