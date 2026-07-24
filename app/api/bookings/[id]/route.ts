@@ -84,8 +84,7 @@ export async function PATCH(request: Request, { params }: RouteContext) {
 
   const previousStatus = existingBooking.bookingStatus;
   const newStatus = booking.bookingStatus;
-  const shouldNotifyStatusChange =
-    previousStatus !== newStatus && ["confirmed", "paid"].includes(newStatus);
+  const shouldNotifyStatusChange = previousStatus !== newStatus;
 
   if (shouldNotifyStatusChange) {
     Promise.all([
