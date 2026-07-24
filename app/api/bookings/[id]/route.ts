@@ -87,7 +87,7 @@ export async function PATCH(request: Request, { params }: RouteContext) {
   const shouldNotifyStatusChange = previousStatus !== newStatus;
 
   if (shouldNotifyStatusChange) {
-    Promise.all([
+    await Promise.allSettled([
       sendCustomerStatusUpdateEmail(booking, previousStatus).catch((e) =>
         console.error("[bookings PATCH] Customer status email failed:", e.message)
       ),

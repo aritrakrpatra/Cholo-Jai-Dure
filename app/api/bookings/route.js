@@ -133,8 +133,8 @@ export async function POST(request) {
       booking,
     });
 
-    // Send emails in background — never block the booking response
-    Promise.all([
+    // Send emails and wait for completion so the booking flow does not silently drop them.
+    await Promise.allSettled([
       sendCustomerBookingEmail(booking).catch((e) =>
         console.error("[bookings POST] Customer email failed:", e.message)
       ),

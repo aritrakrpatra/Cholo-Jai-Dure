@@ -165,7 +165,7 @@ export default function AboutUsPage() {
               </span>
               <div className="space-y-4">
                 <h1 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl">
-                  About CHOLO JAI DURE TOUR AND TRAVELS
+                  CHOLO JAI DURE TOUR AND TRAVELS
                 </h1>
                 <p className="max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg">
                   Creating memorable journeys across India and beyond since 2024.
