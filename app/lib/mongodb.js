@@ -1,27 +1,36 @@
 import { MongoClient } from "mongodb";
 
-const MONGODB_URI = process.env.MONGODB_URI;
 const MONGODB_DB = process.env.MONGODB_DB || "cholo_jai_dure";
-
-if (!MONGODB_URI) {
-  throw new Error("Missing MONGODB_URI. Add it to your environment variables.");
-}
 
 let client;
 let clientPromise;
 
-if (process.env.NODE_ENV === "development") {
-  if (!global._mongoClientPromise) {
-    client = new MongoClient(MONGODB_URI);
-    global._mongoClientPromise = client.connect();
+function getMongoClientPromise() {
+  const mongoUri = process.env.MONGODB_URI;
+
+  if (!mongoUri) {
+    throw new Error("Missing MONGODB_URI. Add it to your environment variables.");
   }
-  clientPromise = global._mongoClientPromise;
-} else {
-  client = new MongoClient(MONGODB_URI);
+
+  if (clientPromise) {
+    return clientPromise;
+  }
+
+  if (process.env.NODE_ENV === "development") {
+    if (!global._mongoClientPromise) {
+      client = new MongoClient(mongoUri);
+      global._mongoClientPromise = client.connect();
+    }
+    clientPromise = global._mongoClientPromise;
+    return clientPromise;
+  }
+
+  client = new MongoClient(mongoUri);
   clientPromise = client.connect();
+  return clientPromise;
 }
 
 export async function getMongoDb() {
-  const connectedClient = await clientPromise;
+  const connectedClient = await getMongoClientPromise();
   return connectedClient.db(MONGODB_DB);
 }

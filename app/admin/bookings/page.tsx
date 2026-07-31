@@ -106,7 +106,15 @@ export default function AdminBookingsPage() {
     }
   }, [page, search, status]);
 
-  useEffect(() => { if (user) fetchBookings(); }, [user, fetchBookings]);
+  useEffect(() => {
+    if (!user) return;
+
+    const loadBookings = async () => {
+      await fetchBookings();
+    };
+
+    void loadBookings();
+  }, [user, fetchBookings]);
 
   function handleSearch(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
