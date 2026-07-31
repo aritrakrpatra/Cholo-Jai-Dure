@@ -45,7 +45,7 @@ export async function PATCH(request: Request, { params }: RouteContext) {
 
   const adminUser = await currentUser();
   const adminName = buildAdminName(adminUser);
-  const userId = adminUser!.id;
+  const userId = adminUser?.id ?? null;
 
   if (body.bookingStatus !== undefined) {
     if (!isBookingStatus(body.bookingStatus)) {
@@ -80,11 +80,18 @@ export async function PATCH(request: Request, { params }: RouteContext) {
   });
   if (!booking) return NextResponse.json({ message: "Booking not found." }, { status: 404 });
 
-  await updateBookingInUserHistory(booking);
-
   const previousStatus = existingBooking.bookingStatus;
   const newStatus = booking.bookingStatus;
   const shouldNotifyStatusChange = previousStatus !== newStatus;
+
+  // History sync and emails must not block the response or each other —
+  // a failure in one (e.g. a transient Mongo/SMTP error) previously could
+  // abort the request before the status-change emails were ever sent.
+  try {
+    await updateBookingInUserHistory(booking);
+  } catch (e) {
+    console.error("[bookings PATCH] User history sync failed:", (e as Error).message);
+  }
 
   if (shouldNotifyStatusChange) {
     await Promise.allSettled([
