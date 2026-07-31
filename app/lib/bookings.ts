@@ -19,6 +19,12 @@ type StatusChangeMeta = {
   note?: string | null;
 };
 
+export type UpdateBookingResult = {
+  booking: Booking | null;
+  statusChanged: boolean;
+  previousStatus: BookingStatus | null;
+};
+
 function normalizeEmail(value?: string | null) {
   return (value || "").trim().toLowerCase();
 }
@@ -142,44 +148,73 @@ export async function updateBooking(
   id: string,
   updates: BookingUpdates,
   meta: StatusChangeMeta = {}
-): Promise<Booking | null> {
+): Promise<UpdateBookingResult> {
   const db = await getMongoDb();
   const collection = db.collection(BOOKINGS_COLLECTION);
   const existingRaw = await collection.findOne(getBookingFilter(id));
   const existing = mapBookingDocument(existingRaw);
-  if (!existing) return null;
-
-  const now = new Date().toISOString();
-  const newStatusHistory = [...(existing.statusHistory || [])];
-
-  if (updates.bookingStatus && updates.bookingStatus !== existing.bookingStatus) {
-    newStatusHistory.push({
-      fromStatus: existing.bookingStatus,
-      toStatus: updates.bookingStatus,
-      changedAt: now,
-      changedByUserId: meta.changedByUserId ?? null,
-      changedByName: meta.changedByName ?? null,
-      note: meta.note || null,
-    });
+  if (!existing) {
+    return {
+      booking: null,
+      statusChanged: false,
+      previousStatus: null,
+    };
   }
 
-  const merged: any = {
+  const now = new Date().toISOString();
+  const statusChanged = !!updates.bookingStatus && updates.bookingStatus !== existing.bookingStatus;
+  const baseSet: any = {
     ...updates,
-    statusHistory: newStatusHistory,
     updatedAt: now,
   };
 
   if (updates.email !== undefined) {
-    merged.emailNormalized = normalizeEmail(updates.email) || null;
+    baseSet.emailNormalized = normalizeEmail(updates.email) || null;
   }
 
   if (updates.phone !== undefined) {
-    merged.phoneNormalized = normalizePhone(updates.phone) || null;
+    baseSet.phoneNormalized = normalizePhone(updates.phone) || null;
   }
 
-  await collection.updateOne(getBookingFilter(id), { $set: merged });
+  if (statusChanged) {
+    const statusHistoryEntry = {
+      fromStatus: existing.bookingStatus,
+      toStatus: updates.bookingStatus!,
+      changedAt: now,
+      changedByUserId: meta.changedByUserId ?? null,
+      changedByName: meta.changedByName ?? null,
+      note: meta.note || null,
+    };
+
+    const result = await collection.findOneAndUpdate(
+      {
+        ...getBookingFilter(id),
+        bookingStatus: existing.bookingStatus,
+      },
+      {
+        $set: baseSet,
+        $push: { statusHistory: statusHistoryEntry },
+      },
+      { returnDocument: "after" }
+    );
+
+    if (result) {
+      return {
+        booking: mapBookingDocument(result),
+        statusChanged: true,
+        previousStatus: existing.bookingStatus,
+      };
+    }
+  } else {
+    await collection.updateOne(getBookingFilter(id), { $set: baseSet });
+  }
+
   const updated = await collection.findOne(getBookingFilter(id));
-  return mapBookingDocument(updated);
+  return {
+    booking: mapBookingDocument(updated),
+    statusChanged: false,
+    previousStatus: existing.bookingStatus,
+  };
 }
 
 /** Remove a booking from the store */

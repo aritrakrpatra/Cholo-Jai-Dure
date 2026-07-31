@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { currentUser } from "@clerk/nextjs/server";
 import { getBookingById, updateBooking, deleteBookingById } from "@/app/lib/bookings";
 import { sendCustomerStatusUpdateEmail, sendAdminStatusUpdateEmail } from "@/app/lib/sendBookingEmails";
+import { notifyBookingStatusChange } from "@/app/lib/bookingStatusNotifications";
 import { updateBookingInUserHistory, removeBookingFromUserHistory } from "@/app/lib/users";
 import { canTransitionBookingStatus, isBookingStatus, type BookingStatus } from "@/app/lib/bookingStatus";
 import { requireAdmin } from "@/app/lib/requireAdmin";
@@ -73,29 +74,25 @@ export async function PATCH(request: Request, { params }: RouteContext) {
 
   const statusNote = body.statusNote !== undefined ? String(body.statusNote).trim().slice(0, 500) : null;
 
-  const booking = await updateBooking(id, updates, {
+  const { booking, statusChanged, previousStatus } = await updateBooking(id, updates, {
     changedByUserId: userId,
     changedByName: adminName,
     note: statusNote,
   });
   if (!booking) return NextResponse.json({ message: "Booking not found." }, { status: 404 });
 
-  await updateBookingInUserHistory(booking);
+  await updateBookingInUserHistory(booking).catch((error) => {
+    console.error("[bookings PATCH] Failed to sync booking history.", error);
+  });
 
-  const previousStatus = existingBooking.bookingStatus;
-  const newStatus = booking.bookingStatus;
-  const shouldNotifyStatusChange = previousStatus !== newStatus;
-
-  if (shouldNotifyStatusChange) {
-    await Promise.allSettled([
-      sendCustomerStatusUpdateEmail(booking, previousStatus).catch((e) =>
-        console.error("[bookings PATCH] Customer status email failed:", e.message)
-      ),
-      sendAdminStatusUpdateEmail(booking, previousStatus).catch((e) =>
-        console.error("[bookings PATCH] Admin status email failed:", e.message)
-      ),
-    ]);
-  }
+  await notifyBookingStatusChange({
+    booking,
+    previousStatus: previousStatus || existingBooking.bookingStatus,
+    statusChanged,
+    sendCustomerStatusUpdateEmail,
+    sendAdminStatusUpdateEmail,
+    logger: console,
+  });
 
   return NextResponse.json({ booking });
 }

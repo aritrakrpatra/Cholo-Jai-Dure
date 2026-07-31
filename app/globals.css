@@ -11,6 +11,8 @@
   --accent-strong: #8f5d11;
   --hero-overlay: linear-gradient(145deg, rgba(255, 247, 237, 0.9), rgba(247, 231, 203, 0.72));
   --shadow-elevated: 0 30px 80px rgba(20, 33, 61, 0.14);
+  --font-geist-sans: "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-geist-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 [data-theme="dark"] {

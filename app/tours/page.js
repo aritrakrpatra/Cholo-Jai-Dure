@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import Navbar from "@/app/components/Navbar";
 import BookNowButton from "@/app/components/BookNowButton";
 import { allPackages as tours } from "@/app/data/packages";
@@ -79,7 +79,7 @@ function isInternationalTour(tour) {
   return tour.category === "international";
 }
 
-export default function ToursPage() {
+function ToursPageContent() {
   const searchParams = useSearchParams();
   const tourCategory = searchParams.get("category") === "international" ? "international" : "domestic";
   const [query, setQuery] = useState("");
@@ -358,5 +358,13 @@ export default function ToursPage() {
         </div>
       </main>
     </>
+  );
+}
+
+export default function ToursPage() {
+  return (
+    <Suspense fallback={null}>
+      <ToursPageContent />
+    </Suspense>
   );
 }

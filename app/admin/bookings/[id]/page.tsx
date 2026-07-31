@@ -233,7 +233,15 @@ export default function BookingDetailPage() {
     }
   }, [id]);
 
-  useEffect(() => { if (user) fetchBooking(); }, [user, fetchBooking]);
+  useEffect(() => {
+    if (!user) return;
+
+    const loadBooking = async () => {
+      await fetchBooking();
+    };
+
+    void loadBooking();
+  }, [user, fetchBooking]);
 
   function showToast(msg: string) {
     setToast(msg);
