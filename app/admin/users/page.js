@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/app/context/AuthContext";
 import Link from "next/link";
 import { Users, Shield, ShieldOff, Plane, ArrowLeft } from "lucide-react";
+import ThemeToggle from "@/app/components/ThemeToggle";
 
 export default function AdminUsersPage() {
   const { user } = useAuth();
@@ -60,7 +61,10 @@ export default function AdminUsersPage() {
               Manage Admins
             </span>
           </div>
-          <span className="text-xs text-white/40">Hi, {user?.name?.split(" ")[0]}</span>
+          <div className="flex items-center gap-3">
+            <ThemeToggle align="right" />
+            <span className="text-xs text-white/40">Hi, {user?.name?.split(" ")[0]}</span>
+          </div>
         </div>
       </div>
 

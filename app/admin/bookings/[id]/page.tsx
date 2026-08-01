@@ -16,6 +16,7 @@ import {
 } from "@/app/lib/bookingStatus";
 import type { Booking, BookingStatusHistoryEntry } from "@/app/types/booking";
 import Image from "next/image";
+import ThemeToggle from "@/app/components/ThemeToggle";
 import {
   ArrowLeft, Phone, Mail, MapPin, Calendar, Users, Package,
   FileText, Clock, CheckCircle, XCircle, DollarSign, MessageSquare,
@@ -437,12 +438,15 @@ export default function BookingDetailPage() {
             <span className="text-white/20">/</span>
             <span className="text-amber-300 font-mono text-sm font-semibold">{booking.bookingId}</span>
           </div>
-          <Link href="/" className="flex items-center gap-2 text-white">
-            <span className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-xl bg-white ring-1 ring-amber-300/20">
-              <Image src="/cjd%20logo.jpg" alt="Cholo Jai Dure logo" width={32} height={32} className="h-full w-full object-cover" />
-            </span>
-            <span className="hidden sm:inline text-sm font-semibold">Cholo Jai Dure</span>
-          </Link>
+          <div className="flex items-center gap-3">
+            <ThemeToggle align="right" />
+            <Link href="/" className="flex items-center gap-2 text-white">
+              <span className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-xl bg-white ring-1 ring-amber-300/20">
+                <Image src="/cjd%20logo.jpg" alt="Cholo Jai Dure logo" width={32} height={32} className="h-full w-full object-cover" />
+              </span>
+              <span className="hidden sm:inline text-sm font-semibold">Cholo Jai Dure</span>
+            </Link>
+          </div>
         </div>
       </div>
 

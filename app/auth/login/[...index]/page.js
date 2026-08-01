@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SignIn } from "@clerk/nextjs";
+import ThemeToggle from "@/app/components/ThemeToggle";
 
 export default function LoginSubPage() {
   return (
@@ -18,9 +19,12 @@ export default function LoginSubPage() {
               <p className="text-xs text-white/70">Your Journey, Our Priority</p>
             </div>
           </Link>
-          <Link href="/" className="text-white/70 hover:text-white transition">
-            Back to Home
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link href="/" className="text-white/70 hover:text-white transition">
+              Back to Home
+            </Link>
+            <ThemeToggle align="right" />
+          </div>
         </div>
       </div>
 

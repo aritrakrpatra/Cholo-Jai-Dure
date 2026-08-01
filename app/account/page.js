@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "@/app/context/AuthContext";
 import { useTheme } from "@/app/context/ThemeContext";
+import ThemeToggle from "@/app/components/ThemeToggle";
 import {
   User, Mail, Phone, LogOut, Plane, ArrowLeft,
   Calendar, Package, Clock, CheckCircle, XCircle, AlertCircle, LayoutDashboard,
@@ -181,13 +182,16 @@ export default function AccountPage() {
               <p className={`text-xs ${isLightTheme ? "text-(--muted)" : "text-white/70"}`}>Your Journey, Our Priority</p>
             </div>
           </Link>
-          <button
-            onClick={() => router.back()}
-            className={`transition flex items-center gap-2 ${isLightTheme ? "text-(--muted) hover:text-foreground" : "text-white/70 hover:text-white"}`}
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back
-          </button>
+          <div className="flex items-center gap-3">
+            <ThemeToggle align="right" />
+            <button
+              onClick={() => router.back()}
+              className={`transition flex items-center gap-2 ${isLightTheme ? "text-(--muted) hover:text-foreground" : "text-white/70 hover:text-white"}`}
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Back
+            </button>
+          </div>
         </div>
       </div>
 

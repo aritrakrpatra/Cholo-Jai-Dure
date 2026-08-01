@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SignIn } from "@clerk/nextjs";
 import { useTheme } from "@/app/context/ThemeContext";
+import ThemeToggle from "@/app/components/ThemeToggle";
 
 export default function LoginPage() {
   const { resolvedTheme } = useTheme();
@@ -29,12 +30,15 @@ export default function LoginPage() {
               <p className={`text-xs ${isLightTheme ? "text-(--muted)" : "text-white/70"}`}>Your Journey, Our Priority</p>
             </div>
           </Link>
-          <Link
-            href="/"
-            className={`transition ${isLightTheme ? "text-(--muted) hover:text-foreground" : "text-white/70 hover:text-white"}`}
-          >
-            Back to Home
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/"
+              className={`transition ${isLightTheme ? "text-(--muted) hover:text-foreground" : "text-white/70 hover:text-white"}`}
+            >
+              Back to Home
+            </Link>
+            <ThemeToggle align="right" />
+          </div>
         </div>
       </div>
 

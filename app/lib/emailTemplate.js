@@ -1,8 +1,15 @@
 // Shared eye-catching HTML email building blocks used by booking-status
 // and enquiry (contact) emails, so every outgoing mail shares one brand look.
 
-export const LOGO_CID = "cjdLogo";
-const LOGO_FILE_PATH = `${process.cwd()}/public/cjd logo.jpg`;
+// Vercel serverless functions don't bundle the `public/` folder into
+// `/var/task`, so reading "cjd logo.jpg" via fs on the server throws ENOENT
+// in production even though it works locally. Point the <img> at the
+// publicly hosted static asset instead of attaching/reading it from disk.
+function getBaseUrl() {
+  return (process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000").replace(/\/+$/, "");
+}
+
+const LOGO_URL = `${getBaseUrl()}/cjd%20logo.jpg`;
 
 export function esc(v) {
   return String(v || "")
@@ -35,8 +42,11 @@ export function fmtDateTime(iso) {
   }
 }
 
+// Kept as a no-op for backward compatibility — callers still pass
+// `attachments: logoAttachment()`, but the logo is now a remote <img>
+// (see LOGO_URL) so no filesystem attachment is needed anymore.
 export function logoAttachment() {
-  return [{ filename: "cjd logo.jpg", path: LOGO_FILE_PATH, cid: LOGO_CID }];
+  return [];
 }
 
 /**
@@ -73,7 +83,7 @@ export function emailWrapper(content, options = {}) {
           <td align="center" style="background:#1e293b;border-radius:16px 16px 0 0;padding:28px 32px;border-bottom:3px solid ${accent};">
             <div style="display:inline-flex;align-items:center;gap:12px;">
               <div style="height:44px;display:inline-flex;align-items:center;justify-content:center;">
-                <img src="cid:${LOGO_CID}" alt="Cholo Jai Dure logo" style="height:44px;width:auto;display:block;border-radius:8px;" />
+                <img src="${LOGO_URL}" alt="Cholo Jai Dure logo" style="height:44px;width:auto;display:block;border-radius:8px;" />
               </div>
               <div>
                 <div style="color:${accent};font-size:18px;font-weight:700;letter-spacing:0.5px;">Cholo Jai Dure</div>

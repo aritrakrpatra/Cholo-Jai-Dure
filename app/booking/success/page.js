@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle, Home, MessageCircle, Calendar, Users, Package, User, Copy, Check } from "lucide-react";
 import { useState, Suspense } from "react";
+import ThemeToggle from "@/app/components/ThemeToggle";
 
 function SuccessContent() {
   const params = useSearchParams();
@@ -45,6 +46,9 @@ function SuccessContent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center px-4 py-12">
+      <div className="fixed top-4 right-4 z-50">
+        <ThemeToggle align="right" />
+      </div>
       <div className="w-full max-w-lg space-y-6">
 
         {/* Success icon + heading */}
