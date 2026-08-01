@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { LayoutDashboard, LogOut, MonitorSmartphone, MoonStar, SunMedium, User } from "lucide-react";
+import { LayoutDashboard, LogOut, MoonStar, SunMedium, User } from "lucide-react";
 import { useAuth } from "@/app/context/AuthContext";
 import { useTheme } from "@/app/context/ThemeContext";
 
@@ -74,14 +74,13 @@ function getActiveItem(href, pathname, hash, category) {
 const themeOptions = [
   { value: "light", label: "Light", icon: SunMedium },
   { value: "dark", label: "Dark", icon: MoonStar },
-  { value: "system", label: "System", icon: MonitorSmartphone },
 ];
 
 function ThemeMenuButton({ pathname, mobile = false, iconOnly = false, alignRight = false }) {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
-  const activeOption = themeOptions.find((option) => option.value === theme) ?? themeOptions[2];
+  const activeOption = themeOptions.find((option) => option.value === theme) ?? themeOptions[0];
   const ActiveIcon = activeOption.icon;
   const isLightTheme = resolvedTheme === "light";
 

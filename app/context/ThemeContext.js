@@ -1,63 +1,55 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useLayoutEffect, useState } from "react";
 
 const ThemeContext = createContext(null);
 const STORAGE_KEY = "cholo-jai-dure-theme";
-const THEME_OPTIONS = ["light", "dark", "system"];
-
-function getSystemTheme() {
-  if (typeof window === "undefined") {
-    return "light";
-  }
-
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
+const THEME_OPTIONS = ["light", "dark"];
 
 function resolveTheme(theme) {
-  return theme === "system" ? getSystemTheme() : theme;
+  return theme === "dark" ? "dark" : "light";
 }
 
 function getInitialTheme() {
   if (typeof window === "undefined") {
-    return "system";
+    return "light";
   }
 
-  const storedTheme = localStorage.getItem(STORAGE_KEY);
-  return THEME_OPTIONS.includes(storedTheme) ? storedTheme : "system";
+  try {
+    const storedTheme = localStorage.getItem(STORAGE_KEY);
+    return THEME_OPTIONS.includes(storedTheme) ? storedTheme : "light";
+  } catch (error) {
+    return "light";
+  }
 }
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(getInitialTheme);
+  const [theme, setTheme] = useState("light");
+  const [hasMounted, setHasMounted] = useState(false);
   const resolvedTheme = resolveTheme(theme);
 
+  useLayoutEffect(() => {
+    setTheme(getInitialTheme());
+    setHasMounted(true);
+  }, []);
+
   useEffect(() => {
+    if (!hasMounted) {
+      return;
+    }
+
     const root = document.documentElement;
-    const applyTheme = () => {
-      const nextResolvedTheme = resolveTheme(theme);
-      root.dataset.theme = nextResolvedTheme;
-      root.dataset.themePreference = theme;
-      root.style.colorScheme = nextResolvedTheme;
-    };
+    const nextResolvedTheme = resolveTheme(theme);
+    root.dataset.theme = nextResolvedTheme;
+    root.dataset.themePreference = nextResolvedTheme;
+    root.style.colorScheme = nextResolvedTheme;
 
-    applyTheme();
-    localStorage.setItem(STORAGE_KEY, theme);
-
-    if (theme !== "system") {
-      return undefined;
+    try {
+      localStorage.setItem(STORAGE_KEY, theme);
+    } catch (error) {
+      // Ignore storage failures.
     }
-
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = () => applyTheme();
-
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener("change", handleChange);
-      return () => mediaQuery.removeEventListener("change", handleChange);
-    }
-
-    mediaQuery.addListener(handleChange);
-    return () => mediaQuery.removeListener(handleChange);
-  }, [theme]);
+  }, [hasMounted, theme]);
 
   return (
     <ThemeContext.Provider

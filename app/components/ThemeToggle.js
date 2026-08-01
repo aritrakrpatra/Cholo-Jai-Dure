@@ -1,13 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MonitorSmartphone, MoonStar, SunMedium } from "lucide-react";
+import { MoonStar, SunMedium } from "lucide-react";
 import { useTheme } from "@/app/context/ThemeContext";
 
 const themeOptions = [
   { value: "light", label: "Light", icon: SunMedium },
   { value: "dark", label: "Dark", icon: MoonStar },
-  { value: "system", label: "System", icon: MonitorSmartphone },
 ];
 
 // Standalone theme toggle button for pages/sections that don't render the main Navbar.
@@ -15,7 +14,7 @@ export default function ThemeToggle({ align = "left", className = "" }) {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
-  const activeOption = themeOptions.find((option) => option.value === theme) ?? themeOptions[2];
+  const activeOption = themeOptions.find((option) => option.value === theme) ?? themeOptions[0];
   const ActiveIcon = activeOption.icon;
   const isLightTheme = resolvedTheme === "light";
 

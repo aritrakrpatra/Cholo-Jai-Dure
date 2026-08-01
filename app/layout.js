@@ -43,11 +43,10 @@ export default function RootLayout({ children }) {
               (function () {
                 try {
                   var preference = localStorage.getItem('cholo-jai-dure-theme');
-                  var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  var theme = preference === 'light' || preference === 'dark' ? preference : (systemDark ? 'dark' : 'light');
+                  var theme = preference === 'dark' ? 'dark' : 'light';
                   var root = document.documentElement;
                   root.dataset.theme = theme;
-                  root.dataset.themePreference = preference || 'system';
+                  root.dataset.themePreference = theme;
                   root.style.colorScheme = theme;
                 } catch (error) {}
               })();
