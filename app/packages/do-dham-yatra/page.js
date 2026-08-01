@@ -158,8 +158,7 @@ export default function DoDhamYatraPage() {
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-16 lg:py-20">
           <div className="grid gap-6 lg:grid-cols-[1.65fr_0.95fr] lg:items-end">
             <div className="space-y-4">
-              <span className="inline-flex rounded-full border border-amber-300/30 bg-amber-300/10 px-4 py-2 text-sm uppercase tracking-[0.35em] text-amber-200">DO DHAM YATRA 7 NIGHTS & 8 DAYS</span>
-              <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-5xl lg:text-7xl">Experience Do Dham Yatra with comfort and spiritual depth</h1>
+              <span className="inline-flex rounded-full border border-amber-300/30 bg-amber-300/10 px-4 py-2 text-sm uppercase tracking-[0.35em] text-amber-200">DO DHAM YATRA</span>
               <p className="max-w-3xl text-base leading-7 text-white/80 sm:text-lg sm:leading-8 md:text-xl">A premium Himalayan pilgrimage from Rishikesh to Kedarnath and Badrinath with guided darshan, smooth travel, and carefully planned stays.</p>
               <div className="flex flex-wrap items-center gap-3">
                 <span className="rounded-full bg-amber-400/10 px-4 py-2 text-base font-semibold text-amber-200 ring-1 ring-amber-300/20 sm:px-5 sm:py-3 sm:text-lg">₹23,000 per person</span>
@@ -190,9 +189,9 @@ export default function DoDhamYatraPage() {
                   </div>
                 </div>
                 <div className="rounded-4xl border border-white/10 bg-slate-950/90 p-6">
-                  <p className="text-sm uppercase tracking-[0.35em] text-amber-300">Pilgrimage Inclusions</p>
+                  <p className="text-sm uppercase tracking-[0.35em] text-amber-300">Special Inclusions</p>
                   <div className="mt-4 space-y-3 text-white/80">
-                    <p className="flex items-center gap-3 text-sm"><Heart className="h-4 w-4 text-amber-300" /> Daily vegetarian meals</p>
+                    <p className="flex items-center gap-3 text-sm"><Heart className="h-4 w-4 text-amber-300" /> Daily Bengali vegetarian meals</p>
                     <p className="flex items-center gap-3 text-sm"><Hotel className="h-4 w-4 text-amber-300" /> Comfortable hotel stays</p>
                     <p className="flex items-center gap-3 text-sm"><Plane className="h-4 w-4 text-amber-300" /> Guided travel support</p>
                   </div>
@@ -211,8 +210,7 @@ export default function DoDhamYatraPage() {
       <section className="py-10 bg-slate-950/95 sm:py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mb-6 text-center sm:mb-8">
-            <p className="text-sm uppercase tracking-[0.5em] text-amber-300">Itinerary</p>
-            <h2 className="mt-3 text-2xl font-bold sm:text-4xl">Detailed Timeline</h2>
+            <p className="text-sm uppercase tracking-[0.7em] text-amber-300">Detailed Itinerary</p>
           </div>
           <div className="space-y-4 sm:space-y-5">
             {dynamicItinerary.map((item) => (
