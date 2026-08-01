@@ -101,7 +101,9 @@ function ToursPageContent() {
         tour.subtitle.toLowerCase().includes(normalized);
 
       const matchesMonth =
-        selectedMonth === "all" || getTourMonths(tour).includes(selectedMonth);
+        tourCategory === "international" ||
+        selectedMonth === "all" ||
+        getTourMonths(tour).includes(selectedMonth);
 
       const tourPrice = parseTourPrice(tour.price);
       const matchesBudget =
@@ -133,27 +135,13 @@ function ToursPageContent() {
           {tourCategory === "international" ? (
             <div>
               <div className="mb-8">
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <input
-                    type="text"
-                    value={query}
-                    onChange={(event) => setQuery(event.target.value)}
-                    placeholder="Search place by name or duration"
-                    className="w-full rounded-3xl border border-(--border) bg-(--surface) px-5 py-3 text-sm text-foreground outline-none placeholder:text-(--muted) focus:border-amber-300/60"
-                  />
-                  <select
-                    value={selectedMonth}
-                    onChange={(event) => setSelectedMonth(event.target.value)}
-                    className="w-full rounded-3xl border border-(--border) bg-(--surface) px-5 py-3 text-sm text-foreground outline-none focus:border-amber-300/60"
-                  >
-                    <option value="all">All Months</option>
-                    {monthOrder.map((month) => (
-                      <option key={month} value={month}>
-                        {month}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Search place by name or duration"
+                  className="w-full rounded-3xl border border-(--border) bg-(--surface) px-5 py-3 text-sm text-foreground outline-none placeholder:text-(--muted) focus:border-amber-300/60"
+                />
 
                 <div className="mt-4 rounded-3xl border border-(--border) bg-(--surface) p-4 sm:p-5">
                   <div className="mb-3 flex items-center justify-between gap-3">

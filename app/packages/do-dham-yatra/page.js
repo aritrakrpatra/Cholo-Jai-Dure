@@ -270,36 +270,38 @@ export default function DoDhamYatraPage() {
 
       <section className="py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="grid gap-10 lg:grid-cols-2">
-            <div className="rounded-4xl border border-white/10 bg-slate-900/90 p-5 shadow-2xl sm:p-8 lg:p-10">
-              <h2 className="text-2xl font-bold text-white sm:text-3xl">Inclusions</h2>
-              <ul className="mt-8 space-y-4 text-white/80">
-                {highlights.map((item) => (
-                  <li key={item} className="flex items-start gap-3 rounded-3xl bg-slate-950/80 p-4">
-                    <span className="mt-1 h-3 w-3 rounded-full bg-emerald-300" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="rounded-4xl border border-white/10 bg-slate-900/90 p-5 shadow-2xl sm:p-8 lg:p-10">
-              <h2 className="text-2xl font-bold text-white sm:text-3xl">Exclusions</h2>
-              <ul className="mt-8 space-y-4 text-white/80">
-                {[
-                  "Room Heater / Air Conditioner Charges",
-                  "Airfare & Train Tickets",
-                  "Journey Food During Travel",
-                  "Entry Fees & Monument Tickets",
-                  "Boating & Adventure Activities",
-                  "Personal Expenses (Laundry, Shopping, etc.)",
-                  "Extra Meals & Additional Water Bottles",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 rounded-3xl bg-slate-950/80 p-4">
-                    <span className="mt-1 h-3 w-3 rounded-full bg-red-400" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+          <div className="rounded-4xl border border-white/10 bg-slate-900/90 p-5 shadow-2xl sm:p-8 lg:p-10">
+            <div className="grid gap-6 sm:grid-cols-2 sm:gap-10">
+              <div>
+                <h2 className="text-xl font-bold text-white sm:text-2xl">Inclusions</h2>
+                <ul className="mt-4 space-y-2 text-sm text-white/80">
+                  {highlights.map((item) => (
+                    <li key={item} className="flex items-start gap-2 rounded-2xl bg-slate-950/80 px-3 py-2">
+                      <span className="mt-1 h-2 w-2 rounded-full bg-emerald-300" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-white sm:text-2xl">Exclusions</h2>
+                <ul className="mt-4 space-y-2 text-sm text-white/80">
+                  {[
+                    "Room Heater / Air Conditioner Charges",
+                    "Airfare & Train Tickets",
+                    "Journey Food During Travel",
+                    "Entry Fees & Monument Tickets",
+                    "Boating & Adventure Activities",
+                    "Personal Expenses (Laundry, Shopping, etc.)",
+                    "Extra Meals & Additional Water Bottles",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2 rounded-2xl bg-slate-950/80 px-3 py-2">
+                      <span className="mt-1 h-2 w-2 rounded-full bg-red-400" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>

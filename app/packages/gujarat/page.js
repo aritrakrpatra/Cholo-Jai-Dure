@@ -410,33 +410,33 @@ export default function GujratExplorePage() {
           </div>
         </section>
 
-        <section className="mb-24 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-10">
-          <div>
-            <div className="mb-10">
-              <p className="text-sm uppercase tracking-[0.4em] text-amber-300">What&apos;s Included</p>
-              <h2 className="mt-4 text-2xl font-bold text-white sm:text-4xl">Every detail covered</h2>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {includedItems.map((item) => (
-                <div key={item} className="rounded-[1.75rem] border border-white/10 bg-slate-900/90 p-6">
-                  <div className="flex items-center gap-3 text-amber-300"><CheckCircle2 className="h-5 w-5" /><span className="font-semibold text-white">Included</span></div>
-                  <p className="mt-4 text-white/75">{item}</p>
+        <section className="mb-24">
+          <div className="rounded-[1.75rem] border border-white/10 bg-slate-900/90 p-6 sm:p-8">
+            <div className="grid gap-6 lg:grid-cols-2 lg:gap-10">
+              <div>
+                <p className="text-xs uppercase tracking-[0.4em] text-amber-300">What&apos;s Included</p>
+                <h2 className="mt-2 text-xl font-bold text-white sm:text-2xl">Every detail covered</h2>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {includedItems.map((item) => (
+                    <div key={item} className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
+                      <div className="flex items-center gap-2 text-amber-300"><CheckCircle2 className="h-4 w-4" /><span className="text-sm font-semibold text-white">Included</span></div>
+                      <p className="mt-2 text-sm text-white/75">{item}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-          <div className="mt-12 lg:mt-0">
-            <div className="mb-10">
-              <p className="text-sm uppercase tracking-[0.4em] text-amber-300">Not Included</p>
-              <h2 className="mt-4 text-2xl font-bold text-white sm:text-4xl">Plan ahead for optional extras</h2>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {excludedItems.map((item) => (
-                <div key={item} className="rounded-[1.75rem] border border-rose-500/10 bg-rose-500/5 p-6 text-rose-100">
-                  <div className="flex items-center gap-3 text-rose-300"><XCircle className="h-5 w-5" /><span className="font-semibold">Not Included</span></div>
-                  <p className="mt-4 text-sm text-rose-100/80">{item}</p>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-[0.4em] text-amber-300">Not Included</p>
+                <h2 className="mt-2 text-xl font-bold text-white sm:text-2xl">Plan ahead for optional extras</h2>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {excludedItems.map((item) => (
+                    <div key={item} className="rounded-2xl border border-rose-500/10 bg-rose-500/5 p-4 text-rose-100">
+                      <div className="flex items-center gap-2 text-rose-300"><XCircle className="h-4 w-4" /><span className="text-sm font-semibold">Not Included</span></div>
+                      <p className="mt-2 text-xs text-rose-100/80">{item}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>
