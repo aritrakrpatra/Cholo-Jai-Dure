@@ -3,10 +3,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { useAuth } from "@/app/context/AuthContext";
 import { useTheme } from "@/app/context/ThemeContext";
-import ThemeToggle from "@/app/components/ThemeToggle";
+import Navbar from "@/app/components/Navbar";
 import {
   User, Mail, Phone, LogOut, Plane, ArrowLeft,
   Calendar, Package, Clock, CheckCircle, XCircle, AlertCircle, LayoutDashboard,
@@ -164,34 +163,16 @@ export default function AccountPage() {
       }`}
     >
       {/* Navigation */}
-      <div className={`sticky top-0 z-50 px-4 py-5 backdrop-blur-xl ${isLightTheme ? "bg-(--surface-strong)" : "bg-slate-950/40"}`}>
-        <div className="mx-auto max-w-7xl flex items-center justify-between">
-          <Link href="/" className={`flex items-center gap-3 ${isLightTheme ? "text-foreground" : "text-white"}`}>
-            <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-3xl bg-white ring-1 ring-amber-300/20 shadow-lg shadow-amber-500/10">
-              <Image
-                src="/cjd%20logo.jpg"
-                alt="Cholo Jai Dure logo"
-                width={40}
-                height={40}
-                className="h-full w-full object-cover"
-                priority
-              />
-            </span>
-            <div>
-              <p className="text-sm font-semibold">Cholo Jai Dure</p>
-              <p className={`text-xs ${isLightTheme ? "text-(--muted)" : "text-white/70"}`}>Your Journey, Our Priority</p>
-            </div>
-          </Link>
-          <div className="flex items-center gap-3">
-            <ThemeToggle align="right" />
-            <button
-              onClick={() => router.back()}
-              className={`transition flex items-center gap-2 ${isLightTheme ? "text-(--muted) hover:text-foreground" : "text-white/70 hover:text-white"}`}
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back
-            </button>
-          </div>
+      <Navbar />
+      <div className={`px-4 py-3 ${isLightTheme ? "bg-(--surface-strong)" : "bg-slate-950/40"}`}>
+        <div className="mx-auto max-w-7xl">
+          <button
+            onClick={() => router.back()}
+            className={`transition flex items-center gap-2 text-sm ${isLightTheme ? "text-(--muted) hover:text-foreground" : "text-white/70 hover:text-white"}`}
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back
+          </button>
         </div>
       </div>
 

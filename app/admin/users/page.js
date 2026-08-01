@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/app/context/AuthContext";
 import Link from "next/link";
 import { Users, Shield, ShieldOff, Plane, ArrowLeft } from "lucide-react";
-import ThemeToggle from "@/app/components/ThemeToggle";
+import Navbar from "@/app/components/Navbar";
 
 export default function AdminUsersPage() {
   const { user } = useAuth();
@@ -47,6 +47,7 @@ export default function AdminUsersPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
+      <Navbar />
       {/* Nav */}
       <div className="sticky top-0 z-50 px-4 py-4 backdrop-blur-xl bg-slate-950/60 border-b border-white/10">
         <div className="mx-auto max-w-5xl flex items-center justify-between gap-4">
@@ -62,7 +63,6 @@ export default function AdminUsersPage() {
             </span>
           </div>
           <div className="flex items-center gap-3">
-            <ThemeToggle align="right" />
             <span className="text-xs text-white/40">Hi, {user?.name?.split(" ")[0]}</span>
           </div>
         </div>

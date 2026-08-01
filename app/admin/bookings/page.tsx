@@ -7,7 +7,7 @@ import { useAuth } from "@/app/context/AuthContext";
 import type { Booking } from "@/app/types/booking";
 import { BOOKING_STATUS_CONFIG, type BookingStatus } from "@/app/lib/bookingStatus";
 import Image from "next/image";
-import ThemeToggle from "@/app/components/ThemeToggle";
+import Navbar from "@/app/components/Navbar";
 import {
   Search, Filter, ChevronLeft, ChevronRight, LogOut,
   Package, Clock, CheckCircle, XCircle, AlertCircle, Users, Calendar, Phone, Mail,
@@ -131,6 +131,7 @@ export default function AdminBookingsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+      <Navbar />
       {/* Top Nav */}
       <div className="sticky top-0 z-50 px-4 py-4 backdrop-blur-xl bg-slate-950/60 border-b border-white/10">
         <div className="mx-auto max-w-7xl flex items-center justify-between gap-4">
@@ -144,7 +145,6 @@ export default function AdminBookingsPage() {
             </div>
           </Link>
           <div className="flex items-center gap-3">
-            <ThemeToggle align="right" />
             <Link
               href="/admin/users"
               className="hidden sm:flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 px-3 py-2 text-xs text-white/70 hover:text-white transition"

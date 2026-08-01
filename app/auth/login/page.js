@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
 import { SignIn } from "@clerk/nextjs";
 import { useTheme } from "@/app/context/ThemeContext";
-import ThemeToggle from "@/app/components/ThemeToggle";
+import Navbar from "@/app/components/Navbar";
 
 export default function LoginPage() {
   const { resolvedTheme } = useTheme();
@@ -19,28 +17,7 @@ export default function LoginPage() {
       }`}
     >
       {/* Navigation */}
-      <div className={`sticky top-0 z-50 px-4 py-5 backdrop-blur-xl ${isLightTheme ? "bg-(--surface-strong)" : "bg-slate-950/40"}`}>
-        <div className="mx-auto max-w-7xl flex items-center justify-between">
-          <Link href="/" className={`flex items-center gap-3 ${isLightTheme ? "text-foreground" : "text-white"}`}>
-            <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-3xl bg-white ring-1 ring-amber-300/20">
-              <Image src="/cjd%20logo.jpg" alt="Cholo Jai Dure logo" width={40} height={40} className="h-full w-full object-cover" />
-            </span>
-            <div>
-              <p className="text-sm font-semibold">Cholo Jai Dure</p>
-              <p className={`text-xs ${isLightTheme ? "text-(--muted)" : "text-white/70"}`}>Your Journey, Our Priority</p>
-            </div>
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link
-              href="/"
-              className={`transition ${isLightTheme ? "text-(--muted) hover:text-foreground" : "text-white/70 hover:text-white"}`}
-            >
-              Back to Home
-            </Link>
-            <ThemeToggle align="right" />
-          </div>
-        </div>
-      </div>
+      <Navbar />
 
       {/* Main content */}
       <div className="flex-1 flex items-center justify-center px-4 py-8">

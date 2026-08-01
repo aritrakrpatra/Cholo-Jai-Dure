@@ -21,7 +21,7 @@ import {
   Users,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import ThemeToggle from "@/app/components/ThemeToggle";
+import Navbar from "@/app/components/Navbar";
 
 const destinations = [
   "Ladakh",
@@ -151,9 +151,7 @@ function AnimatedCounter({ value, suffix, label }) {
 export default function AboutUsPage() {
   return (
     <main className="relative overflow-hidden">
-      <div className="fixed top-4 right-4 z-50">
-        <ThemeToggle align="right" />
-      </div>
+      <Navbar />
       <section className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <motion.header
           initial={{ opacity: 0, y: 24 }}
