@@ -381,13 +381,13 @@ function NavbarContent() {
             className="flex min-w-0 flex-1 shrink items-center gap-3"
             style={{ color: "var(--foreground)" }}
           >
-            <span className="theme-glow flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-3xl bg-white ring-1 ring-amber-300/20 shadow-lg shadow-amber-500/10 sm:h-12 sm:w-12">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-[1.2rem] bg-white ring-1 ring-amber-300/20 shadow-md shadow-amber-500/10 sm:h-16 sm:w-16">
               <Image
                 src="/cjd%20logo.jpg"
                 alt="Cholo Jai Dure logo"
-                width={48}
-                height={48}
-                className="h-full w-full object-cover"
+                width={64}
+                height={64}
+                className="h-full w-full object-contain"
                 priority
               />
             </span>
@@ -555,13 +555,13 @@ function NavbarContent() {
           <div>
             <div className="mb-8 flex items-center justify-between">
               <Link href="/" className="flex items-center gap-3" style={{ color: "var(--foreground)" }}>
-                <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-3xl bg-white ring-1 ring-amber-300/20">
+                <span className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-[1.2rem] bg-white ring-1 ring-amber-300/20 shadow-sm">
                   <Image
                     src="/cjd%20logo.jpg"
                     alt="Cholo Jai Dure logo"
-                    width={48}
-                    height={48}
-                    className="h-full w-full object-cover"
+                    width={56}
+                    height={56}
+                    className="h-full w-full object-contain"
                     priority
                   />
                 </span>

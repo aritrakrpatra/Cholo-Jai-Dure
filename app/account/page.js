@@ -9,6 +9,7 @@ import Navbar from "@/app/components/Navbar";
 import {
   User, Mail, Phone, LogOut, Plane, ArrowLeft,
   Calendar, Package, Clock, CheckCircle, XCircle, AlertCircle, LayoutDashboard,
+  Pencil,
 } from "lucide-react";
 
 const STATUS_STYLES = {
@@ -66,12 +67,17 @@ function InfoRow({ label, value, icon: Icon, isLightTheme, capitalize, breakAll 
 
 export default function AccountPage() {
   const router = useRouter();
-  const { user, isAdmin, logout, loading } = useAuth();
+  const { user, isAdmin, logout, loading, updateProfile } = useAuth();
   const { resolvedTheme } = useTheme();
   const isLightTheme = resolvedTheme === "light";
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [bookings, setBookings] = useState([]);
   const [bookingsLoading, setBookingsLoading] = useState(false);
+  const [isEditingDob, setIsEditingDob] = useState(false);
+  const [dobValue, setDobValue] = useState("");
+  const [dobSaving, setDobSaving] = useState(false);
+  const [dobError, setDobError] = useState("");
+  const [dobSuccess, setDobSuccess] = useState("");
 
   // Redirect to login if not authenticated
   useEffect(() => {
@@ -79,6 +85,17 @@ export default function AccountPage() {
       router.replace("/auth/login");
     }
   }, [loading, user, router]);
+
+  useEffect(() => {
+    if (user?.dateOfBirth) {
+      setDobValue(user.dateOfBirth);
+    } else {
+      setDobValue("");
+    }
+    setDobError("");
+    setDobSuccess("");
+    setIsEditingDob(false);
+  }, [user?.dateOfBirth]);
 
   useEffect(() => {
     if (loading || !user) {
@@ -156,6 +173,30 @@ export default function AccountPage() {
     }
   };
 
+  const maxDobDate = new Date();
+  maxDobDate.setFullYear(maxDobDate.getFullYear() - 5);
+  const maxDobDateStr = maxDobDate.toISOString().split("T")[0];
+
+  const handleDobSave = async () => {
+    if (!dobValue) {
+      setDobError("Please select your date of birth.");
+      return;
+    }
+
+    try {
+      setDobSaving(true);
+      setDobError("");
+      setDobSuccess("");
+      await updateProfile({ dateOfBirth: dobValue });
+      setDobSuccess("Date of birth updated successfully.");
+      setIsEditingDob(false);
+    } catch (err) {
+      setDobError(err.message || "Failed to update date of birth.");
+    } finally {
+      setDobSaving(false);
+    }
+  };
+
   return (
     <div
       className={`min-h-screen flex flex-col bg-linear-to-br ${
@@ -194,14 +235,75 @@ export default function AccountPage() {
             <div className="space-y-4 mb-8">
               <InfoRow label="Full Name" value={user.name || "Traveler"} isLightTheme={isLightTheme} />
 
-              {user.dateOfBirth && (
+              <div className="space-y-2">
                 <InfoRow
                   label="Date of Birth"
                   icon={Calendar}
                   isLightTheme={isLightTheme}
-                  value={new Date(user.dateOfBirth + "T00:00:00").toLocaleDateString("en-IN", { year: "numeric", month: "long", day: "numeric" })}
+                  value={
+                    user.dateOfBirth
+                      ? new Date(user.dateOfBirth + "T00:00:00").toLocaleDateString("en-IN", { year: "numeric", month: "long", day: "numeric" })
+                      : "Not added yet"
+                  }
                 />
-              )}
+
+                {!isEditingDob ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setDobValue(user.dateOfBirth || "");
+                      setDobError("");
+                      setDobSuccess("");
+                      setIsEditingDob(true);
+                    }}
+                    className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition ${isLightTheme ? "border-(--border) bg-(--surface) text-foreground hover:bg-(--surface-strong)" : "border-white/10 bg-white/5 text-white/80 hover:bg-white/10"}`}
+                  >
+                    <Pencil className="h-4 w-4" />
+                    {user.dateOfBirth ? "Change Date of Birth" : "Add Date of Birth"}
+                  </button>
+                ) : (
+                  <div className={`rounded-lg border p-4 ${isLightTheme ? "border-(--border) bg-(--surface)" : "border-white/10 bg-white/5"}`}>
+                    <label className={`mb-2 block text-xs font-semibold uppercase tracking-wide ${isLightTheme ? "text-(--muted)" : "text-white/60"}`}>
+                      Select Date of Birth
+                    </label>
+                    <input
+                      type="date"
+                      value={dobValue}
+                      max={maxDobDateStr}
+                      onChange={(e) => {
+                        setDobValue(e.target.value);
+                        setDobError("");
+                        setDobSuccess("");
+                      }}
+                      className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none ${isLightTheme ? "border-(--border) bg-background text-foreground" : "border-white/10 bg-slate-950/60 text-white"}`}
+                    />
+                    {dobError && <p className="mt-2 text-sm text-red-500">{dobError}</p>}
+                    {dobSuccess && <p className="mt-2 text-sm text-emerald-500">{dobSuccess}</p>}
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        onClick={handleDobSave}
+                        disabled={dobSaving}
+                        className="rounded-lg bg-amber-400 px-3 py-2 text-sm font-semibold text-slate-900 transition hover:bg-amber-300 disabled:opacity-60"
+                      >
+                        {dobSaving ? "Saving..." : "Save"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setDobValue(user.dateOfBirth || "");
+                          setDobError("");
+                          setDobSuccess("");
+                          setIsEditingDob(false);
+                        }}
+                        className={`rounded-lg border px-3 py-2 text-sm font-medium ${isLightTheme ? "border-(--border) text-foreground" : "border-white/10 text-white/80"}`}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
 
               {user.gender && (
                 <InfoRow label="Gender" value={user.gender} isLightTheme={isLightTheme} capitalize />

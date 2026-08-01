@@ -16,21 +16,6 @@ const highlights = [
   "1 Litre Water Bottle Per Person Daily",
 ];
 
-const faqs = [
-  {
-    question: "Can I customize the tour duration?",
-    answer: "Yes, get in touch with us and we can customize the itinerary according to your travel needs.",
-  },
-  {
-    question: "Is the package price per person?",
-    answer: "Yes, ₹23,000 is the cost per person for the standard package.",
-  },
-  {
-    question: "Is the trip safe for first-time pilgrims?",
-    answer: "Absolutely. We provide experienced guides, safe transport, and comfortable stay arrangements.",
-  },
-];
-
 const itinerary = [
   {
     day: "Day 1",
@@ -189,7 +174,7 @@ export default function DoDhamYatraPage() {
                 <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/80 sm:px-5 sm:py-3 sm:text-sm">7 Nights · 8 Days · Pilgrimage Special</span>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
-                <a href="#booking" className="flex items-center justify-center rounded-full bg-amber-400 px-6 py-3.5 text-sm font-semibold text-slate-950 transition hover:bg-amber-300 sm:px-7 sm:py-4">Book Now</a>
+                <a href="/contact" className="flex items-center justify-center rounded-full bg-amber-400 px-6 py-3.5 text-sm font-semibold text-slate-950 transition hover:bg-amber-300 sm:px-7 sm:py-4">Book Now</a>
                 <a href="https://wa.me/917478167607" target="_blank" rel="noreferrer" className="flex items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-400/10 px-6 py-3.5 text-sm font-semibold text-emerald-200 transition hover:bg-emerald-400/20 sm:px-7 sm:py-4">WhatsApp Inquiry</a>
                 <a href="tel:917478167607" className="flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10 sm:px-7 sm:py-4">Call Now</a>
               </div>
@@ -330,46 +315,13 @@ export default function DoDhamYatraPage() {
 
       <section className="py-16 bg-slate-900/80 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="grid gap-8 lg:grid-cols-[0.8fr_0.8fr]">
+          <div className="mx-auto max-w-2xl">
             <div className="rounded-4xl border border-white/10 bg-slate-950/90 p-5 shadow-2xl sm:p-8 lg:p-10">
               <h2 className="text-2xl font-bold text-white sm:text-3xl">Important Information</h2>
               <div className="mt-6 space-y-4 text-white/80">
                 <p><span className="font-semibold text-white">Last Date of Booking:</span> 30 June 2026</p>
                 <p><span className="font-semibold text-white">Booking Amount:</span> ₹5,000 per person</p>
                 <p><span className="font-semibold text-white">Tempo Traveller Seat Selection:</span> Available at booking time</p>
-              </div>
-            </div>
-            <div className="rounded-4xl border border-white/10 bg-slate-950/90 p-5 shadow-2xl sm:p-8 lg:p-10">
-              <h2 className="text-2xl font-bold text-white sm:text-3xl">Pilgrim FAQs</h2>
-              <div className="mt-6 space-y-5">
-                {faqs.map((faq) => (
-                  <div key={faq.question} className="rounded-3xl border border-white/10 bg-slate-900/80 p-6">
-                    <p className="text-lg font-semibold text-white">{faq.question}</p>
-                    <p className="mt-3 text-white/70">{faq.answer}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="booking" className="py-16 bg-slate-950 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-            <div>
-              <p className="text-sm uppercase tracking-[0.35em] text-amber-300">Ready to book</p>
-              <h2 className="mt-4 text-2xl font-bold text-white sm:text-4xl">Reserve your sacred journey today</h2>
-              <p className="mt-6 text-white/70">Confirm your place on Do Dham Yatra with a ₹5,000 booking amount and get personalized seat selection for the tempo traveller.</p>
-            </div>
-            <div className="rounded-4xl border border-white/10 bg-slate-900/90 p-5 shadow-2xl sm:p-8 lg:p-10">
-              <div className="space-y-4">
-                <p className="text-sm uppercase tracking-[0.35em] text-amber-300">Contact</p>
-                <p className="text-xl font-semibold">+91 7478167607</p>
-                <div className="mt-6 grid gap-4">
-                  <a href="tel:917478167607" className="block rounded-full bg-amber-400 px-6 py-4 text-center font-semibold text-slate-950 transition hover:bg-amber-300">Call Now</a>
-                  <a href="https://wa.me/917478167607" target="_blank" rel="noreferrer" className="block rounded-full border border-emerald-400/40 bg-emerald-400/10 px-6 py-4 text-center text-sm text-emerald-200 transition hover:bg-emerald-400/20">WhatsApp Inquiry</a>
-                </div>
               </div>
             </div>
           </div>
