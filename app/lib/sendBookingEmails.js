@@ -1,38 +1,13 @@
 import nodemailer from "nodemailer";
-
-const LOGO_CID = "cjdLogo";
-const LOGO_FILE_PATH = `${process.cwd()}/public/cjd logo.jpg`;
-
-function esc(v) {
-  return String(v || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-function fmtDate(dateStr) {
-  if (!dateStr) return "—";
-  try {
-    return new Date(dateStr + "T00:00:00").toLocaleDateString("en-IN", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  } catch {
-    return dateStr;
-  }
-}
-
-function fmtDateTime(iso) {
-  if (!iso) return "—";
-  try {
-    return new Date(iso).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
-  } catch {
-    return iso;
-  }
-}
+import {
+  esc,
+  fmtDate,
+  fmtDateTime,
+  logoAttachment,
+  emailWrapper,
+  detailRow,
+  ctaButton,
+} from "./emailTemplate";
 
 function createTransporter() {
   const user = (process.env.SMTP_USER || "").trim();
@@ -50,94 +25,28 @@ function createTransporter() {
   );
 }
 
-function logoAttachment() {
-  return [{ filename: "cjd logo.jpg", path: LOGO_FILE_PATH, cid: LOGO_CID }];
-}
+// ─── Status theme helpers ────────────────────────────────────────────────────
 
-// ─── HTML template helpers ───────────────────────────────────────────────────
+const STATUS_THEME = {
+  pending: { bg: "#451a03", color: "#fbbf24", label: "Pending", accent: "#f59e0b", icon: "🕒" },
+  contacted: { bg: "#0c2340", color: "#60a5fa", label: "Contacted", accent: "#3b82f6", icon: "📞" },
+  confirmed: { bg: "#052e16", color: "#4ade80", label: "Confirmed", accent: "#22c55e", icon: "✅" },
+  payment_pending: { bg: "#431407", color: "#fb923c", label: "Payment Pending", accent: "#fb923c", icon: "💳" },
+  paid: { bg: "#022c22", color: "#34d399", label: "Paid", accent: "#10b981", icon: "🎉" },
+  cancelled: { bg: "#450a0a", color: "#f87171", label: "Cancelled", accent: "#ef4444", icon: "❌" },
+};
 
-function emailWrapper(content) {
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cholo Jai Dure</title>
-</head>
-<body style="margin:0;padding:0;background:#0f172a;font-family:'Segoe UI',Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0f172a;padding:32px 0;">
-    <tr><td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
-        <!-- Header -->
-        <tr>
-          <td align="center" style="background:#1e293b;border-radius:16px 16px 0 0;padding:28px 32px;border-bottom:2px solid #f59e0b;">
-            <div style="display:inline-flex;align-items:center;gap:12px;">
-              <div style="height:44px;display:inline-flex;align-items:center;justify-content:center;">
-                <img src="cid:${LOGO_CID}" alt="Cholo Jai Dure logo" style="height:44px;width:auto;display:block;border-radius:8px;" />
-              </div>
-              <div>
-                <div style="color:#f59e0b;font-size:18px;font-weight:700;letter-spacing:0.5px;">Cholo Jai Dure</div>
-                <div style="color:#94a3b8;font-size:11px;">Tour &amp; Travels</div>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <!-- Body -->
-        <tr>
-          <td style="background:#1e293b;padding:32px;border-radius:0 0 16px 16px;">
-            ${content}
-          </td>
-        </tr>
-        <!-- Footer -->
-        <tr>
-          <td align="center" style="padding:24px 0;">
-            <p style="color:#475569;font-size:12px;margin:0;">
-              © ${new Date().getFullYear()} Cholo Jai Dure Tour &amp; Travels · All rights reserved
-            </p>
-          </td>
-        </tr>
-      </table>
-    </td></tr>
-  </table>
-</body>
-</html>`;
-}
-
-function detailRow(label, value) {
-  return `
-    <tr>
-      <td style="padding:10px 0;border-bottom:1px solid #334155;width:40%;">
-        <span style="color:#94a3b8;font-size:13px;">${esc(label)}</span>
-      </td>
-      <td style="padding:10px 0;border-bottom:1px solid #334155;">
-        <span style="color:#f1f5f9;font-size:13px;font-weight:600;">${esc(String(value || "—"))}</span>
-      </td>
-    </tr>`;
+function statusTheme(status) {
+  return STATUS_THEME[status] || STATUS_THEME.pending;
 }
 
 function statusBadge(status) {
-  const map = {
-    pending: { bg: "#451a03", color: "#fbbf24", label: "Pending" },
-    contacted: { bg: "#0c2340", color: "#60a5fa", label: "Contacted" },
-    confirmed: { bg: "#052e16", color: "#4ade80", label: "Confirmed" },
-    payment_pending: { bg: "#431407", color: "#fb923c", label: "Payment Pending" },
-    paid: { bg: "#022c22", color: "#34d399", label: "Paid" },
-    cancelled: { bg: "#450a0a", color: "#f87171", label: "Cancelled" },
-  };
-  const s = map[status] || map.pending;
+  const s = statusTheme(status);
   return `<span style="background:${s.bg};color:${s.color};padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:0.5px;">${s.label}</span>`;
 }
 
 function statusLabel(status) {
-  const labels = {
-    pending: "Pending",
-    contacted: "Contacted",
-    confirmed: "Confirmed",
-    payment_pending: "Payment Pending",
-    paid: "Paid",
-    cancelled: "Cancelled",
-  };
-  return labels[status] || "Updated";
+  return statusTheme(status).label;
 }
 
 // ─── Customer confirmation email ─────────────────────────────────────────────
@@ -245,17 +154,20 @@ function buildAdminEmailHtml(booking) {
 }
 
 function buildCustomerStatusUpdateEmailHtml(booking, previousStatus) {
+  const theme = statusTheme(booking.bookingStatus);
+  const phone = process.env.CONTACT_BUSINESS_PHONE || "7501307766 / 7478167607";
+
   const content = `
     <div style="text-align:center;margin-bottom:28px;">
-      <div style="width:64px;height:64px;border-radius:50%;background:rgba(74,222,128,0.1);margin:0 auto 16px;display:inline-flex;align-items:center;justify-content:center;font-size:32px;">📣</div>
-      <h1 style="color:#f1f5f9;font-size:22px;font-weight:700;margin:0 0 8px;">Booking Status Updated</h1>
-      <p style="color:#94a3b8;font-size:14px;margin:0;">Hi <strong style="color:#f1f5f9;">${esc(booking.customerName)}</strong>, your booking status has changed.</p>
+      <div style="width:72px;height:72px;border-radius:50%;background:${theme.bg};margin:0 auto 16px;display:inline-flex;align-items:center;justify-content:center;font-size:36px;">${theme.icon}</div>
+      <h1 style="color:#f1f5f9;font-size:22px;font-weight:700;margin:0 0 8px;">Your Booking is Now ${esc(theme.label)}</h1>
+      <p style="color:#94a3b8;font-size:14px;margin:0;">Hi <strong style="color:#f1f5f9;">${esc(booking.customerName)}</strong>, here's the latest update on your trip.</p>
     </div>
 
-    <div style="background:#0f172a;border-radius:12px;padding:24px;margin-bottom:24px;">
+    <div style="background:#0f172a;border-radius:12px;padding:24px;margin-bottom:24px;border-top:3px solid ${theme.accent};">
       <div style="text-align:center;margin-bottom:16px;">
         <span style="color:#94a3b8;font-size:12px;text-transform:uppercase;letter-spacing:1px;">Booking ID</span>
-        <div style="color:#f59e0b;font-size:24px;font-weight:800;letter-spacing:2px;margin-top:4px;">${esc(booking.bookingId)}</div>
+        <div style="color:${theme.accent};font-size:24px;font-weight:800;letter-spacing:2px;margin-top:4px;">${esc(booking.bookingId)}</div>
       </div>
       <table width="100%" cellpadding="0" cellspacing="0">
         ${detailRow("Package", booking.packageName)}
@@ -267,25 +179,31 @@ function buildCustomerStatusUpdateEmailHtml(booking, previousStatus) {
       <div style="margin-top:16px;text-align:center;">${statusBadge(booking.bookingStatus)}</div>
     </div>
 
-    <p style="color:#94a3b8;font-size:13px;text-align:center;margin:0;line-height:1.6;">
-      Our team will contact you if any further action is needed.
-    </p>`;
+    <div style="background:#0f172a;border-radius:12px;padding:20px;margin-bottom:24px;">
+      <p style="color:#f1f5f9;font-size:13px;font-weight:700;margin:0 0 12px;">📞 Questions? We're Here to Help</p>
+      <p style="color:#94a3b8;font-size:13px;margin:0;">📱 Call/WhatsApp: <span style="color:#f1f5f9;">${esc(phone)}</span></p>
+    </div>
 
-  return emailWrapper(content);
+    ${ctaButton(`tel:${(phone.match(/[0-9+]+/) || [""])[0]}`, "Call Us Now →", theme.accent)}`;
+
+  return emailWrapper(content, {
+    accent: theme.accent,
+  });
 }
 
 function buildAdminStatusUpdateEmailHtml(booking, previousStatus) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   const adminLink = `${baseUrl}/admin/bookings/${booking.id}`;
+  const theme = statusTheme(booking.bookingStatus);
 
   const content = `
     <div style="margin-bottom:24px;">
-      <h1 style="color:#f1f5f9;font-size:20px;font-weight:700;margin:0 0 8px;">🔄 Booking Status Changed</h1>
+      <h1 style="color:#f1f5f9;font-size:20px;font-weight:700;margin:0 0 8px;">${theme.icon} Booking Status Changed</h1>
       <p style="color:#94a3b8;font-size:14px;margin:0;">A booking status was updated in the admin dashboard.</p>
       <div style="margin-top:12px;">${statusBadge(booking.bookingStatus)}</div>
     </div>
 
-    <div style="background:#0f172a;border-radius:12px;padding:24px;margin-bottom:24px;">
+    <div style="background:#0f172a;border-radius:12px;padding:24px;margin-bottom:24px;border-top:3px solid ${theme.accent};">
       <table width="100%" cellpadding="0" cellspacing="0">
         ${detailRow("Booking ID", booking.bookingId)}
         ${detailRow("Package", booking.packageName)}
@@ -297,13 +215,9 @@ function buildAdminStatusUpdateEmailHtml(booking, previousStatus) {
       </table>
     </div>
 
-    <div style="text-align:center;">
-      <a href="${esc(adminLink)}" style="display:inline-block;background:#f59e0b;color:#0f172a;font-weight:700;font-size:14px;padding:14px 32px;border-radius:10px;text-decoration:none;letter-spacing:0.5px;">
-        Open Booking in Dashboard →
-      </a>
-    </div>`;
+    ${ctaButton(adminLink, "Open Booking in Dashboard →", theme.accent)}`;
 
-  return emailWrapper(content);
+  return emailWrapper(content, { accent: theme.accent });
 }
 
 // ─── Exported send functions ──────────────────────────────────────────────────

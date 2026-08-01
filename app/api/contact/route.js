@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { esc, emailWrapper, detailRow, logoAttachment, ctaButton } from "@/app/lib/emailTemplate";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -17,14 +18,6 @@ function firstDefinedValue(values) {
   return "";
 }
 
-function escapeHtml(value) {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
 
 export async function POST(request) {
   try {
@@ -124,6 +117,64 @@ export async function POST(request) {
     const submittedAt = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
     const businessPhone = process.env.CONTACT_BUSINESS_PHONE || "7501307766 / 7478167607";
 
+    const adminRows = [
+      ["Name", name],
+      ["Phone", phone],
+      ["Email", email],
+      ["Submitted At", submittedAt],
+    ].map(([l, v]) => detailRow(l, v)).join("");
+
+    const adminContent = `
+      <div style="margin-bottom:24px;">
+        <h1 style="color:#f1f5f9;font-size:20px;font-weight:700;margin:0 0 8px;">💬 New Travel Inquiry</h1>
+        <p style="color:#94a3b8;font-size:14px;margin:0;">Someone submitted the contact form on the website.</p>
+      </div>
+
+      <div style="background:#0f172a;border-radius:12px;padding:24px;margin-bottom:24px;">
+        <table width="100%" cellpadding="0" cellspacing="0">${adminRows}</table>
+      </div>
+
+      <div style="background:#0f172a;border-radius:12px;padding:20px;margin-bottom:24px;">
+        <p style="color:#94a3b8;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;">Message</p>
+        <p style="color:#f1f5f9;font-size:13px;margin:0;line-height:1.6;">${esc(message).replace(/\n/g, "<br/>")}</p>
+      </div>
+
+      ${ctaButton(`mailto:${email}`, "Reply to Customer →")}`;
+
+    const customerContent = `
+      <div style="text-align:center;margin-bottom:28px;">
+        <div style="width:64px;height:64px;border-radius:50%;background:rgba(245,158,11,0.1);margin:0 auto 16px;display:inline-flex;align-items:center;justify-content:center;font-size:32px;">🌍</div>
+        <h1 style="color:#f1f5f9;font-size:22px;font-weight:700;margin:0 0 8px;">Thanks for Reaching Out!</h1>
+        <p style="color:#94a3b8;font-size:14px;margin:0;">Hello <strong style="color:#f1f5f9;">${esc(name)}</strong>, we have received your inquiry.</p>
+      </div>
+
+      <div style="background:#0f172a;border-radius:12px;padding:24px;margin-bottom:24px;">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          ${detailRow("Phone", phone)}
+          ${detailRow("Email", email)}
+          ${detailRow("Submitted At", submittedAt)}
+        </table>
+      </div>
+
+      <div style="background:#0f172a;border-radius:12px;padding:20px;margin-bottom:24px;">
+        <p style="color:#94a3b8;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;">Your Message</p>
+        <p style="color:#f1f5f9;font-size:13px;margin:0;line-height:1.6;">${esc(message).replace(/\n/g, "<br/>")}</p>
+      </div>
+
+      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:12px;padding:20px;margin-bottom:24px;">
+        <p style="color:#fbbf24;font-size:13px;font-weight:700;margin:0 0 8px;">📌 What Happens Next?</p>
+        <p style="color:#d1d5db;font-size:13px;margin:0;line-height:1.6;">
+          Our travel consultant will review your inquiry and get back to you shortly with the best options for your trip.
+        </p>
+      </div>
+
+      ${ctaButton(`tel:${(businessPhone.match(/[0-9+]+/) || [""])[0]}`, "Call Us Now →")}
+
+      <p style="color:#94a3b8;font-size:13px;text-align:center;margin:24px 0 0;">
+        Thank you for choosing <strong style="color:#f59e0b;">Cholo Jai Dure Tour &amp; Travels</strong>.<br/>
+        Let's plan your next adventure! ✈️
+      </p>`;
+
     await Promise.all([
       transporter.sendMail({
         from: `Cholo Jai Dure Website <${smtpFrom}>`,
@@ -140,15 +191,8 @@ export async function POST(request) {
           "Message:",
           message,
         ].join("\n"),
-        html: `
-          <h2>New Inquiry Received</h2>
-          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-          <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
-          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-          <p><strong>Submitted At:</strong> ${escapeHtml(submittedAt)}</p>
-          <p><strong>Message:</strong></p>
-          <p>${escapeHtml(message).replace(/\n/g, "<br />")}</p>
-        `,
+        html: emailWrapper(adminContent),
+        attachments: logoAttachment(),
       }),
       transporter.sendMail({
         from: `Cholo Jai Dure Tour & Travels <${smtpFrom}>`,
@@ -173,22 +217,8 @@ export async function POST(request) {
           "Regards,",
           "Cholo Jai Dure Tour & Travels",
         ].join("\n"),
-        html: `
-          <h2>Thank You for Your Inquiry</h2>
-          <p>Hello ${escapeHtml(name)},</p>
-          <p>Thank you for contacting <strong>Cholo Jai Dure Tour &amp; Travels</strong>.</p>
-          <p>We have received your inquiry and our team will contact you shortly.</p>
-          <p><strong>Your submitted details:</strong></p>
-          <ul>
-            <li><strong>Phone:</strong> ${escapeHtml(phone)}</li>
-            <li><strong>Email:</strong> ${escapeHtml(email)}</li>
-            <li><strong>Submitted At:</strong> ${escapeHtml(submittedAt)}</li>
-          </ul>
-          <p><strong>Your message:</strong></p>
-          <p>${escapeHtml(message).replace(/\n/g, "<br />")}</p>
-          <p>For urgent support, call us at ${escapeHtml(businessPhone)}.</p>
-          <p>Regards,<br />Cholo Jai Dure Tour &amp; Travels</p>
-        `,
+        html: emailWrapper(customerContent),
+        attachments: logoAttachment(),
       }),
     ]);
 
