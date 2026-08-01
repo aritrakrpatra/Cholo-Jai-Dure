@@ -9,14 +9,42 @@ import {
   ctaButton,
 } from "./emailTemplate";
 
+// Accept the same alternate env var names as app/api/contact/route.js —
+// some hosting setups (e.g. Vercel) end up with SMTP creds saved under a
+// different name than SMTP_USER/SMTP_PASS, which otherwise fails silently.
+function firstDefinedValue(values) {
+  for (const value of values) {
+    const normalized = String(value || "").trim();
+    if (normalized) return normalized;
+  }
+  return "";
+}
+
 function createTransporter() {
-  const user = (process.env.SMTP_USER || "").trim();
-  const pass = (process.env.SMTP_PASS || "").replace(/\s+/g, "");
-  const host = (process.env.SMTP_HOST || "").trim();
+  const user = firstDefinedValue([
+    process.env.SMTP_USER,
+    process.env.SMTP_USERNAME,
+    process.env.GMAIL_USER,
+    process.env.EMAIL_USER,
+    process.env.MAIL_USER,
+  ]);
+  const pass = firstDefinedValue([
+    process.env.SMTP_PASS,
+    process.env.SMTP_PASSWORD,
+    process.env.GMAIL_APP_PASSWORD,
+    process.env.EMAIL_PASS,
+    process.env.MAIL_PASS,
+  ]).replace(/\s+/g, "");
+  const host = firstDefinedValue([process.env.SMTP_HOST, process.env.EMAIL_HOST, process.env.MAIL_HOST]);
   const port = Number(process.env.SMTP_PORT || 0) || undefined;
   const secure = String(process.env.SMTP_SECURE || "").toLowerCase() === "true" || port === 465;
 
-  if (!user || !pass) throw new Error("SMTP credentials not configured.");
+  if (!user || !pass) {
+    const missing = [!user && "SMTP_USER", !pass && "SMTP_PASS"].filter(Boolean).join(", ");
+    throw new Error(
+      `Server email is not configured. Missing: ${missing}. Add values in Vercel Project Settings -> Environment Variables and redeploy.`
+    );
+  }
 
   return nodemailer.createTransport(
     host

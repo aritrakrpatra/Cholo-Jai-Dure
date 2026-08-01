@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { SignIn } from "@clerk/nextjs";
-import { Plane } from "lucide-react";
 import { useTheme } from "@/app/context/ThemeContext";
 
 export default function LoginPage() {
@@ -21,8 +21,8 @@ export default function LoginPage() {
       <div className={`sticky top-0 z-50 px-4 py-5 backdrop-blur-xl ${isLightTheme ? "bg-(--surface-strong)" : "bg-slate-950/40"}`}>
         <div className="mx-auto max-w-7xl flex items-center justify-between">
           <Link href="/" className={`flex items-center gap-3 ${isLightTheme ? "text-foreground" : "text-white"}`}>
-            <span className="flex h-10 w-10 items-center justify-center rounded-3xl bg-amber-400/15 text-amber-300 ring-1 ring-amber-300/20">
-              <Plane className="h-5 w-5" />
+            <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-3xl bg-white ring-1 ring-amber-300/20">
+              <Image src="/cjd%20logo.jpg" alt="Cholo Jai Dure logo" width={40} height={40} className="h-full w-full object-cover" />
             </span>
             <div>
               <p className="text-sm font-semibold">Cholo Jai Dure</p>

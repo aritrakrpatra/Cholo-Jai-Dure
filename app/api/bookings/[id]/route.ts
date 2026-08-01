@@ -93,18 +93,32 @@ export async function PATCH(request: Request, { params }: RouteContext) {
     console.error("[bookings PATCH] User history sync failed:", (e as Error).message);
   }
 
+  let emailError: string | null = null;
   if (shouldNotifyStatusChange) {
-    await Promise.allSettled([
-      sendCustomerStatusUpdateEmail(booking, previousStatus).catch((e) =>
-        console.error("[bookings PATCH] Customer status email failed:", e.message)
-      ),
-      sendAdminStatusUpdateEmail(booking, previousStatus).catch((e) =>
-        console.error("[bookings PATCH] Admin status email failed:", e.message)
-      ),
+    const [customerResult, adminResult] = await Promise.allSettled([
+      sendCustomerStatusUpdateEmail(booking, previousStatus),
+      sendAdminStatusUpdateEmail(booking, previousStatus),
     ]);
+
+    const customerReason = customerResult.status === "rejected" ? String(customerResult.reason?.message || customerResult.reason) : null;
+    const adminReason = adminResult.status === "rejected" ? String(adminResult.reason?.message || adminResult.reason) : null;
+
+    if (customerReason) console.error("[bookings PATCH] Customer status email failed:", customerReason);
+    if (adminReason) console.error("[bookings PATCH] Admin status email failed:", adminReason);
+
+    // Surface delivery failures (with the real reason) to the admin UI instead of
+    // failing silently — the status change itself always succeeds even if the
+    // notification emails don't.
+    if (customerReason && adminReason) {
+      emailError = `Status updated, but notification emails failed to send: ${customerReason}`;
+    } else if (customerReason) {
+      emailError = `Status updated, but the customer notification email failed to send: ${customerReason}`;
+    } else if (adminReason) {
+      emailError = `Status updated, but the admin notification email failed to send: ${adminReason}`;
+    }
   }
 
-  return NextResponse.json({ booking });
+  return NextResponse.json({ booking, emailError });
 }
 
 // ─── DELETE /api/bookings/:id — admin: permanently remove a booking ──────────

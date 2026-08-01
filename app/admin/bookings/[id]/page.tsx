@@ -15,8 +15,9 @@ import {
   type BookingStatus,
 } from "@/app/lib/bookingStatus";
 import type { Booking, BookingStatusHistoryEntry } from "@/app/types/booking";
+import Image from "next/image";
 import {
-  ArrowLeft, Plane, Phone, Mail, MapPin, Calendar, Users, Package,
+  ArrowLeft, Phone, Mail, MapPin, Calendar, Users, Package,
   FileText, Clock, CheckCircle, XCircle, DollarSign, MessageSquare,
   Trash2, Loader2, AlertCircle, User, Building2, Save,
 } from "lucide-react";
@@ -275,7 +276,7 @@ export default function BookingDetailPage() {
       if (!res.ok) throw new Error(data.message || "Update failed");
 
       await fetchBooking();
-      showToast(`Status updated to "${bookingStatusLabel(newStatus)}"`);
+      showToast(data.emailError || `Status updated to "${bookingStatusLabel(newStatus)}"`);
     } catch {
       showToast("Failed to update status. Please try again.");
     } finally {
@@ -437,8 +438,8 @@ export default function BookingDetailPage() {
             <span className="text-amber-300 font-mono text-sm font-semibold">{booking.bookingId}</span>
           </div>
           <Link href="/" className="flex items-center gap-2 text-white">
-            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-amber-400/15 text-amber-300">
-              <Plane className="h-3.5 w-3.5" />
+            <span className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-xl bg-white ring-1 ring-amber-300/20">
+              <Image src="/cjd%20logo.jpg" alt="Cholo Jai Dure logo" width={32} height={32} className="h-full w-full object-cover" />
             </span>
             <span className="hidden sm:inline text-sm font-semibold">Cholo Jai Dure</span>
           </Link>

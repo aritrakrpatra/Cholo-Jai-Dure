@@ -6,8 +6,9 @@ import Link from "next/link";
 import { useAuth } from "@/app/context/AuthContext";
 import type { Booking } from "@/app/types/booking";
 import { BOOKING_STATUS_CONFIG, type BookingStatus } from "@/app/lib/bookingStatus";
+import Image from "next/image";
 import {
-  Search, Filter, ChevronLeft, ChevronRight, Plane, LogOut,
+  Search, Filter, ChevronLeft, ChevronRight, LogOut,
   Package, Clock, CheckCircle, XCircle, AlertCircle, Users, Calendar, Phone, Mail,
   RefreshCw,
 } from "lucide-react";
@@ -133,8 +134,8 @@ export default function AdminBookingsPage() {
       <div className="sticky top-0 z-50 px-4 py-4 backdrop-blur-xl bg-slate-950/60 border-b border-white/10">
         <div className="mx-auto max-w-7xl flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2 text-white">
-            <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-amber-400/15 text-amber-300">
-              <Plane className="h-4 w-4" />
+            <span className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-2xl bg-white ring-1 ring-amber-300/20">
+              <Image src="/cjd%20logo.jpg" alt="Cholo Jai Dure logo" width={36} height={36} className="h-full w-full object-cover" />
             </span>
             <div>
               <p className="text-sm font-bold leading-none">Cholo Jai Dure</p>
