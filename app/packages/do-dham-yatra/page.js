@@ -21,7 +21,6 @@ const itinerary = [
     day: "Day 1",
     title: "Rishikesh",
     date: "09/10/2027",
-    hotel: "Hotel Ganga Valley Resort",
     points: [
       "Arrival and journey to Rishikesh",
       "Attend the famous Ganga Aarti on the banks of the Ganges",
@@ -32,7 +31,6 @@ const itinerary = [
     day: "Day 2",
     title: "Joshimath",
     date: "10/10/2027",
-    hotel: "Hotel Himalayas",
     points: [
       "Scenic drive through the Himalayas",
       "Visit Dev Prayag, Karn Prayag, Narasimha Temple",
@@ -43,7 +41,6 @@ const itinerary = [
     day: "Day 3",
     title: "Badrinath Dham & Mana Village",
     date: "11/10/2027",
-    hotel: "Hotel Badrinath Inn",
     points: [
       "Darshan at Badrinath Dham",
       "Explore Mana Village",
@@ -54,7 +51,6 @@ const itinerary = [
     day: "Day 4",
     title: "Guptkashi",
     date: "12/10/2026",
-    hotel: "Hotel Guptkashi Palace",
     points: [
       "Travel to Guptkashi",
       "Visit Rudra Prayag",
@@ -65,7 +61,6 @@ const itinerary = [
     day: "Day 5",
     title: "Kedarnath Dham",
     date: "13/10/2026",
-    hotel: "Hotel Kedarnath Retreat",
     points: [
       "Visit Dhari Devi Temple, Kedarnath Dham, Kaal Bhairav Temple",
       "Spiritual activities and darshan",
@@ -76,7 +71,6 @@ const itinerary = [
     day: "Day 6",
     title: "Guptkashi",
     date: "14/10/2026",
-    hotel: "Hotel Guptkashi Palace",
     points: [
       "Rest and relaxation day",
       "Explore local surroundings",
@@ -87,7 +81,6 @@ const itinerary = [
     day: "Day 7",
     title: "Haridwar",
     date: "15/10/2026",
-    hotel: "Hotel Ghat View Haridwar",
     points: [
       "Visit Har Ki Pauri",
       "Attend the world-famous Ganga Aarti",
@@ -99,7 +92,6 @@ const itinerary = [
     day: "Day 8",
     title: "Return Journey",
     date: "16/10/2026",
-    hotel: "No Stay",
     points: [
       "Departure for Delhi",
       "Drop at Railway Station",
@@ -163,9 +155,9 @@ export default function DoDhamYatraPage() {
           }}
         />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-24 lg:py-32">
-          <div className="grid gap-10 lg:grid-cols-[1.65fr_0.95fr] lg:items-end">
-            <div className="space-y-6">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-16 lg:py-20">
+          <div className="grid gap-6 lg:grid-cols-[1.65fr_0.95fr] lg:items-end">
+            <div className="space-y-4">
               <span className="inline-flex rounded-full border border-amber-300/30 bg-amber-300/10 px-4 py-2 text-sm uppercase tracking-[0.35em] text-amber-200">DO DHAM YATRA 7 NIGHTS & 8 DAYS</span>
               <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-5xl lg:text-7xl">Experience Do Dham Yatra with comfort and spiritual depth</h1>
               <p className="max-w-3xl text-base leading-7 text-white/80 sm:text-lg sm:leading-8 md:text-xl">A premium Himalayan pilgrimage from Rishikesh to Kedarnath and Badrinath with guided darshan, smooth travel, and carefully planned stays.</p>
@@ -173,7 +165,7 @@ export default function DoDhamYatraPage() {
                 <span className="rounded-full bg-amber-400/10 px-4 py-2 text-base font-semibold text-amber-200 ring-1 ring-amber-300/20 sm:px-5 sm:py-3 sm:text-lg">₹23,000 per person</span>
                 <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/80 sm:px-5 sm:py-3 sm:text-sm">7 Nights · 8 Days · Pilgrimage Special</span>
               </div>
-              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+              <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-3">
                 <a href="/contact" className="flex items-center justify-center rounded-full bg-amber-400 px-6 py-3.5 text-sm font-semibold text-slate-950 transition hover:bg-amber-300 sm:px-7 sm:py-4">Book Now</a>
                 <a href="https://wa.me/917478167607" target="_blank" rel="noreferrer" className="flex items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-400/10 px-6 py-3.5 text-sm font-semibold text-emerald-200 transition hover:bg-emerald-400/20 sm:px-7 sm:py-4">WhatsApp Inquiry</a>
                 <a href="tel:917478167607" className="flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10 sm:px-7 sm:py-4">Call Now</a>
@@ -181,8 +173,8 @@ export default function DoDhamYatraPage() {
             </div>
 
             <aside className="rounded-4xl border border-white/10 bg-slate-900/85 p-4 shadow-2xl backdrop-blur-xl sm:p-8">
-              <div className="space-y-6">
-                <div className="rounded-4xl border border-amber-300/10 bg-slate-950/90 p-6">
+              <div className="space-y-4">
+                <div className="rounded-4xl border border-amber-300/10 bg-slate-950/90 p-5">
                   <p className="text-sm uppercase tracking-[0.35em] text-amber-300">Journey Date Selection</p>
                   <div className="mt-5 space-y-3">
                     {journeyDates.map((option) => (
@@ -205,7 +197,7 @@ export default function DoDhamYatraPage() {
                     <p className="flex items-center gap-3 text-sm"><Plane className="h-4 w-4 text-amber-300" /> Guided travel support</p>
                   </div>
                 </div>
-                <div className="rounded-4xl border border-white/10 bg-slate-950/90 p-6">
+                <div className="rounded-4xl border border-white/10 bg-slate-950/90 p-5">
                   <p className="text-sm uppercase tracking-[0.35em] text-amber-300">Travel Concierge</p>
                   <p className="mt-4 text-2xl font-semibold text-white">Sacred journey planning with full support.</p>
                 </div>
@@ -216,44 +208,37 @@ export default function DoDhamYatraPage() {
       </section>
 
 
-      <section className="py-16 bg-slate-950/95 sm:py-24">
+      <section className="py-10 bg-slate-950/95 sm:py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="mb-10 text-center sm:mb-12">
+          <div className="mb-6 text-center sm:mb-8">
             <p className="text-sm uppercase tracking-[0.5em] text-amber-300">Itinerary</p>
-            <h2 className="mt-4 text-2xl font-bold sm:text-4xl">Detailed Timeline</h2>
+            <h2 className="mt-3 text-2xl font-bold sm:text-4xl">Detailed Timeline</h2>
           </div>
-          <div className="space-y-8">
+          <div className="space-y-4 sm:space-y-5">
             {dynamicItinerary.map((item) => (
-              <div key={item.day} className="grid gap-4 rounded-4xl border border-white/10 bg-slate-900/90 p-4 sm:gap-6 sm:p-8 lg:grid-cols-[140px_1fr_200px] lg:items-start">
-                <div className="rounded-3xl bg-slate-950/80 p-4 text-center">
-                  <p className="text-xs uppercase tracking-[0.35em] text-amber-300">{item.day}</p>
-                  <p className="mt-2 text-lg font-semibold text-white">{item.date}</p>
+              <div key={item.day} className="grid gap-3 rounded-3xl border border-white/10 bg-slate-900/90 p-4 sm:gap-4 sm:p-6 lg:grid-cols-[120px_1fr] lg:items-start">
+                <div className="rounded-2xl bg-slate-950/80 p-3 text-center">
+                  <p className="text-[11px] uppercase tracking-[0.35em] text-amber-300">{item.day}</p>
+                  <p className="mt-1 text-sm font-semibold text-white">{item.date}</p>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                  <ul className="mt-3 space-y-2 text-white/70">
+                  <h3 className="text-lg font-bold text-white">{item.title}</h3>
+                  <ul className="mt-2 space-y-1.5 text-white/70">
                     {item.points.map((point) => (
-                      <li key={point} className="flex gap-2 text-sm">
-                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-300 shrink-0" />
+                      <li key={point} className="flex gap-2 text-sm leading-6">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-amber-300 shrink-0" />
                         <span>{point}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                {item.hotel && (
-                  <div className="flex flex-col items-center rounded-3xl bg-slate-950/80 p-4 text-center h-fit">
-                    <Hotel className="h-6 w-6 text-amber-300 mb-2" />
-                    <p className="text-xs uppercase tracking-[0.35em] text-amber-300 mb-1">Hotel</p>
-                    <p className="text-sm font-semibold text-white">{item.hotel}</p>
-                  </div>
-                )}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 sm:py-24">
+      <section className="py-10 sm:py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="rounded-4xl border border-white/10 bg-slate-900/90 p-5 shadow-2xl sm:p-8 lg:p-10">
             <div className="grid gap-6 sm:grid-cols-2 sm:gap-10">
@@ -292,9 +277,9 @@ export default function DoDhamYatraPage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24">
+      <section className="py-10 sm:py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="rounded-4xl border border-white/10 bg-slate-900/90 p-5 shadow-2xl sm:p-8 lg:p-10">
+          <div className="rounded-3xl border border-white/10 bg-slate-900/90 p-5 shadow-2xl sm:p-8 lg:p-10">
             <h2 className="text-2xl font-bold text-white sm:text-3xl">Gallery</h2>
             <div className="mt-6 grid gap-3 grid-cols-2 sm:mt-8 sm:gap-4 lg:grid-cols-4">
               {destinations.slice(0, 4).map((destination, index) => (
@@ -313,10 +298,10 @@ export default function DoDhamYatraPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-slate-900/80 sm:py-24">
+      <section className="py-10 bg-slate-900/80 sm:py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mx-auto max-w-2xl">
-            <div className="rounded-4xl border border-white/10 bg-slate-950/90 p-5 shadow-2xl sm:p-8 lg:p-10">
+            <div className="rounded-3xl border border-white/10 bg-slate-950/90 p-5 shadow-2xl sm:p-8 lg:p-10">
               <h2 className="text-2xl font-bold text-white sm:text-3xl">Important Information</h2>
               <div className="mt-6 space-y-4 text-white/80">
                 <p><span className="font-semibold text-white">Last Date of Booking:</span> 30 June 2026</p>
