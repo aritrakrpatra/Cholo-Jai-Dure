@@ -321,8 +321,8 @@ export default function GujratExplorePage() {
               </div>
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
                 <a href="#booking" className="flex items-center justify-center rounded-full bg-amber-400 px-6 py-3.5 text-sm font-semibold text-slate-950 transition hover:bg-amber-300 sm:px-7 sm:py-4">Book Now</a>
-                <a href="https://wa.me/917501307766" target="_blank" rel="noreferrer" className="flex items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-400/10 px-6 py-3.5 text-sm font-semibold text-emerald-200 transition hover:bg-emerald-400/20 sm:px-7 sm:py-4">WhatsApp Inquiry</a>
-                <a href="tel:7501307766" className="flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10 sm:px-7 sm:py-4">Call Now</a>
+                <a href="https://wa.me/917478167607" target="_blank" rel="noreferrer" className="flex items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-400/10 px-6 py-3.5 text-sm font-semibold text-emerald-200 transition hover:bg-emerald-400/20 sm:px-7 sm:py-4">WhatsApp Inquiry</a>
+                <a href="tel:917478167607" className="flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10 sm:px-7 sm:py-4">Call Now</a>
               </div>
             </motion.div>
 
@@ -531,8 +531,8 @@ export default function GujratExplorePage() {
                 <p className="mt-3 text-4xl font-semibold text-white">₹32,000 per person</p>
                 <p className="mt-2 text-sm text-white/70">Booking Amount ₹5,000</p>
               </div>
-              <a href="tel:7501307766" className="block rounded-full bg-white px-6 py-4 text-center text-sm font-semibold text-slate-950 transition hover:bg-amber-300">Call Now</a>
-              <a href="https://wa.me/917501307766" target="_blank" rel="noreferrer" className="block rounded-full bg-emerald-400 px-6 py-4 text-center text-sm font-semibold text-slate-950 transition hover:bg-emerald-300">WhatsApp Inquiry</a>
+              <a href="tel:917478167607" className="block rounded-full bg-white px-6 py-4 text-center text-sm font-semibold text-slate-950 transition hover:bg-amber-300">Call Now</a>
+              <a href="https://wa.me/917478167607" target="_blank" rel="noreferrer" className="block rounded-full bg-emerald-400 px-6 py-4 text-center text-sm font-semibold text-slate-950 transition hover:bg-emerald-300">WhatsApp Inquiry</a>
               <Link href="#booking" className="block rounded-full border border-amber-300 px-6 py-4 text-center text-sm font-semibold text-amber-200 transition hover:bg-amber-300/10">Book Now</Link>
             </div>
           </div>

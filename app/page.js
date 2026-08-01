@@ -381,8 +381,7 @@ export default function CholoJaiDureTours() {
               <h3 className="text-lg font-bold text-white">Contact Us</h3>
               <div className="mt-4 space-y-2.5 text-sm text-white/70">
                 <p>Zilla Parishad Market Complex, Midnapur</p>
-                <p>Phone: 7501307766</p>
-                <p>Phone: 7478167607</p>
+                <p>Phone: +91 7478167607</p>
               </div>
             </div>
           </div>

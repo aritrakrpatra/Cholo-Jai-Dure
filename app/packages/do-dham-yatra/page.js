@@ -191,7 +191,7 @@ export default function DoDhamYatraPage() {
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
                 <a href="#booking" className="flex items-center justify-center rounded-full bg-amber-400 px-6 py-3.5 text-sm font-semibold text-slate-950 transition hover:bg-amber-300 sm:px-7 sm:py-4">Book Now</a>
                 <a href="https://wa.me/917478167607" target="_blank" rel="noreferrer" className="flex items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-400/10 px-6 py-3.5 text-sm font-semibold text-emerald-200 transition hover:bg-emerald-400/20 sm:px-7 sm:py-4">WhatsApp Inquiry</a>
-                <a href="tel:7478167607" className="flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10 sm:px-7 sm:py-4">Call Now</a>
+                <a href="tel:917478167607" className="flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10 sm:px-7 sm:py-4">Call Now</a>
               </div>
             </div>
 
@@ -363,11 +363,10 @@ export default function DoDhamYatraPage() {
             <div className="rounded-4xl border border-white/10 bg-slate-900/90 p-5 shadow-2xl sm:p-8 lg:p-10">
               <div className="space-y-4">
                 <p className="text-sm uppercase tracking-[0.35em] text-amber-300">Contact</p>
-                <p className="text-xl font-semibold">7501307766</p>
-                <p className="text-xl font-semibold">7478167607</p>
+                <p className="text-xl font-semibold">+91 7478167607</p>
                 <div className="mt-6 grid gap-4">
-                  <a href="tel:7501307766" className="block rounded-full bg-amber-400 px-6 py-4 text-center font-semibold text-slate-950 transition hover:bg-amber-300">Call Now</a>
-                  <a href="https://wa.me/917501307766" target="_blank" rel="noreferrer" className="block rounded-full border border-emerald-400/40 bg-emerald-400/10 px-6 py-4 text-center text-sm text-emerald-200 transition hover:bg-emerald-400/20">WhatsApp Inquiry</a>
+                  <a href="tel:917478167607" className="block rounded-full bg-amber-400 px-6 py-4 text-center font-semibold text-slate-950 transition hover:bg-amber-300">Call Now</a>
+                  <a href="https://wa.me/917478167607" target="_blank" rel="noreferrer" className="block rounded-full border border-emerald-400/40 bg-emerald-400/10 px-6 py-4 text-center text-sm text-emerald-200 transition hover:bg-emerald-400/20">WhatsApp Inquiry</a>
                 </div>
               </div>
             </div>

@@ -21,7 +21,7 @@ const navItems = [
   { label: "About Us", href: "/about-us" },
 ];
 
-const desktopPrimaryHrefs = new Set(["/#home", "/tours?category=international", "/tours?category=domestic", "/bike-ride", "/trekking", "/about-us", "/merchandise"]);
+const desktopPrimaryHrefs = new Set(["/#home", "/tours?category=international", "/tours?category=domestic", "/bike-ride", "/trekking", "/rules-regulations", "/contact"]);
 const desktopPrimaryNavItems = navItems.filter((item) => desktopPrimaryHrefs.has(item.href));
 const moreNavItems = navItems.filter((item) => !desktopPrimaryHrefs.has(item.href));
 

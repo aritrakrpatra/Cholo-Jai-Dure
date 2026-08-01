@@ -115,7 +115,7 @@ export async function POST(request) {
     );
 
     const submittedAt = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
-    const businessPhone = process.env.CONTACT_BUSINESS_PHONE || "7501307766 / 7478167607";
+    const businessPhone = process.env.CONTACT_BUSINESS_PHONE || "917478167607";
 
     const adminRows = [
       ["Name", name],

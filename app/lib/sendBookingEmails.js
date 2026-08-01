@@ -117,7 +117,7 @@ function buildCustomerEmailHtml(booking) {
     <div style="background:#0f172a;border-radius:12px;padding:20px;margin-bottom:24px;">
       <p style="color:#f1f5f9;font-size:13px;font-weight:700;margin:0 0 12px;">📞 Need Help? Contact Us</p>
       <p style="color:#94a3b8;font-size:13px;margin:0 0 6px;">
-        📱 Phone: <span style="color:#f1f5f9;">${esc(process.env.CONTACT_BUSINESS_PHONE || "7501307766 / 7478167607")}</span>
+        📱 Phone: <span style="color:#f1f5f9;">${esc(process.env.CONTACT_BUSINESS_PHONE || "917478167607")}</span>
       </p>
       <p style="color:#94a3b8;font-size:13px;margin:0;">
         ✉️ Email: <span style="color:#f1f5f9;">${esc(process.env.CONTACT_RECEIVER_EMAIL || "cholojaiduretourandtravels@gmail.com")}</span>
@@ -183,7 +183,7 @@ function buildAdminEmailHtml(booking) {
 
 function buildCustomerStatusUpdateEmailHtml(booking, previousStatus) {
   const theme = statusTheme(booking.bookingStatus);
-  const phone = process.env.CONTACT_BUSINESS_PHONE || "7501307766 / 7478167607";
+  const phone = process.env.CONTACT_BUSINESS_PHONE || "917478167607";
 
   const content = `
     <div style="text-align:center;margin-bottom:28px;">
@@ -274,7 +274,7 @@ export async function sendCustomerBookingEmail(booking) {
       "",
       "This is a booking REQUEST only. Our team will contact you shortly to confirm.",
       "",
-      `Contact us: ${process.env.CONTACT_BUSINESS_PHONE || "7501307766 / 7478167607"}`,
+      `Contact us: ${process.env.CONTACT_BUSINESS_PHONE || "917478167607"}`,
       "",
       "Regards,",
       "Cholo Jai Dure Tour & Travels",
