@@ -16,7 +16,7 @@ import {
 } from "@/app/lib/bookingStatus";
 import type { Booking, BookingStatusHistoryEntry } from "@/app/types/booking";
 import Image from "next/image";
-import Navbar from "@/app/components/Navbar";
+import ThemeToggle from "@/app/components/ThemeToggle";
 import {
   ArrowLeft, Phone, Mail, MapPin, Calendar, Users, Package,
   FileText, Clock, CheckCircle, XCircle, DollarSign, MessageSquare,
@@ -427,7 +427,6 @@ export default function BookingDetailPage() {
         </div>
       )}
 
-      <Navbar />
       {/* Nav */}
       <div className="sticky top-0 z-40 px-4 py-4 backdrop-blur-xl bg-slate-950/60 border-b border-white/10">
         <div className="mx-auto max-w-5xl flex items-center justify-between">
@@ -440,6 +439,7 @@ export default function BookingDetailPage() {
             <span className="text-amber-300 font-mono text-sm font-semibold">{booking.bookingId}</span>
           </div>
           <div className="flex items-center gap-3">
+            <ThemeToggle align="right" />
             <Link href="/" className="flex items-center gap-2 text-white">
               <span className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-xl bg-white ring-1 ring-amber-300/20">
                 <Image src="/cjd%20logo.jpg" alt="Cholo Jai Dure logo" width={32} height={32} className="h-full w-full object-cover" />
