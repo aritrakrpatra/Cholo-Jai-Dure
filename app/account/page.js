@@ -21,6 +21,8 @@ const STATUS_STYLES = {
   cancelled: { icon: XCircle,     label: "Cancelled", dark: "text-red-400 bg-red-400/10 border-red-400/20", light: "text-red-700 bg-red-500/10 border-red-500/25" },
 };
 
+const PHONE_REGEX = /^[+]?[0-9\s\-()]{7,20}$/;
+
 function BookingCard({ booking, isLightTheme }) {
   const status = STATUS_STYLES[booking.status] ?? STATUS_STYLES.pending;
   const StatusIcon = status.icon;
@@ -73,11 +75,11 @@ export default function AccountPage() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [bookings, setBookings] = useState([]);
   const [bookingsLoading, setBookingsLoading] = useState(false);
-  const [isEditingDob, setIsEditingDob] = useState(false);
-  const [dobValue, setDobValue] = useState("");
-  const [dobSaving, setDobSaving] = useState(false);
-  const [dobError, setDobError] = useState("");
-  const [dobSuccess, setDobSuccess] = useState("");
+  const [editingField, setEditingField] = useState(null);
+  const [profileValues, setProfileValues] = useState({ dob: "", gender: "", phone: "" });
+  const [profileSaving, setProfileSaving] = useState(false);
+  const [profileError, setProfileError] = useState("");
+  const [profileSuccess, setProfileSuccess] = useState("");
 
   // Redirect to login if not authenticated
   useEffect(() => {
@@ -87,15 +89,15 @@ export default function AccountPage() {
   }, [loading, user, router]);
 
   useEffect(() => {
-    if (user?.dateOfBirth) {
-      setDobValue(user.dateOfBirth);
-    } else {
-      setDobValue("");
-    }
-    setDobError("");
-    setDobSuccess("");
-    setIsEditingDob(false);
-  }, [user?.dateOfBirth]);
+    setProfileValues({
+      dob: user?.dateOfBirth || "",
+      gender: user?.gender || "",
+      phone: user?.phoneNumber || "",
+    });
+    setProfileError("");
+    setProfileSuccess("");
+    setEditingField(null);
+  }, [user?.dateOfBirth, user?.gender, user?.phoneNumber]);
 
   useEffect(() => {
     if (loading || !user) {
@@ -177,23 +179,58 @@ export default function AccountPage() {
   maxDobDate.setFullYear(maxDobDate.getFullYear() - 5);
   const maxDobDateStr = maxDobDate.toISOString().split("T")[0];
 
-  const handleDobSave = async () => {
-    if (!dobValue) {
-      setDobError("Please select your date of birth.");
+  const handleStartEdit = (field) => {
+    setEditingField(field);
+    setProfileError("");
+    setProfileSuccess("");
+  };
+
+  const handleProfileSave = async () => {
+    if (editingField === "dob" && !profileValues.dob) {
+      setProfileError("Please select your date of birth.");
+      return;
+    }
+
+    if (editingField === "gender" && !profileValues.gender) {
+      setProfileError("Please select your gender.");
+      return;
+    }
+
+    if (editingField === "phone" && !profileValues.phone) {
+      setProfileError("Please enter your phone number.");
+      return;
+    }
+
+    if (editingField === "phone" && !PHONE_REGEX.test(profileValues.phone)) {
+      setProfileError("Please enter a valid phone number.");
       return;
     }
 
     try {
-      setDobSaving(true);
-      setDobError("");
-      setDobSuccess("");
-      await updateProfile({ dateOfBirth: dobValue });
-      setDobSuccess("Date of birth updated successfully.");
-      setIsEditingDob(false);
+      setProfileSaving(true);
+      setProfileError("");
+      setProfileSuccess("");
+
+      const payload =
+        editingField === "dob"
+          ? { dateOfBirth: profileValues.dob }
+          : editingField === "gender"
+          ? { gender: profileValues.gender }
+          : { phoneNumber: profileValues.phone };
+
+      await updateProfile(payload);
+      setProfileSuccess(
+        editingField === "dob"
+          ? "Date of birth updated successfully."
+          : editingField === "gender"
+          ? "Gender updated successfully."
+          : "Phone number updated successfully."
+      );
+      setEditingField(null);
     } catch (err) {
-      setDobError(err.message || "Failed to update date of birth.");
+      setProfileError(err.message || "Failed to update profile.");
     } finally {
-      setDobSaving(false);
+      setProfileSaving(false);
     }
   };
 
@@ -236,65 +273,58 @@ export default function AccountPage() {
               <InfoRow label="Full Name" value={user.name || "Traveler"} isLightTheme={isLightTheme} />
 
               <div className="space-y-2">
-                <InfoRow
-                  label="Date of Birth"
-                  icon={Calendar}
-                  isLightTheme={isLightTheme}
-                  value={
-                    user.dateOfBirth
-                      ? new Date(user.dateOfBirth + "T00:00:00").toLocaleDateString("en-IN", { year: "numeric", month: "long", day: "numeric" })
-                      : "Not added yet"
-                  }
-                />
+                <div className={`rounded-lg border p-4 ${isLightTheme ? "border-(--border) bg-(--surface)" : "border-white/10 bg-white/5"}`}>
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className={`mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide ${isLightTheme ? "text-(--muted)" : "text-white/60"}`}>
+                        <Calendar className="h-3 w-3" />
+                        Date of Birth
+                      </p>
+                      <p className={`text-lg font-semibold ${isLightTheme ? "text-foreground" : "text-white"}`}>
+                        {user.dateOfBirth
+                          ? new Date(user.dateOfBirth + "T00:00:00").toLocaleDateString("en-IN", { year: "numeric", month: "long", day: "numeric" })
+                          : "Not added yet"}
+                      </p>
+                    </div>
 
-                {!isEditingDob ? (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setDobValue(user.dateOfBirth || "");
-                      setDobError("");
-                      setDobSuccess("");
-                      setIsEditingDob(true);
-                    }}
-                    className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition ${isLightTheme ? "border-(--border) bg-(--surface) text-foreground hover:bg-(--surface-strong)" : "border-white/10 bg-white/5 text-white/80 hover:bg-white/10"}`}
-                  >
-                    <Pencil className="h-4 w-4" />
-                    {user.dateOfBirth ? "Change Date of Birth" : "Add Date of Birth"}
-                  </button>
-                ) : (
+                    <button
+                      type="button"
+                      onClick={() => handleStartEdit("dob")}
+                      className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition ${isLightTheme ? "border-(--border) bg-(--surface) text-foreground hover:bg-(--surface-strong)" : "border-white/10 bg-white/5 text-white/80 hover:bg-white/10"}`}
+                    >
+                      <Pencil className="h-4 w-4" />
+                      {user.dateOfBirth ? "Change" : "Add"}
+                    </button>
+                  </div>
+                </div>
+
+                {editingField === "dob" ? (
                   <div className={`rounded-lg border p-4 ${isLightTheme ? "border-(--border) bg-(--surface)" : "border-white/10 bg-white/5"}`}>
                     <label className={`mb-2 block text-xs font-semibold uppercase tracking-wide ${isLightTheme ? "text-(--muted)" : "text-white/60"}`}>
                       Select Date of Birth
                     </label>
                     <input
                       type="date"
-                      value={dobValue}
+                      value={profileValues.dob}
                       max={maxDobDateStr}
-                      onChange={(e) => {
-                        setDobValue(e.target.value);
-                        setDobError("");
-                        setDobSuccess("");
-                      }}
+                      onChange={(e) => setProfileValues((prev) => ({ ...prev, dob: e.target.value }))}
                       className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none ${isLightTheme ? "border-(--border) bg-background text-foreground" : "border-white/10 bg-slate-950/60 text-white"}`}
                     />
-                    {dobError && <p className="mt-2 text-sm text-red-500">{dobError}</p>}
-                    {dobSuccess && <p className="mt-2 text-sm text-emerald-500">{dobSuccess}</p>}
                     <div className="mt-3 flex flex-wrap gap-2">
                       <button
                         type="button"
-                        onClick={handleDobSave}
-                        disabled={dobSaving}
+                        onClick={handleProfileSave}
+                        disabled={profileSaving}
                         className="rounded-lg bg-amber-400 px-3 py-2 text-sm font-semibold text-slate-900 transition hover:bg-amber-300 disabled:opacity-60"
                       >
-                        {dobSaving ? "Saving..." : "Save"}
+                        {profileSaving ? "Saving..." : "Save"}
                       </button>
                       <button
                         type="button"
                         onClick={() => {
-                          setDobValue(user.dateOfBirth || "");
-                          setDobError("");
-                          setDobSuccess("");
-                          setIsEditingDob(false);
+                          setProfileError("");
+                          setProfileSuccess("");
+                          setEditingField(null);
                         }}
                         className={`rounded-lg border px-3 py-2 text-sm font-medium ${isLightTheme ? "border-(--border) text-foreground" : "border-white/10 text-white/80"}`}
                       >
@@ -302,16 +332,137 @@ export default function AccountPage() {
                       </button>
                     </div>
                   </div>
-                )}
+                ) : null}
               </div>
 
-              {user.gender && (
-                <InfoRow label="Gender" value={user.gender} isLightTheme={isLightTheme} capitalize />
-              )}
+              <div className="space-y-2">
+                <div className={`rounded-lg border p-4 ${isLightTheme ? "border-(--border) bg-(--surface)" : "border-white/10 bg-white/5"}`}>
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className={`mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide ${isLightTheme ? "text-(--muted)" : "text-white/60"}`}>
+                        <User className="h-3 w-3" />
+                        Gender
+                      </p>
+                      <p className={`text-lg font-semibold capitalize ${isLightTheme ? "text-foreground" : "text-white"}`}>
+                        {user.gender ? user.gender.replace(/_/g, " ") : "Not added yet"}
+                      </p>
+                    </div>
 
-              {user.phoneNumber && (
-                <InfoRow label="Phone Number" icon={Phone} value={user.phoneNumber} isLightTheme={isLightTheme} />
-              )}
+                    <button
+                      type="button"
+                      onClick={() => handleStartEdit("gender")}
+                      className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition ${isLightTheme ? "border-(--border) bg-(--surface) text-foreground hover:bg-(--surface-strong)" : "border-white/10 bg-white/5 text-white/80 hover:bg-white/10"}`}
+                    >
+                      <Pencil className="h-4 w-4" />
+                      {user.gender ? "Change" : "Add"}
+                    </button>
+                  </div>
+                </div>
+
+                {editingField === "gender" ? (
+                  <div className={`rounded-lg border p-4 ${isLightTheme ? "border-(--border) bg-(--surface)" : "border-white/10 bg-white/5"}`}>
+                    <label className={`mb-2 block text-xs font-semibold uppercase tracking-wide ${isLightTheme ? "text-(--muted)" : "text-white/60"}`}>
+                      Select Gender
+                    </label>
+                    <select
+                      value={profileValues.gender}
+                      onChange={(e) => setProfileValues((prev) => ({ ...prev, gender: e.target.value }))}
+                      className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none ${isLightTheme ? "border-(--border) bg-background text-foreground" : "border-white/10 bg-slate-950/60 text-white"}`}
+                    >
+                      <option value="">Select gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                      <option value="prefer_not_to_say">Prefer not to say</option>
+                    </select>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        onClick={handleProfileSave}
+                        disabled={profileSaving}
+                        className="rounded-lg bg-amber-400 px-3 py-2 text-sm font-semibold text-slate-900 transition hover:bg-amber-300 disabled:opacity-60"
+                      >
+                        {profileSaving ? "Saving..." : "Save"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setProfileError("");
+                          setProfileSuccess("");
+                          setEditingField(null);
+                        }}
+                        className={`rounded-lg border px-3 py-2 text-sm font-medium ${isLightTheme ? "border-(--border) text-foreground" : "border-white/10 text-white/80"}`}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="space-y-2">
+                <div className={`rounded-lg border p-4 ${isLightTheme ? "border-(--border) bg-(--surface)" : "border-white/10 bg-white/5"}`}>
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className={`mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide ${isLightTheme ? "text-(--muted)" : "text-white/60"}`}>
+                        <Phone className="h-3 w-3" />
+                        Phone Number
+                      </p>
+                      <p className={`text-lg font-semibold ${isLightTheme ? "text-foreground" : "text-white"}`}>
+                        {user.phoneNumber || "Not added yet"}
+                      </p>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => handleStartEdit("phone")}
+                      className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition ${isLightTheme ? "border-(--border) bg-(--surface) text-foreground hover:bg-(--surface-strong)" : "border-white/10 bg-white/5 text-white/80 hover:bg-white/10"}`}
+                    >
+                      <Pencil className="h-4 w-4" />
+                      {user.phoneNumber ? "Change" : "Add"}
+                    </button>
+                  </div>
+                </div>
+
+                {editingField === "phone" ? (
+                  <div className={`rounded-lg border p-4 ${isLightTheme ? "border-(--border) bg-(--surface)" : "border-white/10 bg-white/5"}`}>
+                    <label className={`mb-2 block text-xs font-semibold uppercase tracking-wide ${isLightTheme ? "text-(--muted)" : "text-white/60"}`}>
+                      Enter Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      value={profileValues.phone}
+                      placeholder="e.g. +91 9876543210"
+                      onChange={(e) => setProfileValues((prev) => ({ ...prev, phone: e.target.value }))}
+                      className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none ${isLightTheme ? "border-(--border) bg-background text-foreground" : "border-white/10 bg-slate-950/60 text-white"}`}
+                    />
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        onClick={handleProfileSave}
+                        disabled={profileSaving}
+                        className="rounded-lg bg-amber-400 px-3 py-2 text-sm font-semibold text-slate-900 transition hover:bg-amber-300 disabled:opacity-60"
+                      >
+                        {profileSaving ? "Saving..." : "Save"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setProfileError("");
+                          setProfileSuccess("");
+                          setEditingField(null);
+                        }}
+                        className={`rounded-lg border px-3 py-2 text-sm font-medium ${isLightTheme ? "border-(--border) text-foreground" : "border-white/10 text-white/80"}`}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+
+              {profileError && <p className="text-sm text-red-500">{profileError}</p>}
+              {profileSuccess && <p className="text-sm text-emerald-500">{profileSuccess}</p>}
 
               {user.email && (
                 <InfoRow label="Email" icon={Mail} value={user.email} isLightTheme={isLightTheme} breakAll />
