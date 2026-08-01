@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { LayoutDashboard, LogOut, MonitorSmartphone, MoonStar, SunMedium, User } from "lucide-react";
 import { useAuth } from "@/app/context/AuthContext";
 import { useTheme } from "@/app/context/ThemeContext";
@@ -289,7 +289,7 @@ function MoreMenuButton({ pathname, currentHash, isLightTheme, mobile = false, c
   );
 }
 
-export default function Navbar() {
+function NavbarContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const category = searchParams.get("category");
@@ -665,6 +665,14 @@ export default function Navbar() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Navbar() {
+  return (
+    <Suspense fallback={null}>
+      <NavbarContent />
+    </Suspense>
   );
 }
 
