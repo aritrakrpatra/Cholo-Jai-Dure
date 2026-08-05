@@ -11,7 +11,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_REGEX = /^[0-9+\-()\s]{7,20}$/;
+const PHONE_REGEX = /^\d{10}$/;
 
 // ─── GET /api/bookings — admin: list all bookings with filter + pagination ───
 
@@ -79,7 +79,7 @@ export async function POST(request) {
     // Sanitise & validate
     const customerName = (body.customerName || "").trim();
     const email = authenticatedEmail;
-    const phone = (body.phone || "").trim();
+    const phone = String(body.phone || "").replace(/\D/g, "");
     const packageId = (body.packageId || "").trim();
     const packageName = (body.packageName || "").trim();
     const bookingMode = ((body.bookingMode || "group").toString().trim().toLowerCase() || "group");
@@ -89,7 +89,7 @@ export async function POST(request) {
     const isGroupBooking = bookingMode === "group";
 
     if (!customerName) return NextResponse.json({ message: "Full name is required." }, { status: 400 });
-    if (!phone || !PHONE_REGEX.test(phone)) return NextResponse.json({ message: "A valid phone number is required." }, { status: 400 });
+    if (!PHONE_REGEX.test(phone)) return NextResponse.json({ message: "A valid 10-digit phone number is required." }, { status: 400 });
     if (!packageId || !packageName) return NextResponse.json({ message: "Package information is missing." }, { status: 400 });
     if (!travelDate) return NextResponse.json({ message: "Travel date is required." }, { status: 400 });
     if (!adults || adults < 1) return NextResponse.json({ message: "At least 1 adult traveler is required." }, { status: 400 });

@@ -14,7 +14,6 @@ function SuccessContent() {
   const batch = params.get("batch") || "";
   const travelers = params.get("travelers") || "";
   const customerName = params.get("customerName") || "";
-  const phone = params.get("phone") || "";
   const [copied, setCopied] = useState(false);
 
   const fmtDate = (d) => {
@@ -45,7 +44,7 @@ function SuccessContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-slate-950">
       <Navbar />
       <div className="flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-lg space-y-6">

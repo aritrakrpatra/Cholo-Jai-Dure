@@ -94,7 +94,7 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
     const errs = {};
     if (!submissionForm.customerName.trim()) errs.customerName = "Full name is required.";
     if (!submissionForm.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(submissionForm.email)) errs.email = "Valid email is required.";
-    if (!submissionForm.phone.trim() || !/^[0-9+\-()\s]{7,20}$/.test(submissionForm.phone)) errs.phone = "Valid phone number is required.";
+    if (!/^\d{10}$/.test((submissionForm.phone || "").replace(/\D/g, ""))) errs.phone = "Enter a valid 10-digit phone number.";
     if (!submissionForm.travelDate) errs.travelDate = "Travel date is required.";
     if (!submissionForm.adults || parseInt(submissionForm.adults, 10) < 1) errs.adults = "At least 1 adult is required.";
     if (!submissionForm.acceptTerms) errs.acceptTerms = "Please accept the rules and regulations to continue.";
@@ -114,7 +114,7 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
       ...form,
       customerName: form.customerName || clerkProfile.customerName,
       email: form.email || clerkProfile.email,
-      phone: form.phone || clerkProfile.phone,
+      phone: (form.phone || "").replace(/\D/g, ""),
     };
 
     const errs = validate(normalizedForm);
@@ -142,7 +142,7 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
       const { booking } = data;
       onClose();
       router.push(
-        `/booking/success?bookingId=${encodeURIComponent(booking.bookingId)}&packageName=${encodeURIComponent(booking.packageName)}&travelDate=${encodeURIComponent(booking.travelDate || "")}&travelers=${booking.totalTravelers}&customerName=${encodeURIComponent(booking.customerName)}&phone=${encodeURIComponent(booking.phone)}`
+        `/booking/success?bookingId=${encodeURIComponent(booking.bookingId)}&packageName=${encodeURIComponent(booking.packageName)}&travelDate=${encodeURIComponent(booking.travelDate || "")}&travelers=${booking.totalTravelers}&customerName=${encodeURIComponent(booking.customerName)}`
       );
     } catch {
       setApiError("Network error. Please check your connection and try again.");
@@ -155,7 +155,7 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
 
   return (
     <div
-      className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center bg-black/75 backdrop-blur-sm overflow-hidden"
+      className="fixed inset-0 z-9999 flex items-end sm:items-center justify-center bg-black/75 backdrop-blur-sm overflow-hidden"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div className="relative w-full sm:max-w-2xl max-h-[95vh] sm:max-h-[90vh] rounded-t-3xl sm:rounded-3xl border border-white/10 bg-slate-900 shadow-2xl overflow-visible">
@@ -225,9 +225,9 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
                   <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
                   <input
                     type="tel"
-                    value={form.phone || clerkProfile.phone}
+                    value={form.phone}
                     onChange={(e) => set("phone", e.target.value)}
-                    placeholder="+91 XXXXX XXXXX"
+                    placeholder="10-digit mobile number"
                     className={`${INPUT_BASE} pl-9 ${errors.phone ? "border-red-400" : ""}`}
                     maxLength={20}
                   />
