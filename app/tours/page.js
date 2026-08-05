@@ -192,10 +192,6 @@ function ToursPageContent() {
                         <p className="text-[11px] uppercase tracking-[0.25em] text-amber-300">{tour.subtitle}</p>
                         <h2 className="mt-1 text-lg font-semibold text-foreground">{tour.title}</h2>
                         <p className="mt-1 text-sm text-(--muted)">{tour.price}</p>
-                        <p className="mt-2 text-xs text-(--muted)">
-                          Best months: {getTourMonths(tour).slice(0, 3).join(", ")}
-                          {getTourMonths(tour).length > 3 ? "..." : ""}
-                        </p>
                       </div>
                     </Link>
                     <div className="px-4 pb-4">
@@ -313,10 +309,6 @@ function ToursPageContent() {
                         <p className="text-[11px] uppercase tracking-[0.25em] text-amber-300">{tour.subtitle}</p>
                         <h2 className="mt-1 text-lg font-semibold text-foreground">{tour.title}</h2>
                         <p className="mt-1 text-sm text-(--muted)">{tour.price}</p>
-                        <p className="mt-2 text-xs text-(--muted)">
-                          Best months: {getTourMonths(tour).slice(0, 3).join(", ")}
-                          {getTourMonths(tour).length > 3 ? "..." : ""}
-                        </p>
                       </div>
                     </Link>
                     <div className="px-4 pb-4">

@@ -38,9 +38,6 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 px-4 py-6 text-center text-sm text-white/70 sm:px-6">
-        <p>© 2026 Cholo Jai Dure. All Rights Reserved.</p>
-      </div>
     </footer>
   );
 }
