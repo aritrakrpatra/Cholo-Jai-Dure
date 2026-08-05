@@ -351,7 +351,7 @@ export default function GujratExplorePage() {
             </div>
           </div>
         </section>
-      </main>
+
 
       
     </div>
