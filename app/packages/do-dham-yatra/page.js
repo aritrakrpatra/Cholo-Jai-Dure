@@ -150,23 +150,6 @@ export default function DoDhamYatraPage() {
       <Navbar />
       <div className={isLightTheme ? "bg-[linear-gradient(135deg,#f8f5ec_0%,#fffdf9_100%)] text-slate-900" : "bg-slate-950 text-white"}>
       
-
-      <section className={`py-10 sm:py-12 ${isLightTheme ? "bg-white/70" : "bg-slate-900/80"}`}>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="mx-auto max-w-2xl">
-            <div className={`rounded-3xl border p-5 shadow-2xl sm:p-8 lg:p-10 ${isLightTheme ? "border-slate-200 bg-white/90" : "border-white/10 bg-slate-950/90"}`}>
-              <h2 className={`text-2xl font-bold sm:text-3xl ${isLightTheme ? "text-slate-900" : "text-white"}`}>Important Information</h2>
-              <div className={`mt-6 space-y-4 ${isLightTheme ? "text-slate-700" : "text-white/80"}`}>
-                <p><span className={`font-semibold ${isLightTheme ? "text-slate-900" : "text-white"}`}>Last Date of Booking:</span> 30 June 2026</p>
-                <p><span className={`font-semibold ${isLightTheme ? "text-slate-900" : "text-white"}`}>Booking Amount:</span> ₹5,000 per person</p>
-                <p><span className={`font-semibold ${isLightTheme ? "text-slate-900" : "text-white"}`}>Tempo Traveller Seat Selection:</span> Available at booking time</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      
       </div>
     </>
   );

@@ -99,20 +99,6 @@ export default function KashmirVaishnoDeviPage() {
           </div>
         </section>
 
-        <section className="py-10 sm:py-12">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <div className="mx-auto max-w-2xl rounded-3xl border border-white/10 bg-slate-900/90 p-5 shadow-2xl sm:p-8 lg:p-10">
-              <h2 className="text-2xl font-bold sm:text-3xl">Important Information</h2>
-              <div className="mt-6 space-y-4 text-white/80">
-                <p><span className="font-semibold text-white">Package:</span> ₹22,000/-</p>
-                <p><span className="font-semibold text-white">Journey Dates:</span> 05/04/2027 and 12/04/2027</p>
-                <p><span className="font-semibold text-white">Return Dates:</span> 14/04/2027 and 21/04/2027</p>
-                <p><span className="font-semibold text-white">Route Highlight:</span> Srinagar, Gulmarg, Sonmarg, Pahalgam, and Katra</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="pb-10 sm:pb-14">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="grid gap-6 lg:grid-cols-2">
