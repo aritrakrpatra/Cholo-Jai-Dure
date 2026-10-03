@@ -17,6 +17,25 @@ const highlights = [
   "1 Litre Water Bottle Per Person Daily",
 ];
 
+const inclusions = [
+  "Station-to-station pick-up and drop-off as per the itinerary",
+  "Transportation by tempo traveller or bus as per group size and itinerary",
+  "Standard hotel accommodation on double or triple sharing basis",
+  "Daily breakfast, lunch, and dinner",
+  "Professional travel guide throughout the yatra",
+  "Darshan and sightseeing as mentioned in the itinerary",
+  "One litre of packaged drinking water per person per day",
+];
+
+const exclusions = [
+  "Train, flight, or bus tickets unless specifically mentioned in the package",
+  "Personal expenses such as laundry, telephone calls, room service, shopping, and tips",
+  "Food and beverages not mentioned under inclusions",
+  "Helicopter, pony, or palki charges for Kedarnath and Badrinath",
+  "Monument, museum, and attraction entry fees unless specifically mentioned",
+  "Any service or expense not specifically mentioned under inclusions",
+];
+
 const itinerary = [
   {
     day: "Day 1",
@@ -149,7 +168,36 @@ export default function DoDhamYatraPage() {
     <>
       <Navbar />
       <div className={isLightTheme ? "bg-[linear-gradient(135deg,#f8f5ec_0%,#fffdf9_100%)] text-slate-900" : "bg-slate-950 text-white"}>
-      
+
+        <section className="pb-10 sm:pb-14">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 sm:p-6">
+                <h2 className="text-2xl font-bold sm:text-3xl">Inclusions</h2>
+                <ul className="mt-5 space-y-3 text-white/80">
+                  {inclusions.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-1 block h-2 w-2 rounded-full bg-emerald-300" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 sm:p-6">
+                <h2 className="text-2xl font-bold sm:text-3xl">Exclusions</h2>
+                <ul className="mt-5 space-y-3 text-white/80">
+                  {exclusions.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-1 block h-2 w-2 rounded-full bg-rose-300" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </div>
     </>
   )

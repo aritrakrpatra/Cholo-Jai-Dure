@@ -154,7 +154,7 @@ const itinerary = [
   },
 ];
 
-const includedItems = [
+const inclusions = [
   "Pickup & Drop from Railway Station",
   "Tempo Traveller / Bus",
   "Standard Hotel Accommodation",
@@ -166,7 +166,7 @@ const includedItems = [
   "1 Litre Water Bottle Daily",
 ];
 
-const excludedItems = [
+const exclusions = [
   "Airfare",
   "Train Tickets",
   "Journey Food",
@@ -294,7 +294,35 @@ export default function GujratExplorePage() {
     <>
       <Navbar />
       <div className="bg-slate-950 text-white">
-      
+
+        <section className="pb-10 sm:pb-14">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 sm:p-6">
+                <h2 className="text-2xl font-bold sm:text-3xl">Inclusions</h2>
+                <ul className="mt-5 space-y-3 text-white/80">
+                  {inclusions.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-1 block h-2 w-2 rounded-full bg-emerald-300" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 sm:p-6">
+                <h2 className="text-2xl font-bold sm:text-3xl">Exclusions</h2>
+                <ul className="mt-5 space-y-3 text-white/80">
+                  {exclusions.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-1 block h-2 w-2 rounded-full bg-rose-300" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="mb-24 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
           <div>
