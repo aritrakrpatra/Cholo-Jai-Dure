@@ -55,25 +55,22 @@ const galleryItems = [
 ];
 
 const inclusions = [
-  "✓ STATION-TO-STATION PICK-UP & DROP-OFF – AS PER THE ITINERARY",
-  "✓ TRANSPORTATION – TEMPO TRAVELLER / BUS / SWIFT DZIRE / INNOVA, AS PER GROUP SIZE AND ITINERARY",
-  "✓ ACCOMMODATION – STANDARD HOTELS ON DOUBLE / TRIPLE SHARING BASIS (AC / NON-AC AS PER DESTINATION & AVAILABILITY)",
-  "✓ MEALS – BREAKFAST, LUNCH & DINNER (AUTHENTIC BENGALI CUISINE)",
-  "✓ PROFESSIONAL TOUR ESCORT / TRAVEL GUIDE – THROUGHOUT THE TOUR",
-  "✓ SIGHTSEEING – ALL SIGHTSEEING AS MENTIONED IN THE ITINERARY",
-  "✓ PERMITS & REGISTRATIONS – LIMITED PERMITS AND REGISTRATIONS AS APPLICABLE",
-  "✓ PACKAGED DRINKING WATER – 1 LITRE BOTTLE PER PERSON PER DAY",
+  "Station-to-station pick-up and drop-off as per the itinerary",
+  "Transportation by tempo traveller, bus, Swift Dzire, or Innova as per group size and itinerary",
+  "Standard hotel accommodation on double or triple sharing basis",
+  "Breakfast, lunch, and dinner (authentic Bengali cuisine)",
+  "Professional tour escort or travel guide throughout the tour",
+  "Sightseeing as mentioned in the itinerary",
+  "One litre of packaged drinking water per person per day",
 ];
 
 const exclusions = [
-  "✕ TRAIN / FLIGHT / BUS TICKETS – UNLESS SPECIFICALLY MENTIONED IN THE PACKAGE",
-  "✕ PERSONAL EXPENSES – LAUNDRY, TELEPHONE CALLS, ROOM SERVICE, SHOPPING, TIPS, ETC.",
-  "✕ ADDITIONAL FOOD & BEVERAGES – ANY MEALS, SNACKS, BEVERAGES OR FOOD ITEMS NOT MENTIONED UNDER INCLUSIONS",
-  "✕ ADDITIONAL WATER BOTTLES – MORE THAN 1 LITRE PACKAGED DRINKING WATER PER PERSON PER DAY",
-  "✕ ENTRY FEES – MONUMENT, MONASTERY, PARK, MUSEUM AND OTHER ATTRACTION ENTRY TICKETS UNLESS SPECIFICALLY MENTIONED",
-  "✕ ADVENTURE ACTIVITIES – ANY OPTIONAL ACTIVITIES, RIDES OR ADVENTURE SPORTS NOT INCLUDED IN THE ITINERARY",
-  "✕ PERMITS / REGISTRATIONS – ANY ADDITIONAL OR SPECIAL PERMITS BEYOND THOSE MENTIONED UNDER INCLUSIONS",
-  "✕ ANYTHING NOT SPECIFICALLY MENTIONED – ANY SERVICE OR EXPENSE NOT CLEARLY STATED UNDER THE \"INCLUSIONS\" SECTION WILL BE CONSIDERED EXCLUDED",
+  "Train, flight, or bus tickets unless specifically mentioned in the package",
+  "Personal expenses such as laundry, telephone calls, room service, shopping, and tips",
+  "Food and beverages not mentioned under inclusions",
+  "Monument, museum, park, and attraction entry fees unless specifically mentioned",
+  "Optional activities, rides, and adventure sports not included in the itinerary",
+  "Any service or expense not specifically mentioned under inclusions",
 ];
 
 export default function DaringbariGopalpurPage() {
