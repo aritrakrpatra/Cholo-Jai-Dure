@@ -10,10 +10,34 @@ export const metadata = {
 };
 
 const itinerary = [
-  { day: "Day 1", title: "Ayodhya", date: "08/01/2027", points: ["Arrival and transfer to Ayodhya", "Evening darshan and overnight stay"] },
-  { day: "Day 2", title: "Prayagraj", date: "09/01/2027", points: ["Transfer to Prayagraj", "Temple and Sangam area visits"] },
-  { day: "Day 3", title: "Varanasi", date: "10/01/2027", points: ["Travel to Varanasi", "Evening Ganga Aarti and stay"] },
-  { day: "Day 4", title: "Varanasi", date: "11/01/2027", points: ["Varanasi local spiritual circuit", "Overnight stay"] },
+  {
+    day: "Day 1",
+    title: "Ayodhya",
+    date: "08/01/2027",
+    points: ["Visit Ram Mandir, Hanuman Garhi, Kanak Bhawan, and Dashrath Mahal"],
+  },
+  {
+    day: "Day 2",
+    title: "Prayagraj",
+    date: "09/01/2027",
+    points: ["Holy dip at Triveni Sangam", "Visit Allahabad Fort and Bade Hanuman Ji Temple"],
+  },
+  {
+    day: "Day 3",
+    title: "Varanasi",
+    date: "10/01/2027",
+    points: ["Visit Sarnath and Dhamek Stupa", "Explore the Banaras Hindu University (BHU) campus and Vishwanath Temple"],
+  },
+  {
+    day: "Day 4",
+    title: "Varanasi",
+    date: "11/01/2027",
+    points: [
+      "Visit Kal Bhairav Temple, Kashi Vishwanath Temple, and Annapurna Temple",
+      "See Manikarnika Ghat and Dashashwamedh Ghat",
+      "Attend Assi Ghat Aarti and explore the Kashi ghats on foot",
+    ],
+  },
   { day: "Day 5", title: "Return", date: "13/01/2027", points: ["Check-out and return journey", "Tour concludes with drop-off"] },
 ];
 
@@ -138,5 +162,4 @@ export default function VaranasiPage() {
     </>
   );
 }
-
 

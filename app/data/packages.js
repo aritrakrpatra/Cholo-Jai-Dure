@@ -16,6 +16,75 @@ export const allPackages = [
     featured: true,
   },
   {
+    slug: "mysuru-coorg-ooty",
+    title: "Mysuru, Coorg & Ooty",
+    duration: "6N/7D",
+    subtitle: "6N/7D",
+    price: "Price on request",
+    placesCovered: ["Mysuru", "Coorg", "Ooty", "Coonoor", "Coimbatore"],
+    placesAvailable: true,
+    image: "/tnk-pic.jpeg",
+    description: "A seven-day South India journey through Mysuru, Coorg, Ooty, Coonoor, and Coimbatore.",
+    packagePath: "/packages/mysuru-coorg-ooty",
+    featured: false,
+    bookingMode: "group",
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "Mysuru",
+        points: [
+          "Visit Mysuru Palace and St. Philomena's Cathedral",
+          "Explore Chamundi Hill and Chamundeshwari Temple",
+        ],
+      },
+      {
+        day: "Day 2",
+        title: "Coorg",
+        points: [
+          "Visit Abbey Falls and Raja's Seat",
+          "Explore Madikeri Fort and Omkareshwara Temple",
+        ],
+      },
+      {
+        day: "Day 3",
+        title: "Coorg",
+        points: [
+          "Visit Bhagamandala and a coffee plantation",
+          "Explore the Golden Temple and Dubare Elephant Camp area",
+        ],
+      },
+      {
+        day: "Day 4",
+        title: "Ooty",
+        points: [
+          "Travel through the Bandipur forest region",
+          "Visit Pykara Lake and Waterfalls, Shooting Point, and Ooty Lake",
+        ],
+      },
+      {
+        day: "Day 5",
+        title: "Ooty & Coonoor",
+        points: [
+          "Visit a tea garden, tea factory and museum, and Doddabetta Park",
+          "Explore Coonoor, Sim's Park, Dolphin's Nose, and Lamb's Rock",
+        ],
+      },
+      {
+        day: "Day 6",
+        title: "Coimbatore",
+        points: [
+          "Visit the Adiyogi Shiva Statue and Isha Yoga Centre",
+          "Visit Marudamalai Temple",
+        ],
+      },
+      {
+        day: "Day 7",
+        title: "Return",
+        points: ["Check out and begin the return journey"],
+      },
+    ],
+  },
+  {
     slug: "kashmir",
     title: "Kashmir",
     duration: "4N/5D",

@@ -53,6 +53,31 @@ export default async function PackageDetailsFallbackPage({ params }) {
               </p>
             </div>
           </article>
+
+          {tour.itinerary?.length ? (
+            <section className="mt-8 rounded-3xl border border-white/10 bg-slate-900/90 p-4 sm:p-6 md:p-8">
+              <h2 className="text-2xl font-bold sm:text-3xl">Day-wise Itinerary</h2>
+              <div className="mt-6 space-y-4">
+                {tour.itinerary.map((item) => (
+                  <article
+                    key={`${item.day}-${item.title}`}
+                    className="rounded-2xl border border-white/10 bg-slate-950/70 p-4 sm:p-5"
+                  >
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">{item.day}</p>
+                    <h3 className="mt-2 text-xl font-semibold">{item.title}</h3>
+                    <ul className="mt-3 space-y-2 text-white/75">
+                      {item.points.map((point) => (
+                        <li key={point} className="flex items-start gap-3">
+                          <span className="mt-2 block h-1.5 w-1.5 rounded-full bg-white/60" />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </section>
+          ) : null}
         </div>
       </main>
     </>

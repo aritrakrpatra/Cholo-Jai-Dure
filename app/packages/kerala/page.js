@@ -10,12 +10,51 @@ export const metadata = {
 };
 
 const itinerary = [
-  { day: "Day 1", title: "Kanniyakumari", date: "15/02/2027", points: ["Arrival and transfer to Kanniyakumari", "Evening leisure and overnight stay"] },
-  { day: "Day 2", title: "Thiruvananthapuram", date: "16/02/2027", points: ["Transfer to Thiruvananthapuram", "Local sightseeing and overnight stay"] },
-  { day: "Day 3", title: "Alapuzha", date: "17/02/2027", points: ["Move to Alapuzha", "Backwater experience and overnight stay"] },
-  { day: "Day 4", title: "Thekkady", date: "18/02/2027", points: ["Transfer to Thekkady", "Nature/plantation zone visit and overnight stay"] },
-  { day: "Day 5", title: "Munnar", date: "19/02/2027", points: ["Drive to Munnar", "Tea hill exploration and overnight stay"] },
-  { day: "Day 6", title: "Kochi", date: "20/02/2027", points: ["Transfer to Kochi", "City highlights and overnight stay"] },
+  {
+    day: "Day 1",
+    title: "Kanniyakumari",
+    date: "15/02/2027",
+    points: ["Visit Vivekananda Rock Memorial and the Thiruvalluvar Statue"],
+  },
+  {
+    day: "Day 2",
+    title: "Thiruvananthapuram",
+    date: "16/02/2027",
+    points: [
+      "Visit Padmanabhaswamy Temple and Azhimala Temple",
+      "Explore Kovalam Beach and Poovar",
+    ],
+  },
+  {
+    day: "Day 3",
+    title: "Alapuzha",
+    date: "17/02/2027",
+    points: ["Experience the Alleppey backwaters", "Visit Varkala Beach"],
+  },
+  {
+    day: "Day 4",
+    title: "Thekkady",
+    date: "18/02/2027",
+    points: [
+      "Enjoy boating on Periyar Lake and visit the spice market",
+      "Watch Kathakali dance and Kalaripayattu",
+    ],
+  },
+  {
+    day: "Day 5",
+    title: "Munnar",
+    date: "19/02/2027",
+    points: ["Visit the Rose Garden and Tea Museum", "Explore Mattupetty Dam and Lake"],
+  },
+  {
+    day: "Day 6",
+    title: "Kochi",
+    date: "20/02/2027",
+    points: [
+      "Enjoy a Kochi sunset cruise and explore Fort Kochi",
+      "Visit Santa Cruz Cathedral Basilica and St. Francis Church",
+    ],
+  },
   { day: "Day 7", title: "Return", date: "23/02/2027", points: ["Check-out and return journey", "Tour concludes with drop-off"] },
 ];
 
@@ -140,5 +179,4 @@ export default function KeralaPage() {
     </>
   );
 }
-
 
