@@ -83,19 +83,6 @@ export default function KashmirGurezValleyPage() {
       <main className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
         
 
-        <section className="py-10 sm:py-12">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <div className="mx-auto max-w-2xl rounded-3xl border border-white/10 bg-slate-900/90 p-5 shadow-2xl sm:p-8 lg:p-10">
-              <h2 className="text-2xl font-bold sm:text-3xl">Important Information</h2>
-              <div className="mt-6 space-y-4 text-white/80">
-                <p><span className="font-semibold text-white">Package:</span> ₹18,000/-</p>
-                <p><span className="font-semibold text-white">Journey Date:</span> 14/06/2027</p>
-                <p><span className="font-semibold text-white">Return Date:</span> 21/06/2027</p>
-                <p><span className="font-semibold text-white">Route Highlight:</span> Srinagar, Gulmarg, Gurez Valley, and Doodhpathri</p>
-              </div>
-            </div>
-          </div>
-        </section>
         <section className="pb-10 sm:pb-14">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="grid gap-6 lg:grid-cols-2">
