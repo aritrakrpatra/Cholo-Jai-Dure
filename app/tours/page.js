@@ -23,19 +23,6 @@ const monthOrder = [
   "December",
 ];
 
-const MIN_BUDGET_LIMIT = 8000;
-const MAX_BUDGET_LIMIT = 50000;
-
-function parseTourPrice(priceText) {
-  if (!priceText) return null;
-
-  const match = String(priceText).match(/\d[\d,]*/);
-  if (!match) return null;
-
-  const parsed = Number(match[0].replace(/,/g, ""));
-  return Number.isFinite(parsed) ? parsed : null;
-}
-
 const tourMonthsBySlug = {
   "tamilnadu-kerala": ["October", "November", "December", "January", "February", "March"],
   kashmir: ["April", "May", "June", "July", "August", "September"],
@@ -89,7 +76,6 @@ function ToursPageContent() {
   const [query, setQuery] = useState("");
   const [tourType, setTourType] = useState("group");
   const [selectedMonth, setSelectedMonth] = useState("all");
-  const [budgetValue, setBudgetValue] = useState(MAX_BUDGET_LIMIT);
 
   const filteredTours = useMemo(() => {
     const normalized = query.trim().toLowerCase();
@@ -109,15 +95,9 @@ function ToursPageContent() {
         selectedMonth === "all" ||
         getTourMonths(tour).includes(selectedMonth);
 
-      const tourPrice = parseTourPrice(tour.price);
-      const matchesBudget =
-        tourPrice !== null &&
-        tourPrice >= MIN_BUDGET_LIMIT &&
-        tourPrice <= budgetValue;
-
-      return matchesCategory && matchesQuery && matchesMonth && matchesBudget;
+      return matchesCategory && matchesQuery && matchesMonth;
     });
-  }, [query, selectedMonth, budgetValue, tourCategory]);
+  }, [query, selectedMonth, tourCategory]);
 
   return (
     <>
@@ -146,32 +126,6 @@ function ToursPageContent() {
                   placeholder="Search place by name or duration"
                   className="w-full rounded-3xl border border-(--border) bg-(--surface) px-5 py-3 text-sm text-foreground outline-none placeholder:text-(--muted) focus:border-amber-300/60"
                 />
-
-                <div className="mt-4 rounded-3xl border border-(--border) bg-(--surface) p-4 sm:p-5">
-                  <div className="mb-3 flex items-center justify-between gap-3">
-                    <p className="text-sm font-semibold text-foreground">Budget Filter</p>
-                    <p className="text-xs text-(--muted)">
-                      ₹{MIN_BUDGET_LIMIT.toLocaleString("en-IN")} - ₹{budgetValue.toLocaleString("en-IN")}
-                    </p>
-                  </div>
-
-                  <div>
-                    <label className="mb-2 block text-xs text-(--muted)">Move pointer from minimum to maximum budget</label>
-                    <input
-                      type="range"
-                      min={MIN_BUDGET_LIMIT}
-                      max={MAX_BUDGET_LIMIT}
-                      step={1000}
-                      value={budgetValue}
-                      onChange={(event) => setBudgetValue(Number(event.target.value))}
-                      className="h-2 w-full cursor-pointer appearance-none rounded-full bg-amber-200/35 accent-amber-400"
-                    />
-                    <div className="mt-2 flex items-center justify-between text-xs text-(--muted)">
-                      <span>₹{MIN_BUDGET_LIMIT.toLocaleString("en-IN")}</span>
-                      <span>₹{MAX_BUDGET_LIMIT.toLocaleString("en-IN")}</span>
-                    </div>
-                  </div>
-                </div>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -208,7 +162,7 @@ function ToursPageContent() {
 
               {filteredTours.length === 0 && (
                 <p className="mt-8 text-center text-sm text-(--muted)">
-                  No international tours found for this search and budget range.
+                  No international tours found for this search.
                 </p>
               )}
             </div>
@@ -264,31 +218,6 @@ function ToursPageContent() {
                   </select>
                 </div>
 
-                <div className="mt-4 rounded-3xl border border-(--border) bg-(--surface) p-4 sm:p-5">
-                  <div className="mb-3 flex items-center justify-between gap-3">
-                    <p className="text-sm font-semibold text-foreground">Budget Filter</p>
-                    <p className="text-xs text-(--muted)">
-                      ₹{MIN_BUDGET_LIMIT.toLocaleString("en-IN")} - ₹{budgetValue.toLocaleString("en-IN")}
-                    </p>
-                  </div>
-
-                  <div>
-                    <label className="mb-2 block text-xs text-(--muted)">Move pointer from minimum to maximum budget</label>
-                    <input
-                      type="range"
-                      min={MIN_BUDGET_LIMIT}
-                      max={MAX_BUDGET_LIMIT}
-                      step={1000}
-                      value={budgetValue}
-                      onChange={(event) => setBudgetValue(Number(event.target.value))}
-                      className="h-2 w-full cursor-pointer appearance-none rounded-full bg-amber-200/35 accent-amber-400"
-                    />
-                    <div className="mt-2 flex items-center justify-between text-xs text-(--muted)">
-                      <span>₹{MIN_BUDGET_LIMIT.toLocaleString("en-IN")}</span>
-                      <span>₹{MAX_BUDGET_LIMIT.toLocaleString("en-IN")}</span>
-                    </div>
-                  </div>
-                </div>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -325,7 +254,7 @@ function ToursPageContent() {
 
               {filteredTours.length === 0 && (
                 <p className="mt-8 text-center text-sm text-(--muted)">
-                  No tours found for this search and budget range.
+                  No tours found for this search.
                 </p>
               )}
                 </>

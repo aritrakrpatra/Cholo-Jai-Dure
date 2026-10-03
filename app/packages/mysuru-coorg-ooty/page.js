@@ -1,78 +1,85 @@
-import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/app/components/Navbar";
 import BookNowButton from "@/app/components/BookNowButton";
 import { getPackageBySlug } from "@/app/data/packages";
 
 export const metadata = {
-  title: "Manali",
-  description: "April 4N/5D Manali route covering Shimla, Kasol, and Manali.",
+  title: "Ooty",
+  description: "A seven-day South India journey through Mysuru, Coorg, Ooty, Coonoor, and Coimbatore.",
 };
 
 const itinerary = [
   {
     day: "Day 1",
-    title: "Shimla",
-    points: ["Visit Mall Road, Jakhu Temple, the Clubhouse, Kali Bari, and Kufri"],
+    title: "Mysuru",
+    points: [
+      "Visit Mysuru Palace and St. Philomena's Cathedral",
+      "Explore Chamundi Hill and Chamundeshwari Temple",
+    ],
   },
   {
     day: "Day 2",
-    title: "Kasol",
-    points: ["Visit Manikaran", "Explore Parvati Valley and River, and Kasol Hippie Market"],
+    title: "Coorg",
+    points: ["Visit Abbey Falls and Raja's Seat", "Explore Madikeri Fort and Omkareshwara Temple"],
   },
   {
     day: "Day 3",
-    title: "Manali",
+    title: "Coorg",
     points: [
-      "Visit Kullu and Manali Mall Road",
-      "Explore Hidimba Devi Temple, Ghatotkacha Temple, and Vashisht Temple",
+      "Visit Bhagamandala and a coffee plantation",
+      "Explore the Golden Temple and Dubare Elephant Camp area",
     ],
   },
   {
     day: "Day 4",
-    title: "Manali",
+    title: "Ooty",
     points: [
-      "Visit Atal Tunnel and Solang Valley",
-      "Visit Sissu Village (extra charge); Rohtang Pass visit is optional",
+      "Travel through the Bandipur forest region",
+      "Visit Pykara Lake and Waterfalls, Shooting Point, and Ooty Lake",
     ],
   },
-  { day: "Day 5", title: "Return", points: ["Check-out and return journey", "Tour concludes with drop-off"] },
+  {
+    day: "Day 5",
+    title: "Ooty & Coonoor",
+    points: [
+      "Visit a tea garden, tea factory and museum, and Doddabetta Park",
+      "Explore Coonoor, Sim's Park, Dolphin's Nose, and Lamb's Rock",
+    ],
+  },
+  {
+    day: "Day 6",
+    title: "Coimbatore",
+    points: ["Visit the Adiyogi Shiva Statue and Isha Yoga Centre", "Visit Marudamalai Temple"],
+  },
+  {
+    day: "Day 7",
+    title: "Return",
+    points: ["Check out and begin the return journey"],
+  },
 ];
 
 const inclusions = [
-  "✓ STATION-TO-STATION PICK-UP & DROP-OFF – AS PER THE ITINERARY",
-  "✓ TRANSPORTATION – TEMPO TRAVELLER / BUS / SWIFT DZIRE / INNOVA, AS PER GROUP SIZE AND ITINERARY",
-  "✓ ACCOMMODATION – STANDARD HOTELS ON DOUBLE / TRIPLE SHARING BASIS (AC / NON-AC AS PER DESTINATION & AVAILABILITY)",
-  "✓ MEALS – BREAKFAST, LUNCH & DINNER (AUTHENTIC BENGALI CUISINE)",
-  "✓ PROFESSIONAL TOUR ESCORT / TRAVEL GUIDE – THROUGHOUT THE TOUR",
-  "✓ SIGHTSEEING – ALL SIGHTSEEING AS MENTIONED IN THE ITINERARY",
-  "✓ PERMITS & REGISTRATIONS – LIMITED PERMITS AND REGISTRATIONS AS APPLICABLE",
-  "✓ PACKAGED DRINKING WATER – 1 LITRE BOTTLE PER PERSON PER DAY",
+  "Station-to-station pick-up and drop-off as per the itinerary",
+  "Transportation by tempo traveller, bus, Swift Dzire, or Innova as per group size and itinerary",
+  "Standard hotel accommodation on double or triple sharing basis",
+  "Breakfast, lunch, and dinner (authentic Bengali cuisine)",
+  "Professional tour escort or travel guide throughout the tour",
+  "Sightseeing as mentioned in the itinerary",
+  "One litre of packaged drinking water per person per day",
 ];
 
 const exclusions = [
-  "✕ TRAIN / FLIGHT / BUS TICKETS – UNLESS SPECIFICALLY MENTIONED IN THE PACKAGE",
-  "✕ PERSONAL EXPENSES – LAUNDRY, TELEPHONE CALLS, ROOM SERVICE, SHOPPING, TIPS, ETC.",
-  "✕ ADDITIONAL FOOD & BEVERAGES – ANY MEALS, SNACKS, BEVERAGES OR FOOD ITEMS NOT MENTIONED UNDER INCLUSIONS",
-  "✕ ADDITIONAL WATER BOTTLES – MORE THAN 1 LITRE PACKAGED DRINKING WATER PER PERSON PER DAY",
-  "✕ ENTRY FEES – MONUMENT, MONASTERY, PARK, MUSEUM AND OTHER ATTRACTION ENTRY TICKETS UNLESS SPECIFICALLY MENTIONED",
-  "✕ ADVENTURE ACTIVITIES – ANY OPTIONAL ACTIVITIES, RIDES OR ADVENTURE SPORTS NOT INCLUDED IN THE ITINERARY",
-  "✕ PERMITS / REGISTRATIONS – ANY ADDITIONAL OR SPECIAL PERMITS BEYOND THOSE MENTIONED UNDER INCLUSIONS",
-  "✕ ANYTHING NOT SPECIFICALLY MENTIONED – ANY SERVICE OR EXPENSE NOT CLEARLY STATED UNDER THE \"INCLUSIONS\" SECTION WILL BE CONSIDERED EXCLUDED",
+  "Train, flight, or bus tickets unless specifically mentioned in the package",
+  "Personal expenses such as laundry, telephone calls, room service, shopping, and tips",
+  "Food and beverages not mentioned under inclusions",
+  "Monument, museum, park, and attraction entry fees unless specifically mentioned",
+  "Optional activities, rides, and adventure sports not included in the itinerary",
+  "Any service or expense not specifically mentioned under inclusions",
 ];
 
-const galleryItems = [
-  { label: "Shimla", src: "/manali.jpeg" },
-  { label: "Kasol", src: "/group6.jpeg" },
-  { label: "Manali", src: "/group5.jpeg" },
-  { label: "Himachal Views", src: "/northbengal.jpeg" },
-  { label: "Mountain Route", src: "/group3.jpeg" },
-  { label: "Travel Moments", src: "/group2.jpeg" },
-];
+const packageInfo = getPackageBySlug("mysuru-coorg-ooty");
 
-const packageInfo = getPackageBySlug("shimla-manali");
-
-export default function ShimlaManaliPage() {
+export default function OotyPage() {
   return (
     <>
       <Navbar />
@@ -89,9 +96,7 @@ export default function ShimlaManaliPage() {
               <p className="text-sm uppercase tracking-[0.3em] text-amber-300">{packageInfo.duration}</p>
               <h1 className="mt-3 text-3xl font-bold sm:text-4xl lg:text-5xl">{packageInfo.title}</h1>
               <p className="mt-4 text-base text-white/75 sm:text-lg">{packageInfo.description}</p>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <p className="text-2xl font-semibold text-amber-200">{packageInfo.price}</p>
-              </div>
+              <p className="mt-6 text-2xl font-semibold text-amber-200">{packageInfo.price}</p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <BookNowButton packageName={packageInfo.title} packageId={packageInfo.slug} />
               </div>
@@ -106,12 +111,11 @@ export default function ShimlaManaliPage() {
               <div className="mt-6 space-y-4">
                 {itinerary.map((item) => (
                   <article
-                    key={`${item.day}-${item.title}-${item.date ?? ""}`}
+                    key={`${item.day}-${item.title}`}
                     className="rounded-2xl border border-white/10 bg-slate-950/70 p-4 sm:p-5"
                   >
                     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">{item.day}</p>
                     <h3 className="mt-2 text-xl font-semibold">{item.title}</h3>
-                    {item.date ? <p className="mt-1 text-sm text-amber-200">{item.date}</p> : null}
                     <ul className="mt-3 space-y-2 text-white/75">
                       {item.points.map((point) => (
                         <li key={point} className="flex items-start gap-3">
@@ -141,7 +145,6 @@ export default function ShimlaManaliPage() {
                   ))}
                 </ul>
               </div>
-
               <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 sm:p-6">
                 <h2 className="text-2xl font-bold sm:text-3xl">Exclusions</h2>
                 <ul className="mt-5 space-y-3 text-white/80">
@@ -160,4 +163,3 @@ export default function ShimlaManaliPage() {
     </>
   );
 }
-
