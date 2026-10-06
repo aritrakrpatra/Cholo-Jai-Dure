@@ -2,7 +2,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "./components/Navbar";
-import { visiblePackages as tours } from "./data/packages";
 
 const galleryImages = [
   "/house-boat.jpeg",
@@ -196,43 +195,6 @@ export default function CholoJaiDureTours() {
                 </Link>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="tours" className="py-16 sm:py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="mb-10 text-center sm:mb-12">
-            <p className="text-sm uppercase tracking-[0.5em] text-amber-300">All Tours</p>
-            <h2 className="mt-4 text-2xl font-bold sm:text-4xl">Curated destinations for every traveler</h2>
-          </div>
-          <div className="grid gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {tours.map((tour) => (
-              <div
-                key={tour.title}
-                className="group mx-auto w-full max-w-sm overflow-hidden rounded-3xl border border-white/10 bg-slate-900/90 p-4 shadow-2xl shadow-slate-950/20 transition duration-500 hover:-translate-y-1 hover:bg-slate-900/95 sm:max-w-none sm:rounded-4xl sm:p-6"
-              >
-                <div className="relative h-52 w-full overflow-hidden rounded-[1.25rem] shadow-lg sm:h-64 sm:rounded-[1.75rem] md:h-60 xl:h-64">
-                  <Image
-                    src={tour.image}
-                    alt={tour.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                  />
-                </div>
-                <div className="mt-4 sm:mt-6">
-                  <p className="text-xs uppercase tracking-[0.25em] text-amber-300 sm:text-sm sm:tracking-[0.3em]">{tour.subtitle}</p>
-                  <h3 className="mt-2 text-xl font-bold sm:mt-3 sm:text-2xl">{tour.title}</h3>
-                  <div className="mt-4 flex items-center justify-between gap-3">
-                    <p className="text-sm text-white/70 sm:text-base">{tour.price}</p>
-                    <Link href={tour.packagePath} className="explore-more-btn inline-flex rounded-full bg-white px-5 py-2.5 text-xs font-semibold text-slate-950 transition hover:bg-amber-300 sm:px-6 sm:py-3 sm:text-sm">
-                      Explore More
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>

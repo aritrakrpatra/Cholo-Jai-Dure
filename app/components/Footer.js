@@ -10,7 +10,7 @@ export default function Footer() {
             <div className="mt-4 space-y-2.5 text-sm">
               <Link href="/#home" className="block transition-all duration-200 hover:translate-x-1 hover:text-amber-300">Home</Link>
               <Link href="/tours" className="block transition-all duration-200 hover:translate-x-1 hover:text-amber-300">Tours</Link>
-              <Link href="/#tours" className="block transition-all duration-200 hover:translate-x-1 hover:text-amber-300">Date of Journey</Link>
+              <Link href="/about-us" className="block transition-all duration-200 hover:translate-x-1 hover:text-amber-300">About</Link>
               <Link href="/contact" className="block transition-all duration-200 hover:translate-x-1 hover:text-amber-300">Feedback</Link>
               <Link href="/rules-regulations" className="block transition-all duration-200 hover:translate-x-1 hover:text-amber-300">Rules &amp; Regulations</Link>
               <Link href="/contact" className="block transition-all duration-200 hover:translate-x-1 hover:text-amber-300">Contact Us</Link>
