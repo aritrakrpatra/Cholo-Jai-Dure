@@ -14,7 +14,7 @@ const itinerary = [
   { day: "Day 2", title: "Ujjain", date: "31/01/2027", points: ["Ujjain temple circuit", "Overnight stay"] },
   { day: "Day 3", title: "Omkareshwar", date: "01/02/2027", points: ["Transfer to Omkareshwar", "Temple visits and overnight arrangement"] },
   { day: "Day 4", title: "Indore", date: "02/02/2027", points: ["Transfer to Indore", "City highlights and overnight stay"] },
-  { day: "Day 5", title: "Return", date: "04/01/2027", points: ["Check-out and return journey", "Tour concludes with drop-off"] },
+  { day: "Day 5", title: "Return", date: "04/02/2027", points: ["Check-out and return journey", "Tour concludes with drop-off"] },
 ];
 
 const inclusions = [

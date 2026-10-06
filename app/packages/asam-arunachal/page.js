@@ -10,13 +10,13 @@ export const metadata = {
 };
 
 const itinerary = [
-  { day: "Day 1", title: "Guwahati", points: ["Arrival and transfer to Guwahati", "Evening leisure and overnight stay"] },
-  { day: "Day 2", title: "Bhalukpong", points: ["Scenic transfer to Bhalukpong", "Overnight stay"] },
-  { day: "Day 3", title: "Dirang", points: ["Drive to Dirang", "Local sightseeing and overnight stay"] },
-  { day: "Day 4", title: "Tawang", points: ["Transfer to Tawang via mountain passes", "Evening rest and overnight stay"] },
-  { day: "Day 5", title: "Tawang", points: ["Full-day Tawang exploration", "Overnight stay"] },
-  { day: "Day 6", title: "Bomdilha", points: ["Drive to Bomdilha", "Evening at leisure and overnight stay"] },
-  { day: "Day 7", title: "Return", points: ["Check-out and return journey", "Tour concludes with drop-off"] },
+  { day: "Day 1", title: "Guwahati", date: "13/03/2027", points: ["Arrival and transfer to Guwahati", "Evening leisure and overnight stay"] },
+  { day: "Day 2", title: "Bhalukpong", date: "14/03/2027", points: ["Scenic transfer to Bhalukpong", "Overnight stay"] },
+  { day: "Day 3", title: "Dirang", date: "15/03/2027", points: ["Drive to Dirang", "Local sightseeing and overnight stay"] },
+  { day: "Day 4", title: "Tawang", date: "16/03/2027", points: ["Transfer to Tawang via mountain passes", "Evening rest and overnight stay"] },
+  { day: "Day 5", title: "Tawang", date: "17/03/2027", points: ["Full-day Tawang exploration", "Overnight stay"] },
+  { day: "Day 6", title: "Bomdilha", date: "18/03/2027", points: ["Drive to Bomdilha", "Evening at leisure and overnight stay"] },
+  { day: "Day 7", title: "Return", date: "20/03/2027", points: ["Check-out and return journey", "Tour concludes with drop-off"] },
 ];
 
 const inclusions = [

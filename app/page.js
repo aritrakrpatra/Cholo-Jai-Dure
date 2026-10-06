@@ -150,7 +150,7 @@ export default function CholoJaiDureTours() {
                       <span className="mx-6">🕌 <strong>Do Dham Yatra</strong> — ₹23,000 | 7N/8D</span>
                       <span className="mx-6">🌴 <strong>Tamil Nadu &amp; Kerala</strong> — ₹26,000 | 9N/10D</span>
                       <span className="mx-6">🏖️ <strong>Vizag Tour</strong> — Coastal getaway deal!</span>
-                      <span className="mx-6">🌿 <strong>Sikkim</strong> — Northeast retreat at ₹12,000</span>
+                      <span className="mx-6">🌿 <strong>West Sikkim</strong> — Northeast retreat at ₹12,000</span>
                       <span className="mx-6">🌄 <strong>Arunachal Pradesh</strong> — ₹24,000 | 7N/8D</span>
                       <span className="mx-6">📞 <strong>Cholo Jai Dure Tour &amp; Travels</strong> — Call us now!</span>
                       <span className="mx-6">✈️ <strong>Chardham Yatra 2026</strong> — Book now at ₹30,000 | 11N/12D</span>

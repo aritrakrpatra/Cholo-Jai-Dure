@@ -42,6 +42,8 @@ export const allPackages = [
     description: "A classic Kashmir holiday with valley views and serene landscapes.",
     packagePath: "/packages/kashmir",
     featured: true,
+    bookingMode: "group",
+    travelDateOptions: ["2027-03-29"],
   },
   {
     slug: "kashmir-vaishno-devi",
@@ -100,7 +102,7 @@ export const allPackages = [
     packagePath: "/packages/asam-arunachal",
     featured: true,
     bookingMode: "group",
-    travelDateOptions: ["2027-03-10"],
+    travelDateOptions: ["2027-03-13"],
   },
   {
     slug: "munsiyari",
@@ -246,7 +248,7 @@ export const allPackages = [
     packagePath: "/packages/ladakh",
     featured: false,
     bookingMode: "group",
-    travelDateOptions: ["2027-06-07"],
+    travelDateOptions: ["2027-05-24"],
   },
   {
     slug: "spiti-valley",
@@ -261,7 +263,7 @@ export const allPackages = [
     packagePath: "/packages/spiti-valley",
     featured: false,
     bookingMode: "group",
-    travelDateOptions: ["2027-05-10"],
+    travelDateOptions: ["2027-06-04"],
   },
   {
     slug: "nepal",
@@ -380,6 +382,7 @@ export const allPackages = [
     packagePath: "/packages/shimla-manali",
     featured: false,
     bookingMode: "group",
+    travelDateOptions: ["2027-05-25"],
   },
   {
     slug: "south-india",
@@ -439,17 +442,18 @@ export const allPackages = [
   },
   {
     slug: "sikkim",
-    title: "Sikkim",
-    duration: "3N/4D",
-    subtitle: "3N/4D",
-    price: "Price on request",
-    placesCovered: [],
-    placesAvailable: false,
-    availabilityNote: defaultUnavailableMessage,
+    title: "West Sikkim",
+    duration: "5N/6D",
+    subtitle: "5N/6D",
+    price: "18,000/-",
+    placesCovered: ["Gangtok", "Pelling"],
+    placesAvailable: true,
     image: "/group6.jpeg",
-    description: "A compact Sikkim trip through mountain views and monastery culture.",
+    description: "A May West Sikkim route through mountain views and monastery culture, with Gangtok (3N) and Pelling (2N).",
     packagePath: "/packages/sikkim",
     featured: false,
+    bookingMode: "group",
+    travelDateOptions: ["2027-05-21"],
   },
   {
     slug: "kerala",
@@ -555,7 +559,7 @@ export const allPackages = [
     packagePath: "/packages/amarnath-yatra",
     featured: false,
     bookingMode: "group",
-    travelDateOptions: ["2027-07-02"],
+    travelDateOptions: ["2027-07-12"],
   },
 ];
 

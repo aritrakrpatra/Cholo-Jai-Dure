@@ -13,16 +13,19 @@ const itinerary = [
   {
     day: "Day 1",
     title: "Shimla",
+    date: "25/05/2027",
     points: ["Visit Mall Road, Jakhu Temple, the Clubhouse, Kali Bari, and Kufri"],
   },
   {
     day: "Day 2",
     title: "Kasol",
+    date: "26/05/2027",
     points: ["Visit Manikaran", "Explore Parvati Valley and River, and Kasol Hippie Market"],
   },
   {
     day: "Day 3",
     title: "Manali",
+    date: "27/05/2027",
     points: [
       "Visit Kullu and Manali Mall Road",
       "Explore Hidimba Devi Temple, Ghatotkacha Temple, and Vashisht Temple",
@@ -31,12 +34,13 @@ const itinerary = [
   {
     day: "Day 4",
     title: "Manali",
+    date: "28/05/2027",
     points: [
       "Visit Atal Tunnel and Solang Valley",
       "Visit Sissu Village (extra charge); Rohtang Pass visit is optional",
     ],
   },
-  { day: "Day 5", title: "Return", points: ["Check-out and return journey", "Tour concludes with drop-off"] },
+  { day: "Day 5", title: "Return", date: "31/05/2027", points: ["Check-out and return journey", "Tour concludes with drop-off"] },
 ];
 
 const inclusions = [

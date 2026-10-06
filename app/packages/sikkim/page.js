@@ -5,20 +5,17 @@ import BookNowButton from "@/app/components/BookNowButton";
 import { getPackageBySlug } from "@/app/data/packages";
 
 export const metadata = {
-  title: "Munsiyari",
-  description: "March Munsiyari itinerary across Nainital, Koushani, Munsiyari, Patal Bhubaneswar, and Almora.",
+  title: "West Sikkim",
+  description: "May 5N/6D West Sikkim itinerary covering Gangtok (3N) and Pelling (2N).",
 };
 
 const itinerary = [
-  { day: "Day 1", title: "Nainital", date: "16/03/2027", points: ["Arrival and transfer to Nainital", "Overnight stay"] },
-  { day: "Day 2", title: "Nainital", date: "17/03/2027", points: ["Nainital local sightseeing", "Overnight stay"] },
-  { day: "Day 3", title: "Koushani", date: "18/03/2027", points: ["Transfer to Koushani", "Leisure and overnight stay"] },
-  { day: "Day 4", title: "Koushani", date: "19/03/2027", points: ["Second day in Koushani", "Overnight stay"] },
-  { day: "Day 5", title: "Munsiyari", date: "20/03/2027", points: ["Transfer to Munsiyari", "Evening mountain views"] },
-  { day: "Day 6", title: "Munsiyari", date: "21/03/2027", points: ["Munsiyari exploration", "Overnight stay"] },
-  { day: "Day 7", title: "Patal Bhubaneswar", date: "22/03/2027", points: ["Drive to Patal Bhubaneswar", "Temple cave visit and stay"] },
-  { day: "Day 8", title: "Almora", date: "23/03/2027", points: ["Transfer to Almora", "Overnight stay"] },
-  { day: "Day 9", title: "Return", date: "25/03/2027", points: ["Check-out and return journey", "Tour concludes with drop-off"] },
+  { day: "Day 1", title: "Gangtok", date: "21/05/2027", points: ["Arrival and transfer to Gangtok", "Evening at MG Marg and overnight stay"] },
+  { day: "Day 2", title: "Gangtok", date: "22/05/2027", points: ["Visit Tsomgo Lake and Baba Mandir", "Overnight stay in Gangtok"] },
+  { day: "Day 3", title: "Gangtok to Natula Pass to Gangtok", date: "23/05/2027", points: ["Excursion to Natula Pass on the Indo-China border", "Return to Gangtok for overnight stay"] },
+  { day: "Day 4", title: "Pelling", date: "24/05/2027", points: ["Transfer to Pelling", "Evening leisure and overnight stay"] },
+  { day: "Day 5", title: "Pelling", date: "25/05/2027", points: ["Visit Pemayangtse Monastery and the Skywalk", "Explore Kecheopalri Lake and overnight stay"] },
+  { day: "Day 6", title: "Return", date: "27/05/2027", points: ["Check-out and return journey", "Tour concludes with drop-off"] },
 ];
 
 const inclusions = [
@@ -40,18 +37,9 @@ const exclusions = [
   "Any service or expense not specifically mentioned under inclusions",
 ];
 
-const galleryItems = [
-  { label: "Nainital", src: "/northbengal.jpeg" },
-  { label: "Koushani", src: "/group5.jpeg" },
-  { label: "Munsiyari", src: "/group6.jpeg" },
-  { label: "Patal Bhubaneswar", src: "/group2.jpeg" },
-  { label: "Almora", src: "/group3.jpeg" },
-  { label: "Kumaon Route", src: "/manali.jpeg" },
-];
+const packageInfo = getPackageBySlug("sikkim");
 
-const packageInfo = getPackageBySlug("munsiyari");
-
-export default function MunsiyariPage() {
+export default function SikkimPage() {
   return (
     <>
       <Navbar />
@@ -139,5 +127,3 @@ export default function MunsiyariPage() {
     </>
   );
 }
-
-

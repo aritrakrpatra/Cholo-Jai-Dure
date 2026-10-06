@@ -240,7 +240,13 @@ function ToursPageContent() {
                         <p className="mt-1 text-sm text-(--muted)">{tour.price}</p>
                       </div>
                     </Link>
-                    <div className="px-4 pb-4">
+                    <div className="flex gap-2 px-4 pb-4">
+                      <Link
+                        href={tour.packagePath}
+                        className="flex w-full items-center justify-center rounded-full border border-(--border) px-3 py-2 text-xs font-semibold text-foreground transition hover:border-amber-300/50"
+                      >
+                        Explore
+                      </Link>
                       <BookNowButton
                         packageName={tour.title}
                         packageId={tour.slug}

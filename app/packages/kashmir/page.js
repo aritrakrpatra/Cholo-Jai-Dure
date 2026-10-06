@@ -12,6 +12,7 @@ const itinerary = [
   {
     day: "Day 1",
     title: "Srinagar",
+    date: "29/03/2027",
     points: [
       "Visit Dal Lake and Shankaracharya Temple",
       "Explore Nishat Bagh, Shalimar Bagh, and Hazratbal Shrine",
@@ -20,16 +21,19 @@ const itinerary = [
   {
     day: "Day 2",
     title: "Srinagar",
+    date: "30/03/2027",
     points: ["Visit Gulmarg Gondola, Apharwat Peak, and Gulmarg Golf Course"],
   },
   {
     day: "Day 3",
     title: "Srinagar",
+    date: "31/03/2027",
     points: ["Explore Thajiwas Glacier, Sonmarg Meadows, and the Sind River"],
   },
   {
     day: "Day 4",
     title: "Pahalgam",
+    date: "01/04/2027",
     points: [
       "Visit Aru Valley, Betaab Valley, and Chandanwari",
       "Enjoy Lidder River en-route views and visit the saffron fields",
@@ -38,6 +42,7 @@ const itinerary = [
   {
     day: "Day 5",
     title: "Return",
+    date: "04/04/2027",
     points: ["Check out and begin the return journey"],
   },
 ];

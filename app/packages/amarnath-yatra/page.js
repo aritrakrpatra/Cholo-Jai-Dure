@@ -13,31 +13,31 @@ const itinerary = [
   {
     day: "Day 1",
     title: "Srinagar",
-    date: "02/07/2027",
+    date: "12/07/2027",
     points: ["Arrival and transfer to Srinagar", "Evening rest and overnight stay"],
   },
   {
     day: "Day 2",
     title: "Sonmarg",
-    date: "03/07/2027",
+    date: "13/07/2027",
     points: ["Transfer to Sonmarg", "Pilgrimage support and overnight stay"],
   },
   {
     day: "Day 3",
     title: "Srinagar",
-    date: "04/07/2027",
+    date: "14/07/2027",
     points: ["Return to Srinagar", "Local visits and overnight stay"],
   },
   {
     day: "Day 4",
     title: "Srinagar",
-    date: "05/07/2027",
+    date: "15/07/2027",
     points: ["Srinagar sightseeing and leisure", "Overnight stay"],
   },
   {
     day: "Day 5",
     title: "Return",
-    date: "08/07/2027",
+    date: "18/07/2027",
     points: ["Check-out and return journey", "Tour concludes with drop-off"],
   },
 ];
