@@ -10,8 +10,8 @@ import { useTheme } from "@/app/context/ThemeContext";
 
 const navItems = [
   { label: "Home", href: "/#home" },
-  { label: "International", href: "/tours?category=international" },
   { label: "Domestic", href: "/tours?category=domestic" },
+  { label: "International", href: "/tours?category=international" },
   { label: "Bike Ride", href: "/bike-ride" },
   { label: "Trekking", href: "/trekking" },
   { label: "Merchandise", href: "/merchandise" },
