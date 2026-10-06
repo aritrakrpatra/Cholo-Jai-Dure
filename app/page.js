@@ -78,8 +78,8 @@ export default function CholoJaiDureTours() {
                 />
                 ESTD. 2024
               </p>
-              <p lang="bn" className="mx-auto mt-3 max-w-sm text-sm text-white/80">
-                কাশ্মীর থেকে কন্যাকুমারী — স্বাদে থাকুক বাংলার ছোঁয়া
+              <p lang="bn" className="brand-reveal mx-auto mt-3 max-w-sm text-sm text-white/80" style={{ animationDelay: "320ms" }}>
+                "কাশ্মীর থেকে কন্যাকুমারী — স্বাদে থাকুক বাংলার ছোঁয়া"
               </p>
             </div>
           </div>
@@ -150,8 +150,8 @@ export default function CholoJaiDureTours() {
                 />
                 ESTD. 2024
               </p>
-              <p lang="bn" className="mx-auto mt-5 max-w-3xl text-base text-white/85 md:text-xl">
-                কাশ্মীর থেকে কন্যাকুমারী — স্বাদে থাকুক বাংলার ছোঁয়া
+              <p lang="bn" className="brand-reveal mx-auto mt-5 max-w-3xl text-base text-white/85 md:text-xl" style={{ animationDelay: "320ms" }}>
+                কাশ্মীর থেকে কন্যাকুমারী — স্বাদে থাকুক বাংলার ছোঁয়া’
               </p>
               <div className="mt-8 flex flex-row justify-center gap-4">
                 <a
