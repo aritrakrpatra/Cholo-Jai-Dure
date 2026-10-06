@@ -23,48 +23,11 @@ const monthOrder = [
   "December",
 ];
 
-const tourMonthsBySlug = {
-  "tamilnadu-kerala": ["October", "November", "December", "January", "February", "March"],
-  kashmir: ["April", "May", "June", "July", "August", "September"],
-  "kashmir-vaishno-devi": ["April", "May", "June", "July", "August", "September"],
-  "kashmir-gurez-valley": ["May", "June", "July", "August", "September"],
-  nainital: ["March", "April", "May", "June", "September", "October"],
-  "asam-arunachal": ["October", "November", "December", "January", "February", "March", "April"],
-  munsiyari: ["March", "April", "May", "June", "September", "October"],
-  "kashmir-tulip-festival": ["March", "April"],
-  "asam-meghalaya": ["October", "November", "December", "January", "February", "March", "April"],
-  varanasi: ["October", "November", "December", "January", "February", "March"],
-  puri: ["October", "November", "December", "January", "February", "March"],
-  vizag: ["October", "November", "December", "January", "February"],
-  "daringbari-gopalpur": ["October", "November", "December", "January", "February", "March"],
-  goa: ["November", "December", "January", "February", "March"],
-  rajasthan: ["October", "November", "December", "January", "February", "March"],
-  ladakh: ["June", "July", "August", "September"],
-  "spiti-valley": ["May", "June", "July", "August", "September", "October"],
-  ujjain: ["October", "November", "December", "January", "February", "March"],
-  "khajuraho-chitrakoot": ["October", "November", "December", "January", "February", "March"],
-  gujarat: ["October", "November", "December", "January", "February", "March"],
-  "do-dham-yatra": ["May", "June", "September", "October"],
-  "kanha-bandhavgarh": ["October", "November", "December", "January", "February", "March", "April", "May"],
-  "shimla-manali": ["March", "April", "May", "June", "September", "October", "November"],
-  "south-india": ["October", "November", "December", "January", "February", "March"],
-  "maharashtra-spiritual": ["October", "November", "December", "January", "February", "March"],
-  "auli-chopta": ["October", "November", "December", "January", "February", "March"],
-  darjeeling: ["March", "April", "May", "October", "November"],
-  sikkim: ["March", "April", "May", "October", "November"],
-  kerala: ["September", "October", "November", "December", "January", "February", "March"],
-  nepal: ["March", "April", "May", "June", "September", "October", "November"],
-  "adiyogi-darshan": ["October", "November", "December", "January", "February", "March"],
-  "amritsar-dalhousie-dharamshala": ["February", "March", "April", "May", "October", "November"],
-  andaman: ["October", "November", "December", "January", "February", "March", "April"],
-  thailand: ["November", "December", "January", "February", "March"],
-  vietnam: ["October", "November", "December", "January", "February", "March"],
-  "amarnath-yatra": ["June", "July", "August"],
-  haridwar: ["October", "November", "December", "January", "February", "March"],
-};
-
 function getTourMonths(tour) {
-  return tourMonthsBySlug[tour.slug] ?? monthOrder;
+  return (tour.travelDateOptions ?? [])
+    .filter((date) => typeof date === "string")
+    .map((date) => monthOrder[Number(date.slice(5, 7)) - 1])
+    .filter(Boolean);
 }
 
 function isInternationalTour(tour) {
@@ -85,6 +48,9 @@ function ToursPageContent() {
   const [query, setQuery] = useState("");
   const [tourType, setTourType] = useState("group");
   const [selectedMonth, setSelectedMonth] = useState("all");
+  const availableMonths = monthOrder.filter((month) =>
+    tours.some((tour) => !isInternationalTour(tour) && getTourMonths(tour).includes(month)),
+  );
 
   const filteredTours = useMemo(() => {
     const normalized = query.trim().toLowerCase();
@@ -219,7 +185,7 @@ function ToursPageContent() {
                     className="w-full rounded-3xl border border-(--border) bg-(--surface) px-5 py-3 text-sm text-foreground outline-none focus:border-amber-300/60"
                   >
                     <option value="all">All Months</option>
-                    {monthOrder.map((month) => (
+                    {availableMonths.map((month) => (
                       <option key={month} value={month}>
                         {month}
                       </option>
