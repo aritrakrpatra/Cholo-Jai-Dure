@@ -1,20 +1,28 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { Phone, ArrowRight, MapPin, Plane, Heart, Sparkles } from "lucide-react";
 import Navbar from "@/app/components/Navbar";
-import { useTheme } from "@/app/context/ThemeContext";
+import BookNowButton from "@/app/components/BookNowButton";
 
-const highlights = [
-  "Pickup & Drop-off from Station to Station",
-  "Tempo Traveller / Bus Transportation",
-  "Standard Hotel Accommodation (Non-AC)",
-  "Daily Breakfast, Lunch & Dinner",
-  "Professional Travel Guide",
-  "Complete Sightseeing as per Itinerary",
-  "1 Litre Water Bottle Per Person Daily",
+export const metadata = {
+  title: "Do Dham",
+  description: "A sacred Uttarakhand yatra covering Kedarnath and Badrinath with three departure batches.",
+};
+
+const itinerary = [
+  { day: "Day 1", title: "Rishikesh", points: ["Arrival and journey to Rishikesh", "Attend the famous Ganga Aarti on the banks of the Ganges", "Evening leisure and overnight stay"] },
+  { day: "Day 2", title: "Joshimath", points: ["Scenic drive through the Himalayas", "Visit Dev Prayag, Karn Prayag, and Narasimha Temple", "Overnight stay in Joshimath"] },
+  { day: "Day 3", title: "Badrinath Dham & Mana Village", points: ["Darshan at Badrinath Dham", "Explore Mana Village", "Visit Saraswati River, Panch Pandav Murti, Nand Prayag, and Vishnu Prayag"] },
+  { day: "Day 4", title: "Guptkashi", points: ["Travel to Guptkashi", "Visit Rudra Prayag", "Overnight stay"] },
+  { day: "Day 5", title: "Kedarnath Dham", points: ["Visit Dhari Devi Temple, Kedarnath Dham, and Kaal Bhairav Temple", "Spiritual activities and darshan", "Overnight stay"] },
+  { day: "Day 6", title: "Guptkashi", points: ["Rest and relaxation day", "Explore local surroundings", "Overnight stay"] },
+  { day: "Day 7", title: "Haridwar", points: ["Visit Har Ki Pauri", "Attend the world-famous Ganga Aarti", "Shopping and local sightseeing", "Overnight stay"] },
+  { day: "Day 8", title: "Return Journey", points: ["Departure for Delhi", "Drop at Railway Station", "End of the sacred journey"] },
+];
+
+const departures = [
+  "Journey: 08/10/2027 | Return: 15/10/2027",
+  "Journey: 08/11/2027 | Return: 15/11/2027",
+  "Journey: 08/12/2027 | Return: 15/12/2027",
 ];
 
 const inclusions = [
@@ -36,138 +44,87 @@ const exclusions = [
   "Any service or expense not specifically mentioned under inclusions",
 ];
 
-const itinerary = [
-  {
-    day: "Day 1",
-    title: "Rishikesh",
-    date: "09/10/2027",
-    points: [
-      "Arrival and journey to Rishikesh",
-      "Attend the famous Ganga Aarti on the banks of the Ganges",
-      "Evening leisure and overnight stay",
-    ],
-  },
-  {
-    day: "Day 2",
-    title: "Joshimath",
-    date: "10/10/2027",
-    points: [
-      "Scenic drive through the Himalayas",
-      "Visit Dev Prayag, Karn Prayag, Narasimha Temple",
-      "Overnight stay in Joshimath",
-    ],
-  },
-  {
-    day: "Day 3",
-    title: "Badrinath Dham & Mana Village",
-    date: "11/10/2027",
-    points: [
-      "Darshan at Badrinath Dham",
-      "Explore Mana Village",
-      "Visit Saraswati River, Panch Pandav Murti, Nand Prayag, Vishnu Prayag",
-    ],
-  },
-  {
-    day: "Day 4",
-    title: "Guptkashi",
-    date: "12/10/2026",
-    points: [
-      "Travel to Guptkashi",
-      "Visit Rudra Prayag",
-      "Overnight stay",
-    ],
-  },
-  {
-    day: "Day 5",
-    title: "Kedarnath Dham",
-    date: "13/10/2026",
-    points: [
-      "Visit Dhari Devi Temple, Kedarnath Dham, Kaal Bhairav Temple",
-      "Spiritual activities and darshan",
-      "Overnight stay",
-    ],
-  },
-  {
-    day: "Day 6",
-    title: "Guptkashi",
-    date: "14/10/2026",
-    points: [
-      "Rest and relaxation day",
-      "Explore local surroundings",
-      "Overnight stay",
-    ],
-  },
-  {
-    day: "Day 7",
-    title: "Haridwar",
-    date: "15/10/2026",
-    points: [
-      "Visit Har Ki Pauri",
-      "Attend the world-famous Ganga Aarti",
-      "Shopping and local sightseeing",
-      "Overnight stay",
-    ],
-  },
-  {
-    day: "Day 8",
-    title: "Return Journey",
-    date: "16/10/2026",
-    points: [
-      "Departure for Delhi",
-      "Drop at Railway Station",
-      "End of the sacred journey",
-    ],
-  },
+const galleryItems = [
+  { label: "Rishikesh", src: "/kedarnath.jpeg" },
+  { label: "Badrinath Dham", src: "/varanasi.jpeg" },
+  { label: "Kedarnath Dham", src: "/house-boat.jpeg" },
+  { label: "Guptkashi", src: "/group2.jpeg" },
+  { label: "Haridwar", src: "/group3.jpeg" },
+  { label: "Himalayan Route", src: "/group4.jpeg" },
 ];
-
-const destinations = [
-  { image: "/kedarnath.jpeg" },
-  { image: "/varanasi.jpeg" },
-  { image: "/house-boat.jpeg" },
-  { image: "/group2.jpeg" },
-  { image: "/group3.jpeg" },
-  { image: "/group4.jpeg" },
-];
-
-const journeyDates = [
-  { id: 1, date: "2027-10-08", label: "October 08 - 15, 2027" },
-  { id: 2, date: "2027-11-08", label: "November 08 - 15, 2027" },
-  { id: 3, date: "2027-12-08", label: "December 08 - 15, 2027" },
-];
-
-const defaultSelectedDate = journeyDates[0].date;
-
-function formatDisplayDate(date) {
-  return date.toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
-
-function addDays(dateString, days) {
-  const date = new Date(dateString);
-  const next = new Date(date);
-  next.setDate(date.getDate() + days);
-  return next;
-}
 
 export default function DoDhamYatraPage() {
-  const { resolvedTheme } = useTheme();
-  const isLightTheme = resolvedTheme === "light";
-  const [selectedDate, setSelectedDate] = useState(defaultSelectedDate);
-
-  const dynamicItinerary = useMemo(() => {
-    return itinerary.map((item, index) => ({
-      ...item,
-      date: formatDisplayDate(addDays(selectedDate, index)),
-    }));
-  }, [selectedDate]);
-
   return (
     <>
       <Navbar />
-      <div className={isLightTheme ? "bg-[linear-gradient(135deg,#f8f5ec_0%,#fffdf9_100%)] text-slate-900" : "bg-slate-950 text-white"}>
+      <main className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
+        <section className="border-b border-white/10 py-10 sm:py-14">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <Link
+              href="/tours"
+              className="inline-flex rounded-full border border-white/20 px-4 py-2 text-sm text-white/80 transition hover:border-amber-300/40 hover:text-amber-200"
+            >
+              Back to Tours
+            </Link>
+
+            <div className="mt-8 grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+              <div>
+                <p className="text-sm uppercase tracking-[0.3em] text-amber-300">8D / 7N Group Departure</p>
+                <h1 className="mt-3 text-3xl font-bold sm:text-4xl lg:text-5xl">Do Dham</h1>
+                <p className="mt-4 max-w-2xl text-base text-white/75 sm:text-lg">
+                  A sacred Uttarakhand yatra covering Kedarnath and Badrinath with guided support across three departure batches.
+                </p>
+                <div className="mt-6 flex flex-wrap items-center gap-3">
+                  <p className="text-2xl font-semibold text-amber-200">Rs 23,000/- per person</p>
+                  <span className="rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-amber-200">
+                    Fixed Group Dates
+                  </span>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <BookNowButton packageName="Do Dham" packageId="do-dham-yatra" />
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 shadow-2xl sm:p-6">
+                <h2 className="text-lg font-semibold text-white sm:text-xl">Departure Batches</h2>
+                <ul className="mt-4 space-y-3 text-sm text-white/80 sm:text-base">
+                  {departures.map((departure) => (
+                    <li key={departure} className="rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3">
+                      {departure}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="pb-10 sm:pb-14">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 sm:p-6 lg:p-8">
+              <h2 className="text-2xl font-bold sm:text-3xl">Day-wise Itinerary</h2>
+              <div className="mt-6 space-y-4">
+                {itinerary.map((item) => (
+                  <article
+                    key={`${item.day}-${item.title}`}
+                    className="rounded-2xl border border-white/10 bg-slate-950/70 p-4 sm:p-5"
+                  >
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">{item.day}</p>
+                    <h3 className="mt-2 text-xl font-semibold">{item.title}</h3>
+                    <ul className="mt-3 space-y-2 text-white/75">
+                      {item.points.map((point) => (
+                        <li key={point} className="flex items-start gap-3">
+                          <span className="mt-2 block h-1.5 w-1.5 rounded-full bg-white/60" />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="pb-10 sm:pb-14">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -183,6 +140,7 @@ export default function DoDhamYatraPage() {
                   ))}
                 </ul>
               </div>
+
               <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 sm:p-6">
                 <h2 className="text-2xl font-bold sm:text-3xl">Exclusions</h2>
                 <ul className="mt-5 space-y-3 text-white/80">
@@ -197,8 +155,8 @@ export default function DoDhamYatraPage() {
             </div>
           </div>
         </section>
-
-      </div>
+      </main>
     </>
-  )
+  );
 }
+

@@ -60,6 +60,7 @@ const tourMonthsBySlug = {
   thailand: ["November", "December", "January", "February", "March"],
   vietnam: ["October", "November", "December", "January", "February", "March"],
   "amarnath-yatra": ["June", "July", "August"],
+  haridwar: ["October", "November", "December", "January", "February", "March"],
 };
 
 function getTourMonths(tour) {
@@ -68,6 +69,14 @@ function getTourMonths(tour) {
 
 function isInternationalTour(tour) {
   return tour.category === "international";
+}
+
+function formatTravelDate(dateString) {
+  return new Date(`${dateString}T00:00:00`).toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 }
 
 function ToursPageContent() {
@@ -235,7 +244,14 @@ function ToursPageContent() {
                         className="h-36 w-full object-cover sm:h-28"
                       />
                       <div className="p-4">
-                        <p className="text-[11px] uppercase tracking-[0.25em] text-amber-300">{tour.subtitle}</p>
+                        <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                          <p className="text-[11px] uppercase tracking-[0.25em] text-amber-300">{tour.subtitle}</p>
+                          {Array.isArray(tour.travelDateOptions) && tour.travelDateOptions.length > 0 && (
+                            <p className="text-[11px] font-semibold text-emerald-300">
+                              DOJ: {tour.travelDateOptions.map(formatTravelDate).join(" / ")}
+                            </p>
+                          )}
+                        </div>
                         <h2 className="mt-1 text-lg font-semibold text-foreground">{tour.title}</h2>
                         <p className="mt-1 text-sm text-(--muted)">{tour.price}</p>
                       </div>

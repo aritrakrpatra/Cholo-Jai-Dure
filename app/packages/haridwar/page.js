@@ -1,76 +1,21 @@
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/app/components/Navbar";
 import BookNowButton from "@/app/components/BookNowButton";
-import { getPackageBySlug } from "@/app/data/packages";
 
 export const metadata = {
-  title: "Rajasthan",
-  description: "An 11-day Rajasthan tour covering Bikaner, Jaisalmer, Sam, Jodhpur, Mount Abu, Udaipur, Pushkar, and Jaipur.",
+  title: "Haridwar",
+  description: "November Haridwar and Rishikesh itinerary with Ganga Aarti and riverside darshan.",
 };
 
 const itinerary = [
-  {
-    day: "Day 1",
-    title: "Bikaner",
-    points: ["Visit Junagarh Fort and Karni Mata Temple"],
-  },
-  {
-    day: "Day 2",
-    title: "Jaisalmer",
-    points: ["Visit Jaisalmer Museum and Jaisalmer Fort", "Explore Gadisar Lake"],
-  },
-  {
-    day: "Day 3",
-    title: "Sam",
-    points: [
-      "Experience the sand dunes and camel safari",
-      "Visit Longewala War Memorial and Tanot Mata Temple",
-    ],
-  },
-  {
-    day: "Day 4",
-    title: "Jodhpur",
-    points: ["Visit Mehrangarh Fort and Jaswant Thada", "See the Blue City viewpoint"],
-  },
-  {
-    day: "Day 5",
-    title: "Mount Abu",
-    points: ["Visit Nakki Lake and Sunset Point", "Explore Mall Road"],
-  },
-  {
-    day: "Day 6",
-    title: "Udaipur",
-    points: [
-      "Visit Kumbhalgarh Fort and Haldighati",
-      "Explore Maharana Pratap Museum and Chetak Samadhi",
-    ],
-  },
-  {
-    day: "Day 7",
-    title: "Udaipur",
-    points: ["Visit City Palace, Lake Pichola, Fateh Sagar Lake, and Jag Mandir"],
-  },
-  {
-    day: "Day 8",
-    title: "Pushkar",
-    points: ["Visit Chittorgarh Fort and Brahma Temple", "Explore Pushkar Lake"],
-  },
-  {
-    day: "Day 9",
-    title: "Jaipur",
-    points: ["Visit Hawa Mahal, Jantar Mantar, Amer Fort, and Jal Mahal"],
-  },
-  {
-    day: "Day 10",
-    title: "Jaipur",
-    points: ["Visit Khatu Shyam Temple"],
-  },
-  {
-    day: "Day 11",
-    title: "Return",
-    points: ["Check out and begin the return journey"],
-  },
+  { day: "Day 1", title: "Haridwar", points: ["Arrival and transfer to Haridwar", "Evening Ganga Aarti at Har Ki Pauri and overnight stay"] },
+  { day: "Day 2", title: "Rishikesh", points: ["Transfer to Rishikesh", "Visit Ram Jhula, Laxman Jhula, and Triveni Ghat", "Overnight stay"] },
+  { day: "Day 3", title: "Rishikesh & Haridwar", points: ["Visit Neelkanth Mahadev and Parmarth Niketan", "Local market time and overnight stay"] },
+  { day: "Day 4", title: "Return", points: ["Check-out and return journey", "Tour concludes with drop-off"] },
 ];
+
+const departures = ["Journey: 03/11/2027 | Return: 08/11/2027"];
 
 const inclusions = [
   "Station-to-station pick-up and drop-off as per the itinerary",
@@ -86,16 +31,21 @@ const exclusions = [
   "Train, flight, or bus tickets unless specifically mentioned in the package",
   "Personal expenses such as laundry, telephone calls, room service, shopping, and tips",
   "Food and beverages not mentioned under inclusions",
-  "Monument, museum, and attraction entry fees unless specifically mentioned",
+  "Monument, museum, park, and attraction entry fees unless specifically mentioned",
   "Optional activities, rides, and adventure sports not included in the itinerary",
   "Any service or expense not specifically mentioned under inclusions",
 ];
 
-const departures = ["Journey: 10/12/2027 | Return: 22/12/2027"];
+const galleryItems = [
+  { label: "Har Ki Pauri", src: "/kedarnath.jpeg" },
+  { label: "Ganga Aarti", src: "/varanasi.jpeg" },
+  { label: "Rishikesh", src: "/house-boat.jpeg" },
+  { label: "Ram Jhula", src: "/group2.jpeg" },
+  { label: "Laxman Jhula", src: "/group3.jpeg" },
+  { label: "Riverside Route", src: "/group4.jpeg" },
+];
 
-const packageInfo = getPackageBySlug("rajasthan");
-
-export default function RajasthanPage() {
+export default function HaridwarPage() {
   return (
     <>
       <Navbar />
@@ -111,17 +61,19 @@ export default function RajasthanPage() {
 
             <div className="mt-8 grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
               <div>
-                <p className="text-sm uppercase tracking-[0.3em] text-amber-300">{packageInfo.duration}</p>
-                <h1 className="mt-3 text-3xl font-bold sm:text-4xl lg:text-5xl">{packageInfo.title}</h1>
-                <p className="mt-4 max-w-2xl text-base text-white/75 sm:text-lg">{packageInfo.description}</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-amber-300">4D / 3N Group Departure</p>
+                <h1 className="mt-3 text-3xl font-bold sm:text-4xl lg:text-5xl">Haridwar</h1>
+                <p className="mt-4 max-w-2xl text-base text-white/75 sm:text-lg">
+                  A November Haridwar and Rishikesh route with Ganga Aarti and riverside darshan.
+                </p>
                 <div className="mt-6 flex flex-wrap items-center gap-3">
-                  <p className="text-2xl font-semibold text-amber-200">{packageInfo.price}</p>
+                  <p className="text-2xl font-semibold text-amber-200">Price on request</p>
                   <span className="rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-amber-200">
                     Fixed Group Dates
                   </span>
                 </div>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <BookNowButton packageName={packageInfo.title} packageId={packageInfo.slug} />
+                  <BookNowButton packageName="Haridwar" packageId="haridwar" />
                 </div>
               </div>
 

@@ -97,6 +97,8 @@ const exclusions = [
   "Any service or expense not specifically mentioned under inclusions",
 ];
 
+const departures = ["Journey: 24/05/2027 | Return: 05/06/2027"];
+
 const galleryItems = [
   { label: "Ladakh", src: "/ladakh.jpeg" },
   { label: "Leh", src: "/group3.jpeg" },
@@ -121,15 +123,32 @@ export default function LadakhPage() {
             >
               Back to Tours
             </Link>
-            <div className="mt-8 max-w-3xl">
-              <p className="text-sm uppercase tracking-[0.3em] text-amber-300">{packageInfo.duration}</p>
-              <h1 className="mt-3 text-3xl font-bold sm:text-4xl lg:text-5xl">{packageInfo.title}</h1>
-              <p className="mt-4 text-base text-white/75 sm:text-lg">{packageInfo.description}</p>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <p className="text-2xl font-semibold text-amber-200">{packageInfo.price}</p>
+
+            <div className="mt-8 grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+              <div>
+                <p className="text-sm uppercase tracking-[0.3em] text-amber-300">{packageInfo.duration}</p>
+                <h1 className="mt-3 text-3xl font-bold sm:text-4xl lg:text-5xl">{packageInfo.title}</h1>
+                <p className="mt-4 max-w-2xl text-base text-white/75 sm:text-lg">{packageInfo.description}</p>
+                <div className="mt-6 flex flex-wrap items-center gap-3">
+                  <p className="text-2xl font-semibold text-amber-200">{packageInfo.price}</p>
+                  <span className="rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-amber-200">
+                    Fixed Group Dates
+                  </span>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <BookNowButton packageName={packageInfo.title} packageId={packageInfo.slug} />
+                </div>
               </div>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <BookNowButton packageName={packageInfo.title} packageId={packageInfo.slug} />
+
+              <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 shadow-2xl sm:p-6">
+                <h2 className="text-lg font-semibold text-white sm:text-xl">Departure Batches</h2>
+                <ul className="mt-4 space-y-3 text-sm text-white/80 sm:text-base">
+                  {departures.map((departure) => (
+                    <li key={departure} className="rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3">
+                      {departure}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
@@ -142,12 +161,11 @@ export default function LadakhPage() {
               <div className="mt-6 space-y-4">
                 {itinerary.map((item) => (
                   <article
-                    key={`${item.day}-${item.title}-${item.date ?? ""}`}
+                    key={`${item.day}-${item.title}`}
                     className="rounded-2xl border border-white/10 bg-slate-950/70 p-4 sm:p-5"
                   >
                     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">{item.day}</p>
                     <h3 className="mt-2 text-xl font-semibold">{item.title}</h3>
-                    {item.date ? <p className="mt-1 text-sm text-amber-200">{item.date}</p> : null}
                     <ul className="mt-3 space-y-2 text-white/75">
                       {item.points.map((point) => (
                         <li key={point} className="flex items-start gap-3">

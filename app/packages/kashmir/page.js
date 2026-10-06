@@ -12,7 +12,6 @@ const itinerary = [
   {
     day: "Day 1",
     title: "Srinagar",
-    date: "29/03/2027",
     points: [
       "Visit Dal Lake and Shankaracharya Temple",
       "Explore Nishat Bagh, Shalimar Bagh, and Hazratbal Shrine",
@@ -21,19 +20,16 @@ const itinerary = [
   {
     day: "Day 2",
     title: "Srinagar",
-    date: "30/03/2027",
     points: ["Visit Gulmarg Gondola, Apharwat Peak, and Gulmarg Golf Course"],
   },
   {
     day: "Day 3",
     title: "Srinagar",
-    date: "31/03/2027",
     points: ["Explore Thajiwas Glacier, Sonmarg Meadows, and the Sind River"],
   },
   {
     day: "Day 4",
     title: "Pahalgam",
-    date: "01/04/2027",
     points: [
       "Visit Aru Valley, Betaab Valley, and Chandanwari",
       "Enjoy Lidder River en-route views and visit the saffron fields",
@@ -42,9 +38,13 @@ const itinerary = [
   {
     day: "Day 5",
     title: "Return",
-    date: "04/04/2027",
     points: ["Check out and begin the return journey"],
   },
+];
+
+const departures = [
+  "Journey: 29/03/2027 | Return: 04/04/2027",
+  "Journey: 04/10/2027 | Return: 11/10/2027",
 ];
 
 const inclusions = [
@@ -83,13 +83,32 @@ export default function KashmirPage() {
             >
               Back to Tours
             </Link>
-            <div className="mt-8 max-w-3xl">
-              <p className="text-sm uppercase tracking-[0.3em] text-amber-300">{packageInfo.duration}</p>
-              <h1 className="mt-3 text-3xl font-bold sm:text-4xl lg:text-5xl">{packageInfo.title}</h1>
-              <p className="mt-4 text-base text-white/75 sm:text-lg">{packageInfo.description}</p>
-              <p className="mt-6 text-2xl font-semibold text-amber-200">{packageInfo.price}</p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <BookNowButton packageName={packageInfo.title} packageId={packageInfo.slug} />
+
+            <div className="mt-8 grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+              <div>
+                <p className="text-sm uppercase tracking-[0.3em] text-amber-300">{packageInfo.duration}</p>
+                <h1 className="mt-3 text-3xl font-bold sm:text-4xl lg:text-5xl">{packageInfo.title}</h1>
+                <p className="mt-4 max-w-2xl text-base text-white/75 sm:text-lg">{packageInfo.description}</p>
+                <div className="mt-6 flex flex-wrap items-center gap-3">
+                  <p className="text-2xl font-semibold text-amber-200">{packageInfo.price}</p>
+                  <span className="rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-amber-200">
+                    Fixed Group Dates
+                  </span>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <BookNowButton packageName={packageInfo.title} packageId={packageInfo.slug} />
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 shadow-2xl sm:p-6">
+                <h2 className="text-lg font-semibold text-white sm:text-xl">Departure Batches</h2>
+                <ul className="mt-4 space-y-3 text-sm text-white/80 sm:text-base">
+                  {departures.map((departure) => (
+                    <li key={departure} className="rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3">
+                      {departure}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>

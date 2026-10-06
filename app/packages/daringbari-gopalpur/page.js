@@ -2,48 +2,37 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/app/components/Navbar";
 import BookNowButton from "@/app/components/BookNowButton";
+import { getPackageBySlug } from "@/app/data/packages";
 
 export const metadata = {
   title: "Daringbari & Gopalpur",
   description: "September Daringbari and Gopalpur itinerary with a compact hill-and-coast route.",
 };
 
-const highlights = [
-  "Pickup & Drop-off from Station to Station",
-  "Tempo Traveller / Bus Transportation",
-  "Standard Hotel Accommodation",
-  "Daily Breakfast, Lunch & Dinner",
-  "Professional Travel Guide",
-  "Complete Sightseeing as per Itinerary",
-  "1 Litre Water Bottle Per Person Daily",
-];
-
 const itinerary = [
   {
     day: "Day 1",
     title: "Daringbari",
-    date: "September Batch",
     points: ["Arrival and transfer to Daringbari", "Enjoy the hill station evening and overnight stay"],
   },
   {
     day: "Day 2",
     title: "Gopalpur",
-    date: "September Batch",
     points: ["Drive to Gopalpur by the coast", "Relax at the beach and stay overnight"],
   },
   {
     day: "Day 3",
     title: "Gopalpur",
-    date: "September Batch",
     points: ["Local sightseeing and beach time", "Evening leisure and another overnight stay"],
   },
   {
     day: "Day 4",
     title: "Return",
-    date: "September Batch",
     points: ["Check-out and return journey", "Tour concludes with drop-off"],
   },
 ];
+
+const departures = ["Journey: 24/09/2027 | Return: 28/09/2027"];
 
 const galleryItems = [
   { label: "Daringbari", src: "/group6.jpeg" },
@@ -73,15 +62,110 @@ const exclusions = [
   "Any service or expense not specifically mentioned under inclusions",
 ];
 
+const packageInfo = getPackageBySlug("daringbari-gopalpur");
+
 export default function DaringbariGopalpurPage() {
   return (
     <>
       <Navbar />
       <main className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
-        
+        <section className="border-b border-white/10 py-10 sm:py-14">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <Link
+              href="/tours"
+              className="inline-flex rounded-full border border-white/20 px-4 py-2 text-sm text-white/80 transition hover:border-amber-300/40 hover:text-amber-200"
+            >
+              Back to Tours
+            </Link>
 
-        
+            <div className="mt-8 grid items-start gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+              <div>
+                <p className="text-sm uppercase tracking-[0.3em] text-amber-300">{packageInfo.duration}</p>
+                <h1 className="mt-3 text-3xl font-bold sm:text-4xl lg:text-5xl">{packageInfo.title}</h1>
+                <p className="mt-4 max-w-2xl text-base text-white/75 sm:text-lg">{packageInfo.description}</p>
+                <div className="mt-6 flex flex-wrap items-center gap-3">
+                  <p className="text-2xl font-semibold text-amber-200">{packageInfo.price}</p>
+                  <span className="rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-amber-200">
+                    Fixed Group Dates
+                  </span>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <BookNowButton packageName={packageInfo.title} packageId={packageInfo.slug} />
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 shadow-2xl sm:p-6">
+                <h2 className="text-lg font-semibold text-white sm:text-xl">Departure Batches</h2>
+                <ul className="mt-4 space-y-3 text-sm text-white/80 sm:text-base">
+                  {departures.map((departure) => (
+                    <li key={departure} className="rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3">
+                      {departure}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="pb-10 sm:pb-14">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 sm:p-6 lg:p-8">
+              <h2 className="text-2xl font-bold sm:text-3xl">Day-wise Itinerary</h2>
+              <div className="mt-6 space-y-4">
+                {itinerary.map((item) => (
+                  <article
+                    key={`${item.day}-${item.title}`}
+                    className="rounded-2xl border border-white/10 bg-slate-950/70 p-4 sm:p-5"
+                  >
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">{item.day}</p>
+                    <h3 className="mt-2 text-xl font-semibold">{item.title}</h3>
+                    <ul className="mt-3 space-y-2 text-white/75">
+                      {item.points.map((point) => (
+                        <li key={point} className="flex items-start gap-3">
+                          <span className="mt-2 block h-1.5 w-1.5 rounded-full bg-white/60" />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="pb-10 sm:pb-14">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 sm:p-6">
+                <h2 className="text-2xl font-bold sm:text-3xl">Inclusions</h2>
+                <ul className="mt-5 space-y-3 text-white/80">
+                  {inclusions.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-1 block h-2 w-2 rounded-full bg-emerald-300" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 sm:p-6">
+                <h2 className="text-2xl font-bold sm:text-3xl">Exclusions</h2>
+                <ul className="mt-5 space-y-3 text-white/80">
+                  {exclusions.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-1 block h-2 w-2 rounded-full bg-rose-300" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );
 }
+
