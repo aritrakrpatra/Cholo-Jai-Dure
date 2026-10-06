@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Cinzel";
+  src: url("/cinzel-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+}
+
 :root {
   --background: #f6f0e8;
   --foreground: #14213d;
@@ -72,7 +80,7 @@ body {
 }
 
 .font-brand {
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: "Cinzel", Georgia, serif;
   letter-spacing: 0;
 }
 
