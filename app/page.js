@@ -60,11 +60,14 @@ export default function CholoJaiDureTours() {
           <div className="relative z-10 flex flex-col items-center px-4 pb-8 pt-6 text-center">
             <div className="mx-auto max-w-md">
               <h1
-                className="brand-reveal text-[clamp(1.8rem,8vw,2.8rem)] font-bold leading-tight"
+                className="brand-reveal font-brand text-[clamp(1.8rem,8vw,2.8rem)] font-bold leading-tight"
                 style={{ color: "var(--foreground)" }}
               >
                 CHOLO JAI DURE
               </h1>
+              <h2 className="brand-reveal font-brand mt-2 text-[clamp(1rem,5vw,1.45rem)] font-semibold text-white/80" style={{ animationDelay: "160ms" }}>
+                Tour &amp; Travels
+              </h2>
               <p className="mb-3 mt-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] text-white/80">
                 <Image
                   src="/cjd%20logo.jpg"
@@ -75,9 +78,6 @@ export default function CholoJaiDureTours() {
                 />
                 ESTD. 2024
               </p>
-              <h2 className="brand-reveal mt-2 text-[clamp(1rem,5vw,1.45rem)] font-semibold text-white/80" style={{ animationDelay: "160ms" }}>
-                Tour &amp; Travels
-              </h2>
               <p lang="bn" className="mx-auto mt-3 max-w-sm text-sm text-white/80">
                 কাশ্মীর থেকে কন্যাকুমারী — স্বাদে থাকুক বাংলার ছোঁয়া
               </p>
@@ -161,9 +161,12 @@ export default function CholoJaiDureTours() {
                 </div>
               </div>
 
-              <h1 className="brand-reveal text-[clamp(1.5rem,7vw,2.7rem)] font-bold leading-tight sm:text-5xl md:text-7xl" style={{ color: "white", textShadow: "0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.7)" }}>
+              <h1 className="brand-reveal font-brand text-[clamp(1.5rem,7vw,2.7rem)] font-bold leading-tight sm:text-5xl md:text-7xl" style={{ color: "white", textShadow: "0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.7)" }}>
                 CHOLO JAI DURE
               </h1>
+              <h2 className="brand-reveal font-brand mt-3 text-[clamp(1rem,5vw,1.75rem)] font-semibold text-white/80 sm:text-3xl md:text-5xl" style={{ animationDelay: "160ms" }}>
+                Tour &amp; Travels
+              </h2>
               <p className="mb-4 mt-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm uppercase tracking-[0.3em] text-white/80">
                 <Image
                   src="/cjd%20logo.jpg"
@@ -174,9 +177,6 @@ export default function CholoJaiDureTours() {
                 />
                 ESTD. 2024
               </p>
-              <h2 className="brand-reveal mt-3 text-[clamp(1rem,5vw,1.75rem)] font-semibold text-white/80 sm:text-3xl md:text-5xl" style={{ animationDelay: "160ms" }}>
-                Tour &amp; Travels
-              </h2>
               <p lang="bn" className="mx-auto mt-5 max-w-3xl text-base text-white/85 md:text-xl">
                 কাশ্মীর থেকে কন্যাকুমারী — স্বাদে থাকুক বাংলার ছোঁয়া
               </p>

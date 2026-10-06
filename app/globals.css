@@ -71,6 +71,11 @@ body {
     radial-gradient(circle at top right, rgba(120, 119, 198, 0.08), transparent 26%);
 }
 
+.font-brand {
+  font-family: var(--font-brand), Georgia, serif;
+  letter-spacing: 0;
+}
+
 body::before {
   content: "";
   position: fixed;
