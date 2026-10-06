@@ -134,33 +134,6 @@ export default function CholoJaiDureTours() {
 
           <div className="relative z-10 flex min-h-[calc(100svh-5rem)] flex-col items-center justify-center px-6 pb-8 pt-10 text-center md:min-h-screen md:pt-16">
             <div className="mx-auto max-w-4xl">
-              <div className="mb-6 hidden justify-center min-[421px]:flex">
-                <div className="flex w-full max-w-2xl overflow-hidden rounded-full border border-amber-400/40 bg-black/40 shadow-lg shadow-amber-400/10 backdrop-blur-md">
-                  <span className="shrink-0 rounded-l-full bg-amber-400 px-4 py-2 text-xs font-bold uppercase tracking-widest text-slate-950">
-                    FLASH NEWS
-                  </span>
-                  <div className="overflow-hidden flex-1">
-                    <div
-                      className="flex whitespace-nowrap py-2 text-sm text-amber-200"
-                      style={{ animation: "marquee 30s linear infinite" }}
-                    >
-                      <span className="mx-6">✈️ <strong>Chardham Yatra 2026</strong> — Book now at ₹30,000 | 11N/12D</span>
-                      <span className="mx-6">🏔️ <strong>Kashmir Special</strong> — Limited seats available!</span>
-                      <span className="mx-6">🕌 <strong>Do Dham Yatra</strong> — ₹23,000 | 7N/8D</span>
-                      <span className="mx-6">🌴 <strong>Tamil Nadu &amp; Kerala</strong> — ₹26,000 | 9N/10D</span>
-                      <span className="mx-6">🏖️ <strong>Vizag Tour</strong> — Coastal getaway deal!</span>
-                      <span className="mx-6">🌿 <strong>West Sikkim</strong> — Northeast retreat at ₹12,000</span>
-                      <span className="mx-6">🌄 <strong>Arunachal Pradesh</strong> — ₹24,000 | 7N/8D</span>
-                      <span className="mx-6">📞 <strong>Cholo Jai Dure Tour &amp; Travels</strong> — Call us now!</span>
-                      <span className="mx-6">✈️ <strong>Chardham Yatra 2026</strong> — Book now at ₹30,000 | 11N/12D</span>
-                      <span className="mx-6">🏔️ <strong>Kashmir Special</strong> — Limited seats available!</span>
-                      <span className="mx-6">🕌 <strong>Do Dham Yatra</strong> — ₹23,000 | 7N/8D</span>
-                      <span className="mx-6">🌴 <strong>Tamil Nadu &amp; Kerala</strong> — ₹26,000 | 9N/10D</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <h1 className="brand-reveal font-brand text-[clamp(1.5rem,7vw,2.7rem)] font-bold leading-tight sm:text-5xl md:text-7xl" style={{ color: "white", textShadow: "0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.7)" }}>
                 CHOLO JAI DURE
               </h1>
