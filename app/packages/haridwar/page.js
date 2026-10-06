@@ -9,9 +9,9 @@ export const metadata = {
 };
 
 const itinerary = [
-  { day: "Day 1", title: "Haridwar", points: ["Arrival and transfer to Haridwar", "Evening Ganga Aarti at Har Ki Pauri and overnight stay"] },
-  { day: "Day 2", title: "Rishikesh", points: ["Transfer to Rishikesh", "Visit Ram Jhula, Laxman Jhula, and Triveni Ghat", "Overnight stay"] },
-  { day: "Day 3", title: "Rishikesh & Haridwar", points: ["Visit Neelkanth Mahadev and Parmarth Niketan", "Local market time and overnight stay"] },
+  { day: "Day 1", title: "Haridwar", points: ["Arrival and transfer to Haridwar", "Evening Ganga Aarti at Har Ki Pauri", "Overnight stay in Haridwar (Night 1 of 2)"] },
+  { day: "Day 2", title: "Haridwar", points: ["Visit Mansa Devi and Chandi Devi temples", "Explore Haridwar ghats and local markets", "Overnight stay in Haridwar (Night 2 of 2)"] },
+  { day: "Day 3", title: "Rishikesh", points: ["Transfer to Rishikesh", "Visit Ram Jhula, Laxman Jhula, Triveni Ghat, and Parmarth Niketan", "Overnight stay in Rishikesh"] },
   { day: "Day 4", title: "Return", points: ["Check-out and return journey", "Tour concludes with drop-off"] },
 ];
 
@@ -64,10 +64,10 @@ export default function HaridwarPage() {
                 <p className="text-sm uppercase tracking-[0.3em] text-amber-300">4D / 3N Group Departure</p>
                 <h1 className="mt-3 text-3xl font-bold sm:text-4xl lg:text-5xl">Haridwar</h1>
                 <p className="mt-4 max-w-2xl text-base text-white/75 sm:text-lg">
-                  A November Haridwar and Rishikesh route with Ganga Aarti and riverside darshan.
+                  A 3N/4D November trip with two nights in Haridwar and one night in Rishikesh, including Ganga Aarti and riverside sightseeing.
                 </p>
                 <div className="mt-6 flex flex-wrap items-center gap-3">
-                  <p className="text-2xl font-semibold text-amber-200">Price on request</p>
+                  <p className="text-2xl font-semibold text-amber-200">Rs 10,000/- per person</p>
                   <span className="rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-amber-200">
                     Fixed Group Dates
                   </span>

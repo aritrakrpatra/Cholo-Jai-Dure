@@ -48,6 +48,18 @@ function ToursPageContent() {
   const [query, setQuery] = useState("");
   const [tourType, setTourType] = useState("group");
   const [selectedMonth, setSelectedMonth] = useState("all");
+  const [customEnquiry, setCustomEnquiry] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    destination: "",
+    travelDate: "",
+    travelers: "",
+    budget: "",
+    preferences: "",
+  });
+  const [isSubmittingEnquiry, setIsSubmittingEnquiry] = useState(false);
+  const [enquiryStatus, setEnquiryStatus] = useState({ type: "", message: "" });
   const availableMonths = monthOrder.filter((month) =>
     tours.some((tour) => !isInternationalTour(tour) && getTourMonths(tour).includes(month)),
   );
@@ -73,6 +85,61 @@ function ToursPageContent() {
       return matchesCategory && matchesQuery && matchesMonth;
     });
   }, [query, selectedMonth, tourCategory]);
+
+  function handleEnquiryChange(event) {
+    const { name, value } = event.target;
+    setCustomEnquiry((current) => ({ ...current, [name]: value }));
+  }
+
+  async function handleEnquirySubmit(event) {
+    event.preventDefault();
+    setEnquiryStatus({ type: "", message: "" });
+    setIsSubmittingEnquiry(true);
+
+    const message = [
+      "Customized tour enquiry",
+      `Destination: ${customEnquiry.destination || "Not specified"}`,
+      `Travel date: ${customEnquiry.travelDate || "Flexible"}`,
+      `Travelers: ${customEnquiry.travelers || "Not specified"}`,
+      `Estimated budget per person: ${customEnquiry.budget || "Not specified"}`,
+      `Preferences: ${customEnquiry.preferences || "Not specified"}`,
+    ].join("\n");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: customEnquiry.name,
+          phone: customEnquiry.phone,
+          email: customEnquiry.email,
+          message,
+        }),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        setEnquiryStatus({ type: "error", message: result?.message || "Unable to send enquiry. Please try again." });
+        return;
+      }
+
+      setEnquiryStatus({ type: "success", message: "Enquiry sent. Our team will contact you soon." });
+      setCustomEnquiry({
+        name: "",
+        phone: "",
+        email: "",
+        destination: "",
+        travelDate: "",
+        travelers: "",
+        budget: "",
+        preferences: "",
+      });
+    } catch {
+      setEnquiryStatus({ type: "error", message: "Network error. Please try again." });
+    } finally {
+      setIsSubmittingEnquiry(false);
+    }
+  }
 
   return (
     <>
@@ -247,11 +314,113 @@ function ToursPageContent() {
               )}
                 </>
               ) : (
-                <div className="theme-surface-strong rounded-3xl p-6 text-center sm:p-10">
-                  <h2 className="text-xl font-semibold text-foreground">Customize Tour</h2>
-                  <p className="mt-3 text-sm text-(--muted) sm:text-base">
-                    Customize tour options will appear here. You can add the data anytime, and this section is ready for it.
-                  </p>
+                <div className="theme-surface-strong rounded-3xl p-6 sm:p-8">
+                  <div className="mb-6">
+                    <h2 className="text-xl font-semibold text-foreground">Plan a Custom Tour</h2>
+                    <p className="mt-2 text-sm text-(--muted) sm:text-base">
+                      Share your trip details and our team will help plan an itinerary around you.
+                    </p>
+                  </div>
+                  <form onSubmit={handleEnquirySubmit} className="grid gap-4 sm:grid-cols-2">
+                    <input
+                      name="name"
+                      value={customEnquiry.name}
+                      onChange={handleEnquiryChange}
+                      placeholder="Your name"
+                      autoComplete="name"
+                      required
+                      className="w-full rounded-2xl border border-(--border) bg-(--surface) px-4 py-3 text-sm text-foreground outline-none placeholder:text-(--muted) focus:border-amber-300/60"
+                    />
+                    <input
+                      name="phone"
+                      type="tel"
+                      value={customEnquiry.phone}
+                      onChange={handleEnquiryChange}
+                      placeholder="Phone number"
+                      autoComplete="tel"
+                      required
+                      className="w-full rounded-2xl border border-(--border) bg-(--surface) px-4 py-3 text-sm text-foreground outline-none placeholder:text-(--muted) focus:border-amber-300/60"
+                    />
+                    <input
+                      name="email"
+                      type="email"
+                      value={customEnquiry.email}
+                      onChange={handleEnquiryChange}
+                      placeholder="Email address"
+                      autoComplete="email"
+                      required
+                      className="w-full rounded-2xl border border-(--border) bg-(--surface) px-4 py-3 text-sm text-foreground outline-none placeholder:text-(--muted) focus:border-amber-300/60"
+                    />
+                    <input
+                      name="destination"
+                      value={customEnquiry.destination}
+                      onChange={handleEnquiryChange}
+                      placeholder="Destination or places to visit"
+                      className="w-full rounded-2xl border border-(--border) bg-(--surface) px-4 py-3 text-sm text-foreground outline-none placeholder:text-(--muted) focus:border-amber-300/60"
+                    />
+                    <label className="grid gap-2 text-sm text-(--muted)">
+                      Travel date
+                      <input
+                        name="travelDate"
+                        type="date"
+                        value={customEnquiry.travelDate}
+                        onChange={handleEnquiryChange}
+                        className="w-full rounded-2xl border border-(--border) bg-(--surface) px-4 py-3 text-foreground outline-none focus:border-amber-300/60"
+                      />
+                    </label>
+                    <label className="grid gap-2 text-sm text-(--muted)">
+                      Number of travelers
+                      <input
+                        name="travelers"
+                        type="number"
+                        min="1"
+                        value={customEnquiry.travelers}
+                        onChange={handleEnquiryChange}
+                        placeholder="e.g. 4"
+                        className="w-full rounded-2xl border border-(--border) bg-(--surface) px-4 py-3 text-foreground outline-none placeholder:text-(--muted) focus:border-amber-300/60"
+                      />
+                    </label>
+                    <label className="grid gap-2 text-sm text-(--muted) sm:col-span-2">
+                      Estimated budget per person
+                      <input
+                        name="budget"
+                        value={customEnquiry.budget}
+                        onChange={handleEnquiryChange}
+                        placeholder="e.g. Rs 25,000"
+                        className="w-full rounded-2xl border border-(--border) bg-(--surface) px-4 py-3 text-sm text-foreground outline-none placeholder:text-(--muted) focus:border-amber-300/60"
+                      />
+                    </label>
+                    <label className="grid gap-2 text-sm text-(--muted) sm:col-span-2">
+                      Trip preferences
+                      <textarea
+                        name="preferences"
+                        value={customEnquiry.preferences}
+                        onChange={handleEnquiryChange}
+                        rows={4}
+                        placeholder="Tell us about your preferred pace, activities, or accommodation"
+                        className="w-full resize-y rounded-2xl border border-(--border) bg-(--surface) px-4 py-3 text-sm text-foreground outline-none placeholder:text-(--muted) focus:border-amber-300/60"
+                      />
+                    </label>
+                    {enquiryStatus.message && (
+                      <p
+                        role="status"
+                        className={`sm:col-span-2 rounded-2xl border px-4 py-3 text-sm ${
+                          enquiryStatus.type === "success"
+                            ? "border-emerald-400/40 bg-emerald-500/10 text-emerald-700"
+                            : "border-red-400/40 bg-red-500/10 text-red-700"
+                        }`}
+                      >
+                        {enquiryStatus.message}
+                      </p>
+                    )}
+                    <button
+                      type="submit"
+                      disabled={isSubmittingEnquiry}
+                      className="sm:col-span-2 rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-300 disabled:cursor-not-allowed disabled:opacity-70"
+                    >
+                      {isSubmittingEnquiry ? "Sending..." : "Send Custom Tour Enquiry"}
+                    </button>
+                  </form>
                 </div>
               )}
             </>

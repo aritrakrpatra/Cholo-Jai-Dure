@@ -5,16 +5,16 @@ import BookNowButton from "@/app/components/BookNowButton";
 
 export const metadata = {
   title: "Maharashtra Spiritual",
-  description: "December devotional itinerary through Nashik, Shirdi, Shani Shingnapur, Aurangabad, Ellora, and Ajanta.",
+  description: "December 6N/7D Maharashtra spiritual tour through Pune, Nashik, Shirdi, and Sambhaji Nagar.",
 };
 
 const itinerary = [
-  { day: "Day 1", title: "Nashik", points: ["Arrival and transfer to Nashik", "Darshan at Trimbakeshwar Temple and overnight stay"] },
-  { day: "Day 2", title: "Shirdi", points: ["Transfer to Shirdi", "Darshan at the Sai Baba Temple and overnight stay"] },
-  { day: "Day 3", title: "Shani Shingnapur", points: ["Visit Shani Shingnapur Temple", "Transfer towards Aurangabad and overnight stay"] },
-  { day: "Day 4", title: "Aurangabad", points: ["Visit Bibi Ka Maqbara and Daulatabad Fort", "Overnight stay in Aurangabad"] },
-  { day: "Day 5", title: "Ellora Caves", points: ["Full-day excursion to the Ellora Caves", "Overnight stay"] },
-  { day: "Day 6", title: "Ajanta Caves", points: ["Full-day excursion to the Ajanta Caves", "Overnight stay"] },
+  { day: "Day 1", title: "Pune", points: ["Arrival and transfer to Pune", "Local sightseeing and overnight stay in Pune (Night 1 of 2)"] },
+  { day: "Day 2", title: "Pune", points: ["Explore Pune's spiritual and historic landmarks", "Overnight stay in Pune (Night 2 of 2)"] },
+  { day: "Day 3", title: "Nashik", points: ["Transfer to Nashik", "Visit Trimbakeshwar Temple and overnight stay in Nashik"] },
+  { day: "Day 4", title: "Shirdi", points: ["Transfer to Shirdi", "Darshan at Sai Baba Temple and overnight stay in Shirdi"] },
+  { day: "Day 5", title: "Sambhaji Nagar", points: ["Transfer to Sambhaji Nagar", "Visit Bibi Ka Maqbara and overnight stay (Night 1 of 2)"] },
+  { day: "Day 6", title: "Sambhaji Nagar", points: ["Explore Ellora Caves and Daulatabad Fort", "Overnight stay in Sambhaji Nagar (Night 2 of 2)"] },
   { day: "Day 7", title: "Return", points: ["Check-out and return journey", "Tour concludes with drop-off"] },
 ];
 
@@ -40,10 +40,10 @@ const exclusions = [
 ];
 
 const galleryItems = [
-  { label: "Trimbakeshwar", src: "/group5.jpeg" },
-  { label: "Shirdi", src: "/group1.jpeg" },
-  { label: "Shani Shingnapur", src: "/group2.jpeg" },
-  { label: "Aurangabad", src: "/group3.jpeg" },
+  { label: "Pune", src: "/group5.jpeg" },
+  { label: "Nashik", src: "/group1.jpeg" },
+  { label: "Shirdi", src: "/group2.jpeg" },
+  { label: "Sambhaji Nagar", src: "/group3.jpeg" },
   { label: "Ellora Caves", src: "/group4.jpeg" },
   { label: "Ajanta Caves", src: "/group6.jpeg" },
 ];
@@ -67,10 +67,10 @@ export default function MaharashtraSpiritualPage() {
                 <p className="text-sm uppercase tracking-[0.3em] text-amber-300">7D / 6N Group Departure</p>
                 <h1 className="mt-3 text-3xl font-bold sm:text-4xl lg:text-5xl">Maharashtra Spiritual</h1>
                 <p className="mt-4 max-w-2xl text-base text-white/75 sm:text-lg">
-                  A December devotional journey through important spiritual sites of Maharashtra.
+                  A 6N/7D Maharashtra spiritual tour with two nights in Pune, one in Nashik, one in Shirdi, and two in Sambhaji Nagar.
                 </p>
                 <div className="mt-6 flex flex-wrap items-center gap-3">
-                  <p className="text-2xl font-semibold text-amber-200">Price on request</p>
+                  <p className="text-2xl font-semibold text-amber-200">Rs 21,500/- per person</p>
                   <span className="rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-amber-200">
                     Fixed Group Dates
                   </span>
