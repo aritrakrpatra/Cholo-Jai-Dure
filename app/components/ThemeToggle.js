@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { MoonStar, SunMedium } from "lucide-react";
 import { useTheme } from "@/app/context/ThemeContext";
 
-export default function ThemeToggle({ className = "" }) {
+export default function ThemeToggle({ align = "left", className = "" }) {
   const { setTheme, resolvedTheme } = useTheme();
   const isLightTheme = resolvedTheme === "light";
   const ActiveIcon = isLightTheme ? SunMedium : MoonStar;
@@ -12,6 +11,7 @@ export default function ThemeToggle({ className = "" }) {
   return (
     <button
       type="button"
+      data-align={align}
       aria-label={`Switch to ${isLightTheme ? "dark" : "light"} theme`}
       title={`Switch to ${isLightTheme ? "dark" : "light"} theme`}
       onClick={() => setTheme(isLightTheme ? "dark" : "light")}
