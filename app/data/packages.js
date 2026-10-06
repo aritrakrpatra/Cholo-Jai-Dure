@@ -14,6 +14,7 @@ export const allPackages = [
     description: "A balanced South India journey blending temple heritage and nature escapes.",
     packagePath: "/packages/tamilnadu-kerala",
     featured: true,
+    showInTours: false,
   },
   {
     slug: "mysuru-coorg-ooty",
@@ -44,7 +45,7 @@ export const allPackages = [
     packagePath: "/packages/kashmir",
     featured: true,
     bookingMode: "group",
-    travelDateOptions: ["2027-03-29", "2027-10-04"],
+    travelDateOptions: ["2027-10-04"],
   },
   {
     slug: "kashmir-vaishno-devi",
@@ -280,8 +281,9 @@ export const allPackages = [
     description: "A May Nepal circuit spanning spiritual landmarks, lakeside cities, and Himalayan viewpoints.",
     packagePath: "/packages/nepal",
     featured: false,
+    category: "international",
     bookingMode: "group",
-    travelDateOptions: ["2027-05-13", "2027-10-16"],
+    travelDateOptions: ["2027-10-16"],
   },
   {
     slug: "ujjain",
@@ -546,6 +548,7 @@ export const allPackages = [
     packagePath: "/packages/thailand",
     featured: false,
     category: "international",
+    showInTours: false,
     bookingMode: "customize",
     travelDateOptions: ["2026-10-12", "2026-11-18", "2026-12-08"],
   },
@@ -562,6 +565,7 @@ export const allPackages = [
     packagePath: "/packages/vietnam",
     featured: false,
     category: "international",
+    showInTours: false,
     bookingMode: "customize",
     travelDateOptions: ["2026-10-20", "2026-11-24", "2026-12-18"],
   },
@@ -582,7 +586,11 @@ export const allPackages = [
   },
 ];
 
-export const featuredPackages = allPackages.filter((tour) => tour.featured).slice(0, 6);
+export const visiblePackages = allPackages.filter(
+  (tour) => tour.showInTours !== false && tour.price !== "Price on request",
+);
+
+export const featuredPackages = visiblePackages.filter((tour) => tour.featured).slice(0, 6);
 
 export const destinationOptions = Array.from(
   new Set(allPackages.flatMap((tour) => tour.placesCovered)),

@@ -57,10 +57,7 @@ const itinerary = [
   },
 ];
 
-const departures = [
-  "Journey: 13/05/2027 | Return: 22/05/2027",
-  "Journey: 16/10/2027 | Return: 25/10/2027",
-];
+const departures = ["Journey: 16/10/2027 | Return: 25/10/2027"];
 
 const inclusions = [
   "Station-to-station pick-up and drop-off as per the itinerary",

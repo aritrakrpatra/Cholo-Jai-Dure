@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useMemo, useState } from "react";
 import Navbar from "@/app/components/Navbar";
 import BookNowButton from "@/app/components/BookNowButton";
-import { allPackages as tours } from "@/app/data/packages";
+import { visiblePackages as tours } from "@/app/data/packages";
 
 const monthOrder = [
   "January",

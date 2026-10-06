@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "./components/Navbar";
-import { allPackages as tours } from "./data/packages";
+import { visiblePackages as tours } from "./data/packages";
 
 const galleryImages = [
   "/house-boat.jpeg",
