@@ -72,7 +72,7 @@ body {
 }
 
 .font-brand {
-  font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   letter-spacing: 0;
 }
 
