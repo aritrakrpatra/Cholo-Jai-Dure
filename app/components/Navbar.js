@@ -377,7 +377,7 @@ function NavbarContent() {
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 lg:grid lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-4">
           <Link
             href="/"
-            className="flex min-w-0 flex-1 shrink items-center gap-3"
+            className="brand-reveal flex min-w-0 flex-1 shrink items-center gap-3"
             style={{ color: "var(--foreground)" }}
           >
             <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-[1.2rem] bg-white ring-1 ring-amber-300/20 shadow-md shadow-amber-500/10 sm:h-16 sm:w-16">
@@ -392,13 +392,13 @@ function NavbarContent() {
             </span>
             <div className="min-w-0">
               <p
-                className="truncate text-sm font-semibold sm:text-base"
+                className="font-brand truncate text-base font-semibold sm:text-lg"
                 style={{ color: "var(--foreground)", textShadow: isLightTheme ? "none" : "0 1px 2px rgba(0, 0, 0, 0.35)" }}
               >
                 Cholo Jai Dure
               </p>
               <p
-                className="truncate text-[11px] sm:text-xs"
+                className="truncate text-[10px]"
                 style={{ color: "var(--muted)", textShadow: isLightTheme ? "none" : "0 1px 2px rgba(0, 0, 0, 0.35)" }}
               >
                 Your Journey, Our Priority
@@ -553,7 +553,7 @@ function NavbarContent() {
         }`}>
           <div>
             <div className="mb-8 flex items-center justify-between">
-              <Link href="/" className="flex items-center gap-3" style={{ color: "var(--foreground)" }}>
+              <Link href="/" className="brand-reveal flex items-center gap-3" style={{ color: "var(--foreground)" }}>
                 <span className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-[1.2rem] bg-white ring-1 ring-amber-300/20 shadow-sm">
                   <Image
                     src="/cjd%20logo.jpg"
@@ -565,10 +565,10 @@ function NavbarContent() {
                   />
                 </span>
                 <div>
-                  <p style={{ color: "var(--foreground)", textShadow: isLightTheme ? "none" : "0 1px 2px rgba(0, 0, 0, 0.35)" }}>
+                  <p className="font-brand text-base font-semibold" style={{ color: "var(--foreground)", textShadow: isLightTheme ? "none" : "0 1px 2px rgba(0, 0, 0, 0.35)" }}>
                     Cholo Jai Dure
                   </p>
-                  <p style={{ color: "var(--muted)", textShadow: isLightTheme ? "none" : "0 1px 2px rgba(0, 0, 0, 0.35)" }}>
+                  <p className="text-[10px]" style={{ color: "var(--muted)", textShadow: isLightTheme ? "none" : "0 1px 2px rgba(0, 0, 0, 0.35)" }}>
                     Your Journey, Our Priority
                   </p>
                 </div>
