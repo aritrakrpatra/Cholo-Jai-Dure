@@ -71,133 +71,25 @@ function getActiveItem(href, pathname, hash, category) {
   return false;
 }
 
-const themeOptions = [
-  { value: "light", label: "Light", icon: SunMedium },
-  { value: "dark", label: "Dark", icon: MoonStar },
-];
-
-function ThemeMenuButton({ pathname, mobile = false, iconOnly = false, alignRight = false }) {
-  const { theme, setTheme, resolvedTheme } = useTheme();
-  const [open, setOpen] = useState(false);
-  const menuRef = useRef(null);
-  const activeOption = themeOptions.find((option) => option.value === theme) ?? themeOptions[0];
-  const ActiveIcon = activeOption.icon;
+function ThemeMenuButton() {
+  const { setTheme, resolvedTheme } = useTheme();
   const isLightTheme = resolvedTheme === "light";
+  const ActiveIcon = isLightTheme ? SunMedium : MoonStar;
 
-  useEffect(() => {
-    if (!open) return;
-
-    const handlePointerDown = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setOpen(false);
-      }
-    };
-
-    const handleEscape = (event) => {
-      if (event.key === "Escape") {
-        setOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handlePointerDown);
-    window.addEventListener("keydown", handleEscape);
-
-    return () => {
-      document.removeEventListener("mousedown", handlePointerDown);
-      window.removeEventListener("keydown", handleEscape);
-    };
-  }, [open]);
-
-  useEffect(() => {
-    const timeoutId = window.setTimeout(() => setOpen(false), 0);
-    return () => window.clearTimeout(timeoutId);
-  }, [pathname]);
-
-  const buttonClasses = iconOnly
-    ? `inline-flex h-11 w-11 items-center justify-center rounded-3xl border transition ${
-        mobile
-          ? "border-white/10 bg-white/10 text-white hover:bg-white/20"
-          : isLightTheme
-            ? "border-(--border) bg-(--surface-strong) text-slate-900 hover:bg-black/5"
-            : "border-white/10 bg-white/5 text-white/85 hover:bg-white/10 hover:text-white"
-      }`
-    : mobile
-    ? `flex w-full items-center justify-between rounded-3xl border px-5 py-4 text-sm font-semibold transition ${
-        isLightTheme
-          ? "border-(--border) bg-(--surface-strong) text-slate-900 hover:bg-black/5"
-          : "border-white/10 bg-white/10 text-white hover:bg-white/20"
-      }`
-    : `inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-semibold transition ${
+  return (
+    <button
+      type="button"
+      aria-label={`Switch to ${isLightTheme ? "dark" : "light"} theme`}
+      title={`Switch to ${isLightTheme ? "dark" : "light"} theme`}
+      onClick={() => setTheme(isLightTheme ? "dark" : "light")}
+      className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border transition ${
         isLightTheme
           ? "border-(--border) bg-(--surface-strong) text-slate-900 hover:bg-black/5"
           : "border-white/10 bg-white/5 text-white/85 hover:bg-white/10 hover:text-white"
-      }`;
-
-  const menuClasses = mobile
-    ? `absolute left-0 right-0 top-full mt-3 grid gap-2 rounded-3xl border p-2 shadow-2xl backdrop-blur-xl z-50 ${
-        isLightTheme ? "border-(--border) bg-(--surface-strong)" : "border-white/10 bg-slate-950/95"
-      }`
-    : `absolute top-full mt-2 grid w-56 gap-2 rounded-3xl border p-2 shadow-2xl backdrop-blur-xl ${alignRight ? "right-0" : "left-0"} ${
-        isLightTheme ? "border-(--border) bg-(--surface-strong)" : "border-white/10 bg-slate-950/95"
-      }`;
-
-  return (
-    <div ref={menuRef} className={`relative ${mobile ? "w-full" : "shrink-0"}`}>
-      <button
-        type="button"
-        aria-label={`Change theme, current theme ${activeOption.label.toLowerCase()}`}
-        onClick={() => setOpen((value) => !value)}
-        className={buttonClasses}
-      >
-        {iconOnly ? (
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-400/15 text-amber-300">
-            <ActiveIcon className="h-4 w-4" />
-          </span>
-        ) : (
-          <span className="flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-400/15 text-amber-300">
-              <ActiveIcon className="h-4 w-4" />
-            </span>
-            <span>{activeOption.label} theme</span>
-          </span>
-        )}
-      </button>
-
-      {open && (
-        <div className={menuClasses}>
-          {themeOptions.map((option) => {
-            const OptionIcon = option.icon;
-            const selected = option.value === theme;
-
-            return (
-              <button
-                key={option.value}
-                type="button"
-                onClick={() => {
-                  setTheme(option.value);
-                  setOpen(false);
-                }}
-                className={`flex items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm transition ${
-                  selected
-                    ? isLightTheme
-                      ? "border-amber-300/40 bg-amber-300/15 text-slate-900"
-                      : "border-amber-300/40 bg-amber-300/15 text-amber-100"
-                    : isLightTheme
-                      ? "border-(--border) bg-transparent text-slate-700 hover:bg-black/5 hover:text-slate-950"
-                      : "border-white/10 bg-white/5 text-white/80 hover:bg-white/10 hover:text-white"
-                }`}
-              >
-                <span className="flex items-center gap-3">
-                  <OptionIcon className="h-4 w-4" />
-                  {option.label}
-                </span>
-                {selected ? <span className={`text-[10px] uppercase tracking-[0.28em] ${isLightTheme ? "text-amber-700" : "text-amber-200"}`}>Active</span> : null}
-              </button>
-            );
-          })}
-        </div>
-      )}
-    </div>
+      }`}
+    >
+      <ActiveIcon className="h-5 w-5 text-amber-500" />
+    </button>
   );
 }
 
@@ -440,7 +332,7 @@ function NavbarContent() {
 
           <div className="hidden items-center gap-3 lg:flex">
             <div className="relative z-50">
-              <ThemeMenuButton pathname={pathname} />
+              <ThemeMenuButton />
             </div>
             {!loading && user ? (
               <div className="relative">
@@ -501,7 +393,7 @@ function NavbarContent() {
           </div>
 
           <div className="ml-auto flex shrink-0 items-center gap-2 lg:hidden">
-            <ThemeMenuButton pathname={pathname} iconOnly alignRight />
+            <ThemeMenuButton />
             <button
               type="button"
               aria-label="Toggle navigation menu"
@@ -616,17 +508,11 @@ function NavbarContent() {
             </div>
           </div>
 
-          <div className={`space-y-3 border-t pt-4 pb-2 ${isLightTheme ? "border-(--border)" : "border-white/10"}`}>
-            <p className={`px-1 text-[10px] font-semibold uppercase tracking-[0.28em] ${isLightTheme ? "text-slate-500" : "text-white/45"}`}>
-              Preferences
-            </p>
-
-            <div className="relative">
-              <ThemeMenuButton pathname={pathname} mobile />
-            </div>
-
-            {!loading && user ? (
-              <>
+          {!loading && user ? (
+            <div className={`space-y-3 border-t pt-4 pb-2 ${isLightTheme ? "border-(--border)" : "border-white/10"}`}>
+              <p className={`px-1 text-[10px] font-semibold uppercase tracking-[0.28em] ${isLightTheme ? "text-slate-500" : "text-white/45"}`}>
+                Account
+              </p>
                 <div className={`rounded-2xl border px-4 py-3 text-center ${isLightTheme ? "border-amber-300/30 bg-amber-300/15" : "border-amber-400/20 bg-amber-400/10"}`}>
                   <p className={`text-sm font-semibold ${isLightTheme ? "text-slate-900" : "text-amber-300"}`}>
                     <User className="h-4 w-4 inline mr-2" />
@@ -658,9 +544,8 @@ function NavbarContent() {
                   <LogOut className="h-4 w-4 inline mr-2" />
                   {isLoggingOut ? "Logging out..." : "Logout"}
                 </button>
-              </>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
