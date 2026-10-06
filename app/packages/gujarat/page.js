@@ -5,7 +5,7 @@ import BookNowButton from "@/app/components/BookNowButton";
 
 export const metadata = {
   title: "Gujarat",
-  description: "A complete Gujarat discovery covering heritage, wildlife, temples, and coast with three departure batches.",
+  description: "A complete Gujarat discovery covering heritage, wildlife, temples, and coast with an October group departure.",
 };
 
 const itinerary = [
@@ -22,9 +22,6 @@ const itinerary = [
 ];
 
 const departures = [
-  "Journey: 26/10/2026 | Return: 04/11/2026",
-  "Journey: 16/11/2026 | Return: 25/11/2026",
-  "Journey: 14/12/2026 | Return: 23/12/2026",
   "Journey: 16/10/2027 | Return: 27/10/2027",
 ];
 

@@ -337,7 +337,7 @@ export const allPackages = [
     packagePath: "/packages/gujarat",
     featured: false,
     bookingMode: "group",
-    travelDateOptions: ["2026-10-26", "2026-11-16", "2026-12-14", "2027-10-16"],
+    travelDateOptions: ["2027-10-16"],
   },
   {
     slug: "do-dham-yatra",
@@ -358,7 +358,7 @@ export const allPackages = [
     packagePath: "/packages/do-dham-yatra",
     featured: false,
     bookingMode: "group",
-    travelDateOptions: ["2027-10-08", "2027-11-08", "2027-12-08"],
+    travelDateOptions: ["2027-10-02"],
   },
   {
     slug: "haridwar",

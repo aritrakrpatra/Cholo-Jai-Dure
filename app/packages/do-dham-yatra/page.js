@@ -5,7 +5,7 @@ import BookNowButton from "@/app/components/BookNowButton";
 
 export const metadata = {
   title: "Do Dham",
-  description: "A sacred Uttarakhand yatra covering Kedarnath and Badrinath with three departure batches.",
+  description: "A sacred Uttarakhand yatra covering Kedarnath and Badrinath with an October group departure.",
 };
 
 const itinerary = [
@@ -19,11 +19,7 @@ const itinerary = [
   { day: "Day 8", title: "Return Journey", points: ["Departure for Delhi", "Drop at Railway Station", "End of the sacred journey"] },
 ];
 
-const departures = [
-  "Journey: 08/10/2027 | Return: 15/10/2027",
-  "Journey: 08/11/2027 | Return: 15/11/2027",
-  "Journey: 08/12/2027 | Return: 15/12/2027",
-];
+const departures = ["Journey: 02/10/2027 | Return: 10/10/2027"];
 
 const inclusions = [
   "Station-to-station pick-up and drop-off as per the itinerary",
