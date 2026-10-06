@@ -243,6 +243,27 @@ body {
   background: var(--background);
 }
 
+[data-theme="light"] main.min-h-screen.bg-linear-to-br > section:has(> div > div > h2) > div > div {
+  color: var(--foreground);
+  background: var(--surface-strong);
+  border-color: var(--border);
+  box-shadow: var(--shadow-elevated);
+}
+
+[data-theme="light"] main.min-h-screen.bg-linear-to-br > section:has(> div > div > h2) article {
+  color: var(--foreground);
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+[data-theme="light"] main.min-h-screen.bg-linear-to-br > section:has(> div > div > h2) article [class*="text-white"] {
+  color: var(--muted);
+}
+
+[data-theme="light"] main.min-h-screen.bg-linear-to-br > section:has(> div > div > h2) article li > span:first-child {
+  background-color: var(--accent);
+}
+
 .theme-hero-overlay {
   background: var(--hero-overlay);
 }
