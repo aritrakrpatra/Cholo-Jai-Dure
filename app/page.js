@@ -175,7 +175,7 @@ export default function CholoJaiDureTours() {
               <p className="mt-3 max-w-xl text-sm text-white/70 sm:text-base">
                 Find your next journey across India, from Himalayan escapes to spiritual destinations.
               </p>
-              <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-amber-300">
+              <span className="mt-6 inline-flex items-center gap-2 text-base font-semibold text-amber-300 sm:text-lg">
                 Explore domestic tours <span aria-hidden="true">-&gt;</span>
               </span>
             </div>
@@ -252,7 +252,7 @@ export default function CholoJaiDureTours() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mb-10 text-center sm:mb-12">
             <p className="text-sm uppercase tracking-[0.3em] text-amber-300">Travel Statistics</p>
-            <h2 className="mt-4 text-2xl font-bold sm:text-4xl">Trusted by thousands of explorers</h2>
+            <h2 className="mt-4 text-2xl font-bold sm:text-4xl">Making every journey memorable</h2>
           </div>
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4 text-center">
             {[
