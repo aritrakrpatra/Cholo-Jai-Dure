@@ -89,12 +89,14 @@ export default function CholoJaiDureTours() {
               >
                 View Packages
               </a>
-              <Link
-                href="/contact"
+              <a
+                href="https://wa.me/917478167607"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex w-full max-w-xs items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-3 text-sm text-white transition hover:bg-white/20"
               >
-                Contact Us
-              </Link>
+                Contact
+              </a>
             </div>
           </div>
         </div>
@@ -142,12 +144,14 @@ export default function CholoJaiDureTours() {
                 >
                   View Packages
                 </a>
-                <Link
-                  href="/contact"
+                <a
+                  href="https://wa.me/917478167607"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-3.5 text-sm text-white transition hover:bg-white/20"
                 >
-                  Contact Us
-                </Link>
+                  Contact
+                </a>
               </div>
             </div>
           </div>
