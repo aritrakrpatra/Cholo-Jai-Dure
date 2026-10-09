@@ -53,11 +53,34 @@ async function ensureUserIndexes() {
 
   const db = await getMongoDb();
   const users = db.collection(USERS_COLLECTION);
+  const existingIndexes = await users.indexes();
+
+  for (const indexName of ["emailNormalized_1", "phoneNormalized_1"]) {
+    if (existingIndexes.some((index) => index.name === indexName && !index.partialFilterExpression)) {
+      await users.dropIndex(indexName).catch((error) => {
+        if (error?.code !== 27) throw error;
+      });
+    }
+  }
 
   await Promise.all([
     users.createIndex({ clerkUserId: 1 }, { unique: true, sparse: true }),
-    users.createIndex({ emailNormalized: 1 }, { unique: true, sparse: true }),
-    users.createIndex({ phoneNormalized: 1 }, { unique: true, sparse: true }),
+    users.createIndex(
+      { emailNormalized: 1 },
+      {
+        unique: true,
+        partialFilterExpression: { emailNormalized: { $type: "string" } },
+        name: "emailNormalized_string_unique",
+      }
+    ),
+    users.createIndex(
+      { phoneNormalized: 1 },
+      {
+        unique: true,
+        partialFilterExpression: { phoneNormalized: { $type: "string" } },
+        name: "phoneNormalized_string_unique",
+      }
+    ),
   ]);
 
   indexesInitialized = true;
