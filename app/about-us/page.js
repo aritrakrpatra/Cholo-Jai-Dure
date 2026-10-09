@@ -104,8 +104,8 @@ const stats = [
   { value: 2024, suffix: "", label: "Founded" },
   { value: 4.8, suffix: "★", label: "Google Rating" },
   { value: 80, suffix: "+", label: "Positive Reviews" },
-  { value: 100, suffix: "+", label: "Happy Travellers" },
-  { value: 11, suffix: "+", label: "Destinations Covered" },
+  { value: 400, suffix: "+", label: "Happy Travellers" },
+  { value: 50, suffix: "+", label: "Destinations Covered" },
 ];
 
 function AnimatedCounter({ value, suffix, label }) {

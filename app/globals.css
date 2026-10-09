@@ -320,3 +320,25 @@ body {
 .theme-glow {
   animation: glow 6s ease-in-out infinite;
 }
+
+[data-theme="light"] main.min-h-screen.bg-linear-to-br:has(> section:first-of-type a[href="/tours"]),
+[data-theme="light"] main.min-h-screen.bg-slate-950:has(> div > a[href="/tours"]) {
+  background-image: linear-gradient(135deg, #f7f7f1 0%, #edf4ee 52%, #e8f1f6 100%) !important;
+}
+
+[data-theme="light"] main.min-h-screen.bg-linear-to-br:has(> section:first-of-type a[href="/tours"]) > section:first-of-type {
+  background-image: linear-gradient(125deg, rgba(255, 255, 255, 0.7), rgba(231, 241, 243, 0.4));
+  border-color: var(--border) !important;
+}
+
+[data-theme="light"] main.min-h-screen.bg-linear-to-br:has(> section:first-of-type a[href="/tours"]) > section:first-of-type [class*="text-white/"],
+[data-theme="light"] main.min-h-screen.bg-slate-950:has(> div > a[href="/tours"]) article [class*="text-white/"] {
+  color: var(--muted) !important;
+}
+
+[data-theme="light"] main.min-h-screen.bg-linear-to-br:has(> section:first-of-type a[href="/tours"]) > section:first-of-type [class~="text-amber-200"],
+[data-theme="light"] main.min-h-screen.bg-linear-to-br:has(> section:first-of-type a[href="/tours"]) > section:first-of-type [class~="text-amber-300"],
+[data-theme="light"] main.min-h-screen.bg-slate-950:has(> div > a[href="/tours"]) article [class~="text-amber-200"],
+[data-theme="light"] main.min-h-screen.bg-slate-950:has(> div > a[href="/tours"]) article [class~="text-amber-300"] {
+  color: var(--accent-strong) !important;
+}

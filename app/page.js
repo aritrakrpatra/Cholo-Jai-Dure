@@ -14,39 +14,21 @@ const galleryImages = [
   "/group7.jpeg",
 ];
 
-const faqItems = [
-  {
-    question: "How do I book a tour?",
-    answer: "Use the Book Now button or contact us directly via phone or the enquiry form.",
-  },
-  {
-    question: "Can I customize my itinerary?",
-    answer: "Yes. We design tailored itineraries based on your travel interests and budget.",
-  },
-  {
-    question: "Are meals included?",
-    answer: "Most tours include breakfast and selected meals. Details are shown on each package.",
-  },
-];
-
 const testimonials = [
   {
-    name: "Riya Sen",
-    designation: "Software Engineer",
-    comment: "Amazing experience, perfect planning and service.",
-    image: "https://i.pravatar.cc/120?img=5",
+    name: "Dr. Souvik Ghosh",
+    designation: "Doctor",
+    comment: "Excellent accomodation. Very Good transport also. Food arrangement awesome. Finally Communication is Excellent also.",
   },
   {
-    name: "Anirban Das",
-    designation: "Business Consultant",
-    comment: "The guides were so helpful and the hotels were excellent.",
-    image: "https://i.pravatar.cc/120?img=12",
+    name: "Mrinal Pati",
+    designation: "Retired Army Officer",
+    comment: "Overall very good everything like Accommodation, transportation and food. Good behavior and everything explanation. But my suggestion Rameshwaram may halt for two days. If possible then sight seeing from morning so reach before evening.",
   },
   {
-    name: "Shreya Mukherjee",
-    designation: "School Teacher",
-    comment: "A luxurious trip with great attention to every detail.",
-    image: "https://i.pravatar.cc/120?img=32",
+    name: "Chaitali Singh",
+    designation: "Teacher",
+    comment: "Had a great experience with Cholo Jai Dure Tour and Travels. The management was professional and well-organized, making everything smooth and hassle-free. Travel arrangements were comfortable and timely, and the food was fresh, tasty, and well-managed. Highly recommended!",
   },
 ];
 
@@ -181,7 +163,7 @@ export default function CholoJaiDureTours() {
             <div className="relative min-h-52 sm:min-h-64">
               <Image
                 src="/Domestic Tour.jpeg"
-                alt="Varanasi, one of the domestic tour destinations"
+                alt="Domestic tour destinations across India"
                 fill
                 className="object-cover transition duration-500 group-hover:scale-[1.03]"
                 sizes="(max-width: 640px) 100vw, 40vw"
@@ -233,7 +215,7 @@ export default function CholoJaiDureTours() {
           </div>
           <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
             {[
-              { title: "Andaman Islands", subtitle: "Tropical escape" },
+              { title: "Rajasthan", subtitle: "Royal heritage" },
               { title: "Varanasi", subtitle: "Spiritual heritage" },
               { title: "Leh Ladakh", subtitle: "Adventure retreat" },
             ].map((destination) => (
@@ -254,21 +236,11 @@ export default function CholoJaiDureTours() {
           </div>
           <div className="grid gap-8 md:grid-cols-3">
             {testimonials.map((review) => (
-              <div key={review.name} className="rounded-4xl border border-slate-200 bg-white p-8 shadow-xl">
-                <p className="mb-6 text-slate-700">&ldquo;{review.comment}&rdquo;</p>
-                <div className="flex items-center gap-3">
-                  <Image
-                    src={review.image}
-                    alt={review.name}
-                    width={44}
-                    height={44}
-                    className="h-11 w-11 rounded-full object-cover ring-2 ring-amber-300/60"
-                    loading="lazy"
-                  />
-                  <div>
-                    <p className="font-semibold text-slate-900">{review.name}</p>
-                    <p className="text-xs text-slate-500">{review.designation}</p>
-                  </div>
+              <div key={review.name} className="flex h-full flex-col rounded-4xl border border-slate-200 bg-white p-8 shadow-xl">
+                <p className="flex-1 text-slate-700">&ldquo;{review.comment}&rdquo;</p>
+                <div className="mt-6 border-t border-slate-100 pt-4">
+                  <p className="font-semibold text-slate-900">{review.name}</p>
+                  <p className="text-xs text-slate-500">{review.designation}</p>
                 </div>
               </div>
             ))}
@@ -284,31 +256,14 @@ export default function CholoJaiDureTours() {
           </div>
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4 text-center">
             {[
-              { value: "500+", label: "Happy Travelers" },
-              { value: "50+", label: "Destinations" },
+              { value: "400+", label: "Happy Travelers" },
+              { value: "50+", label: "Destinations Covered" },
               { value: "100%", label: "Trusted Service" },
               { value: "24/7", label: "Support" },
             ].map((stat) => (
               <div key={stat.label} className="rounded-4xl border border-white/10 bg-slate-900/90 p-6 sm:p-10">
                 <p className="text-4xl font-bold text-amber-300 sm:text-5xl">{stat.value}</p>
                 <p className="mt-3 text-sm uppercase tracking-[0.2em] text-white/70">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 bg-slate-900 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="mb-10 text-center sm:mb-12">
-            <p className="text-sm uppercase tracking-[0.3em] text-amber-300">FAQ</p>
-            <h2 className="mt-4 text-2xl font-bold sm:text-4xl">Frequently asked questions</h2>
-          </div>
-          <div className="grid gap-4 sm:gap-6">
-            {faqItems.map((faq) => (
-              <div key={faq.question} className="rounded-4xl border border-white/10 bg-slate-950/90 p-6 sm:p-8">
-                <h3 className="text-lg font-semibold sm:text-xl">{faq.question}</h3>
-                <p className="mt-4 text-white/70">{faq.answer}</p>
               </div>
             ))}
           </div>
