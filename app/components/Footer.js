@@ -33,11 +33,11 @@ export default function Footer() {
             <h3 className="text-lg font-bold text-white">Contact Us</h3>
             <div className="mt-4 space-y-2.5 text-sm text-white/70">
               <p>Zilla Parishad Market Complex, Midnapur</p>
-              <a href="tel:+917478167607" aria-label="Call +91 7478167607" className="inline-flex items-center gap-2 transition-colors hover:text-amber-300">
+              <a href="tel:+917478167607" aria-label="Call +91 7478167607" className="flex w-fit items-center gap-2 transition-colors hover:text-amber-300">
                 <Phone className="h-4 w-4" aria-hidden="true" />
                 +91 7478167607
               </a>
-              <a href="tel:+917501307766" aria-label="Call +91 7501307766" className="inline-flex items-center gap-2 transition-colors hover:text-amber-300">
+              <a href="tel:+917501307766" aria-label="Call +91 7501307766" className="flex w-fit items-center gap-2 transition-colors hover:text-amber-300">
                 <Phone className="h-4 w-4" aria-hidden="true" />
                 +91 7501307766
               </a>
