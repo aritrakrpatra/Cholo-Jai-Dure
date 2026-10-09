@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@/app/context/AuthContext";
-import { Calendar, Phone, UserCircle2 } from "lucide-react";
+import { Calendar, Phone, UserCircle2, X } from "lucide-react";
 
 const PHONE_REGEX = /^[+]?[0-9\s\-()]{7,20}$/;
 
@@ -68,6 +68,17 @@ export default function DOBModal() {
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
       <div className="relative w-full max-w-md rounded-3xl border border-white/10 bg-slate-900 p-8 shadow-2xl">
+        <button
+          type="button"
+          onClick={() => setDismissed(true)}
+          disabled={saving}
+          aria-label="Skip profile completion"
+          title="Skip profile completion"
+          className="absolute right-4 top-4 rounded-full p-2 text-white/60 transition hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          <X className="h-5 w-5" aria-hidden="true" />
+        </button>
+
         <div className="mb-5 flex justify-center">
           <span className="flex h-14 w-14 items-center justify-center rounded-full bg-amber-400/15 text-amber-300 ring-2 ring-amber-300/20">
             <Calendar className="h-7 w-7" />
