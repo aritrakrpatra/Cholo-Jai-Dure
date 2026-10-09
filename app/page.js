@@ -180,7 +180,7 @@ export default function CholoJaiDureTours() {
           >
             <div className="relative min-h-52 sm:min-h-64">
               <Image
-                src="/varanasi.jpeg"
+                src="/Domestic Tour.jpeg"
                 alt="Varanasi, one of the domestic tour destinations"
                 fill
                 className="object-cover transition duration-500 group-hover:scale-[1.03]"
