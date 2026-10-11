@@ -88,25 +88,35 @@ export function AuthProvider({ children }) {
   const updateProfile = useCallback(async (fields) => {
     if (!clerkUser) return;
 
-    const res = await fetch("/api/users/me", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(fields),
-    });
+    try {
+      const res = await fetch("/api/users/me", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(fields),
+      });
 
-    const data = await res.json();
-    if (!res.ok) {
-      throw new Error(data.message || "Failed to update profile.");
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to update profile.");
+      }
+
+      setDbProfile(data.user || null);
+
+      try {
+        const existing = clerkUser.unsafeMetadata || {};
+        await clerkUser.update({
+          unsafeMetadata: { ...existing, ...fields },
+        });
+      } catch (metadataError) {
+        console.warn("Profile metadata sync failed:", metadataError);
+      }
+
+      return data.user || null;
+    } catch (error) {
+      throw error;
     }
-
-    setDbProfile(data.user || null);
-
-    const existing = clerkUser.unsafeMetadata || {};
-    await clerkUser.update({
-      unsafeMetadata: { ...existing, ...fields },
-    });
   }, [clerkUser]);
 
   const signUp = async () => {
