@@ -104,29 +104,51 @@ export async function upsertUserFromClerk({
   const normalizedPhone = normalizePhone(phoneNumber) || null;
   const now = new Date().toISOString();
 
-  await users.updateOne(
-    { clerkUserId },
-    {
-      $set: {
-        clerkUserId,
-        name: name || "Traveler",
-        email: email || null,
-        phoneNumber: phoneNumber || null,
-        gender: gender || null,
-        dateOfBirth: dateOfBirth || null,
-        emailNormalized: normalizedEmail,
-        phoneNormalized: normalizedPhone,
-        updatedAt: now,
-      },
-      $setOnInsert: {
-        createdAt: createdAt || now,
-      },
-    },
-    { upsert: true }
-  );
+  const existingUser =
+    (clerkUserId ? await users.findOne({ clerkUserId }) : null) ||
+    (normalizedEmail ? await users.findOne({ emailNormalized: normalizedEmail }) : null) ||
+    (normalizedPhone ? await users.findOne({ phoneNormalized: normalizedPhone }) : null);
 
-  const user = await users.findOne({ clerkUserId });
-  return stripPassword(user);
+  if (existingUser) {
+    const baseUpdates = {
+      name: name || existingUser.name || "Traveler",
+      email: email || existingUser.email || null,
+      phoneNumber: phoneNumber || existingUser.phoneNumber || null,
+      gender: gender ?? existingUser.gender ?? null,
+      dateOfBirth: dateOfBirth || existingUser.dateOfBirth || null,
+      emailNormalized: normalizedEmail || existingUser.emailNormalized || null,
+      phoneNormalized: normalizedPhone || existingUser.phoneNormalized || null,
+      updatedAt: now,
+    };
+
+    if (!existingUser.clerkUserId && clerkUserId) {
+      baseUpdates.clerkUserId = clerkUserId;
+    }
+
+    if (!existingUser.createdAt) {
+      baseUpdates.createdAt = createdAt || now;
+    }
+
+    await users.updateOne({ _id: existingUser._id }, { $set: baseUpdates });
+    const mergedUser = await users.findOne({ _id: existingUser._id });
+    return stripPassword(mergedUser);
+  }
+
+  const newUser = {
+    clerkUserId,
+    name: name || "Traveler",
+    email: email || null,
+    phoneNumber: phoneNumber || null,
+    gender: gender || null,
+    dateOfBirth: dateOfBirth || null,
+    emailNormalized: normalizedEmail,
+    phoneNormalized: normalizedPhone,
+    createdAt: createdAt || now,
+    updatedAt: now,
+  };
+
+  await users.insertOne(newUser);
+  return stripPassword(newUser);
 }
 
 export async function updateUserByClerkId(clerkUserId, updates) {
