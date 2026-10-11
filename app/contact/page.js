@@ -82,6 +82,10 @@ export default function ContactPage() {
                   <Phone className="h-5 w-5" />
                   +91 7478167607
                 </p>
+                <p className="flex items-center gap-3">
+                  <Phone className="h-5 w-5" />
+                  +91 7501307766
+                </p>
               </div>
             </div>
 
