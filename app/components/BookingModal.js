@@ -155,7 +155,7 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
 
   return (
     <div
-      className="fixed inset-0 z-9999 flex items-end sm:items-center justify-center bg-slate-950/35 backdrop-blur-sm overflow-hidden"
+      className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center bg-slate-950/35 backdrop-blur-sm overflow-hidden"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div className="relative w-full sm:max-w-2xl max-h-[95vh] sm:max-h-[90vh] rounded-t-3xl sm:rounded-3xl border border-[var(--border)] bg-[var(--surface-strong)] shadow-[var(--shadow-elevated)] overflow-visible">
