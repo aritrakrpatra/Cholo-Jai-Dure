@@ -46,32 +46,32 @@ export default function AdminUsersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       {/* Nav */}
-      <div className="sticky top-0 z-50 px-4 py-4 backdrop-blur-xl bg-slate-950/60 border-b border-white/10">
+      <div className="sticky top-0 z-50 px-4 py-4 backdrop-blur-xl bg-[var(--surface)] border-b border-[var(--border)]">
         <div className="mx-auto max-w-5xl flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <Link href="/admin/bookings" className="flex items-center gap-1 text-white/50 hover:text-white text-sm transition">
+            <Link href="/admin/bookings" className="flex items-center gap-1 text-[var(--muted)] hover:text-[var(--foreground)] text-sm transition">
               <ArrowLeft className="h-4 w-4" />
               Bookings
             </Link>
-            <span className="text-white/20">|</span>
-            <span className="flex items-center gap-2 text-white font-semibold">
-              <Plane className="h-4 w-4 text-amber-300" />
+            <span className="text-[var(--border)]">|</span>
+            <span className="flex items-center gap-2 text-[var(--foreground)] font-semibold">
+              <Plane className="h-4 w-4 text-[var(--accent)]" />
               Manage Admins
             </span>
           </div>
           <div className="flex items-center gap-3">
             <ThemeToggle align="right" />
-            <span className="text-xs text-white/40">Hi, {user?.name?.split(" ")[0]}</span>
+            <span className="text-xs text-[var(--muted)]">Hi, {user?.name?.split(" ")[0]}</span>
           </div>
         </div>
       </div>
 
       <div className="mx-auto max-w-5xl px-4 py-8">
-        <h1 className="text-2xl font-bold mb-1">User Roles</h1>
-        <p className="text-white/50 text-sm mb-6">
-          Promote users to <span className="text-amber-300 font-medium">Admin</span> to give them access to the admin dashboard.
+        <h1 className="text-2xl font-bold mb-1 text-[var(--foreground)]">User Roles</h1>
+        <p className="text-[var(--muted)] text-sm mb-6">
+          Promote users to <span className="text-[var(--accent)] font-medium">Admin</span> to give them access to the admin dashboard.
         </p>
 
         {message && (
@@ -88,12 +88,12 @@ export default function AdminUsersPage() {
 
         {loading ? (
           <div className="flex justify-center py-20">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-[var(--accent)] border-t-transparent" />
           </div>
         ) : (
-          <div className="rounded-2xl border border-white/10 overflow-hidden">
+          <div className="rounded-2xl border border-[var(--border)] overflow-hidden bg-[var(--surface-strong)] shadow-[var(--shadow-elevated)]">
             <table className="w-full text-sm">
-              <thead className="bg-white/5 text-white/50 uppercase text-xs tracking-wider">
+              <thead className="bg-[var(--surface)] text-[var(--muted)] uppercase text-xs tracking-wider">
                 <tr>
                   <th className="px-4 py-3 text-left">Name</th>
                   <th className="px-4 py-3 text-left">Email</th>
@@ -101,30 +101,30 @@ export default function AdminUsersPage() {
                   <th className="px-4 py-3 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-[var(--border)]">
                 {users.map((u) => (
-                  <tr key={u.id} className="hover:bg-white/[0.02] transition">
-                    <td className="px-4 py-3 font-medium">{u.name}</td>
-                    <td className="px-4 py-3 text-white/60">{u.email || "—"}</td>
+                  <tr key={u.id} className="hover:bg-[var(--surface)] transition">
+                    <td className="px-4 py-3 font-medium text-[var(--foreground)]">{u.name}</td>
+                    <td className="px-4 py-3 text-[var(--muted)]">{u.email || "—"}</td>
                     <td className="px-4 py-3">
                       {u.role === "admin" ? (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 px-2.5 py-0.5 text-xs font-semibold">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-[color:rgba(197,140,43,0.1)] border border-[color:rgba(197,140,43,0.3)] text-[var(--accent)] px-2.5 py-0.5 text-xs font-semibold">
                           <Shield className="h-3 w-3" /> Admin
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-white/5 border border-white/15 text-white/40 px-2.5 py-0.5 text-xs">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-[var(--surface)] border border-[var(--border)] text-[var(--muted)] px-2.5 py-0.5 text-xs">
                           <Users className="h-3 w-3" /> User
                         </span>
                       )}
                     </td>
                     <td className="px-4 py-3 text-right">
                       {u.id === user?.id ? (
-                        <span className="text-xs text-white/25 italic">You</span>
+                        <span className="text-xs text-[var(--muted)] italic">You</span>
                       ) : u.role === "admin" ? (
                         <button
                           onClick={() => setRole(u.id, "user")}
                           disabled={actionLoading === u.id}
-                          className="inline-flex items-center gap-1 rounded-lg bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 text-red-400 px-3 py-1.5 text-xs font-medium transition disabled:opacity-50"
+                          className="inline-flex items-center gap-1 rounded-lg bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 text-red-500 px-3 py-1.5 text-xs font-medium transition disabled:opacity-50"
                         >
                           <ShieldOff className="h-3 w-3" />
                           {actionLoading === u.id ? "…" : "Revoke Admin"}
@@ -133,7 +133,7 @@ export default function AdminUsersPage() {
                         <button
                           onClick={() => setRole(u.id, "admin")}
                           disabled={actionLoading === u.id}
-                          className="inline-flex items-center gap-1 rounded-lg bg-amber-400/10 border border-amber-400/20 hover:bg-amber-400/20 text-amber-300 px-3 py-1.5 text-xs font-medium transition disabled:opacity-50"
+                          className="inline-flex items-center gap-1 rounded-lg bg-[color:rgba(197,140,43,0.1)] border border-[color:rgba(197,140,43,0.25)] hover:bg-[color:rgba(197,140,43,0.18)] text-[var(--accent)] px-3 py-1.5 text-xs font-medium transition disabled:opacity-50"
                         >
                           <Shield className="h-3 w-3" />
                           {actionLoading === u.id ? "…" : "Make Admin"}

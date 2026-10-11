@@ -123,46 +123,46 @@ export default function AdminBookingsPage() {
 
   if (loading || !user || !isAdmin) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="text-white/60">Loading...</div>
+      <div className="min-h-screen bg-[var(--background)] flex items-center justify-center">
+        <div className="text-[var(--muted)]">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       {/* Top Nav */}
-      <div className="sticky top-0 z-50 px-4 py-4 backdrop-blur-xl bg-slate-950/60 border-b border-white/10">
+      <div className="sticky top-0 z-50 px-4 py-4 backdrop-blur-xl bg-[var(--surface)] border-b border-[var(--border)]">
         <div className="mx-auto max-w-7xl flex items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-2 text-white">
+          <Link href="/" className="flex items-center gap-2 text-[var(--foreground)]">
             <span className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-2xl bg-white ring-1 ring-amber-300/20">
               <Image src="/cjd%20logo.jpg" alt="Cholo Jai Dure logo" width={36} height={36} className="h-full w-full object-cover" />
             </span>
             <div>
               <p className="text-sm font-bold leading-none">Cholo Jai Dure</p>
-              <p className="text-xs text-amber-300/70 leading-none mt-0.5">Admin Dashboard</p>
+              <p className="text-xs text-[var(--accent)] leading-none mt-0.5">Admin Dashboard</p>
             </div>
           </Link>
           <div className="flex items-center gap-3">
             <ThemeToggle align="right" />
             <Link
               href="/admin/users"
-              className="hidden sm:flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 px-3 py-2 text-xs text-white/70 hover:text-white transition"
+              className="hidden sm:flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface-strong)] hover:bg-[var(--surface)] px-3 py-2 text-xs text-[var(--muted)] hover:text-[var(--foreground)] transition"
             >
               <Users className="h-3.5 w-3.5" />
               Manage Admins
             </Link>
             <button
               onClick={fetchBookings}
-              className="hidden sm:flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 px-3 py-2 text-xs text-white/70 hover:text-white transition"
+              className="hidden sm:flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface-strong)] hover:bg-[var(--surface)] px-3 py-2 text-xs text-[var(--muted)] hover:text-[var(--foreground)] transition"
             >
               <RefreshCw className={`h-3.5 w-3.5 ${fetching ? "animate-spin" : ""}`} />
               Refresh
             </button>
-            <span className="text-xs text-white/40">Hi, {user.name?.split(" ")[0]}</span>
+            <span className="text-xs text-[var(--muted)]">Hi, {user.name?.split(" ")[0]}</span>
             <button
               onClick={() => logout()}
-              className="flex items-center gap-1.5 rounded-lg border border-red-500/20 bg-red-500/10 hover:bg-red-500/20 px-3 py-2 text-xs text-red-300 transition"
+              className="flex items-center gap-1.5 rounded-lg border border-red-500/20 bg-red-500/10 hover:bg-red-500/20 px-3 py-2 text-xs text-red-500 transition"
             >
               <LogOut className="h-3.5 w-3.5" />
               Logout
@@ -175,8 +175,8 @@ export default function AdminBookingsPage() {
         {/* Page header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-white">Booking Requests</h1>
-            <p className="text-white/50 text-sm mt-1">
+            <h1 className="text-2xl font-bold text-[var(--foreground)]">Booking Requests</h1>
+            <p className="text-[var(--muted)] text-sm mt-1">
               {fetching ? "Fetching..." : `${total} booking${total !== 1 ? "s" : ""} found`}
             </p>
           </div>
@@ -192,12 +192,12 @@ export default function AdminBookingsPage() {
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 placeholder="Search by booking ID, name, phone, package, email…"
-                className="w-full rounded-xl border border-white/15 bg-white/5 pl-9 pr-4 py-2.5 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-amber-300 transition"
+                className="w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] pl-9 pr-4 py-2.5 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--accent)] transition"
               />
             </div>
             <button
               type="submit"
-              className="rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-900 font-semibold px-4 py-2.5 text-sm transition"
+              className="rounded-xl bg-[var(--accent)] hover:bg-[var(--accent-strong)] text-slate-900 font-semibold px-4 py-2.5 text-sm transition"
             >
               Search
             </button>
@@ -205,7 +205,7 @@ export default function AdminBookingsPage() {
               <button
                 type="button"
                 onClick={() => { setSearch(""); setSearchInput(""); setStatus("all"); setPage(1); }}
-                className="rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-white/70 px-3 py-2.5 text-sm transition"
+                className="rounded-xl border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-strong)] text-[var(--muted)] px-3 py-2.5 text-sm transition"
               >
                 Clear
               </button>
@@ -221,8 +221,8 @@ export default function AdminBookingsPage() {
               onClick={() => changeStatus(s)}
               className={`rounded-full border px-3 py-1 text-xs font-semibold transition capitalize ${
                 status === s
-                  ? "bg-amber-400 border-amber-400 text-slate-900"
-                  : "border-white/15 bg-white/5 text-white/60 hover:text-white hover:border-white/30"
+                  ? "bg-[var(--accent)] border-[var(--accent)] text-slate-900"
+                  : "border-[var(--border)] bg-[var(--surface)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--border)]"
               }`}
             >
               {s === "all" ? "All" : BOOKING_STATUS_CONFIG[s]?.label ?? s}
@@ -231,17 +231,17 @@ export default function AdminBookingsPage() {
         </div>
 
         {/* Table */}
-        <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
+        <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] overflow-hidden shadow-[var(--shadow-elevated)]">
           {fetching ? (
-            <div className="flex items-center justify-center py-16 text-white/40">
+            <div className="flex items-center justify-center py-16 text-[var(--muted)]">
               <RefreshCw className="h-6 w-6 animate-spin mr-2" />
               Loading bookings...
             </div>
           ) : bookings.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 text-center">
-              <AlertCircle className="h-10 w-10 text-white/20 mb-3" />
-              <p className="text-white/50 font-medium">No bookings found</p>
-              <p className="text-white/30 text-sm mt-1">Try adjusting your search or filters.</p>
+              <AlertCircle className="h-10 w-10 text-[var(--muted)] mb-3" />
+              <p className="text-[var(--foreground)] font-medium">No bookings found</p>
+              <p className="text-[var(--muted)] text-sm mt-1">Try adjusting your search or filters.</p>
             </div>
           ) : (
             <>
@@ -249,36 +249,36 @@ export default function AdminBookingsPage() {
               <div className="hidden lg:block overflow-x-auto">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-white/10">
+                    <tr className="border-b border-[var(--border)]">
                       {["Booking ID", "Customer", "Package", "Travel Date", "Travelers", "Phone", "Status", "Created"].map((h) => (
-                        <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-white/40 uppercase tracking-wider">
+                        <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">
                           {h}
                         </th>
                       ))}
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5">
+                  <tbody className="divide-y divide-[var(--border)]">
                     {bookings.map((b) => (
                       <tr
                         key={b.id}
                         onClick={() => router.push(`/admin/bookings/${b.id}`)}
-                        className="hover:bg-white/5 cursor-pointer transition group"
+                        className="hover:bg-[var(--surface)] cursor-pointer transition group"
                       >
                         <td className="px-4 py-3">
-                          <span className="text-amber-300 font-mono text-xs font-semibold group-hover:text-amber-200">
+                          <span className="text-[var(--accent)] font-mono text-xs font-semibold group-hover:text-[var(--accent-strong)]">
                             {b.bookingId}
                           </span>
                         </td>
                         <td className="px-4 py-3">
-                          <p className="text-white text-sm font-medium">{b.customerName}</p>
-                          <p className="text-white/40 text-xs">{b.email}</p>
+                          <p className="text-[var(--foreground)] text-sm font-medium">{b.customerName}</p>
+                          <p className="text-[var(--muted)] text-xs">{b.email}</p>
                         </td>
-                        <td className="px-4 py-3 text-white/70 text-sm max-w-[160px] truncate">{b.packageName}</td>
-                        <td className="px-4 py-3 text-white/70 text-sm whitespace-nowrap">{fmtDate(b.travelDate)}</td>
-                        <td className="px-4 py-3 text-white/70 text-sm text-center">{b.totalTravelers}</td>
-                        <td className="px-4 py-3 text-white/70 text-sm">{b.phone}</td>
+                        <td className="px-4 py-3 text-[var(--muted)] text-sm max-w-[160px] truncate">{b.packageName}</td>
+                        <td className="px-4 py-3 text-[var(--muted)] text-sm whitespace-nowrap">{fmtDate(b.travelDate)}</td>
+                        <td className="px-4 py-3 text-[var(--muted)] text-sm text-center">{b.totalTravelers}</td>
+                        <td className="px-4 py-3 text-[var(--muted)] text-sm">{b.phone}</td>
                         <td className="px-4 py-3"><StatusBadge status={b.bookingStatus} /></td>
-                        <td className="px-4 py-3 text-white/40 text-xs whitespace-nowrap">{fmtDateTime(b.createdAt)}</td>
+                        <td className="px-4 py-3 text-[var(--muted)] text-xs whitespace-nowrap">{fmtDateTime(b.createdAt)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -286,16 +286,16 @@ export default function AdminBookingsPage() {
               </div>
 
               {/* Mobile cards */}
-              <div className="lg:hidden divide-y divide-white/10">
+              <div className="lg:hidden divide-y divide-[var(--border)]">
                 {bookings.map((b) => (
-                  <Link key={b.id} href={`/admin/bookings/${b.id}`} className="block p-4 hover:bg-white/5 transition">
+                  <Link key={b.id} href={`/admin/bookings/${b.id}`} className="block p-4 hover:bg-[var(--surface)] transition">
                     <div className="flex items-start justify-between gap-3 mb-2">
-                      <span className="text-amber-300 font-mono text-xs font-semibold">{b.bookingId}</span>
+                      <span className="text-[var(--accent)] font-mono text-xs font-semibold">{b.bookingId}</span>
                       <StatusBadge status={b.bookingStatus} />
                     </div>
-                    <p className="text-white font-semibold text-sm">{b.customerName}</p>
-                    <p className="text-white/50 text-xs mt-0.5">{b.packageName}</p>
-                    <div className="flex flex-wrap gap-3 mt-2 text-xs text-white/40">
+                    <p className="text-[var(--foreground)] font-semibold text-sm">{b.customerName}</p>
+                    <p className="text-[var(--muted)] text-xs mt-0.5">{b.packageName}</p>
+                    <div className="flex flex-wrap gap-3 mt-2 text-xs text-[var(--muted)]">
                       <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />{fmtDate(b.travelDate)}</span>
                       <span className="flex items-center gap-1"><Users className="h-3 w-3" />{b.totalTravelers} travelers</span>
                       <span className="flex items-center gap-1"><Phone className="h-3 w-3" />{b.phone}</span>
@@ -310,14 +310,14 @@ export default function AdminBookingsPage() {
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-between">
-            <p className="text-white/40 text-sm">
+            <p className="text-[var(--muted)] text-sm">
               Page {page} of {totalPages}
             </p>
             <div className="flex gap-2">
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className="flex items-center gap-1 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed px-3 py-2 text-sm text-white transition"
+                className="flex items-center gap-1 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-strong)] disabled:opacity-40 disabled:cursor-not-allowed px-3 py-2 text-sm text-[var(--foreground)] transition"
               >
                 <ChevronLeft className="h-4 w-4" />
                 Prev
@@ -325,7 +325,7 @@ export default function AdminBookingsPage() {
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}
-                className="flex items-center gap-1 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed px-3 py-2 text-sm text-white transition"
+                className="flex items-center gap-1 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-strong)] disabled:opacity-40 disabled:cursor-not-allowed px-3 py-2 text-sm text-[var(--foreground)] transition"
               >
                 Next
                 <ChevronRight className="h-4 w-4" />

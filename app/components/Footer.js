@@ -71,8 +71,9 @@ export default function Footer() {
                   aria-label="Visit LinkedIn"
                   className="transition-colors hover:text-amber-300"
                 >
-                  <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden="true">
-                    <path d="M6.94 8.5A1.56 1.56 0 1 1 6.9 5.4a1.56 1.56 0 0 1 .04 3.1ZM5.5 9.8h2.9V19H5.5V9.8Zm5.12 0h2.78v1.26h.04c.39-.73 1.33-1.5 2.73-1.5 2.92 0 3.45 1.92 3.45 4.41V19h-2.9v-17.7h2.9V9.8h-2.9v-.04c-.05-.8-.47-1.6-1.39-1.6-1.6 0-1.74 1.32-1.74 2.4V19h-2.9V9.8Z" />
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
+                    <rect x="1" y="1" width="22" height="22" rx="4" fill="#0A66C2" />
+                    <path fill="#fff" d="M6.94 8.5A1.56 1.56 0 1 1 6.9 5.4a1.56 1.56 0 0 1 .04 3.1ZM5.5 9.8h2.9V19H5.5V9.8Zm5.12 0h2.78v1.26h.04c.39-.73 1.33-1.5 2.73-1.5 2.92 0 3.45 1.92 3.45 4.41V19h-2.9v-17.7h2.9V9.8h-2.9v-.04c-.05-.8-.47-1.6-1.39-1.6-1.6 0-1.74 1.32-1.74 2.4V19h-2.9V9.8Z" />
                   </svg>
                 </a>
                 <a
@@ -82,8 +83,8 @@ export default function Footer() {
                   aria-label="Chat on WhatsApp at +91 7478167607"
                   className="transition-colors hover:text-amber-300"
                 >
-                  <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden="true">
-                    <path d="M20.5 3.5A11.9 11.9 0 0 0 12.1 0C5.5 0 .1 5.4.1 12c0 2.1.5 4.1 1.6 5.9L0 24l6.2-1.6a12 12 0 0 0 5.9 1.5h.1c6.6 0 12-5.4 12-12 0-3.2-1.3-6.2-3.7-8.4ZM12.1 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.3-.4a9.8 9.8 0 0 1-1.5-5.2c0-5.4 4.4-9.8 9.8-9.8 2.6 0 5.1 1 6.9 2.9a9.7 9.7 0 0 1 2.9 6.9c0 5.4-4.4 9.8-9.8 9.8Zm5.4-7.3c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.9-1.9-.2-.5-.5-.4-.6-.4h-.5c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.3s1 2.6 1.1 2.8c.1.2 2 3.1 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.1-1.3-.1-.1-.3-.2-.6-.4Z" />
+                  <svg viewBox="0 0 32 32" className="h-5 w-5" aria-hidden="true">
+                    <path d="M16 3.2A12.8 12.8 0 0 0 5.3 23.6L3.5 28.7l5.2-1.8A12.8 12.8 0 1 0 16 3.2Zm7.1 18.8-1 .9c-.4.3-.9.4-1.6.2-1.7-.4-4.1-1.9-5.7-4.5-1.6-2.6-1.9-5-.7-5.6l1-.8c.3-.2.6-.2.9 0l1.1 1c.3.3.5.7.4 1.1l-.4 1.1c-.1.3 0 .6.2.8l1.1 1.2c.2.2.5.3.8.2l1.1-.6c.3-.2.7-.2 1 .1l1.5 1.1c.3.2.4.6.3 1l-.6 1.4c-.2.4-.7.6-1 .5Z" fill="#25D366"/>
                   </svg>
                 </a>
               </div>
@@ -91,6 +92,20 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      <a
+        href="https://wa.me/917478167607"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with Cholo Jai Dure on WhatsApp"
+        title="Chat with us on WhatsApp"
+        className="fixed bottom-5 right-5 z-[100] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/25 transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/40 sm:bottom-6 sm:right-6 sm:h-16 sm:w-16"
+      >
+        <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" aria-hidden="true">
+          <path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L4 20l1.1-4a8.2 8.2 0 1 1 15.1-4.3Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+          <path d="M8.4 8.1c.2-.4.5-.5.8-.5h.5c.2 0 .4.1.5.4l.7 1.7c.1.2.1.4-.1.6l-.5.6c-.2.2-.2.4-.1.6.5.9 1.2 1.6 2.1 2.1.2.1.4.1.6-.1l.6-.7c.2-.2.4-.2.6-.1l1.7.8c.3.1.4.3.4.5 0 .5-.2 1-.6 1.3-.5.4-1.1.6-1.8.5-1.1-.2-2.4-.8-3.7-2-1.4-1.3-2.2-2.8-2.4-3.9-.1-.7.1-1.3.5-1.8l.2-.2Z" fill="currentColor" />
+        </svg>
+      </a>
 
     </footer>
   );
