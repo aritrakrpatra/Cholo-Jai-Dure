@@ -54,6 +54,28 @@ export default function Footer() {
                   </svg>
                 </a>
                 <a
+                  href="https://instagram.com/cholojaidure.in?psln=Zjc3NWtnZzY3NWph"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit Instagram"
+                  className="transition-colors hover:text-amber-300"
+                >
+                  <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden="true">
+                    <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5Zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5Zm5.25-3.25a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25Z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/cholojaidure/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit LinkedIn"
+                  className="transition-colors hover:text-amber-300"
+                >
+                  <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden="true">
+                    <path d="M6.94 8.5A1.56 1.56 0 1 1 6.9 5.4a1.56 1.56 0 0 1 .04 3.1ZM5.5 9.8h2.9V19H5.5V9.8Zm5.12 0h2.78v1.26h.04c.39-.73 1.33-1.5 2.73-1.5 2.92 0 3.45 1.92 3.45 4.41V19h-2.9v-17.7h2.9V9.8h-2.9v-.04c-.05-.8-.47-1.6-1.39-1.6-1.6 0-1.74 1.32-1.74 2.4V19h-2.9V9.8Z" />
+                  </svg>
+                </a>
+                <a
                   href="https://wa.me/917478167607"
                   target="_blank"
                   rel="noopener noreferrer"
