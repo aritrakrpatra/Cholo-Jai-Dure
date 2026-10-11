@@ -66,35 +66,35 @@ export default function DOBModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
-      <div className="relative w-full max-w-md rounded-3xl border border-white/10 bg-slate-900 p-8 shadow-2xl">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/35 backdrop-blur-sm px-4">
+      <div className="relative w-full max-w-md rounded-3xl border border-[var(--border)] bg-[var(--surface-strong)] p-8 shadow-[var(--shadow-elevated)]">
         <button
           type="button"
           onClick={() => setDismissed(true)}
           disabled={saving}
           aria-label="Skip profile completion"
           title="Skip profile completion"
-          className="absolute right-4 top-4 rounded-full p-2 text-white/60 transition hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+          className="absolute right-4 top-4 rounded-full p-2 text-[var(--muted)] transition hover:bg-[var(--surface)] hover:text-[var(--foreground)] disabled:cursor-not-allowed disabled:opacity-40"
         >
           <X className="h-5 w-5" aria-hidden="true" />
         </button>
 
         <div className="mb-5 flex justify-center">
-          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-amber-400/15 text-amber-300 ring-2 ring-amber-300/20">
+          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[color:rgba(197,140,43,0.12)] text-[var(--accent)] ring-2 ring-[color:rgba(197,140,43,0.18)]">
             <Calendar className="h-7 w-7" />
           </span>
         </div>
 
-        <h2 className="mb-1 text-center text-2xl font-bold text-white">
+        <h2 className="mb-1 text-center text-2xl font-bold text-[var(--foreground)]">
           Complete your profile
         </h2>
-        <p className="mb-6 text-center text-sm text-white/60">
+        <p className="mb-6 text-center text-sm text-[var(--muted)]">
           Please provide your date of birth, gender, and phone number to continue.
         </p>
 
         <div className="space-y-4">
           <div>
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-wide text-white/60">
+            <label className="mb-2 block text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">
               Date of Birth
             </label>
             <input
@@ -105,12 +105,12 @@ export default function DOBModal() {
                 setDob(e.target.value);
                 setError("");
               }}
-              className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white transition focus:border-amber-300 focus:outline-none [color-scheme:dark]"
+              className="w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-[var(--foreground)] transition focus:border-[var(--accent)] focus:outline-none"
             />
           </div>
 
           <div>
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-wide text-white/60">
+            <label className="mb-2 block text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">
               Gender
             </label>
             <div className="relative">
@@ -120,20 +120,20 @@ export default function DOBModal() {
                   setGender(e.target.value);
                   setError("");
                 }}
-                className="w-full appearance-none rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white transition focus:border-amber-300 focus:outline-none"
+                className="w-full appearance-none rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-[var(--foreground)] transition focus:border-[var(--accent)] focus:outline-none"
               >
-                <option value="" className="bg-slate-900 text-white">Select gender</option>
-                <option value="male" className="bg-slate-900 text-white">Male</option>
-                <option value="female" className="bg-slate-900 text-white">Female</option>
-                <option value="other" className="bg-slate-900 text-white">Other</option>
-                <option value="prefer_not_to_say" className="bg-slate-900 text-white">Prefer not to say</option>
+                <option value="" className="bg-[var(--surface-strong)] text-[var(--foreground)]">Select gender</option>
+                <option value="male" className="bg-[var(--surface-strong)] text-[var(--foreground)]">Male</option>
+                <option value="female" className="bg-[var(--surface-strong)] text-[var(--foreground)]">Female</option>
+                <option value="other" className="bg-[var(--surface-strong)] text-[var(--foreground)]">Other</option>
+                <option value="prefer_not_to_say" className="bg-[var(--surface-strong)] text-[var(--foreground)]">Prefer not to say</option>
               </select>
-              <UserCircle2 className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
+              <UserCircle2 className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--muted)]" />
             </div>
           </div>
 
           <div>
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-wide text-white/60">
+            <label className="mb-2 block text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">
               Phone Number
             </label>
             <div className="relative">
@@ -145,9 +145,9 @@ export default function DOBModal() {
                   setPhoneNumber(e.target.value);
                   setError("");
                 }}
-                className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 pl-10 text-white transition focus:border-amber-300 focus:outline-none"
+                className="w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 pl-10 text-[var(--foreground)] transition focus:border-[var(--accent)] focus:outline-none"
               />
-              <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
+              <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--muted)]" />
             </div>
           </div>
 
@@ -157,7 +157,7 @@ export default function DOBModal() {
         <button
           onClick={handleSave}
           disabled={saving || !dob || !gender || !phoneNumber}
-          className="mt-6 w-full rounded-xl bg-amber-400 py-3 font-bold text-slate-900 transition duration-200 hover:bg-amber-300 disabled:cursor-not-allowed disabled:opacity-50"
+          className="mt-6 w-full rounded-xl bg-[var(--accent)] py-3 font-bold text-slate-900 transition duration-200 hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-50 shadow-lg shadow-[rgba(197,140,43,0.2)]"
         >
           {saving ? "Saving..." : "Save & Continue"}
         </button>

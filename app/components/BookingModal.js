@@ -6,8 +6,8 @@ import { useClerk, useUser } from "@clerk/nextjs";
 import { X, User, Mail, Phone, MessageSquare, MapPin, Calendar, Users, FileText, Loader2, AlertCircle } from "lucide-react";
 
 const INPUT_BASE =
-  "w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-amber-300 transition [color-scheme:dark]";
-const LABEL_BASE = "block text-xs font-semibold text-white/60 uppercase tracking-wide mb-1.5";
+  "w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--accent)] transition";
+const LABEL_BASE = "block text-xs font-semibold uppercase tracking-wide mb-1.5 text-[var(--muted)]";
 
 function Field({ label, required, children }) {
   return (
@@ -155,19 +155,19 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
 
   return (
     <div
-      className="fixed inset-0 z-9999 flex items-end sm:items-center justify-center bg-black/75 backdrop-blur-sm overflow-hidden"
+      className="fixed inset-0 z-9999 flex items-end sm:items-center justify-center bg-slate-950/35 backdrop-blur-sm overflow-hidden"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="relative w-full sm:max-w-2xl max-h-[95vh] sm:max-h-[90vh] rounded-t-3xl sm:rounded-3xl border border-white/10 bg-slate-900 shadow-2xl overflow-visible">
+      <div className="relative w-full sm:max-w-2xl max-h-[95vh] sm:max-h-[90vh] rounded-t-3xl sm:rounded-3xl border border-[var(--border)] bg-[var(--surface-strong)] shadow-[var(--shadow-elevated)] overflow-visible">
         {/* Header */}
-        <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-slate-900 border-b border-white/10">
+        <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-[var(--surface-strong)] border-b border-[var(--border)]">
           <div>
-            <h2 className="text-lg font-bold text-white">Book Your Trip</h2>
-            <p className="text-xs text-amber-300 font-medium mt-0.5">{packageName}</p>
+            <h2 className="text-lg font-bold text-[var(--foreground)]">Book Your Trip</h2>
+            <p className="text-xs text-[var(--accent)] font-medium mt-0.5">{packageName}</p>
           </div>
           <button
             onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--surface)] hover:bg-[var(--surface)] text-[var(--muted)] hover:text-[var(--foreground)] transition"
             aria-label="Close"
           >
             <X className="h-4 w-4" />
@@ -186,11 +186,11 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
 
             {/* Section: Customer Info */}
             <div>
-              <p className="text-xs font-bold text-amber-300/80 uppercase tracking-widest mb-4">Customer Information</p>
+              <p className="text-xs font-bold uppercase tracking-widest mb-4 text-[var(--accent)]">Customer Information</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Field label="Full Name" required>
                 <div className="relative">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--muted)] pointer-events-none" />
                   <input
                     type="text"
                     value={form.customerName || clerkProfile.customerName}
@@ -205,7 +205,7 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
 
               <Field label="Email Address" required>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--muted)] pointer-events-none" />
                   <input
                     type="email"
                     value={form.email || clerkProfile.email}
@@ -217,12 +217,12 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
                   />
                 </div>
                 {errors.email && <p className="mt-1 text-xs text-red-400">{errors.email}</p>}
-                <p className="mt-1 text-xs text-white/40">Email comes from your login account and cannot be changed.</p>
+                <p className="mt-1 text-xs text-[var(--muted)]">Email comes from your login account and cannot be changed.</p>
               </Field>
 
               <Field label="Mobile Number" required>
                 <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
+                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--muted)] pointer-events-none" />
                   <input
                     type="tel"
                     value={form.phone}
@@ -237,7 +237,7 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
 
               <Field label="WhatsApp Number">
                 <div className="relative">
-                  <MessageSquare className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
+                  <MessageSquare className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--muted)] pointer-events-none" />
                   <input
                     type="tel"
                     value={form.whatsapp}
@@ -251,7 +251,7 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
 
               <Field label="City">
                 <div className="relative">
-                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--muted)] pointer-events-none" />
                   <input
                     type="text"
                     value={form.city}
@@ -266,11 +266,11 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
           </div>
 
           {/* Divider */}
-          <div className="border-t border-white/10" />
+          <div className="border-t border-[var(--border)]" />
 
           {/* Section: Booking Info */}
           <div>
-            <p className="text-xs font-bold text-amber-300/80 uppercase tracking-widest mb-4">Booking Information</p>
+            <p className="text-xs font-bold uppercase tracking-widest mb-4 text-[var(--accent)]">Booking Information</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Package (readonly) */}
               <Field label="Package">
@@ -301,7 +301,7 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
               ) : (
                 <Field label="Travel Date" required>
                   <div className="relative">
-                    <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
+                    <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--muted)] pointer-events-none" />
                     <input
                       type="date"
                       value={form.travelDate}
@@ -316,7 +316,7 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
 
               <Field label="Number of Adults" required>
                 <div className="relative">
-                  <Users className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
+                  <Users className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--muted)] pointer-events-none" />
                   <input
                     type="number"
                     value={form.adults}
@@ -342,15 +342,15 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
 
               {/* Total Travelers */}
               <Field label="Total Travelers">
-                <div className="rounded-xl border border-amber-300/20 bg-amber-400/5 px-4 py-3">
-                  <span className="text-amber-300 font-bold text-lg">{totalTravelers}</span>
-                  <span className="text-white/50 text-sm ml-1">traveler{totalTravelers !== 1 ? "s" : ""}</span>
+                <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3">
+                  <span className="text-[var(--accent)] font-bold text-lg">{totalTravelers}</span>
+                  <span className="text-[var(--muted)] text-sm ml-1">traveler{totalTravelers !== 1 ? "s" : ""}</span>
                 </div>
               </Field>
 
               <Field label="Pickup Location">
                 <div className="relative">
-                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--muted)] pointer-events-none" />
                   <input
                     type="text"
                     value={form.pickupLocation}
@@ -366,7 +366,7 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
             <div className="mt-4">
               <Field label="Special Requests / Notes">
                 <div className="relative">
-                  <FileText className="absolute left-3 top-3.5 h-4 w-4 text-white/30 pointer-events-none" />
+                  <FileText className="absolute left-3 top-3.5 h-4 w-4 text-[var(--muted)] pointer-events-none" />
                   <textarea
                     value={form.specialRequests}
                     onChange={(e) => set("specialRequests", e.target.value)}
@@ -381,14 +381,14 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
           </div>
 
             {/* Info banner */}
-            <div className="rounded-xl bg-amber-400/8 border border-amber-400/20 p-4">
-              <p className="text-xs text-amber-200/80 leading-relaxed">
-                <strong className="text-amber-300">Pay Later:</strong> No payment is required now. After submission, our travel
+            <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4">
+              <p className="text-xs leading-relaxed text-[var(--foreground)]/90">
+                <strong className="text-[var(--accent)]">Pay Later:</strong> No payment is required now. After submission, our travel
                 consultant will contact you within 24 hours to confirm your booking and share payment details.
               </p>
             </div>
 
-            <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+            <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4">
               <label className="flex items-start gap-3 cursor-pointer">
                 <input
                   type="checkbox"
@@ -396,13 +396,13 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
                   onChange={(e) => set("acceptTerms", e.target.checked)}
                   className="mt-1 h-4 w-4 rounded border-white/20 bg-slate-950 text-amber-400 focus:ring-amber-300"
                 />
-                <span className="text-sm text-white/85 leading-relaxed">
+                <span className="text-sm text-[var(--foreground)] leading-relaxed">
                   I have read and agree to the
                   <a
                     href="/rules-regulations"
                     target="_blank"
                     rel="noreferrer"
-                    className="ml-1 font-semibold text-amber-300 underline decoration-amber-300/80 underline-offset-2 hover:text-amber-200"
+                    className="ml-1 font-semibold text-[var(--accent)] underline decoration-[var(--accent)]/80 underline-offset-2 hover:text-[var(--accent-strong)]"
                   >
                     Rules &amp; Regulations
                   </a>
@@ -416,7 +416,7 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
             <button
               type="submit"
               disabled={submitting || !isLoaded || !clerkUser}
-              className="w-full bg-amber-400 hover:bg-amber-300 disabled:opacity-60 disabled:cursor-not-allowed text-slate-900 font-bold py-4 rounded-xl transition duration-200 flex items-center justify-center gap-2 text-sm"
+              className="w-full bg-[var(--accent)] hover:bg-[var(--accent-strong)] disabled:opacity-60 disabled:cursor-not-allowed text-slate-900 font-bold py-4 rounded-xl transition duration-200 flex items-center justify-center gap-2 text-sm shadow-lg shadow-[rgba(197,140,43,0.2)]"
             >
               {submitting ? (
                 <>
@@ -434,7 +434,7 @@ export default function BookingModal({ packageName, packageId, bookingMode = "gr
               <button
                 type="button"
                 onClick={() => openSignIn({ redirectUrl: window.location.pathname })}
-                className="w-full border border-amber-300/40 text-amber-200 hover:text-amber-100 hover:border-amber-300 rounded-xl py-3 text-sm font-semibold transition"
+                className="w-full border border-[var(--border)] text-[var(--foreground)] hover:text-[var(--foreground)] hover:border-[var(--accent)] rounded-xl py-3 text-sm font-semibold transition"
               >
                 Login / Create Account
               </button>
