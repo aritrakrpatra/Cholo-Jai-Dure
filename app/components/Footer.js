@@ -49,8 +49,9 @@ export default function Footer() {
                   aria-label="Visit Facebook"
                   className="transition-colors hover:text-amber-300"
                 >
-                  <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden="true">
-                    <path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.5 1.6-1.5h1.7V3.1c-.3 0-1.4-.1-2.6-.1-2.6 0-4.3 1.6-4.3 4.5v2.1H7v3.2h2.9V21h3.6Z" />
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
+                    <circle cx="12" cy="12" r="12" fill="#0866FF" />
+                    <path fill="#fff" d="M13.5 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.5 1.6-1.5h1.7V3.1c-.3 0-1.4-.1-2.6-.1-2.6 0-4.3 1.6-4.3 4.5v2.1H7v3.2h2.9V21h3.6Z" />
                   </svg>
                 </a>
                 <a
@@ -60,8 +61,16 @@ export default function Footer() {
                   aria-label="Visit Instagram"
                   className="transition-colors hover:text-amber-300"
                 >
-                  <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden="true">
-                    <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5Zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5Zm5.25-3.25a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25Z" />
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="instagram-brand-gradient" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse">
+                        <stop stopColor="#FFB800" />
+                        <stop offset="0.5" stopColor="#FF315A" />
+                        <stop offset="1" stopColor="#9B36D7" />
+                      </linearGradient>
+                    </defs>
+                    <rect x="1" y="1" width="22" height="22" rx="6" fill="url(#instagram-brand-gradient)" />
+                    <path fill="#fff" d="M8 5.5h8A2.5 2.5 0 0 1 18.5 8v8a2.5 2.5 0 0 1-2.5 2.5H8A2.5 2.5 0 0 1 5.5 16V8A2.5 2.5 0 0 1 8 5.5Zm0 1.6A.9.9 0 0 0 7.1 8v8a.9.9 0 0 0 .9.9h8a.9.9 0 0 0 .9-.9V8a.9.9 0 0 0-.9-.9H8Zm4 1.2a3.7 3.7 0 1 1 0 7.4 3.7 3.7 0 0 1 0-7.4Zm0 1.6a2.1 2.1 0 1 0 0 4.2 2.1 2.1 0 0 0 0-4.2Zm4.2-2.2a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8Z" />
                   </svg>
                 </a>
                 <a
@@ -91,6 +100,10 @@ export default function Footer() {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="border-t border-white/10 px-4 py-5 text-center text-xs text-white/50">
+        © 2026 Cholo Jai Dure Tour &amp; Travels. All rights reserved.
       </div>
 
       <a
