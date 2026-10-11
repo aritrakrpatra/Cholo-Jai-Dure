@@ -176,7 +176,7 @@ export default function AboutUsPage() {
 
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Link
-                  href="/packages"
+                  href="/tours?category=domestic"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#14213d] transition hover:bg-[var(--accent-strong)]"
                   aria-label="Explore packages"
                 >
@@ -371,7 +371,7 @@ export default function AboutUsPage() {
             </h2>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/packages"
+                href="/tours?category=domestic"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#14213d] transition hover:bg-[var(--accent-strong)]"
                 aria-label="Explore packages"
               >
