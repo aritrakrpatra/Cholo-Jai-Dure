@@ -138,19 +138,19 @@ function AnimatedCounter({ value, suffix, label }) {
       : displayValue.toFixed(1);
 
   return (
-    <div className="rounded-3xl border border-white/10 bg-white/10 p-5 text-center shadow-lg backdrop-blur-xl sm:p-6">
-      <div className="text-3xl font-bold text-amber-500 sm:text-4xl">
+    <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface-strong)] p-5 text-center shadow-lg backdrop-blur-xl sm:p-6">
+      <div className="text-3xl font-bold text-[var(--accent)] sm:text-4xl">
         {formattedValue}
         {suffix}
       </div>
-      <p className="mt-2 text-sm font-medium text-slate-700 dark:text-slate-200">{label}</p>
+      <p className="mt-2 text-sm font-medium text-[var(--foreground)]">{label}</p>
     </div>
   );
 }
 
 export default function AboutUsPage() {
   return (
-    <main className="relative overflow-hidden">
+    <main className="relative overflow-hidden bg-[var(--background)] text-[var(--foreground)]">
       <Navbar />
       <section className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <motion.header
@@ -161,15 +161,15 @@ export default function AboutUsPage() {
         >
           <div className="grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="space-y-5">
-              <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-100/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-amber-900 dark:bg-amber-500/10 dark:text-amber-200">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--accent-strong)]">
                 <Sparkles className="h-4 w-4" aria-hidden="true" />
                 Travel with confidence
               </span>
               <div className="space-y-4">
-                <h1 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl">
+                <h1 className="text-4xl font-black tracking-tight text-[var(--foreground)] sm:text-5xl lg:text-6xl">
                   CHOLO JAI DURE TOUR AND TRAVELS
                 </h1>
-                <p className="max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg">
+                <p className="max-w-2xl text-base leading-7 text-[var(--muted)] sm:text-lg">
                   Creating memorable journeys across India and beyond since 2024.
                 </p>
               </div>
@@ -177,7 +177,7 @@ export default function AboutUsPage() {
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="/packages"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#14213d] transition hover:bg-[var(--accent-strong)]"
                   aria-label="Explore packages"
                 >
                   Explore Packages
@@ -185,7 +185,7 @@ export default function AboutUsPage() {
                 </Link>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-500/40 bg-white/60 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-amber-500 hover:bg-white/80 dark:bg-slate-950/40 dark:text-white"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:bg-[var(--surface-strong)]"
                   aria-label="Contact CHOLO JAI DURE TOUR AND TRAVELS"
                 >
                   <Phone className="h-4 w-4" aria-hidden="true" />
@@ -197,16 +197,16 @@ export default function AboutUsPage() {
             <div className="theme-surface-strong rounded-[28px] p-5 sm:p-6">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="rounded-3xl bg-gradient-to-br from-amber-300/30 to-orange-400/10 p-5">
-                  <MapPinned className="mb-3 h-9 w-9 text-amber-700" aria-hidden="true" />
-                  <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Trusted Grounded Roots</h2>
-                  <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
+                  <MapPinned className="mb-3 h-9 w-9 text-[var(--accent-strong)]" aria-hidden="true" />
+                  <h2 className="text-lg font-semibold text-[var(--foreground)]">Trusted Grounded Roots</h2>
+                  <p className="mt-2 text-sm text-[var(--muted)]">
                     Based at Zilla Parishad, Midnapore, West Bengal.
                   </p>
                 </div>
                 <div className="rounded-3xl bg-gradient-to-br from-sky-300/25 to-cyan-400/10 p-5">
                   <Plane className="mb-3 h-9 w-9 text-sky-700" aria-hidden="true" />
-                  <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Purpose-Built Journeys</h2>
-                  <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
+                  <h2 className="text-lg font-semibold text-[var(--foreground)]">Purpose-Built Journeys</h2>
+                  <p className="mt-2 text-sm text-[var(--muted)]">
                     Crafted to blend comfort, discovery, and peace of mind.
                   </p>
                 </div>
@@ -223,11 +223,11 @@ export default function AboutUsPage() {
           className="theme-surface rounded-[28px] p-6 sm:p-8 lg:p-10"
         >
           <div className="mb-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-amber-700 dark:text-amber-300">Our Story</p>
-            <h2 className="mt-2 text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">A passionate travel story built on trust</h2>
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--accent-strong)]">Our Story</p>
+            <h2 className="mt-2 text-3xl font-bold text-[var(--foreground)] sm:text-4xl">A passionate travel story built on trust</h2>
           </div>
 
-          <div className="space-y-5 text-base leading-8 text-slate-700 dark:text-slate-300">
+          <div className="space-y-5 text-base leading-8 text-[var(--muted)]">
             <p>
               Founded in 2024, CHOLO JAI DURE TOUR AND TRAVELS (CJD) was created with one simple vision—to make every journey memorable, comfortable, and filled with unforgettable experiences. Based at Zilla Parishad, Midnapore, West Bengal, we specialize in crafting thoughtfully planned tours that combine reliability, comfort, and authentic travel experiences.
             </p>
@@ -241,7 +241,7 @@ export default function AboutUsPage() {
               {destinations.map((destination) => (
                 <span
                   key={destination}
-                  className="rounded-full border border-amber-400/30 bg-gradient-to-r from-amber-100/80 to-white/60 px-4 py-2 text-sm font-medium text-slate-800 shadow-sm backdrop-blur-md dark:border-amber-400/20 dark:from-amber-400/10 dark:to-slate-950/30 dark:text-slate-100"
+                  className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-sm font-medium text-[var(--foreground)] shadow-sm backdrop-blur-md"
                 >
                   {destination}
                 </span>
@@ -258,10 +258,10 @@ export default function AboutUsPage() {
           className="theme-surface rounded-[28px] p-6 sm:p-8 lg:p-10"
         >
           <div className="mb-6 max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-amber-700 dark:text-amber-300">What We Believe</p>
-            <h2 className="mt-2 text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">Every journey should be a lasting memory</h2>
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--accent-strong)]">What We Believe</p>
+            <h2 className="mt-2 text-3xl font-bold text-[var(--foreground)] sm:text-4xl">Every journey should be a lasting memory</h2>
           </div>
-          <p className="text-base leading-8 text-slate-700 dark:text-slate-300">
+          <p className="text-base leading-8 text-[var(--muted)]">
             At CHOLO JAI DURE TOUR AND TRAVELS, every trip is more than just a vacation—it is a collection of lifelong memories. Our experienced team focuses on personalized itineraries, dependable support, carefully selected accommodations, and hassle-free travel arrangements so our guests can simply relax and enjoy their journey.
           </p>
         </motion.section>
@@ -295,11 +295,11 @@ export default function AboutUsPage() {
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-90`} />
                 <div className="relative space-y-4">
-                  <div className="inline-flex rounded-2xl bg-white/60 p-3 text-amber-700 shadow-sm backdrop-blur-md dark:bg-slate-950/40 dark:text-amber-300">
+                  <div className="inline-flex rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3 text-[var(--accent-strong)] shadow-sm backdrop-blur-md">
                     <Icon className="h-6 w-6" aria-hidden="true" />
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{card.title}</h3>
-                  <p className="text-base leading-8 text-slate-700 dark:text-slate-300">{card.content}</p>
+                  <h3 className="text-2xl font-bold text-[var(--foreground)]">{card.title}</h3>
+                  <p className="text-base leading-8 text-[var(--muted)]">{card.content}</p>
                 </div>
               </motion.article>
             );
@@ -314,8 +314,8 @@ export default function AboutUsPage() {
           className="theme-surface rounded-[28px] p-6 sm:p-8 lg:p-10"
         >
           <div className="mb-6 text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-amber-700 dark:text-amber-300">Why Choose Us</p>
-            <h2 className="mt-2 text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">Travel solutions tailored for every kind of journey</h2>
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--accent-strong)]">Why Choose Us</p>
+            <h2 className="mt-2 text-3xl font-bold text-[var(--foreground)] sm:text-4xl">Travel solutions tailored for every kind of journey</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {services.map((service, index) => {
@@ -328,13 +328,13 @@ export default function AboutUsPage() {
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.45, delay: index * 0.03 }}
                   whileHover={{ y: -6, scale: 1.01 }}
-                  className="group rounded-[24px] border border-white/10 bg-white/60 p-5 shadow-lg backdrop-blur-xl transition dark:bg-slate-950/35"
+                  className="group rounded-[24px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-lg backdrop-blur-xl transition hover:bg-[var(--surface-strong)]"
                 >
-                  <div className="mb-4 inline-flex rounded-2xl bg-amber-100/80 p-3 text-amber-700 dark:bg-amber-500/10 dark:text-amber-300">
+                  <div className="mb-4 inline-flex rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] p-3 text-[var(--accent-strong)]">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </div>
-                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{service.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">{service.description}</p>
+                  <h3 className="text-lg font-semibold text-[var(--foreground)]">{service.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{service.description}</p>
                 </motion.article>
               );
             })}
@@ -363,16 +363,16 @@ export default function AboutUsPage() {
           className="theme-surface rounded-[28px] p-6 sm:p-8 lg:p-10"
         >
           <div className="flex flex-col items-center gap-6 text-center">
-            <div className="inline-flex rounded-full bg-amber-100/80 p-3 text-amber-700 dark:bg-amber-500/10 dark:text-amber-300">
+            <div className="inline-flex rounded-full border border-[var(--border)] bg-[var(--surface)] p-3 text-[var(--accent-strong)]">
               <Sparkles className="h-6 w-6" aria-hidden="true" />
             </div>
-            <h2 className="max-w-4xl text-2xl font-bold text-slate-900 dark:text-white sm:text-4xl">
+            <h2 className="max-w-4xl text-2xl font-bold text-[var(--foreground)] sm:text-4xl">
               Your journey begins here. Let&apos;s travel farther, discover more, and create unforgettable memories together with CHOLO JAI DURE TOUR AND TRAVELS.
             </h2>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/packages"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#14213d] transition hover:bg-[var(--accent-strong)]"
                 aria-label="Explore packages"
               >
                 Explore Packages
@@ -380,7 +380,7 @@ export default function AboutUsPage() {
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-500/40 bg-white/60 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-amber-500 hover:bg-white/80 dark:bg-slate-950/40 dark:text-white"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:bg-[var(--surface-strong)]"
                 aria-label="Contact CHOLO JAI DURE TOUR AND TRAVELS"
               >
                 <Phone className="h-4 w-4" aria-hidden="true" />
